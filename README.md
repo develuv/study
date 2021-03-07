@@ -1,5 +1,7 @@
 # Study
 
+Study Project ✏️
+
 ## Ground Rules
 - cycle : 1 week (수요일)
 - 자유로운 주제로 부담없는 선에서 준비
