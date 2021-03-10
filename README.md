@@ -11,7 +11,7 @@ Study Project ✏️
 - [ ] Learna
 - [ ] Yarn workspace
 - [ ] Github actions
-- [ ] Typescript
+- [ ][ ] Typescript
 - [ ] React
 - [ ] Tdd & Refactoring
 - [ ] Docker
