@@ -7,7 +7,7 @@ Study Project ✏️
 - 자유로운 주제로 부담없는 선에서 준비
 - 발표자는 한주까지 연기가능
 
-## Stack Of Interest
+## Subject Of Interest
 - Lerna
 - Yarn workspace
 - Github actions
