@@ -1,6 +1,6 @@
 # Study
 
-Study Project ✏️
+Study & Discuss Project ✏️
 
 ## Ground Rules
 - cycle : 1 week (수요일)
