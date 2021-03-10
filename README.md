@@ -8,7 +8,7 @@ Study Project ✏️
 - 발표자는 한주까지 연기가능
 
 ## 관심사
-- Learna
+- Lerna
 - Yarn workspace
 - Github actions
 - Typescript
@@ -18,6 +18,7 @@ Study Project ✏️
 - Docker
 - Aws
 - GraphQL
+- Functional programming
 
 ## Cycle.1
 > - order : 동주 - 상훈 - 희준 - 재섭 - 성광
