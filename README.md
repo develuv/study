@@ -12,7 +12,7 @@ Study & Discuss Project ✏️
 - Yarn workspace
 - Github actions
 - Typescript
-  - [2021.03.10(수) - Typescript](cycle-1/study-1-typescript.md)
+  - [Cycle.1 2021.03.10(수) - Typescript 얕은 정리](cycle-1/study-1-typescript.md)
 - React
 - Tdd & Refactoring
 - Docker
