@@ -1,4 +1,4 @@
-#  TypeScript
+#  Typescript 얕은 정리 - 이동주
 
 ## Config
 
