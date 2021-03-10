@@ -8,11 +8,16 @@ Study Project ✏️
 - 발표자는 한주까지 연기가능
 
 ## 관심사
-- learna
-- yarn workspace
-- github actions
+- [ ] Learna
+- [ ] Yarn workspace
+- [ ] Github actions
+- [ ] Typescript
+- [ ] React
+- [ ] Tdd & Refactoring
+- [ ] Docker
+- [ ] Aws
+- [ ] GraphQL
 
 ## Cycle.1
 > - order : 동주 - 상훈 - 희준 - 재섭 - 성광
-> - 관심사 : Typescript, react, tdd & refactoring, docker, aws, graphQL
 - [2021.03.10(수) - Typescript](cycle-1/study-1-typescript.md)
