@@ -5,7 +5,7 @@ Study & Discuss Project ✏️
 ## Ground Rules
 - cycle : 1 week (수요일)
 - 자유로운 주제 혹은 관심 주제 중 부담없는 선에서 준비
-- 발표자는 한주까지 연기가능
+- 발표자는 한주까지 연기 가능
 - 적극적 토론 지향
 
 ## Subject Of Interest
