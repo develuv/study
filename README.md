@@ -13,7 +13,7 @@ Study & Discuss Project ✏️
 - Yarn workspace
 - Github actions
 - Typescript
-  - [Cycle.1 2021.03.10(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
+  - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
 - React
 - Tdd & Refactoring
 - Docker
@@ -23,4 +23,4 @@ Study & Discuss Project ✏️
 
 ## Cycle.1
 > 동주 - 상훈 - 희준 - 재섭 - 성광
-- [Cycle.1 2021.03.10(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
+- [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
