@@ -20,6 +20,7 @@ Study & Discuss Project ✏️
 - Aws
 - GraphQL
 - Functional programming
+- ngrok
 
 ## Cycle.1
 > 동주 - 상훈 - 희준 - 재섭 - 성광
