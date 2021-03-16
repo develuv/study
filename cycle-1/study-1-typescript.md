@@ -245,4 +245,7 @@ type Uncapitalize<S extends string> = intrinsic;
 
 ## 추가 관련 자료
 
-- [**올해 버려야 할 타입스크립트 나쁜 버릇 10가지**](https://ui.toast.com/weekly-pick/ko_20210217)
+- [한눈에 보는 타입스크립트(updated)]https://heropy.blog/2020/01/27/typescript/
+- [올해 버려야 할 타입스크립트 나쁜 버릇 10가지](https://ui.toast.com/weekly-pick/ko_20210217)
+- [타입스크립트 코리아 : 기초 세미나](https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%94%EB%A6%AC%EC%95%84-1705-%EA%B8%B0%EC%B4%88-%EC%84%B8%EB%AF%B8%EB%82%98/dashboard)
+
