@@ -1,4 +1,4 @@
-#  Typescript 얕은 정리
+#  D3 얕은 정리
 
 ## D3 (Data Driven Document)란?
 단순 번역: 데이터 기반 문서 
