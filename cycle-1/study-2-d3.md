@@ -11,7 +11,7 @@
 
 - [w3school svg tutorial](https://www.w3schools.com/graphics/svg_intro.asp)
 
-## 메서드
+## API
 
 - **select**: 말그대로 선택한다는 뜻이다. jquery 와 문법이 많이 비숫하다.
 ```
@@ -142,4 +142,10 @@ ticks(int)를 이용해 간격을 설정할 수도 있다.
 canvas.append("g").attr("transform", "translate(0, 300)").call(axis);
 ```
 그 다음 axis 를 그릴 요소 ( <g> ) 를 만든후 call 을 하면 축이 지정한 위치에 그려진다.
+
+## 추가 자료
+- [d3-react sample code](https://github.com/yangSangHoon/d3-study)
+- [d3 + React.js](https://velog.io/@bangina/D3.js-React.js-Hooks-%ED%95%A8%EA%BB%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-1)
+- [d3js 개념 및 api](https://pa-pico.tistory.com/2)
+
 
