@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noUnusedParameters": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "strictNullChecks": false,
+    "outDir": "./build"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
