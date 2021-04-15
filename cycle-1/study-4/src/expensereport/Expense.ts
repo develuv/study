@@ -8,13 +8,4 @@ export default class Expense {
         this.type = type;
         this.amount = amount;
     }
-
-    isOverage(): boolean {
-        return ((this.type == Type.DINNER && this.amount > 5000)
-            || (this.type == Type.BREAKFAST && this.amount > 1000));
-    }
-
-    isMeal(): boolean {
-        return this.type == Type.BREAKFAST || this.type == Type.DINNER;
-    }
 }

@@ -1,15 +1,15 @@
-import ExpenseReporter from '../src/expensereport/ExpenseReporter';
 import MockReportPrinter from './MockReportPrinter';
 import {Type} from '../src/expensereport/enum/Type';
 import Expense from '../src/expensereport/Expense';
 import {changeToUsdFormat} from '../src/expensereport/utils/util';
+import ExpenseReport from '../src/expensereport/ExpenseReport';
 
 describe("Tdd Test ExpenseReporter", () => {
-    let report: ExpenseReporter = new ExpenseReporter();
+    let report: ExpenseReport = new ExpenseReport();
     let printer: MockReportPrinter = new MockReportPrinter();
 
     beforeEach(() => {
-        report = new ExpenseReporter();
+        report = new ExpenseReport();
         printer = new MockReportPrinter();
     });
 
