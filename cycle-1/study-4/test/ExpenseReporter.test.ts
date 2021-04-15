@@ -38,19 +38,6 @@ describe("Tdd Test ExpenseReporter", () => {
         ).toEqual(printer.getText());
     });
 
-    it("printOneDinner", () => {
-        report.addExpense(new Expense(Type.DINNER, 1678));
-        report.printReport(printer);
-
-        expect(
-            "Expenses 9/12/2002\n" +
-            " \tDinner\t" + changeToUsdFormat(16.78) + "\n" +
-            "\n" +
-            "Meal expenses " + changeToUsdFormat(16.78) + "\n" +
-            "Total " + changeToUsdFormat(16.78)
-        ).toEqual(printer.getText());
-    });
-
     it("twoMeals", () => {
         report.addExpense(new Expense(Type.DINNER, 1000));
         report.addExpense(new Expense(Type.BREAKFAST, 500));
