@@ -60,7 +60,7 @@
 - 클래스는 일련의 변수들에 동작하는 기능의 집
 
 
-##### Example (fitness)
+### Example (fitness)
 Robert C. Martin이 Clean Coders에서 Function에 대해 설명할 때 사용한 예제
 > 마이클 C. 페더스  -> 레거시 코드 활용 전략 (http://www.yes24.com/Product/Goods/64586851)
 
@@ -77,12 +77,12 @@ Robert C. Martin이 Clean Coders에서 Function에 대해 설명할 때 사용�
 9. includeSetup, includeTeardown은 하나의 문장으로...
 10. method 추출 -> isTestPage()
 
-##### 개선
+#### 개선
 읽기 쉬워지고   
 이해하기 쉬워지고   
 함수가 자신의 의도를 잘 전달 (함수의 사용하는 디테일함을 찾아가서 볼 필요가 없을것 같다. 이름만 봐도 뭐 하는구나)   
 
-##### 개선의 원인
+#### 개선의 원인
 작아졌다. (함수가 작아졌다.)   
 블록이 적어야 함 (if, else, while 문장 등의 내부 블록은 한줄이여야 함)   
 Indenting이 적어야 함 (함수는 중첩구조를 갖을 만큼 크면 안됨, 들여쓰기는 한두단계 정도만)   
@@ -101,7 +101,7 @@ Indenting이 적어야 함 (함수는 중첩구조를 갖을 만큼 크면 안�
 
 
 
-##### Example (expenses)
+### Example (expenses)
 Robert C. Martin의 Clean Coders Screen Cast 중 Episode 10. OCP(Open but Closed Principle)에서 사용된 예제를 가지고 어떤 문제가 있는지, 어떻게 해결할 수 있는지를 보자   
 이 예제에서는
 * Function Should Do One Thing
@@ -122,7 +122,7 @@ Robert C. Martin의 Clean Coders Screen Cast 중 Episode 10. OCP(Open but Closed
 * push members down
 
 
-###### problem
+#### problem
 1.1 Function Should Do One Thing 위반 (ExpenseReport)
 - 함수가 너무 크고,
 - 중복도 존재(xx / 100)
@@ -135,9 +135,10 @@ Robert C. Martin의 Clean Coders Screen Cast 중 Episode 10. OCP(Open but Closed
 
 1.3 OCP 위반 (ExpenseReport)
 - 비지니스 규칙을 확장하고자 한다면 이 모듈을 수정해야 한다.
-- 메시지와 포맷팅을 변경하고자 한다면 이 모듈을 수정해야한다(위 그림에서 붉은 박스처럼 타입에 의존한 코드로 인해)   
+- 메시지와 포맷팅을 변경하고자 한다면 이 모듈을 수정해야한다   
 
-만일 새로운 식사 타입으로 LUNCH를 추가하는 경우 타입에 의존하는 코드로 인해 어려움을 겪게된다. 시스템 내의 모든 소스에서 expense type에 의존하는 모든 switch-case나 if-else 문장을 수정해야 할 것이다.
+만일 새로운 식사 타입으로 LUNCH를 추가하는 경우 타입에 의존하는 코드로 인해 어려움을 겪게된다.    
+시스템 내의 모든 소스에서 expense type에 의존하는 모든 switch-case나 if-else 문장을 수정해야 한다.
 
 
 1.4 Feature Envy (ExpenseReport)
@@ -146,72 +147,40 @@ Robert C. Martin의 Clean Coders Screen Cast 중 Episode 10. OCP(Open but Closed
 
 
 
-###### Do it
+#### Do it
 
 
-## 1. Function Should Do One Thing
-#### 1.1 penniesToDollars
-- extract variable
-- extract method
-- inline variabel
+#### 1. Function Should Do One Thing
+1. extract method - printHeader, printTotals
+2. for loop를 출력과 계산으로 나눈다.
+3. extract method - totalsUpExpenses (전에 다루는 지역변수를 멤버변수로)
+4. extract method - printExpenses
+5. printReport의 printer는 필드변수로 추출
+6. 파라메터 제거
+7. extract method - printExpensesAndTotals (한번 더 추상화)
+8. extract method - switch문을 getName
+9. 한군데만 호출되는 name을 인라인으로 변경
+10. extract method - isOverages
+11. 비용계산 로직도 extract method - totalUpExpense 
+12. extract method - isMeal
 
-#### 1.2 printXXX
-- printHeader
-- printTotals
-- printExpenses
-	- for-loop 분리
-	- extract method - printExpenses
-	- extract method - totalUpExpenses
-		- extract fields - total, mealExpenses
-		- initialize in c'tor
-		- extract method - totalUpExpenses
-		- change signature - remove total, mealExpenses from parameter list
-
-#### 1.3 extract method - getName
-
-#### 1.4 assign field - ReportPrinter printer
-- printer가 여러 메소드에서 파라미터로 사용되고 있다
-- change signature - remove parameter printer
-
-#### 1.5 extract method - printExpensesAndTotals
-- move line up(totalUpExpenses)
-
-#### 1.6 extract method - printExpense from printExpensesAndTotals
-- to remove {}
-
-#### 1.7 extract method - isMeal, isOverage
+#### 2. Feature Envy
+1. Move isOverages -> Expense
+2. Move getName -> Expense
+3. Move isMeal -> Expense
 
 
-#### 1.8 extract method addTotals from totalUpExpenses
-- to remove {}
 
-## 2. Featuer Envy
+#### 3. SRP
+1. rename ExpenseReport to ExpenseReporter
+2. extract delegate - ExpenseReport
+- totalUpExpenses, addToTotals, addExenses, expenses, total, mealExpenses 추출
 
-#### 2.1 move method - isMeal, isOverage to Expense
-- feature envy
-
-
-## 3. SRP 위반 해소
-
-#### 3.1 rename ExpenseReport to ExpenseReporter
-
-#### 3.2 extract delegate - ExpenseReport
-
-- BL(totalUpExpenses, addToTotals, addExenses, expenses, total, mealExpenses) 추출
-
-#### 3.3 safely delete unused methods
-
-## 4. OCP 위반 해소
-- replace type code with subclasses
-
-#### 4.1 test 수정 - Expense가 아니라 서브 클래스 생성하도록
+#### 4. OCP
+1. Expense를 하위 클래스로
 - 생성자에서 type 파라미터는 이름과 중복. change signature
 - push members down - isMeal, isOverage, getName - keep abstract
-
-#### 4.2 run with coverage로 안 사용되는 코드 타입별로 제거
-
-#### 4.3 remove type : Expense.Type enum 제거
-
+2. run with coverage 사용 안 하는 코드 삭제
 
 
 ###### result
