@@ -27,6 +27,7 @@ Study & Discuss Project ✏️
 > 동주 - 상훈 - 희준 - 재섭 - 성광
 - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
 - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
+- [Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭](cycle-1/cycle-1/study-4/study-4-refactoring.md)
 - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
 
 ### 회고 [Mirro보드 바로가기](https://miro.com/welcomeonboard/0p2xKh9fze1t2bho1E5rNOcK2NzPnS3ceGoorPJPCtI4RrMuxbQZvHs1kU4OsncU)
