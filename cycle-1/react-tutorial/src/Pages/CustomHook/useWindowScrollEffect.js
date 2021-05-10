@@ -6,6 +6,7 @@ function useWindowScrollEffect(listener, deps = []) {
 		const onScroll = () => {
 			listener(window.scrollY);
 		}
+		
 		window.addEventListener('scroll', onScroll);
   
     return () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-
 class ProfilePage extends React.Component {
   render() {
     // props의 값을 고정!
