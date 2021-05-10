@@ -7,7 +7,7 @@ import Local from './pages/LocalState'
 const routes = [
   {
     path: '',
-    element: <Local />,
+    element: <MainLayout />,
     children: [
       { path: 'local', element: <Local /> },
       { path: '*', element: <Navigate to="/404" /> }
