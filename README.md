@@ -9,9 +9,6 @@ Study & Discuss Project ✏️
 - 적극적 토론 지향
 
 ## Subject Of Interest
-- Lerna
-- Yarn workspace
-- Github actions
 - Typescript
   - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
 - D3
@@ -29,6 +26,9 @@ Study & Discuss Project ✏️
 - GraphQL
 - Functional programming
 - ngrok
+- Lerna
+- Yarn workspace
+- Github actions
 
 ## Cycle.1
 <details>
