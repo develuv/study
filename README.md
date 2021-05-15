@@ -16,6 +16,8 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
 - D3
   - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
+- Clean Code
+  - Cycle.1 2021.04.07(수) - 클린코드 - 희준
 - React
 - Tdd & Refactoring
 - Docker
