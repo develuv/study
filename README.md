@@ -7,6 +7,12 @@ Study & Discuss Project ✏️
 - 자유로운 주제 혹은 관심 주제 중 부담없는 선에서 준비
 - 발표자는 한주까지 연기 가능
 - 적극적 토론 지향
+- 스터디 하루전 전 내용 공유하기
+- 5인이상 풀리면 주변 맛집에서 저녁먹고 이후 스터디 하기
+- 스터디 타임라인을 만들자
+  - 저녁: 7시 ~8시
+  - 스터디: 8시 ~ 10시
+  - 잡담: 10시 ~ 11시
 
 ## Subject Of Interest
 - Typescript
@@ -70,18 +76,3 @@ Study & Discuss Project ✏️
 
  </div>
 </details>
-
-### 회고 [Mirro보드 바로가기](https://miro.com/welcomeonboard/0p2xKh9fze1t2bho1E5rNOcK2NzPnS3ceGoorPJPCtI4RrMuxbQZvHs1kU4OsncU)
-- Try
-   - 계속 스터디 모임 유지하자
-   - 재섭이형은 웬만하면 실습 스터디로 준비
-   - 모노레포 저장소(러나, yarn워크스페이스) 활용성 스터디해봐도 좋을듯, 공용 저장소는 꾸준히 관리
-
-
-- Action
-   - 스터디 하루전 전 내용 공유하기
-   - 5인이상 풀리면 주변 맛집에서 저녁먹고 이후 스터디 하기
-   - 스터디 타임라인을 만들자
-      - 저녁: 7시 ~8시
-      - 스터디: 8시 ~ 10시
-      - 잡담: 10시 ~ 11시
