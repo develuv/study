@@ -36,9 +36,8 @@ Study & Discuss Project ✏️
 - Yarn workspace
 - Github actions
 
-## Cycle.1
 <details>
- <summary>펼치기</summary>
+ <summary><h2>Cycle.1</h2></summary>
  <div>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
@@ -66,9 +65,8 @@ Study & Discuss Project ✏️
  </div>
 </details>
 
-## Cycle.2
 <details>
- <summary>펼치기</summary>
+ <summary>Cycle.2</summary>
  <div>
    
 > 성광 - 동주 - 
