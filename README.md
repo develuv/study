@@ -25,7 +25,7 @@ Study & Discuss Project ✏️
 
 ## Cycle.1
 <details>
- <summary>펼치기</summary>
+ <summary>## Cycle.1</summary>
  <div markdown=1>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
