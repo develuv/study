@@ -19,7 +19,9 @@ Study & Discuss Project ✏️
 - Clean Code
   - Cycle.1 2021.04.07(수) - 클린코드 - 희준
 - React
-- Tdd & Refactoring
+- Refactoring
+  - Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭
+- Tdd
 - Docker
 - Aws
 - GraphQL
