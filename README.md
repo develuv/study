@@ -14,6 +14,7 @@ Study & Discuss Project ✏️
 - Github actions
 - Typescript
   - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
+- D3
   - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
 - React
 - Tdd & Refactoring
