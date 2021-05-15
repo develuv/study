@@ -25,8 +25,8 @@ Study & Discuss Project ✏️
 
 ## Cycle.1
 <details>
- <summary>## Cycle.1</summary>
- <div markdown=1>
+ <summary>펼치기</summary>
+ <div>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
 - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
