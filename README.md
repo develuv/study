@@ -22,6 +22,7 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
 - Refactoring
   - Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭
+- Vite
 - Tdd
 - Docker
 - Aws
