@@ -37,7 +37,8 @@ Study & Discuss Project ✏️
 - Github actions
 
 <details>
-  <h2><summary>Cycle.1</summary></h2>
+  Cycle.1
+<summary>펼치기</summary>
  <div>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
