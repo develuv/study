@@ -57,7 +57,7 @@
 
 
 
-### 소개팅 
+### Blind date 
 
 >ICE : Interactive Connectivity Establishment(대화형 연결 설정) : 두단말 통신 할 수 있는 최적의 경로를 찾아주는 프레임워크
 >
@@ -74,9 +74,8 @@
      <div markdown=2><img src="./00.png" width=300 align=left>
      </div>
    </details>
-
    
-
+   
 3. 주선자는 서로의 전화번호와 프로필을 전달
 
    <details>
@@ -132,11 +131,11 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 대부분의 최신 브라우져 지원
 
-<img src="./pc.png" alt="pc can i use" align="left" style="zoom:50%;" />
+<img src="./pc.png" alt="pc can i use" align="left" width="400px" />
 
 #### mobile
 
-<img src="./mobile.png" alt="mobile can i use" align="left" style="zoom:50%;" />
+<img src="./mobile.png" alt="mobile can i use" align="left" width="500px" />
 
 실제 모바일에서는 문제가 많다고 한다
 
@@ -160,13 +159,19 @@ https://bloggeek.me/webrtc-browser-support/
 
 
 
-#### How zoom use WebRTC?
+### How zoom use WebRTC?
 
 https://bloggeek.me/when-will-zoom-use-webrtc/
 
 
 
-#### With need a skill
+### How Stove use WebRTC?
+
+
+
+
+
+### With need a skill
 
 - WebAssembly
 - Web worker
@@ -226,4 +231,6 @@ https://bloggeek.me/when-will-zoom-use-webrtc/
 <img src="./codec2.png" alt="codec2" align="left" style="zoom:50%;" />
 
 
+
+#### 비디오 코덱
 
