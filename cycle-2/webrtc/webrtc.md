@@ -130,19 +130,13 @@ https://github.com/yangSangHoon/webrtc-typescript
 #### pc
 
 대부분의 최신 브라우져 지원
-
-{:refdef: style="width: 400px;"}
-<img src="./pc.png">
-{:refdef}
-
-
+[[./pc.png|width=400px]]
 
 #### mobile
 
-![mobile can i use](./mobile.png | width:50%)
-
+[[./mobile.png|width=50%]]
 실제 모바일에서는 문제가 많다고 한다
-
+(스토브에서는 모바일 native로 개발되었다)
 
 
 자세한 내용은 아래 링크 참고
