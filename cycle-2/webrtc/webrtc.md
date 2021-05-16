@@ -129,12 +129,12 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 #### pc
 
+![pc](./pc.png)
 대부분의 최신 브라우져 지원
-[[./pc.png|width=400px]]
 
 #### mobile
 
-[[./mobile.png|width=50%]]
+![pc](./mobile.png)
 실제 모바일에서는 문제가 많다고 한다
 (스토브에서는 모바일 native로 개발되었다)
 
