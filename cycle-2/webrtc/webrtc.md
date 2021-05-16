@@ -102,7 +102,7 @@
 
 p2p통신을 하기 위해서는 공인 ip가 필요한데 공인ip를 획득하는 단계로 turn서버를 이용한다고 한다
 
-https://brunch.co.kr/@linecard/156
+[참고자료]https://brunch.co.kr/@linecard/156
 
 
 
@@ -141,6 +141,8 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 실제 모바일에서는 문제가 많다고 한다
 
+
+
 자세한 내용은 아래 링크 참고
 
 https://bloggeek.me/webrtc-browser-support/
@@ -157,7 +159,9 @@ chrome의 경우 동시 허용 peer 500회, 권장 50회
 
 높은 해상도 지원 불가
 
-https://bloggeek.me/webrtc-browser-support/
+[참고자료]https://bloggeek.me/webrtc-browser-support/
+
+
 
 현재 webrtc 1.0이며 계속 변화중이며 deprecated된 함수들이 많아 지고 있어 다음 버전에 대한 논의가 많다.
 
