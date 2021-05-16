@@ -131,7 +131,7 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 대부분의 최신 브라우져 지원
 
-<img src="./pc.png" alt="pc can i use" align=left width=50% />
+[pc can i use](./pc.png)
 
 
 
