@@ -133,7 +133,7 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 <img src="./pc.png" alt="pc can i use" align="left" width="400px" style="display: block;" />
 
-
+---
 
 #### mobile
 
@@ -209,19 +209,19 @@ Websocket은 TCP기반의 통신이기 때문에 패킷 손실시 성능과 미�
 
 DataChannel쪽 socket으로 예상해본다 (진정한 뇌피셜!)
 
-![1](/Users/yangsanghun/study/team-study/cycle-2/webrtc/zoom/1.png)
+![1](./zoom/1.png)
 
 
 
 미디어 데이타 이외의 실시간 동기화 되어야하는 데이타 (접속한 유저, 유저의 마이크등의 상태등)
 
-![info](/Users/yangsanghun/study/team-study/cycle-2/webrtc/zoom/info.png)
+![info](./zoom/info.png)
 
 
 
 webAssembly쪽
 
-![wasm](/Users/yangsanghun/study/team-study/cycle-2/webrtc/zoom/wasm.png)
+![wasm](./zoom/wasm.png)
 
 
 
