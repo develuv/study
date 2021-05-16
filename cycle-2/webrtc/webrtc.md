@@ -131,13 +131,13 @@ https://github.com/yangSangHoon/webrtc-typescript
 
 대부분의 최신 브라우져 지원
 
-![pc can i use](./pc.png)
+![pc can i use](./pc.png){: width="50%"}
 
 
 
 #### mobile
 
-<img src="./mobile.png" alt="mobile can i use" align="left" width="500px" />
+![mobile can i use](./mobile.png){: width="50%"}
 
 실제 모바일에서는 문제가 많다고 한다
 
