@@ -306,7 +306,7 @@ web에서 사용할 수 없음으로 중간에 webrtc -> mumble로 변경해주�
 - WebAssembly
 - Web worker
 - Turn / Stun
-- https://github.com/webrtcHacks/adapter(브라우져마다 다른 미디어 기능에 대한 대응 라이브러리)
+- [https://github.com/webrtcHacks/adapter](https://github.com/webrtcHacks/adapter)브라우져마다 다른 미디어 기능에 대한 대응 라이브러리)
 
 
 
@@ -329,30 +329,6 @@ web에서 사용할 수 없음으로 중간에 webrtc -> mumble로 변경해주�
 - 코덱별 Delay 비교
 
 <p style="text-align:left"><img src="./codec1.png" align="left" alt="codec1" width="600px" /></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
