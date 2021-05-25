@@ -306,7 +306,7 @@ web에서 사용할 수 없음으로 중간에 webrtc -> mumble로 변경해주�
 - WebAssembly
 - Web worker
 - Turn / Stun
-- [https://github.com/webrtcHacks/adapter](https://github.com/webrtcHacks/adapter)브라우져마다 다른 미디어 기능에 대한 대응 라이브러리)
+- [https://github.com/webrtcHacks/adapter](https://github.com/webrtcHacks/adapter) (브라우져마다 다른 미디어 기능에 대한 대응 라이브러리)
 
 
 
@@ -334,7 +334,7 @@ web에서 사용할 수 없음으로 중간에 webrtc -> mumble로 변경해주�
 
 - 코덱별 Quality비교
 
-<img src="./codec2.png" alt="codec2" align="left" style="zoom:50%;" />
+<img src="./codec2.png" alt="codec2" align="left"/>
 
 
 
@@ -344,7 +344,7 @@ VP8, AVC/h264
 
 사실 비디오 연동을 안해봐서 많은 정보가 없다.(지치기도 해서...) 아래 링크 참고 부탁드립니다 ㅎㅎ;
 
-https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs
+[https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs)
 
 
 
