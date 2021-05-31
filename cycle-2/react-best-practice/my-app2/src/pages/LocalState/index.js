@@ -1,7 +1,17 @@
 import {useRef, useEffect, useState, useCallback} from 'react';
 import { useIntersection } from 'react-use';
-import * as api from '../../api';
-import ScrollSensor from './ScrollSensor'
+import { Link } from 'react-router-dom';
+import styled from '@emotion/styled'
+import * as api from '../../api/user';
+import ScrollSensor from '../../components/ScrollSensor'
+
+
+const Card = styled.li`
+  border: 1px solid #eee;
+  padding: 10px;
+  width: 100%;
+`
+
 
 function LocalState() {
   const [page, setPage] = useState(0);
@@ -31,11 +41,14 @@ function LocalState() {
   return (
     <ol>
       {users.map(({_id, name, trips, airline: { logo, name: airlineName } }) => (
-        <li key={_id}>
+        <Card key={_id}>
+          <Link to={`/local/product/${_id}`}>
+          <div>id: {_id}</div>
           <div>name: {name}</div>
           <div>trips: {trips}</div>
           <img src={logo} alt={airlineName} width={50} />
-        </li>
+          </Link>
+        </Card>
       ))}
       <ScrollSensor intersection={intersection} ref={intersectionRef} />
     </ol>
