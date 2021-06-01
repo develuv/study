@@ -9,7 +9,7 @@ function HistoryBack() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      console.log("history change: ", history.action)
+      // console.log("history change: ", history.action)
       dispatch(setAction(history.action))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
