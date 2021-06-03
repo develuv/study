@@ -9,6 +9,10 @@ const items = [
     href: '/global/product',
     title: 'global'
   },
+  {
+    href: '/popup/product',
+    title: 'popup'
+  },
 ];
 
 function NavBar() {

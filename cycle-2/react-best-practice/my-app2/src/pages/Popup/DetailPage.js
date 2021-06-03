@@ -5,7 +5,6 @@ import {
 import * as api from '../../api/user';
 
 function DetailPage() {
-  console.log("detail popup")
   const [user, setUser] = useState(null);
   const { id } = useParams();
 
@@ -14,7 +13,6 @@ function DetailPage() {
     setUser(data);
   }, []);
   
-
   useEffect(() => {
       fetchUser(id);
   }, [fetchUser, id]);
