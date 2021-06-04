@@ -30,13 +30,13 @@ function GlobalState() {
   });
   
   useEffect(() => {
-    console.log("> list mount: ", action, status);
+    console.log("> list mount: ", action);
     if (action === "POP") {
       return;
     }
     dispatch(resetUsers())
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [action])
   
   useEffect(() => {
     if (intersection?.isIntersecting) {

@@ -18,9 +18,9 @@ import './App.css';
 function App() {
   const location = useLocation();
   let background = location.state && location.state.background;
-  console.log("background", background)
   return (
     <>
+      <HistoryBack /> 
       <NavBar />
       <Switch location={background || location}>
         {/* <Route exact path={"/"} component={HomePage}> */}
@@ -36,7 +36,7 @@ function App() {
       </Switch>
 
       {background && <Route path="/popup/product/:id" component={ModalDetailPopupPage} />}
-      <HistoryBack /> 
+      
     </>
   );
 }
