@@ -6,9 +6,11 @@
 
 - 페이지 로딩 속도를 개선하고 CommonJS / UMD 모듈을 ESM으로 변환하기 위해 사전 번들로 제공합니다.
 - 사전 번들링 단계는 esbuild로 수행되며 Vite의 콜드 시작 시간을 JavaScript 기반 번 들러보다 훨씬 빠르게 만듭니다.
+
+![esbuild](https://user-images.githubusercontent.com/25737303/120878784-aaeb2d80-c5f9-11eb-8f3e-5cc4078af20e.JPG)
 <details>
     <summary>esbuild</summary>
-    ![esbuild](https://user-images.githubusercontent.com/25737303/120878784-aaeb2d80-c5f9-11eb-8f3e-5cc4078af20e.JPG)
+    
 </details>
 
 ### Hot Module Replacement
