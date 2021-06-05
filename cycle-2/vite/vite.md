@@ -211,6 +211,9 @@ const worker = new MyWorker();
 
 ### Build Optimizations
 
+### Production build
+기본 진입점은 `<root>/index.html`
+    
 > 빌드 프로세스의 일부로 자동으로 적용되며 비활성화하지 않는 한 명시적인 구성이 필요하지 않습니다.
 
 - CSS Code Splitting
