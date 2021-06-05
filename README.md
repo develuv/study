@@ -85,6 +85,6 @@ Study & Discuss Project ✏️
  
 
    
-   https://github.com/develuv/study/blob/main/cycle-2/webrtc/webrtc.md
+
  </div>
 </details>
