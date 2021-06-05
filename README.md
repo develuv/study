@@ -39,6 +39,7 @@ Study & Discuss Project ✏️
 - ngrok
 - Lerna
 - Yarn workspace
+- Yarn berry
 - Github actions
 
 ## Cycle.1
