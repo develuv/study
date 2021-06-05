@@ -106,7 +106,7 @@ npm install -D stylus
 ### Static Assets
 
 - 정적 자산을 가져 오면 제공 될 때 해결 된 공개 URL이 반환됩니다.
-- `webpack`의 `file-loader`와의 차이점은 개발중 프로젝트 루트 기반으로 절대경로나 상대경로를 사용할수 있다는 점입니다.
+- `webpack`의 `file-loader`와의 차이점은 개발중 프로젝트 루트 기반의 절대경로나 상대경로를 사용할수 있다는 점입니다.
 
 ```js
 import imgUrl from "./img.png";
