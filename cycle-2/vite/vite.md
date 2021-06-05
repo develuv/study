@@ -5,7 +5,7 @@
 ### NPM 종속성 해결 및 사전 번들링
 
 - **CommonJS 및 UMD 호환성**: 페이지 로딩 속도를 개선하고 CommonJS / UMD 모듈을 ESM으로 변환하기 위해 사전 번들로 제공합니다.
-- react 처럼 exports 에 동적으로 할당된 경우에도 named import를 사용할수 있도록 스마트 가져오기 분석(smart import analysis)을 수행합니다.
+- `react` 처럼 `exports` 에 동적으로 할당된 경우에도 `named import`를 사용할수 있도록 `스마트 가져오기 분석(smart import analysis)`을 수행합니다.
 ```ts
 import React, { useState } from 'react'
 ```
