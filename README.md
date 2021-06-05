@@ -25,6 +25,11 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
 - Refactoring
   - Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭
+- WebRTC
+  - [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
+- 뒤로가기
+  - Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
+  - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
 - Vite
 - Tdd
 - Docker
@@ -73,7 +78,7 @@ Study & Discuss Project ✏️
    
 > 성광 - 상훈 - 성광 - 동주 - 
 - Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
-- [Cycle.2 - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자](cycle-2/webrtc/webrtc.md) - 상훈
+- [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
 - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
 - Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주
    
