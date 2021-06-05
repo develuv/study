@@ -213,6 +213,8 @@ const worker = new MyWorker();
 ### Production build
 기본 진입점은 `<root>/index.html`
 - vite는 기본 ESM 스크립트 태그 및 기본 ESM 동적 가져 오기 를 지원하는 브라우저를 대상
+![can-i-use-esm](https://user-images.githubusercontent.com/25737303/120880443-9319a680-c605-11eb-963e-6db805320a3b.JPG)
+
     
 ### Build Optimizations
     
