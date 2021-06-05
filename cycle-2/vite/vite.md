@@ -209,10 +209,12 @@ const worker = new MyWorker();
 - 기본 경로: `/public`
 - 개발중 소스에서 가져올때는 `/` 루트 절대 경로로 사용 (`/public/icon.png` 이라면 `/icon.png`로 사용)
 
-### Build Optimizations
 
 ### Production build
 기본 진입점은 `<root>/index.html`
+
+    
+### Build Optimizations
     
 > 빌드 프로세스의 일부로 자동으로 적용되며 비활성화하지 않는 한 명시적인 구성이 필요하지 않습니다.
 
