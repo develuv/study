@@ -31,6 +31,7 @@ Study & Discuss Project ✏️
   - Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
   - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
 - Vite
+  - [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
 - Tdd
 - Docker
 - Aws
