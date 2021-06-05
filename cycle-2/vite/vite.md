@@ -216,6 +216,8 @@ const worker = new MyWorker();
 - browserslist: (`build.target` 옵션을 통해 수정가능)<br/>
     `defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0`
 ![can-i-use-esm](https://user-images.githubusercontent.com/25737303/120880443-9319a680-c605-11eb-963e-6db805320a3b.JPG)
+- 레거시 브라우저는 `@vitejs/plugin-legacy` 를 통해 지원 될 수 있으며 ,레거시 청크 및 해당 ES 언어 기능 폴리 필을 자동으로 생성합니다.
+- 레거시 청크는 기본 ESM 지원이없는 브라우저에서만 조건부로로드됩니다.
 
     
 ### Build Optimizations
