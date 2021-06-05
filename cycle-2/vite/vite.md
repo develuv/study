@@ -203,6 +203,11 @@ import MyWorker from "./worker?worker";
 
 const worker = new MyWorker();
 ```
+    
+### Public 디렉토리
+- dist 루트에 적재되는 리소스
+- 기본 경로: `/public`
+- 개발중 소스에서 가져올때는 `/` 루트 절대 경로로 
 
 ### Build Optimizations
 
