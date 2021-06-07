@@ -227,3 +227,8 @@ const worker = new MyWorker();
 - CSS Code Splitting
 - Preload Directives Generation
 - Async Chunk Loading Optimization
+    
+### References
+- [Webpack을 사용하지 말아야하는 이유](https://javascript.plainenglish.io/why-you-should-not-use-webpack-f07f4fd7c116)
+- [Vite 2.0의 새로운 기능](https://blog.logrocket.com/whats-new-in-vite-2-0/)
+- [Vite : 생산 가치를 높이고 만능 빌드 도구로 만드는 12 가지 기능](https://www.derpycoder.com/vite-12-features-that-make-it-a-production-worthy-all-rounder-build-tool/)
