@@ -233,3 +233,4 @@ const worker = new MyWorker();
 - [Vite 2.0의 새로운 기능](https://blog.logrocket.com/whats-new-in-vite-2-0/)
 - [Vite : 생산 가치를 높이고 만능 빌드 도구로 만드는 12 가지 기능](https://www.derpycoder.com/vite-12-features-that-make-it-a-production-worthy-all-rounder-build-tool/)
 - [Vite의 작동 원리-Webpack과의 비교](https://harlanzw.com/blog/how-the-heck-does-vite-work/#app-js)
+- [Webpack에서 Vite로 전환 한 이유](https://blog.replit.com/vite)
