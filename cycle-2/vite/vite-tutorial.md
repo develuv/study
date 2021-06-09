@@ -144,6 +144,20 @@ module.exports = {
 
 ide의 prettier 지원 플러그인 설치후 저장시에 prettier 동작하도록 설정
 
+- webstorm or intelliJ : 설정 > prettier > 체크박스 체크
+- vscode (setting.json)
+```json
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+
 ## 7. 커밋대상 eslint 적용하기
 
 ```shell
