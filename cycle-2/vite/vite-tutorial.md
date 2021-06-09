@@ -188,7 +188,7 @@ npx lint-staged --verbose
 
 ### 원격저장소 복사(깃 히스토리 X) https://github.com/Rich-Harris/degit
 
-로컬에서 degit을 사용하면 git clone 과는 다르게 git 히스토리 없이 템플릿만을 빠르게 복사해서 재사용할 수 있다.
+로컬에서 degit을 사용하면 `git clone` 과는 다르게 git 히스토리 없이 템플릿만을 빠르게 복사해서 재사용할 수 있다.
 
 ```sh
 npx degit [repo address] [directory]
