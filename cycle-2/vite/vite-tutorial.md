@@ -9,6 +9,7 @@
 -   [5. eslint 추가하기](#5-eslint-추가하기)
 -   [6. prettier 추가하기](#6-prettier-추가하기)
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
+-   [7. degit을 활용하여 스캐폴딩 재사용하기](#8-degit을-활용하여-스캐폴딩-재사용하기)
 
 ## 1. 프로젝트 생성하기
 
@@ -167,6 +168,20 @@ npx lint-staged --verbose
         "lint-staged": "lint-staged --verbose"
     }
 }
+```
+
+## 8. degit을-활용하여-스캐폴딩-재사용하기
+
+### 원격저장소 복사(깃 히스토리 X) https://github.com/Rich-Harris/degit
+
+로컬에서 degit을 사용하면 git clone 과는 다르게 git 히스토리 없이 템플릿만을 빠르게 복사해서 재사용할 수 있다.
+
+```sh
+npx degit [저장소명] [?로컬저장소명]
+npx degit [저장소명][?#브랜치명] [?로컬저장소명]  // 해당 브랜치 복사 (기본 master)
+npx degit [저장소명][?#태그명] [?로컬저장소명]  // 해당 태그 복사
+npx degit [저장소명][?#커밋해쉬] [?로컬저장소명]  // 해당 커밋해쉬 복사
+npx degit [저장소명]/[?폴더] [?로컬저장소명]  // 폴더 뎁스로 들어가서 복사
 ```
 
 ## 참고
