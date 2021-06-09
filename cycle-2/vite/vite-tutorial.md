@@ -177,11 +177,11 @@ npx lint-staged --verbose
 로컬에서 degit을 사용하면 git clone 과는 다르게 git 히스토리 없이 템플릿만을 빠르게 복사해서 재사용할 수 있다.
 
 ```sh
-npx degit [repo address] [?directory]
-npx degit [repo address][?#branch] [?directory]  // 해당 브랜치 복사 (기본 master)
-npx degit [repo address][?#tag] [?directory]  // 해당 태그 복사
-npx degit [repo address][?#commitHash] [?directory]  // 해당 커밋해쉬 복사
-npx degit [repo address]/[?directory] [?directory]  // 폴더 뎁스로 들어가서 복사
+npx degit [repo address] [directory]
+npx degit [repo address][#branch] [?directory]  // 해당 브랜치 복사 (기본 master)
+npx degit [repo address][#tag] [?directory]  // 해당 태그 복사
+npx degit [repo address][#commitHash] [?directory]  // 해당 커밋해쉬 복사
+npx degit [repo address]/[directory] [?directory]  // 폴더 뎁스로 들어가서 복사
 
 // 저장소명만으로도 가능
 degit github:[user]/[repo name]
