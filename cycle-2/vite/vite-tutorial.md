@@ -9,6 +9,7 @@
 -   [5. eslint 추가하기](#5-eslint-추가하기)
 -   [6. prettier 추가하기](#6-prettier-추가하기)
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
+-   [8. degit을 활용하여 스캐폴딩 재사용하기](#8-degit을-활용하여-스캐폴딩-재사용하기)
 
 ## 1. 프로젝트 생성하기
 
@@ -143,6 +144,20 @@ module.exports = {
 
 ide의 prettier 지원 플러그인 설치후 저장시에 prettier 동작하도록 설정
 
+- webstorm or intelliJ : 설정 > prettier > 체크박스 체크
+- vscode (setting.json)
+```json
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+
 ## 7. 커밋대상 eslint 적용하기
 
 ```shell
@@ -167,6 +182,23 @@ npx lint-staged --verbose
         "lint-staged": "lint-staged --verbose"
     }
 }
+```
+
+## 8. degit을-활용하여-스캐폴딩-재사용하기
+
+### 원격저장소 복사(깃 히스토리 X) https://github.com/Rich-Harris/degit
+
+로컬에서 degit을 사용하면 `git clone` 과는 다르게 git 히스토리 없이 템플릿만을 빠르게 복사해서 재사용할 수 있다.
+
+```sh
+npx degit [repo address] [directory]
+npx degit [repo address]#[branch] [directory]  // 해당 브랜치 복사 (기본 master)
+npx degit [repo address]#[tag] [directory]  // 해당 태그 복사
+npx degit [repo address]#[commit hash] [directory]  // 해당 커밋해쉬 복사
+npx degit [repo address]/[directory] [directory]  // 폴더 뎁스로 들어가서 복사
+
+// 저장소명만으로도 가능
+degit github:[user]/[repo name]
 ```
 
 ## 참고
