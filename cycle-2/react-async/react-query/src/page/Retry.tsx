@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useQuery } from 'react-query'
+import {Link} from "react-router-dom";
 
 function Retry(): JSX.Element {
   const { isLoading, error, data, refetch } = useQuery('articles', () => axios.get('https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles'), {
@@ -20,6 +21,7 @@ function Retry(): JSX.Element {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
+      <Link to="/">Home</Link>
     </div>
   )
 }

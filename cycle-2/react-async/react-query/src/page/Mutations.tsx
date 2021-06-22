@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { useMutation, UseMutationResult, useQuery } from 'react-query'
+import {Link} from "react-router-dom";
 
 interface Article {
   id?: string
@@ -96,6 +97,7 @@ function Mutations(): JSX.Element {
           </li>
         ))}
       </ul>
+      <Link to="/">Home</Link>
     </div>
   )
 }

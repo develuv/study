@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useQuery } from 'react-query'
+import {Link} from "react-router-dom";
 
 const fetchArticles = async (page: number = 1) => await axios.get(`https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles?page=${page}&limit=10`)
 
@@ -36,6 +37,7 @@ function Prefetch(): JSX.Element {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
+      <Link to="/">Home</Link>
     </div>
   )
 }
