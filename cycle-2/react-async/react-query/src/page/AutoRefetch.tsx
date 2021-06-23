@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 function AutoRefetch(): JSX.Element {
   const { isLoading, error, data } = useQuery('articles', () => axios.get('https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles'), {
-    refetchInterval: 3,
+    refetchInterval: 1000,
   })
 
   if (isLoading) return <div>loading...</div>
