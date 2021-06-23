@@ -11,6 +11,8 @@ import Enabled from './page/Enabled'
 import Focus from "./page/Focus";
 import Prefetch from "./page/Prefetch";
 import Mutations from "./page/Mutations";
+import Select from "./page/Select";
+import MutateAsync from "./page/MutateAsync";
 
 export const queryClient: QueryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +31,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/basic" component={Basic} />
+          <Route exact path="/select" component={Select} />
           <Route exact path="/refetch" component={Refetch} />
           <Route exact path="/polling" component={AutoRefetch} />
           <Route exact path="/focus" component={Focus} />
@@ -36,6 +39,7 @@ ReactDOM.render(
           <Route exact path="/enabled" component={Enabled} />
           <Route exact path="/prefetch" component={Prefetch} />
           <Route exact path="/mutations" component={Mutations} />
+          <Route exact path="/mutate-async" component={MutateAsync} />
         </Switch>
       </BrowserRouter>
     </QueryClientProvider>{' '}

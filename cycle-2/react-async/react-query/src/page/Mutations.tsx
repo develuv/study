@@ -1,32 +1,32 @@
-import React, {useEffect, useState} from 'react'
-import axios, { AxiosResponse } from 'axios'
+import React, { useCallback, useEffect, useState } from 'react'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { useMutation, UseMutationResult, useQuery } from 'react-query'
-import {Link} from "react-router-dom";
-
-interface Article {
-  id?: string
-  name: string
-  avatar: string
-  createdAt?: string
-}
+import { Link } from 'react-router-dom'
+import { Article } from '../model/Article'
 
 function Mutations(): JSX.Element {
   const [articles, setArticles] = useState<Array<Article>>([])
-  const { isLoading, error, data } = useQuery('articles', () => axios.get('https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles'))
+  const { isLoading, error, data } = useQuery<AxiosResponse<Array<Article>>, AxiosError, Array<Article>>(
+    'articles',
+    () => axios.get('https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles'),
+    {
+      select: (axiosResponse: AxiosResponse<Array<Article>>): Array<Article> => axiosResponse.data,
+    }
+  )
 
-  const addMutation: UseMutationResult<AxiosResponse<Article>, unknown, Article, unknown> = useMutation((newArticle: Article) =>
+  const addMutation: UseMutationResult<AxiosResponse<Article>, unknown, Article> = useMutation((newArticle: Article) =>
     axios.post('https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles', newArticle)
   )
 
-  const updateMutation: UseMutationResult<AxiosResponse<Article>, unknown, Article, unknown> = useMutation((modifyArticle: Article) =>
+  const updateMutation: UseMutationResult<AxiosResponse<Article>, unknown, Article> = useMutation((modifyArticle: Article) =>
     axios.put(`https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles/${modifyArticle.id}`, modifyArticle)
   )
 
-  const removeMutation: UseMutationResult<AxiosResponse<Article>, unknown, number, unknown> = useMutation((id: number) =>
+  const removeMutation: UseMutationResult<AxiosResponse<Article>, unknown, number> = useMutation((id: number) =>
     axios.delete(`https://60d08b927de0b20017108f83.mockapi.io/api/v1/articles/${id}`)
   )
 
-  const addArticle = () => {
+  const addArticle = useCallback(() => {
     const name = prompt('name')
 
     if (!name) return
@@ -35,23 +35,26 @@ function Mutations(): JSX.Element {
       name,
       avatar: 'https://cdn.fakercloud.com/avatars/artem_kostenko_128.jpg',
     })
-  }
+  }, [addMutation])
 
-  const updateArticle = (article: Article) => {
-    const name = prompt('name')
+  const updateArticle = useCallback(
+    (article: Article) => {
+      const name = prompt('name')
 
-    if (!name) return
+      if (!name) return
 
-    updateMutation.mutate({
-      id: article.id,
-      name,
-      avatar: article.avatar,
-    })
-  }
+      updateMutation.mutate({
+        id: article.id,
+        name,
+        avatar: article.avatar,
+      })
+    },
+    [updateMutation]
+  )
 
-  const removeArticle = (id: number) => {
+  const removeArticle = useCallback((id: number) => {
     removeMutation.mutate(id)
-  }
+  }, [removeMutation])
 
   useEffect(() => {
     if (!addMutation.data) return
@@ -78,7 +81,7 @@ function Mutations(): JSX.Element {
   }, [removeMutation.data])
 
   useEffect(() => {
-    setArticles(data?.data || [])
+    setArticles(data || [])
   }, [data])
 
   if (isLoading) return <div>loading...</div>

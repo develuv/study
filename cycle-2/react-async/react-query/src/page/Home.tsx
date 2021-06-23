@@ -8,6 +8,9 @@ function Home(): JSX.Element {
         <Link to="/basic">Basic</Link>
       </li>
       <li>
+        <Link to="/select">Select</Link>
+      </li>
+      <li>
         <Link to="/refetch">Refetch</Link>
       </li>
       <li>
@@ -27,6 +30,9 @@ function Home(): JSX.Element {
       </li>
       <li>
         <Link to="/mutations">Mutations</Link>
+      </li>
+      <li>
+        <Link to="/mutate-async">MutateAsync</Link>
       </li>
     </ul>
   )
