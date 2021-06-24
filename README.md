@@ -83,6 +83,8 @@ Study & Discuss Project ✏️
 - [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
 - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
 - [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
+- [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
+- [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
    
  
 
