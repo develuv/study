@@ -32,6 +32,10 @@ Study & Discuss Project ✏️
   - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
 - Vite
   - [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
+- 디자인 패턴
+  - [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
+- React Query
+  - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
 - Tdd
 - Docker
 - Aws
