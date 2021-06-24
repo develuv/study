@@ -15,23 +15,23 @@ Study & Discuss Project ✏️
   - 잡담: 10시 ~ 11시
 
 ## Subject Of Interest
-- Typescript
-  - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
-- D3
-  - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
 - 클린 코드
   - Cycle.1 2021.04.07(수) - 클린코드 - 희준
 - 디자인 패턴
   - [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
+- 리팩토링
+  - [Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭](cycle-1/study-4/study-4-refactoring.md)
 - 뒤로가기
   - Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
   - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
+- Typescript
+  - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
+- D3
+  - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
 - React
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
 - React Query
   - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
-- Refactoring
-  - Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭
 - WebRTC
   - [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
 - Vite
