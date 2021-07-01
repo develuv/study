@@ -3,6 +3,7 @@
 Study & Discuss Project ✏️
 
 ## Ground Rules
+
 - cycle : 1 week (수요일)
 - 자유로운 주제 혹은 관심 주제 중 부담없는 선에서 준비
 - 발표자는 한주까지 연기 가능
@@ -15,6 +16,7 @@ Study & Discuss Project ✏️
   - 잡담: 10시 ~ 11시
 
 ## Subject Of Interest
+
 - 클린 코드
   - Cycle.1 2021.04.07(수) - 클린코드 - 희준
 - 디자인 패턴
@@ -48,6 +50,7 @@ Study & Discuss Project ✏️
 - Github actions
 
 ## Cycle.1
+
 <details>
 <summary>펼치기</summary>
  <div>
@@ -60,24 +63,28 @@ Study & Discuss Project ✏️
 - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
 
 ### 회고 [Mirro보드 바로가기](https://miro.com/welcomeonboard/0p2xKh9fze1t2bho1E5rNOcK2NzPnS3ceGoorPJPCtI4RrMuxbQZvHs1kU4OsncU)
-- Try
-   - 계속 스터디 모임 유지하자
-   - 재섭이형은 웬만하면 실습 스터디로 준비
-   - 모노레포 저장소(러나, yarn워크스페이스) 활용성 스터디해봐도 좋을듯, 공용 저장소는 꾸준히 관리
 
+- Try
+
+  - 계속 스터디 모임 유지하자
+  - 재섭이형은 웬만하면 실습 스터디로 준비
+  - 모노레포 저장소(러나, yarn워크스페이스) 활용성 스터디해봐도 좋을듯, 공용 저장소는 꾸준히 관리
 
 - Action
-   - 스터디 하루전 전 내용 공유하기
-   - 5인이상 풀리면 주변 맛집에서 저녁먹고 이후 스터디 하기
-   - 스터디 타임라인을 만들자
-      - 저녁: 7시 ~8시
-      - 스터디: 8시 ~ 10시
-      - 잡담: 10시 ~ 11시
 
- </div>
-</details>
+  - 스터디 하루전 전 내용 공유하기
+  - 5인이상 풀리면 주변 맛집에서 저녁먹고 이후 스터디 하기
+  - 스터디 타임라인을 만들자
+    - 저녁: 7시 ~8시
+    - 스터디: 8시 ~ 10시
+    - 잡담: 10시 ~ 11시
+
+  ![첫번째 스터디 사이클 회고](./images/cycle-1.png)
+   </div>
+  </details>
 
 ## Cycle.2
+
 <details>
  <summary>펼치기</summary>
  <div>
@@ -90,9 +97,7 @@ Study & Discuss Project ✏️
 - [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
 - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
    
- 
-
-   
+![두번째 스터디 사이클 회고](./images/cycle-2.png)
 
  </div>
 </details>
