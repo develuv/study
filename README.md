@@ -96,7 +96,9 @@ Study & Discuss Project ✏️
 - [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
 - [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
 - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
-   
+
+   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/T0V0UkVOMnpVY0VrNDBwamZxcjh3U1gyZVJHT09reGhZVTFvYk1xS2tzbDVGSGNCbTF1TWxqYWF2c01CZ1hwZXwzMDc0NDU3MzU3ODIzMjkyNTY2)
+
 ![두번째 스터디 사이클 회고](./images/cycle-2.png)
 
  </div>
