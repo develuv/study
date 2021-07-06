@@ -11,7 +11,7 @@
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
 -   [8. degit을 활용하여 스캐폴딩 재사용하기](#8-degit을-활용하여-스캐폴딩-재사용하기)
 -   [9. commitlint 추가하여 커밋메시지 통일성 주기](#9-commitlint-추가하여-커밋메시지-통일성-주기)
--   [10. standard-version 추가하기](#10-standard-version-추가하기)
+-   [10. standard-version 사용하여 버전히스토리 자동화하기](#10-standard-version-사용하여-버전히스토리-자동화하기)
 
 ## 1. 프로젝트 생성하기
 
@@ -225,7 +225,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-## 10. [standard-version](https://github.com/conventional-changelog/standard-version) 추가하기
+## 10. [standard-version](https://github.com/conventional-changelog/standard-version) 사용하여 버전히스토리 자동화하기
 
 설치하기
 
