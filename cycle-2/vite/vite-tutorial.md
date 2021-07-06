@@ -203,7 +203,7 @@ npx degit [repo address]/[directory] [directory]  // 폴더 뎁스로 들어가�
 degit github:[user]/[repo name]
 ```
 
-## 9. commitlint 추가하여 커밋메시지 통일성 주기
+## 9. [commitlint](https://github.com/conventional-changelog/commitlint) 추가하여 커밋메시지 통일성 주기
 
 `@commitlint/cli`,  `@commitlint/config-conventional` 설치하기
 
@@ -226,6 +226,14 @@ yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
 ## 10. standard-version 추가하기
+
+설치하기
+
+```sh
+npm i -D standard-version
+```
+
+
 
 ## 참고
 
