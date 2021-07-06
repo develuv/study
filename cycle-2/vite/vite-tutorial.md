@@ -245,7 +245,7 @@ npm i -D standard-version
 
 새로운 버전 릴리즈하기
 
-이 명령어를 입력하게 되면 커밋을 보고 판단하여 자동으로 semVer에 입각하여 버전을 올림
+이 명령어를 입력하게 되면 커밋을 보고 판단하여 자동으로 semVer에 입각하여 버전을 올리고 `package.json`, `changelog.md`를 업데이트하고 태그를 생성한다.
 ```sh
 npm run release
 ```
