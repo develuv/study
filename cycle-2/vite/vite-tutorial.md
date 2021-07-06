@@ -110,7 +110,7 @@ module.exports = {
 };
 ```
 
-## 6. prettier 추가하기
+## 6. [prettier](https://github.com/prettier/prettier) 추가하기
 
 ```shell
 npm i -D prettier
