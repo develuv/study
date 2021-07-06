@@ -225,7 +225,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-## 10. standard-version 추가하기
+## 10. [standard-version](https://github.com/conventional-changelog/standard-version) 추가하기
 
 설치하기
 
