@@ -10,8 +10,8 @@
 -   [6. prettier 추가하기](#6-prettier-추가하기)
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
 -   [8. degit을 활용하여 스캐폴딩 재사용하기](#8-degit을-활용하여-스캐폴딩-재사용하기)
--   [9. commitlint 추가하여 커밋메시지 통일성 주기](#8-commitlint-추가하여-커밋메시지-통일성-주기)
--   [10. standard-version 추가하기](#8-standard-version-추가하기)
+-   [9. commitlint 추가하여 커밋메시지 통일성 주기](#9-commitlint-추가하여-커밋메시지-통일성-주기)
+-   [10. standard-version 추가하기](#10-standard-version-추가하기)
 
 ## 1. 프로젝트 생성하기
 
@@ -186,7 +186,7 @@ npx lint-staged --verbose
 }
 ```
 
-## 8. degit을-활용하여-스캐폴딩-재사용하기
+## 8. degit을 활용하여 스캐폴딩 재사용하기
 
 ### 원격저장소 복사(깃 히스토리 X) https://github.com/Rich-Harris/degit
 
@@ -204,8 +204,16 @@ degit github:[user]/[repo name]
 ```
 
 ## 9. commitlint 추가하여 커밋메시지 통일성 주기
+
+`@commitlint/cli`,  `@commitlint/config-conventional` 설치하기
+
 ```sh
 npm install -D @commitlint/cli @commitlint/config-conventional
+```
+
+설정파일 `commitlint.config.js` 추가
+ 
+```sh
 echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
