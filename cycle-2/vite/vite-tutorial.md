@@ -160,7 +160,7 @@ ide의 prettier 지원 플러그인 설치후 저장시에 prettier 동작하도
 ```
 
 
-## 7. 커밋대상 eslint 적용하기
+## 7. 커밋대상 [eslint](https://github.com/eslint/eslint) 적용하기
 
 ```sh
 npx mrm@2 lint-staged
