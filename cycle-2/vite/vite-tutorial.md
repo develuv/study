@@ -233,7 +233,15 @@ yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 npm i -D standard-version
 ```
 
+`package.json`에 스크립트 추가하기
 
+```json
+{
+  "scripts": {
+    "release": "standard-version"
+  }
+}
+```
 
 ## 참고
 
