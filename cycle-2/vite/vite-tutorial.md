@@ -5,7 +5,7 @@
 -   [1. 프로젝트 생성하기](#1-프로젝트-생성하기)
 -   [2. 빌드 및 데브서버 실행](#2-빌드-및-데브서버-실행)
 -   [3. 원격 저장소에 올리기](#3-원격-저장소에-올리기)
--   [4. Github 페이지에 배포하기](#4-Github-페이지에-배포하기)
+-   [4. gh-pages 이용하여 Github 페이지에 배포하기](#4-gh-pages-이용하여-Github-페이지에-배포하기)
 -   [5. eslint 추가하기](#5-eslint-추가하기)
 -   [6. prettier 추가하기](#6-prettier-추가하기)
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
@@ -50,7 +50,7 @@ git remote add origin [원격저장소 주소]
 git push -u origin main
 ```
 
-## 4. Github 페이지에 배포하기
+## 4. [gh-pages](https://github.com/tschaub/gh-pages) 이용하여 Github 페이지에 배포하기
 
 `gh-pages` 설치
 
