@@ -217,6 +217,13 @@ npm install -D @commitlint/cli @commitlint/config-conventional
 echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
+husky 의 commit-msg 훅 추가하기
+```sh
+# Add hook
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
+# or
+yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
+```
 
 ## 10. standard-version 추가하기
 
