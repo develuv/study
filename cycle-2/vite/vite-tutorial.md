@@ -10,6 +10,8 @@
 -   [6. prettier 추가하기](#6-prettier-추가하기)
 -   [7. 커밋대상 eslint 적용하기](#7-커밋대상-eslint-적용하기)
 -   [8. degit을 활용하여 스캐폴딩 재사용하기](#8-degit을-활용하여-스캐폴딩-재사용하기)
+-   [9. commitlint 추가하여 커밋메시지 통일성 주기](#8-commitlint-추가하여-커밋메시지-통일성-주기)
+-   [10. standard-version 추가하기](#8-standard-version-추가하기)
 
 ## 1. 프로젝트 생성하기
 
@@ -160,7 +162,7 @@ ide의 prettier 지원 플러그인 설치후 저장시에 prettier 동작하도
 
 ## 7. 커밋대상 eslint 적용하기
 
-```shell
+```sh
 npx mrm@2 lint-staged
 ```
 
@@ -200,6 +202,15 @@ npx degit [repo address]/[directory] [directory]  // 폴더 뎁스로 들어가�
 // 저장소명만으로도 가능
 degit github:[user]/[repo name]
 ```
+
+## 9. commitlint 추가하여 커밋메시지 통일성 주기
+```sh
+npm install -D @commitlint/cli @commitlint/config-conventional
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+```
+
+
+## 10. standard-version 추가하기
 
 ## 참고
 
