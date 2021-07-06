@@ -186,7 +186,7 @@ npx lint-staged --verbose
 }
 ```
 
-## 8. degit을 활용하여 스캐폴딩 재사용하기
+## 8. [degit](https://github.com/Rich-Harris/degit)을 활용하여 스캐폴딩 재사용하기
 
 ### 원격저장소 복사(깃 히스토리 X) https://github.com/Rich-Harris/degit
 
