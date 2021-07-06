@@ -87,7 +87,7 @@ in `vite.config.ts`
 yarn deploy
 ```
 
-## 5. [eslint](https://github.com/search?q=eslint) 추가하기
+## 5. [eslint](https://github.com/eslint/eslint) 추가하기
 
 ```shell
 npm i -D eslint
