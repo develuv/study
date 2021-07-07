@@ -238,10 +238,12 @@ npm i -D standard-version
 ```json
 {
   "scripts": {
-    "release": "standard-version"
+    "release": "standard-version --no-verify -t ''"
   }
 }
 ```
+> - **--no-verify**: `pre-commit`훅을 실행하지는 옵션
+> - **-t ''**: 태그 앞에 프리픽스 제거 (default: 'v') 
 
 새로운 버전 릴리즈하기
 
