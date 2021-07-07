@@ -245,6 +245,26 @@ npm i -D standard-version
 > - **--no-verify**: 버저닝 커밋 시에 `pre-commit`훅 실행을 방지하는 옵션
 > - **-t ''**: 태그 앞에 프리픽스 제거 (default: 'v') 
 
+`.versionrc` 만들어서 섹션 설정하기
+```json
+{
+  "types": [
+    {"type": "feat", "section": "✨ Features"},
+    {"type": "fix", "section": "\uD83D\uDC1B Bug Fixes"},
+    {"type": "docs", "section": "\uD83D\uDCDA Documentation"},
+    {"type": "style", "section": "\uD83D\uDC8E Styles"},
+    {"type": "refactor", "section": "\uD83D\uDCE6 Refactoring"},
+    {"type": "perf", "section": "\uD83D\uDE80 Performance"},
+    {"type": "test", "section": "\uD83D\uDEA8 Tests"},
+    {"type": "build", "section": "\uD83D\uDEE0 Builds"},
+    {"type": "ci", "section": "⚙️ Continuous Integrations"},
+    {"type": "chore", "section": "♻️ Chores"},
+    {"type": "revert", "section": "\uD83D\uDDD1 Reverts"}
+  ]
+}
+
+```
+
 새로운 버전 릴리즈하기
 
 이 명령어를 입력하게 되면 커밋을 보고 판단하여 자동으로 semVer에 입각하여 올린 버전을 `package.json`, `changelog.md`에 업데이트한 후 커밋하고 태그를 생성한다.
