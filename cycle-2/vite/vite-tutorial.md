@@ -273,6 +273,8 @@ npm i -D standard-version
 npm run release
 ```
 
+참고링크: [conventional commit](https://www.conventionalcommits.org/ko/v1.0.0/)
+
 ## 참고
 
 > -   [Vite Guide](https://vitejs.dev/guide/)
