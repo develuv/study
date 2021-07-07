@@ -245,7 +245,7 @@ npm i -D standard-version
 > - **--no-verify**: 버저닝 커밋 시에 `pre-commit`훅 실행을 방지하는 옵션
 > - **-t ''**: 태그 앞에 프리픽스 제거 (default: 'v') 
 
-`.versionrc` 만들어서 섹션 설정하기
+`.versionrc` 만들어서 섹션 커스텀 설정하기
 ```json
 {
   "types": [
