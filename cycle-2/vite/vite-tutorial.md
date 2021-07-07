@@ -242,7 +242,7 @@ npm i -D standard-version
   }
 }
 ```
-> - **--no-verify**: `pre-commit`훅을 실행하지는 옵션
+> - **--no-verify**: 버저닝 커밋 시에 `pre-commit`훅 실행을 방지하는 옵션
 > - **-t ''**: 태그 앞에 프리픽스 제거 (default: 'v') 
 
 새로운 버전 릴리즈하기
