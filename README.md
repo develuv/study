@@ -108,6 +108,6 @@ Study & Discuss Project ✏️
 ## Cycle.3
 
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
-- [Cycle.3 2021.10.06(수) - 캘린더 만들고 Date Picker 기능 구현하기 - 동주](https://github.com/dunz/date-picker)
+- [Cycle.3 2021.10.07(수) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
 
 
