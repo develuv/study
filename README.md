@@ -43,6 +43,7 @@ Study & Discuss Project ✏️
 - Tdd
 - Docker
 - Aws
+  - [Cycle.3 2021.10.12(화) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
 - GraphQL
 - Functional programming
 - ngrok
@@ -111,5 +112,5 @@ Study & Discuss Project ✏️
 
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
 - [Cycle.3 2021.10.07(수) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
-
+- [Cycle.3 2021.10.12(화) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
 
