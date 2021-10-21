@@ -101,9 +101,6 @@ mkdir ./packages/server
   "name": "common",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {
-    "cross-env": "7.0.3"
-  },
   "license": "MIT"
 }
 ```
@@ -116,9 +113,59 @@ mkdir ./packages/server
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
   "license": "MIT"
 }
+```
+
+샘플코드: https://github.com/sungkwangkim/yarn-1-workspace
+
+
+#### 불편한점!
+./packages/server에서 아래 명령어가 안됨
+```
+yarn add @study/common
+```
+
+
+
+## yarn berry workspace
+```
+// yarn 버전 변경
+yarn -v 
+yarn set version berry
+yarn -v
+
+
+// workpsace 생성
+yarn init -w
+```
+
+
+workspaces-tools플러그인을 추가
+나중에 사용할 작업 공간 스크립트를 실행할 때 유용
+```
+yarn plugin import workspace-tools
+```
+
+common, server 폴더 생성
+```
+yarn packages/common init
+yarn packages/server init
+```
+
+
+
+
+
+
+
+
+// typescript를 추가하고 VSCode 통합
+```
+
+```
+
+종속성을 자동으로 관리하는 데 도움이 되는 Yarn의 TypeScript 플러그인을 선택적으로 활성화할 수 있습니다 @types/*.
+```
+yarn plugin import typescript
 ```

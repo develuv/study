@@ -1,9 +1,0 @@
-{
-  "name": "@study/common",
-  "version": "1.0.0",
-  "main": "index.js",
-  "dependencies": {
-    "cross-env": "7.0.3"
-  },
-  "license": "MIT"
-}
