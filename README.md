@@ -49,6 +49,7 @@ Study & Discuss Project ✏️
 - ngrok
 - Lerna
 - Yarn workspace
+  - [Cycle.3 2021.10.21(목) - yarn workspace - 성광](https://github.com/develuv/study/tree/main/cycle-3/yarn-workspace)
 - Yarn berry
 - Github actions
 
