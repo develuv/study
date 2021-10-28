@@ -113,4 +113,5 @@ Study & Discuss Project ✏️
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
 - [Cycle.3 2021.10.07(목) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
 - [Cycle.3 2021.10.14(목) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
+- [Cycle.3 2021.10.21(목) - yarn workspace - 성광](https://github.com/develuv/study/tree/main/cycle-3/yarn-workspace)
 
