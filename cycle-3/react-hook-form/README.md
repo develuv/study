@@ -92,6 +92,8 @@ formik이 가장 높아서 좀더 찾아보니 위에 공식문서 문제이외�
 
 [7.FormProvider](https://github.com/yangSangHoon/react-hook-form-scaffoling/commit/15b303dcdd1636c839895e00ec295a1fbfad5c25)
 
+[9.배열 데이타 다루기](https://github.com/yangSangHoon/react-hook-form-scaffoling/commit/52e1ef2ea9d290b0f80a60a8804f37a22c1a372a)
+
 # 공식문서
 
 문서가 잘 갖추어져 있다
