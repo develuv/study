@@ -1,4 +1,4 @@
-#React CRA 실무 환경 적용기
+# React CRA 실무 환경 적용기
 
 ## 개요
 웹프론트엔드는 Webpack 과 같은 번들러와 Babel 과 같은 트랜스파일링등 개발을 위한 기본적인 설정 파일들 뿐만 아니라 lint 같은 코드 품질 도구나 각종 컨벤션 플로그인, 코드 최적화 및 테스팅 도구까지 관리해 줘야 할 것들이 매우 많다. 
@@ -70,7 +70,8 @@ const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
 module.exports = {
   jest: function (config) {
     // alias 대응을 위한 패스 설정
-    config.moduleNameMapper['^@(.*)$'] = '<rootDir>/core/src$1';
+    config.moduleNameMapper['^@src(.*)$'] = '<rootDir>/src$1';
+
 
     return config;
   },
@@ -83,7 +84,7 @@ module.exports = {
 
     // alias 사용을 위한 패스 설정
     config.resolve.alias = {
-      '@': path.resolve(__dirname, `src`),
+      '@src': path.resolve(__dirname, `src`),
     };
 
     // build 같은 로컬 개발 용도가 아닌 실무 용도로 사용
@@ -97,12 +98,12 @@ module.exports = {
 
       // dynamic module import 사용 시, 'chunkloaderror loading chunk failed' 오류 방지 목적
       config.plugins.push(
-        new RetryChunkLoadPlugin({
-          // optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
-          retryDelay: 200,
-          // optional value to set the maximum number of retries to load the chunk. Default is 1
-          maxRetries: 5,
-        })
+              new RetryChunkLoadPlugin({
+                // optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
+                retryDelay: 200,
+                // optional value to set the maximum number of retries to load the chunk. Default is 1
+                maxRetries: 5,
+              })
       );
 
       // bundle 결과를 비쥬얼하게 확인하는 용도
@@ -234,7 +235,7 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
     "baseUrl": "src",
     "paths": {
       // webpack alia 설정에 맞춰서 패스 설정 필요
-      "@/*": ["./src/*"]
+      "@src/*": ["./*"]
     }
   }
 }
@@ -246,7 +247,6 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
 `"extends": "./tsconfig.paths.json"`
 ```json
 {
-  // tsconfig.json에 paths를 추가하면 사라지는 현상으로 path를 별도 파일로 설정
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
@@ -294,5 +294,7 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
 [react-router v6에서는 어떤것들이 변했을까??](https://blog.woolta.com/categories/1/posts/211)
 
 [tsconfig.json에 paths를 추가하면 사라지는 현상](https://velog.io/@pilyeooong/tsconfig.json%EC%97%90-paths%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%A9%B4-%EC%82%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%ED%98%84%EC%83%81)
+
+[[webpack4] splitChunksPlugin 옵션 파헤치기](https://simsimjae.medium.com/webpack4-splitchunksplugin-%EC%98%B5%EC%85%98-%ED%8C%8C%ED%97%A4%EC%B9%98%EA%B8%B0-19f5de32425a)
 
 https://www.npmjs.com/package/webpack-retry-chunk-load-plugin

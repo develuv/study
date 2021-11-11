@@ -8,7 +8,8 @@ const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
 module.exports = {
   jest: function (config) {
     // alias 대응을 위한 패스 설정
-    config.moduleNameMapper['^@(.*)$'] = '<rootDir>/core/src$1';
+    config.moduleNameMapper['^@src(.*)$'] = '<rootDir>/src$1';
+
 
     return config;
   },
@@ -21,7 +22,7 @@ module.exports = {
 
     // alias 사용을 위한 패스 설정
     config.resolve.alias = {
-      '@': path.resolve(__dirname, `src`),
+      '@src': path.resolve(__dirname, `src`),
     };
 
     // build 같은 로컬 개발 용도가 아닌 실무 용도로 사용

@@ -1,5 +1,4 @@
 {
-  // tsconfig.json에 paths를 추가하면 사라지는 현상으로 path를 별도 파일로 설정
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
