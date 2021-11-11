@@ -5,8 +5,6 @@ const isAddBundleVisualizer = Object.is(BUNDLE_VISUALIZE, 'true');
 const publicPath = 'https://www.cdn.com/';
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
 
-console.log(BUNDLE_VISUALIZE);
-
 module.exports = {
   jest: function (config) {
     // alias 대응을 위한 패스 설정

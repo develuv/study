@@ -46,24 +46,26 @@
 ### react-app-rewired 설치
 
 #### react-app-rewired devDependencies 설치
+react cra 설정을 오버라이드할 수 있도록 해주는 의존성 라이브러리를 설치한다.
 `yarn add react-app-rewired --dev`
 
 #### webpack-bundle-analyzer plugin devDependencies 설치
+build 결과물 상태를 분석하여 중복 리소스를 분석하는데 유리하다. 
 `yarn add webpack-bundle-analyzer --dev`
 
 #### webpack-retry-chunk-load-plugin plugin devDependencies 설치
+실무 환경에서 dynamic module import 사용 시, 'chunkloaderror loading chunk failed' 오류의 간현적으로 발생하게 된다.
+이를 방지하기 위해 설치한다.(https://www.npmjs.com/package/webpack-retry-chunk-load-plugin)
 `webpack-retry-chunk-load-plugin --dev`
 
 #### config-overrides.js 설치
-```json
+```javascript
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const { BUNDLE_VISUALIZE } = process.env;
 const isAddBundleVisualizer = Object.is(BUNDLE_VISUALIZE, 'true');
 const publicPath = 'https://www.cdn.com/';
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
-
-console.log(BUNDLE_VISUALIZE);
 
 module.exports = {
   jest: function (config) {
@@ -136,31 +138,37 @@ module.exports = {
 #### devDependencies 설치
 
 ##### typescript recommended rule 
+typescript rule 체크를 위한 의존성라이브러리를 설치한다.
 ```
 yarn add @typescript-eslint/eslint-plugin --dev
 yarn add @typescript-eslint/parser --dev
 ```
 
 #### airbnb recommended rule
+airbnb에서 권장하는 rule 체크를 위한 의존성 라이브러리를 설치한다.
 `yarn add eslint-config-airbnb --dev`
 `yarn add eslint-config-airbnb-typescript --dev`
 
 #### prettier recommended rule
+prettier 설정과 연동하기 위한 의존성 라이브러리를 설치한다.
 `yarn add eslint-config-prettier --dev`
 
+`yarn add eslint-plugin-prettier --dev`
+
 #### import recommended rule
+es6 import 구문에 대한 rule 체크를 위한 의존성 라이브러리를 설치한다.
 `yarn add eslint-plugin-import --dev`
 
 #### jsx-a11y recommended rule
+jsx 템플릿에 대한 기본적인 접근성 rule 체크를 위한 의존성 라이브러리를 설치한다.
 `yarn add eslint-plugin-jsx-a11y --dev`
 
-#### prettier recommended rule
-`yarn add eslint-plugin-prettier --dev`
-
 #### react recommended rule
+react 권장 rule 체크를 위한 의존설 라이브러리를 설치한다.
 `yarn add eslint-plugin-react --dev`
 
 #### react-hook recommended rule
+react hook을 사용하고 있다면 react-hook 권장 rule 체크를 위한 라이브러리를 추가 설치한다.
 `yarn add eslint-plugin-react-hook --dev`
 
 #### .eslintrc.json 파일 생성
@@ -283,5 +291,8 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
 ```
 
 ## 참고 자료
-https://blog.woolta.com/categories/1/posts/211
-https://velog.io/@pilyeooong/tsconfig.json%EC%97%90-paths%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%A9%B4-%EC%82%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%ED%98%84%EC%83%81
+[react-router v6에서는 어떤것들이 변했을까??](https://blog.woolta.com/categories/1/posts/211)
+
+[tsconfig.json에 paths를 추가하면 사라지는 현상](https://velog.io/@pilyeooong/tsconfig.json%EC%97%90-paths%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%A9%B4-%EC%82%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%ED%98%84%EC%83%81)
+
+https://www.npmjs.com/package/webpack-retry-chunk-load-plugin
