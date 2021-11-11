@@ -47,15 +47,19 @@
 
 #### react-app-rewired devDependencies 설치
 react cra 설정을 오버라이드할 수 있도록 해주는 의존성 라이브러리를 설치한다.
+
 `yarn add react-app-rewired --dev`
 
 #### webpack-bundle-analyzer plugin devDependencies 설치
 build 결과물 상태를 분석하여 중복 리소스를 분석하는데 유리하다. 
+
 `yarn add webpack-bundle-analyzer --dev`
 
 #### webpack-retry-chunk-load-plugin plugin devDependencies 설치
 실무 환경에서 dynamic module import 사용 시, 'chunkloaderror loading chunk failed' 오류의 간현적으로 발생하게 된다.
-이를 방지하기 위해 설치한다.(https://www.npmjs.com/package/webpack-retry-chunk-load-plugin)
+
+이를 방지하기 위해 webpack-retry-chunk-load-plugin을 설치한다.
+
 `webpack-retry-chunk-load-plugin --dev`
 
 #### config-overrides.js 설치
