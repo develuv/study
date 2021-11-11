@@ -60,7 +60,9 @@ build 결과물 상태를 분석하여 중복 리소스를 분석하는데 유�
 
 이를 방지하기 위해 webpack-retry-chunk-load-plugin을 설치한다.
 
-`webpack-retry-chunk-load-plugin --dev`
+주의 사항으로는 v2 버전은 webpack v5 버전 이상만 지원하므로 cra 같은 webpack v4 버전에서는 webpack-retry-chunk-load-plugin v1 버전으로 설치해주어야 한다.
+
+`webpack-retry-chunk-load-plugin@1.5.0 --dev`
 
 #### config-overrides.js 설치
 ```javascript
@@ -300,6 +302,19 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
     "lint": "eslint ."
   },
 ```
+
+## 결론
+이로써 CRA 환경을 가지고 eject 하지 않고 리액트 개발환경을 구축하는 방법에 대해서 알아보았다.
+
+본인이 webpack 이나 babel등 프로젝트 구축에 필요한 기술에 자신이 있다면 인터넷상에 레퍼런스를 참고하여 진행해보는 것도 좋은 선택일 수 있을 것이다. 
+
+다만, 대부분의 devDependencies 의존성 관계를 지속적으로 유지 관리는 어느정도 필수적으로 필요할 수 있다.
+
+하지만 필자는 대부분의 프로젝트에서 이러한 devDependencies 의존성 관리에 실패하여 업데이트를 포기하는 사례를 수 없이 보아왔다.
+
+프로젝트의 devDependencies 와 관련 설정을 최소한으로 간결히 유지하고 싶은 개발자들에게 권하고 싶은 개발 구축 방법이 되겠다.
+
+사실, vue나 angular에서는 cli로 구축하는게 어느정도 보편적이기 때문에 커스텀이 필요한 부분만 적절히 오버라이드해서 사용하는 것도 장기적인 프로젝트 관리에 장점으로 작용하지 않을까 생각해 본다. 
 
 ## 참고 자료
 [react-router v6에서는 어떤것들이 변했을까??](https://blog.woolta.com/categories/1/posts/211)
