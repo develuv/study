@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "src/*": ["src/*"],
-      "@config/*": ["./config/local/*", "./config/beta/*", "./config/live/*"]
+      // webpack alia 설정에 맞춰서 패스 설정 필요
+      "@/*": ["./src/*"]
     }
   }
 }

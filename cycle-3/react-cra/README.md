@@ -1,13 +1,19 @@
-React CRA 실무 환경 적용기
+#React CRA 실무 환경 적용기
 
 ## 개요
-- 웹프론트엔드는 Webpack 과 같은 번들러와 Babel 과 같은 트랜스파일링등 개발을 위한 기본적인 설정 파일들 뿐만 아니라 lint 같은 코드 품질 도구나 각종 컨벤션 플로그인, 코드 최적화 및 테스팅 도구까지 관리해 줘야 할 것들이 매우 많다. 
-- 개발 환경 구축에 들이는 비용을 조금이라도 줄이고자 하는 상황에서 간단한 명령어 한줄로 개발 환경 구축해주는 CRA 나 vite 같은 도구들을 이용하여 쉽게 개발 환경을 구축해 사용하는 것을 한번쯤 고민해 보셨을 것이다.
-- 대부분 많은 프론트엔드 개발자들은 CRA 혹은 vite 같은 개발 환경 구축 도구보다는 직접 webpack, babel, eslint 등 이미 구축된 프로젝트를 참고하여 구축하는 것을 선호할 것이다.
-- 하지만 대부분의 경우, CRA 나 vite 같은 개발환경 구축도구를 이용한 결과물보다 못한 경우가 많았고 특히, 유지보수적인 측면에서 많은 설정 파일과 의존성 라이브러리들간의 호환성 문제로 이후 관리가 매우 어렵다는 단점이 있다.
-- 실제로 구축 이후 운영되는 많은 프로덕트 코드들이 지속적인 관리에 실패하여 결국 개발환경을 재구축하는 경우를 많이 경험하였다.
-- 하지만 그럼에서 실무 환경에서는 CRA 같은 개발환경 구축 도구를 이용하여 운영하는 것은 어려운 일이라고 생각한다. 정말 그러할까?
-- 여기서는 CRA를 실무에서 어떻게 적용할 수 있는지 점검해 보도록 하겠다.
+웹프론트엔드는 Webpack 과 같은 번들러와 Babel 과 같은 트랜스파일링등 개발을 위한 기본적인 설정 파일들 뿐만 아니라 lint 같은 코드 품질 도구나 각종 컨벤션 플로그인, 코드 최적화 및 테스팅 도구까지 관리해 줘야 할 것들이 매우 많다. 
+
+개발 환경 구축에 들이는 비용을 조금이라도 줄이고자 하는 상황에서 간단한 명령어 한줄로 개발 환경 구축해주는 CRA 나 vite 같은 도구들을 이용하여 쉽게 개발 환경을 구축해 사용하는 것을 한번쯤 고민해 보셨을 것이다. 
+
+대부분 많은 프론트엔드 개발자들은 CRA 혹은 vite 같은 개발 환경 구축 도구보다는 직접 webpack, babel, eslint 등 이미 구축된 프로젝트를 참고하여 구축하는 것을 선호할 것이다. 
+
+하지만 대부분의 경우, CRA 나 vite 같은 개발환경 구축도구를 이용한 결과물보다 못한 경우가 많았고 특히, 유지보수적인 측면에서 많은 설정 파일과 의존성 라이브러리들간의 호환성 문제로 이후 관리가 매우 어렵다는 단점이 있다. 
+
+실제로 구축 이후 운영되는 많은 프로덕트 코드들이 지속적인 관리에 실패하여 결국 개발환경을 재구축하는 경우를 많이 경험하였다. 
+
+하지만 그럼에서 실무 환경에서는 CRA 같은 개발환경 구축 도구를 이용하여 운영하는 것은 어려운 일이라고 생각한다. 정말 그러할까? 
+
+여기서는 CRA를 실무에서 어떻게 적용할 수 있는지 점검해 보도록 하겠다.
 
 ## 개발 환경 구축 도구(CRA)의 장점
 - 빠른 개발 환경 구축
@@ -38,13 +44,73 @@ React CRA 실무 환경 적용기
 ## 프로젝트 오버라이드
 
 ### react-app-rewired 설치
+
+#### react-app-rewired devDependencies 설치
 `yarn add react-app-rewired --dev`
 
-### webpack-bundle-analyzer 설치
+#### webpack-bundle-analyzer plugin devDependencies 설치
 `yarn add webpack-bundle-analyzer --dev`
 
-### webpack-retry-chunk-load-plugin 설치
+#### webpack-retry-chunk-load-plugin plugin devDependencies 설치
 `webpack-retry-chunk-load-plugin --dev`
+
+#### config-overrides.js 설치
+```json
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path');
+const { BUNDLE_VISUALIZE } = process.env;
+const isAddBundleVisualizer = Object.is(BUNDLE_VISUALIZE, 'true');
+const publicPath = 'https://www.cdn.com/';
+const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
+
+console.log(BUNDLE_VISUALIZE);
+
+module.exports = {
+  jest: function (config) {
+    // alias 대응을 위한 패스 설정
+    config.moduleNameMapper['^@(.*)$'] = '<rootDir>/core/src$1';
+
+    return config;
+  },
+
+  webpack: function (config, env) {
+    const isProduct = env === 'production';
+
+    // 절대 경로 사용을 위한 패스 설정
+    config.resolve.modules = [...(config.resolve.modules || []), path.resolve(__dirname, 'src')];
+
+    // alias 사용을 위한 패스 설정
+    config.resolve.alias = {
+      '@': path.resolve(__dirname, `src`),
+    };
+
+    // build 같은 로컬 개발 용도가 아닌 실무 용도로 사용
+    if (isProduct) {
+      config.output.publicPath = publicPath;
+      config.optimization.runtimeChunk = true;
+      config.optimization.splitChunks.name = true;
+
+      // ManifestPlugin override
+      config.plugins[6].opts.publicPath = publicPath;
+
+      // dynamic module import 사용 시, 'chunkloaderror loading chunk failed' 오류 방지 목적
+      config.plugins.push(
+        new RetryChunkLoadPlugin({
+          // optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
+          retryDelay: 200,
+          // optional value to set the maximum number of retries to load the chunk. Default is 1
+          maxRetries: 5,
+        })
+      );
+
+      // bundle 결과를 비쥬얼하게 확인하는 용도
+      isAddBundleVisualizer && config.plugins.push(new BundleAnalyzerPlugin());
+    }
+
+    return config;
+  },
+};
+```
 
 ### prettier 설정
 #### devDependencies 설치
@@ -68,9 +134,6 @@ React CRA 실무 환경 적용기
 ### eslint 설정
 
 #### devDependencies 설치
-
-##### eslint 설치
-`yarn add eslint --dev`
 
 ##### typescript recommended rule 
 ```
@@ -101,7 +164,7 @@ yarn add @typescript-eslint/parser --dev
 `yarn add eslint-plugin-react-hook --dev`
 
 #### .eslintrc.json 파일 생성
-```
+```json
 {
     "env": {
         "browser": true, // Browser global variables like `window` etc.
@@ -150,3 +213,75 @@ yarn add @typescript-eslint/parser --dev
 }
 ```
 
+#### tsconfig-paths-webpack-plugin devDependencies 설치
+`yarn add tsconfig-paths-webpack-plugin --dev`
+
+#### tsconfig.paths.json 파일 생성
+https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconfig.json에 paths 를 추가하면 빌드 시점에서 해당 패스 설정이 사라지는 현상이 발생한다.
+
+이를 방지하려면 파일을 별도로 설정하고 tsconfig.json에 별도로 연결해 줘야 한다.
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      // webpack alia 설정에 맞춰서 패스 설정 필요
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+#### tsconfig.json
+위에서 설정한 tsconfig.paths.json을 아래와 같이 연결해 준다. 
+
+`"extends": "./tsconfig.paths.json"`
+```json
+{
+  // tsconfig.json에 paths를 추가하면 사라지는 현상으로 path를 별도 파일로 설정
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es5",
+      "es6",
+      "es7",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
+```
+
+#### package.json 스크립트 추가
+```json
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build:report": "BUNDLE_VISUALIZE=true react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+```
+
+## 참고 자료
+https://blog.woolta.com/categories/1/posts/211
+https://velog.io/@pilyeooong/tsconfig.json%EC%97%90-paths%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%A9%B4-%EC%82%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%ED%98%84%EC%83%81

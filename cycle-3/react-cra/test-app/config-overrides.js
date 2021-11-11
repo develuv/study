@@ -1,15 +1,16 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
-const { TARGET, BUNDLE_VISUALIZE } = process.env;
-const target = TARGET || 'beta';
+const { BUNDLE_VISUALIZE } = process.env;
 const isAddBundleVisualizer = Object.is(BUNDLE_VISUALIZE, 'true');
-const publicPath = require(`./config/${target}`).orderClientUrl;
+const publicPath = 'https://www.cdn.com/';
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
+
+console.log(BUNDLE_VISUALIZE);
 
 module.exports = {
   jest: function (config) {
-    config.moduleNameMapper['^@config(.*)$'] = `<rootDir>/src/config/${target}$1`;
-    config.moduleNameMapper['^@core(.*)$'] = '<rootDir>/core/src$1';
+    // alias 대응을 위한 패스 설정
+    config.moduleNameMapper['^@(.*)$'] = '<rootDir>/core/src$1';
 
     return config;
   },
@@ -17,14 +18,15 @@ module.exports = {
   webpack: function (config, env) {
     const isProduct = env === 'production';
 
+    // 절대 경로 사용을 위한 패스 설정
     config.resolve.modules = [...(config.resolve.modules || []), path.resolve(__dirname, 'src')];
 
+    // alias 사용을 위한 패스 설정
     config.resolve.alias = {
-      '@config': path.resolve(__dirname, `src/config/${target}`),
-      '@core': path.resolve(__dirname, `src/core/src`),
-      '@coreConfig': path.resolve(__dirname, `src/core/src/config/${target}`),
+      '@': path.resolve(__dirname, `src`),
     };
 
+    // build 같은 로컬 개발 용도가 아닌 실무 용도로 사용
     if (isProduct) {
       config.output.publicPath = publicPath;
       config.optimization.runtimeChunk = true;
@@ -33,6 +35,7 @@ module.exports = {
       // ManifestPlugin override
       config.plugins[6].opts.publicPath = publicPath;
 
+      // dynamic module import 사용 시, 'chunkloaderror loading chunk failed' 오류 방지 목적
       config.plugins.push(
         new RetryChunkLoadPlugin({
           // optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
@@ -42,6 +45,7 @@ module.exports = {
         })
       );
 
+      // bundle 결과를 비쥬얼하게 확인하는 용도
       isAddBundleVisualizer && config.plugins.push(new BundleAnalyzerPlugin());
     }
 
