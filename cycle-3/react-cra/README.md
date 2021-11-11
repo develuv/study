@@ -326,3 +326,5 @@ https://github.com/facebook/create-react-app/issues/8909 를 살펴보면 tsconf
 [Webpack을 활용한 성능향상 - 캐싱 활용하기](https://yceffort.kr/2020/07/make-use-of-long-term-caching)
 
 https://www.npmjs.com/package/webpack-retry-chunk-load-plugin
+
+https://webpack.js.org/guides/code-splitting/
