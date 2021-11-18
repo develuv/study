@@ -152,7 +152,7 @@ Template Method 패턴에서는 상위 클래스에서 처리의 골격을 만�
 강감찬의 카드를 사용합니다.
 </pre>
 
-![img_1.png](img_1.png
+![img_1.png](img_1.png)
 - framework 패키지 (응용 프로그램의 기본 틀을 제공함)  
   Product / Factory  
 - idcard 패키지  
