@@ -1,0 +1,22 @@
+{
+  "name": "design-patterns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^4.5.2",
+    "ts-node": "^10.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \\\"ts-node\\\" src/template/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
