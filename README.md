@@ -21,6 +21,7 @@ Study & Discuss Project ✏️
   - Cycle.1 2021.04.07(수) - 클린코드 - 희준
 - 디자인 패턴
   - [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
+  - [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
 - 리팩토링
   - [Cycle.1 2021.04.16(금) - IDE를 활용하여 리팩토링 전략 실습 - 재섭](cycle-1/study-4/study-4-refactoring.md)
 - 뒤로가기
@@ -32,6 +33,8 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
 - React
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
+  - [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
+  - [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
 - React Query
   - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
 - WebRTC
