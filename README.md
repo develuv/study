@@ -117,4 +117,5 @@ Study & Discuss Project ✏️
 - [Cycle.3 2021.10.21(목) - yarn workspace - 성광](https://github.com/develuv/study/tree/main/cycle-3/yarn-workspace)
 - [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
 - [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
+- [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
 
