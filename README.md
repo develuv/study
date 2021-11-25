@@ -111,9 +111,12 @@ Study & Discuss Project ✏️
  </div>
 </details>
 
-
 ## Cycle.3
 
+<details>
+ <summary>펼치기</summary>
+ <div>
+   
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
 - [Cycle.3 2021.10.07(목) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
 - [Cycle.3 2021.10.14(목) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
@@ -122,3 +125,8 @@ Study & Discuss Project ✏️
 - [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
 - [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
 
+   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/bUU5eXo0NHYzaWIzWG5lcnA0Q2xaSGRYaFlRc0k3QzVhSlZXMEVURE5RRmZwVU1NYTRHNzB2TDhYM2RHeXVoWnwzMDc0NDU3MzU3ODIxMTMwMjky?invite_link_id=611719735886)
+
+
+ </div>
+</details>
