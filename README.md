@@ -127,6 +127,7 @@ Study & Discuss Project ✏️
 
    ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/bUU5eXo0NHYzaWIzWG5lcnA0Q2xaSGRYaFlRc0k3QzVhSlZXMEVURE5RRmZwVU1NYTRHNzB2TDhYM2RHeXVoWnwzMDc0NDU3MzU3ODIxMTMwMjky?invite_link_id=611719735886)
 
-
+![세번째 스터디 사이클 회고](./images/cycle-3.png)
+   
  </div>
 </details>
