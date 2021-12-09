@@ -126,6 +126,8 @@ Study & Discuss Project ✏️
 - [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
 
    ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/bUU5eXo0NHYzaWIzWG5lcnA0Q2xaSGRYaFlRc0k3QzVhSlZXMEVURE5RRmZwVU1NYTRHNzB2TDhYM2RHeXVoWnwzMDc0NDU3MzU3ODIxMTMwMjky?invite_link_id=611719735886)
+   
+   #### [회고란?](https://medium.com/@nanse84/%ED%9A%8C%EA%B3%A0%EB%9E%80-25833157cad6)
 
 ![세번째 스터디 사이클 회고](./images/cycle-3.png)
    
