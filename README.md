@@ -133,3 +133,5 @@ Study & Discuss Project ✏️
    
  </div>
 </details>
+
+> 성광 - 진영 - 동주 - 재섭 - 상훈 - 재섭
