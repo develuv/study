@@ -134,4 +134,4 @@ Study & Discuss Project ✏️
  </div>
 </details>
 
-> 진영 -  - 동주 - 재섭 - 상훈 - 재섭
+> 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
