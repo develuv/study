@@ -134,4 +134,12 @@ Study & Discuss Project ✏️
  </div>
 </details>
 
+## Cycle.4
+
+<details>
+  <summary>펼치기</summary>
+  <div>
 > 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
+
+  </div>
+</details>
