@@ -142,5 +142,18 @@ Study & Discuss Project ✏️
 
 > 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
 
+#### Section 4. User CRUD By 진영
+1. NestJS에서 throw로 예외를 방출하지 않고 객체로 만들어서 반환하는데, Exception을 만들어서 처리할 수 있을까?
+  - Exception 상태 코드 정의와 구조를 잘 짜면 Error를 확장하여 throw 하는 방향으로 갈 수 있을 것 같다. 
+  - [Example feature/custom-exception](https://github.com/camp-son/nuber-eats-backend/tree/feature/custom-exception)
+
+2. Entity에 대한 로직을 서비스가 아닌 모델에서 처리하는 부분이 인상 깊었다.
+  - typeorm에서 쿼리를 처리(CUD)할 때 전/후처리를 할 수 있도록 데코레이터를 제공하고 있다. (Insert, Remove, Update)
+  - Repository를 통해 데이터를 조회를 했을 때 해당 Entity를 반환해줘서 Entity에 대한 비지니스 로직 메서드를 작성하고 사용할 수 있다.
+
+3. Resolver와 Service의 반환 타입을 맞출 수 있지 않을까?
+  - `output.dto.ts` 공통 반환 클래스를 생성하였고, 각 Input, Output에 대해 클래스를 생성하게 되는데 Resolver와 Service의 반환 타입을 맞출 수 있지 않을까 하는 생각이 들었다.
+  - Q. 타입을 맞추지 않는다면 어떤 경우가 있을까?
+    
   </div>
 </details>
