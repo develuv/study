@@ -134,3 +134,8 @@ if ('x-jwt' in req.headers) {
 
 의아한점
 jwtService에서 userService를 접근할때, userModule에 exports userService만 해줬는데 접근이 가능했음.
+
+
+
+## references
+- http://www.opennaru.com/opennaru-blog/jwt-json-web-token/
