@@ -126,6 +126,81 @@ await app.listen(3000);
 ```
 
 
+## Context
+Nestjs에서 생성한 `req['user']` 를 graphql에서도 사용해야함.
+```
+GraphQLModule.forRoot({
+  autoSchemaFile: true,
+  context: ({ req }) => ({ user: req['user'] }), // graphql context에서도 사용 가능
+}),
+```
+
+nestjs context --> graphql context 다르기
+```
+import { GqlExecutionContext } from '@nestjs/graphql';
+
+const gqlContext = GqlExecutionContext.create(context).getContext();
+const user = gqlContext['user'];
+```
+
+
+## Guard
+https://docs.nestjs.com/guards
+Request를 다음으로 진행할지 말지를 결정.
+
+`CanActivate`을 구현해야함
+```
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { GqlExecutionContext } from '@nestjs/graphql';
+
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+  canActivate(context: ExecutionContext) {
+    const gqlContext = GqlExecutionContext.create(context).getContext();
+    const user = gqlContext['user'];
+    if (!user) {
+      return false;
+    }
+    return true;
+  }
+}
+```
+
+## Auth Decorator
+Guard를 통화한 Request가 어떤 User인지를 알아야 함.
+이때 가장 쿨하게 hUser를 넘길수 있는 방법.
+
+`auth-decorator.ts`
+```
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { GqlExecutionContext } from '@nestjs/graphql';
+
+export const AuthUser = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    const gqlContext = GqlExecutionContext.create(context).getContext();
+    const user = gqlContext['user'];
+    return user;
+  },
+);
+
+```
+
+
+
+`users.resolver.ts`
+```
+@Query(returns => User)
+  @UseGuards(AuthGuard)
+  me(@AuthUser() authUser: User) {
+    return authUser;
+  }
+```
+
+
+## typeorm .save와 update 차이점
+
+
 ### 멋졌던 코딩
 ```
 if ('x-jwt' in req.headers) {
@@ -133,7 +208,7 @@ if ('x-jwt' in req.headers) {
 
 
 의아한점
-jwtService에서 userService를 접근할때, userModule에 exports userService만 해줬는데 접근이 가능했음.
+> jwtService에서 userService를 접근할때, userModule에 exports userService만 해줬는데 접근이 가능했음.
 
 
 
