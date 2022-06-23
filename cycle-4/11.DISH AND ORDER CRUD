@@ -1,0 +1,747 @@
+# Dish Entity
+
+## 개요
+- Create Dish
+- Edit Dish
+- Delete Dish
+
+- Orders CRUD
+- Orders Subscription (Owner, Customer, Deleivery)
+
+- Payments (CRON)
+
+## Dish Entity
+ 
+### 1. Dish 엔티티 만들기
+- 프로퍼티: name, price, photo, description
+
+
+### 2. Relationship 설정하기
+- Dish는 한개의 레스토랑을 가져야 하기 때문에 @ManyToOne 설정
+- 레스토랑이 삭제될 경우 음식도 음식도 Dish도 삭제 시키기 위해 onDelete는 CASCADE 설정
+
+`src/restaurants/entities/dish.entity.ts`
+```ts
+  @Field(() => Restaurant)
+  @ManyToOne(() => Restaurant, (restaurant) => restaurant.menu, {
+    onDelete: 'CASCADE',
+  })
+  restaurant: Restaurant;
+```
+
+- Restaurant에 @OneToMany로 복수의 dish 를 가진 menu 필드 추가
+
+
+`src/restaurants/entities/restaurant.entity.ts`
+```ts
+  @Field(() => [Dish])
+  @OneToMany(() => Dish, (dish) => dish.restaurant)
+  menu: Dish[];
+```
+
+- Dish 엔티티의 restaurant.id를 가져오려면 relations 설정으로 restaurant 엔티티 정보를 로드 해와야 하는데 
+ 그럴 필요 없도록 restaurantId를 RealtionId 를 사용해 추가한다
+
+`src/restaurants/entities/dish.entity.ts`
+```ts
+  @RelationId((dish: Dish) => dish.restaurant)
+  restaurantId: number;
+```
+
+- app.module.ts 에 Dish 엔티티 추가
+
+## Create Dish
+
+### 1. 요리 옵션을 위해 options 추가
+일반적으로 Entity를 추가한뒤에 Dish와의 관계설정을 해주지만 'json' 타입의 필드 추가로 별도의 CRUD 없이 옵션 구조를 저장할 수 있다
+
+`src/restaurants/entities/dish.entity.ts`
+```ts
+  @Field(() => DishOption)
+  @Column({ type: 'json' })
+  options: DishOption[];
+```
+```ts
+@InputType('DishOptionInputType', { isAbstract: true })
+@ObjectType()
+class DishOption {
+  @Field(() => String)
+  name: string;
+
+  @Field(() => String)
+  choices: string[];
+
+  @Field(() => Int)
+  extra: number;
+}
+```
+
+### 3. Dish dto 추가
+- 생성할때 어느 레스토랑의 요리인지 알아야 하기 때문에 restaurantId 필드 추가
+
+```ts
+@InputType()
+export class CreateDishInput extends PickType(Dish, [
+  'name',
+  'price',
+  'description',
+  'options',
+]) {
+  @Field(() => Int)
+  restaurantId: number;
+}
+
+@ObjectType()
+export class CreateDishOutput extends CoreOutput {}
+```
+
+### 3. Dish Resolver 추가
+
+`src/restaurants/restaurants.resolver.ts`
+```ts
+@Resolver(() => Dish)
+export class DishResolver {
+  constructor(private readonly restaurantsService: RestaurantsService) {}
+
+  @Mutation(() => CreateDishOutput)
+  @Role([UserRole.Owner])
+  createDish(
+    @AuthUser() owner: User,
+    @Args('input') createDishInput: CreateDishInput,
+  ) {
+    return this.restaurantsService.createDish(owner, createDishInput);
+  }
+}
+```
+
+- 레스토랑 모듈 providers에도 DishResolver를 추가
+- 레스토랑을 조회해오는 서비스 메소드에서 reations 로 menu를 추가하여 같이 가져올수 있도록 설정
+
+`src/restaurants/restaurants.service.ts`
+```ts
+      const restaurant = await this.restaurants.findOne(restaurantId, {
+        relations: ['menu'],
+      });
+```
+- 서비스에 createDish 메소드 추가
+
+`src/restaurants/restaurants.service.ts`
+```ts
+async createDish(
+    owner: User,
+    createDishInput: CreateDishInput,
+  ): Promise<CreateDishOutput> {
+    try {
+      const restaurant = await this.restaurants.findOne(
+        createDishInput.restaurantId,
+      );
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Restaurant not found',
+        };
+      }
+      if (owner.id !== restaurant.ownerId) {
+        return {
+          ok: false,
+          error: `You Can't do that.`,
+        };
+      }
+      await this.dishes.save(
+        this.dishes.create({ ...createDishInput, restaurant }),
+      );
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        ok: false,
+        error: 'Could not create dish',
+      };
+    }
+  }
+}
+```
+- Dish Repository 추가
+
+`src/restaurants/restaurants.service.ts`
+```ts
+    @InjectRepository(Dish)
+    private readonly dishes: Repository<Dish>,
+```
+
+## Edit & Delete Dish
+### 1. Edit & Delete Dish Dto
+`src/restaurants/dtos/edit-dish.dto.ts`
+```ts
+@InputType()
+export class EditDishInput extends PickType(PartialType(Dish), [
+  'name',
+  'options',
+  'price',
+  'description',
+]) {
+  @Field(() => Int)
+  dishId: number;
+}
+
+@ObjectType()
+export class EditDishOutput extends CoreOutput {}
+```
+
+`src/restaurants/dtos/delete-dish.dto.ts`
+```ts
+@InputType()
+export class DeleteDishInput {
+  @Field(() => Int)
+  dishId: number;
+}
+
+@ObjectType()
+export class DeleteDishOutput extends CoreOutput {}
+```
+
+### Edit & Delete Dish Resolver
+`src/restaurants/restaurants.resolver.ts`
+```ts
+  @Mutation(() => EditDishOutput)
+  @Role([UserRole.Owner])
+  editDish(
+    @AuthUser() owner: User,
+    @Args('input') editDishInput: EditDishInput,
+  ) {
+    return this.restaurantsService.editDish(owner, editDishInput);
+  }
+
+  @Mutation(() => DeleteDishOutput)
+  @Role([UserRole.Owner])
+  deleteDish(
+    @AuthUser() owner: User,
+    @Args('input') deleteDishInput: DeleteDishInput,
+  ) {
+    return this.restaurantsService.deleteDish(owner, deleteDishInput);
+  }
+```
+
+### Edit & Delete Dish Service method
+`src/restaurants/restaurants.service.ts`
+```ts
+  async editDish(
+    owner: User,
+    editDishInput: EditDishInput,
+  ): Promise<EditDishOutput> {
+    try {
+      const dish = await this.dishes.findOne(editDishInput.dishId, {
+        relations: ['restaurant'],
+      });
+      if (!dish) {
+        return {
+          ok: false,
+          error: 'Dish not found',
+        };
+      }
+      if (owner.id !== dish.restaurant.ownerId) {
+        return {
+          ok: false,
+          error: `You Can't do that.`,
+        };
+      }
+      await this.dishes.save([
+        {
+          id: editDishInput.dishId,
+          ...editDishInput,
+        },
+      ]);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not delete dish',
+      };
+    }
+  }
+
+  async deleteDish(
+    owner: User,
+    { dishId }: DeleteDishInput,
+  ): Promise<DeleteDishOutput> {
+    try {
+      const dish = await this.dishes.findOne(dishId, {
+        relations: ['restaurant'],
+      });
+      if (!dish) {
+        return {
+          ok: false,
+          error: 'Dish not found',
+        };
+      }
+      if (owner.id !== dish.restaurant.ownerId) {
+        return {
+          ok: false,
+          error: `You Can't do that.`,
+        };
+      }
+      await this.dishes.delete(dishId);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not delete dish',
+      };
+    }
+  }
+```
+- 로그인 사용자의 아이디와 레스토랑 소유자의 아이디를 비교하기 위해서 dish 를 가져올때 relations를 지정해서 restaurant 정보를 받아와야 한다
+
+## Order Entity
+>  nest g mo orders
+
+### 1. Order Entity 추가
+`src/orders/entities/order.entity.ts`
+```ts
+@InputType('OrderInputType', { isAbstract: true })
+@ObjectType()
+@Entity()
+export class Order extends CoreEntity {
+  @Field(() => User, { nullable: true })
+  @ManyToOne(() => User, (user) => user.orders, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
+  customer?: User;
+
+  @Field(() => User, { nullable: true })
+  @ManyToOne(() => User, (user) => user.rides, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
+  driver?: User;
+
+  @Field(() => Restaurant)
+  @ManyToOne(() => Restaurant, (restaurant) => restaurant.orders, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
+  restaurant: Restaurant;
+
+  @Field(() => [Dish])
+  @ManyToMany(() => Dish)
+  @JoinTable()
+  dishes: Dish[];
+
+  @Field(() => Float)
+  @Column()
+  total: number;
+
+  @Field(() => OrderStatus)
+  @Column({ type: 'enum', enum: OrderStatus })
+  status: OrderStatus;
+}
+```
+> - customer는 User타입이고 Order와 User의 관계는 many to one 관계
+> - driver는 User타입이고 Order와 User의 관계는 many to one 관계
+> - restaurant는 Restaurant타입이고 Order와 Restaurant의 관계는 many to one 관계 
+> - dishes는 Dish[]타입이고 Order와 Dish의 관계는 many to many 관계 
+
+`src/users/entities/user.entity.ts`
+```ts
+  @Field(() => [Order])
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[];
+
+  @Field(() => [Order])
+  @OneToMany(() => Order, (order) => order.driver)
+  rides: Order[];
+```
+
+`src/restaurants/entities/restaurant.entity.ts`
+```ts
+  @Field(() => [Order])
+  @OneToMany(() => Order, (order) => order.restaurant)
+  orders: Order[];
+```
+
+- `src/app.module.ts` 에 `Order` 엔티티 추가
+
+## Create Order
+### 1. Order Dto
+`src/orders/dtos/create-order.dto.ts`
+```ts
+@InputType()
+class CreateOrderItemInput {
+  @Field(() => Int)
+  dishId: number;
+
+  @Field(() => [OrderItemOption], { nullable: true })
+  options?: OrderItemOption[];
+}
+
+@InputType()
+export class CreateOrderInput {
+  @Field(() => Int)
+  restaurantId: number;
+
+  @Field(() => [CreateOrderItemInput])
+  items: CreateOrderItemInput[];
+}
+
+@ObjectType()
+export class CreateOrderOutput extends CoreOutput {}
+```
+
+`src/orders/entities/order-item.entity.ts`
+```ts
+@InputType('OrderItemOptionInputType', { isAbstract: true })
+@ObjectType()
+export class OrderItemOption {
+  @Field(() => String)
+  name: string;
+
+  @Field(() => String, { nullable: true })
+  choice: string;
+}
+
+@InputType('OrderItemInputType', { isAbstract: true })
+@ObjectType()
+@Entity()
+export class OrderItem extends CoreEntity {
+  @Field(() => Dish)
+  @ManyToOne(() => Dish, { nullable: true, onDelete: 'CASCADE' })
+  dish: Dish;
+
+  @Field(() => [OrderItemOption], { nullable: true })
+  @Column({ type: 'json', nullable: true })
+  options?: OrderItemOption[];
+}
+```
+
+### 2. Create Order Service
+`src/orders/order.service.ts`
+```ts
+@Injectable()
+export class OrderService {
+  constructor(
+    @InjectRepository(Order) private readonly orders: Repository<Order>,
+    @InjectRepository(OrderItem)
+    private readonly orderItems: Repository<OrderItem>,
+    @InjectRepository(Restaurant)
+    private readonly restaurants: Repository<Restaurant>,
+    @InjectRepository(Dish)
+    private readonly dishes: Repository<Dish>,
+  ) {}
+
+  async createOrder(
+    customer: User,
+    { restaurantId, items }: CreateOrderInput,
+  ): Promise<CreateOrderOutput> {
+    try {
+      const restaurant = await this.restaurants.findOne(restaurantId);
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Restaurant not found',
+        };
+      }
+
+      let orderFinalPrice = 0;
+      const orderItems: OrderItem[] = [];
+      for (const { dishId, options } of items) {
+        const dish = await this.dishes.findOne(dishId);
+        if (!dish) {
+          return {
+            ok: false,
+            error: 'Dish not found',
+          };
+        }
+        let dishFinalPrice = dish.price;
+        console.log('dish price', dish.price);
+        for (const itemOption of options) {
+          const dishOption = dish.options.find(
+            (dishOption) => dishOption.name === itemOption.name,
+          );
+          if (dishOption) {
+            if (dishOption?.extra) {
+              dishFinalPrice += dishOption.extra;
+              console.log('USD', dishOption.extra);
+            } else {
+              const dishOptionChoice = dishOption.choices.find(
+                (choice) => choice.name === itemOption.choice,
+              );
+              if (dishOptionChoice?.extra) {
+                dishFinalPrice += dishOptionChoice.extra;
+                console.log('USD', dishOptionChoice.extra);
+              }
+            }
+          }
+        }
+        console.log('dishFinalPrice', dishFinalPrice);
+        orderFinalPrice += dishFinalPrice;
+
+        const orderItem = await this.orderItems.save(
+          this.orderItems.create({
+            dish,
+            options,
+          }),
+        );
+        orderItems.push(orderItem);
+      }
+      const order = await this.orders.save(
+        this.orders.create({
+          customer,
+          restaurant,
+          total: orderFinalPrice,
+          items: orderItems,
+        }),
+      );
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not create order',
+      };
+    }
+  }
+}
+```
+
+- 서비스에서 레포지토리로 접근하기 위해서는 모듈에 엔티티를 주입해주어야 한다
+`src/orders/orders.module.ts`
+```ts
+@Module({
+  imports: [TypeOrmModule.forFeature([Order, Restaurant, OrderItem, Dish])],
+  providers: [OrderResolver, OrderService],
+})
+export class OrdersModule {}
+```
+
+## Get Orders & Order
+### 1. Get Order Dto
+`src/orders/dtos/get-order.dto.ts`
+```ts
+@InputType()
+export class GetOrderInput extends PickType(Order, ['id']) {}
+
+@ObjectType()
+export class GetOrderOutput extends CoreOutput {
+  @Field(() => Order, { nullable: true })
+  order?: Order;
+}
+```
+
+`src/orders/dtos/get-orders.dto.ts`
+```ts
+@InputType()
+export class GetOrdersInput {
+  @Field(() => OrderStatus, { nullable: true })
+  status: OrderStatus;
+}
+
+@ObjectType()
+export class GetOrdersOutput extends CoreOutput {
+  @Field(() => [Order], { nullable: true })
+  orders?: Order[];
+}
+```
+
+### 2. Order Entity customerId, driverId 추가
+`src/orders/entities/order.entity.ts`
+```ts
+  @RelationId((order: Order) => order.customer)
+  customerId: number;
+  
+  @RelationId((order: Order) => order.driver)
+  driverId: number;
+```
+
+### 3. Get Orders & Order Service
+`src/orders/order.service.ts`
+```ts
+  async getOrders(
+    user: User,
+    { status }: GetOrdersInput,
+  ): Promise<GetOrdersOutput> {
+    try {
+      let orders = [];
+      if (user.role === UserRole.Client) {
+        orders = await this.orders.find({
+          where: { customer: user, ...(status && { status }) },
+        });
+      } else if (user.role === UserRole.Delivery) {
+        orders = await this.orders.find({
+          where: { driver: user, ...(status && { status }) },
+        });
+      } else if (user.role === UserRole.Owner) {
+        const restaurants = await this.restaurants.find({
+          where: { owner: user },
+          relations: ['orders'],
+        });
+        orders = restaurants.map((restaurant) => restaurant.orders).flat();
+        if (status) {
+          orders = orders.filter((order) => order.status === status);
+        }
+      }
+      return {
+        ok: true,
+        orders,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not get orders',
+      };
+    }
+  }
+
+  async getOrder(
+    user: User,
+    { id: orderId }: GetOrderInput,
+  ): Promise<GetOrderOutput> {
+    try {
+      const order = await this.orders.findOne(orderId, {
+        relations: ['restaurant'],
+      });
+      if (!order) {
+        return {
+          ok: false,
+          error: 'Order not found',
+        };
+      }
+
+      if (
+        (user.role === UserRole.Client && user.id !== order.customerId) ||
+        (user.role === UserRole.Delivery && user.id !== order.driverId) ||
+        (user.role === UserRole.Owner && user.id !== order.restaurant.ownerId)
+      ) {
+        return {
+          ok: false,
+          error: `You can't see that`,
+        };
+      }
+      return {
+        ok: false,
+        order,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not load order',
+      };
+    }
+  }
+```
+
+## Edit Order
+### 1. Edit Order Dto
+`src/orders/dtos/edit-order.dto.ts`
+```ts
+@InputType()
+export class EditOrderInput extends PickType(Order, ['id', 'status']) {}
+
+@ObjectType()
+export class EditOrderOutput extends CoreOutput {}
+```
+
+### 2. Edit Order Service
+`src/orders/order.service.ts`
+```ts
+  canSeeOrder(user: User, order: Order): boolean {
+    return (
+      (user.role === UserRole.Client && user.id === order.customerId) ||
+      (user.role === UserRole.Delivery && user.id === order.driverId) ||
+      (user.role === UserRole.Owner && user.id === order.restaurant.ownerId)
+    );
+  }
+  
+  async editOrder(
+    user: User,
+    { id: orderId, status }: EditOrderInput,
+  ): Promise<EditOrderOutput> {
+    try {
+      const order = await this.orders.findOne(orderId, {
+        relations: ['restaurant'],
+      });
+      if (!order) {
+        return {
+          ok: false,
+          error: 'Order not found',
+        };
+      }
+      if (!this.canSeeOrder(user, order)) {
+        return {
+          ok: false,
+          error: `You can't see that`,
+        };
+      }
+      let canEdit = true;
+      if (user.role === UserRole.Client) {
+        canEdit = false;
+      }
+      if (user.role === UserRole.Owner) {
+        if (![OrderStatus.Cooking, OrderStatus.Cooked].includes(status)) {
+          canEdit = false;
+        }
+      }
+      if (user.role === UserRole.Delivery) {
+        if (![OrderStatus.PickedUp, OrderStatus.Delivered].includes(status)) {
+          canEdit = false;
+        }
+      }
+      if (!canEdit) {
+        return {
+          ok: false,
+          error: `You can't do that`,
+        };
+      }
+      await this.orders.save({
+        id: orderId,
+        status,
+      });
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error: 'Could not edit order',
+      };
+    }
+  }
+```
+
+## 사소한 팁
+
+### Graphql
+- graphql 필드 자동완성:  `Shift` + `Space`
+- graphql 실행: `Command` + `Enter`
+- graphql 필드 사이에 Comma는 필요없음 (있어도 오류는 안남)
+- github 에서 파일 작성후 `Command` + `S` 누르면 커밋 폼으로 포커싱
+
+### Chrome
+- 크롬 탭이동: `Option` + `Command` + `좌 or 우 방향키`
+- 크롬 스크롤 이동: `Command` + `상 or 하 방향키`
+
+### Postico
+- 삭제: 로우를 선택한후 `Command` + `Backspace` 로 삭제 체크한 뒤에 `Command` + `S`
+
+## 에러
+
+### graphql 에러
+
+`"Field 필드명 of type 클래스명" must have a selection of subfields.`
+> 필드를 가져오려고할때 필드의 서브필드를 작성해야 할 경우 발생하는 에러이다. 서브필드를 작성해주면 됨.
+
+## entity와 inputType
+
+- Entity 내 에서 엔티티타입을 바라보는 필드는 엔티티의 타입을 바라보고 해당 엔티티의 모든 속성(상속받는 부모속성까지)이 정의되어있다
+- InputType에서 엔티티타입을 바라보는 필드는 정의되어있는 InputType을 바라보고 해당 엔티티에 정의되어있는 속성만 바라본다(상속된 부모속성 X)
+
+<img width="894" alt="Order Entity에서 items" src="https://user-images.githubusercontent.com/25737303/174448626-6c2705b4-73d1-4598-b2b7-b3f8321041f4.png">
+<img width="891" alt="Create Order Input 에서 items" src="https://user-images.githubusercontent.com/25737303/174448628-5894b5c0-add1-4774-bc24-f028f974a392.png">
+
