@@ -7,7 +7,7 @@
 3. 도메인 정책 (유니버스 개념)
    - Google vs Youtube
    - Facebook vs instagram
-   - Naver
+   - Naver vs Band
 
 
 
@@ -295,26 +295,6 @@ request header에 `Authorization`을 보내라고 한다!
 <br />
 
 
-## 테크 기업 API를 어떻게 사용할 수 있나?
-이렇게 발급받은 access_token가지고 API를 호출할때 아래와 같이 호출하도록 가이드한다.
-
-
-
-
-### OAuth 제공자
-- facebook
-- google
-- apple
-- amazon
-- microsoft
-- github
-- naver
-- kakao
-- ... (생략) ...
-
-
-<br />
-
 
 
 # 글로벌 테크 기업은 자사 인증을 어떻게 구현했을까?
@@ -381,7 +361,7 @@ Youtube와 로그인 연동을 위해,
 ### 로그아웃 응답
 response body는 내용이 없고 response header에 set-cookie로 제어함
 
-![Google](./images/google-logout-response-body.png)
+![Google](./images/google-logout-respose-body.png)
 
 
 <br />
@@ -409,6 +389,7 @@ response header로 set-cookie로 인증정보를 내려주고,
 response body는 특별한 데이터를 넘겨주지 않는다.
 ![Facebook](./images/facebook-login-request-header.png)
 ![Facebook](./images/facebook-login-response-body.png)
+
 
 
 response header
@@ -460,7 +441,64 @@ response body는 특별한 데이터를 넘겨주지 않는다
 ![Naver](./images/naver-login-response-header.png)
 ![Naver](./images/naver-login-response-body.png)
 
+<br />
+<br />
 
+---
+
+## 👉 프론트에 의존하지 않고, 인증서버 알아서 token을 관리할 수 있게 되었다.
+
+
+---
+## Cookie HttpOnly
+> Cross-site 스크립팅 (XSS (en-US)) 공격을 방지하기 위해, HttpOnly쿠키는 JavaScript의 Document.cookie API에 접근할 수 없습니다; 그들은 서버에게 전송되기만 합니다. 예를 들어, 서버 쪽에서 지속되고 있는 세션의 쿠키는 JavaScript를 사용할 필요성이 없기 때문에 HttpOnly플래그가 설정될 것입니다
+
+[HTTP 쿠키 - HTTP | MDN](https://developer.mozilla.org/ko/docs/Web/HTTP/Cookies#secure%EA%B3%BC_httponly_%EC%BF%A0%ED%82%A4)
+
+
+
+### Google
+![Google](./images/google-httponly.png)
+
+
+### Facebook
+![Facebook](./images/facebook-httponly.png)
+
+### Naver
+![Naver](./images/naver-httponly.png)
+
+
+## 쿠키 탈취 예
+![Xss](./images/xss.png)
+
+[HTML escaping과 XSS 공격](https://isaac56.github.io/security/2021/09/05/HTML-escaping-XSS-type/)
+
+[[XSS] 세션 가로채기(Session Hijacking)](https://pyj92.tistory.com/16)
+
+
+<br />
+<br />
+
+## 👉 cookie httpOnly 속성을 줌으로서 보안성이 확 올라기게 됨!
+
+---
+
+
+<br />
+<br />
+
+## 글로벌 테크 기업의 인증 방향성
+1. client단 id/pw 암호화,
+2. refresh_token보다 도용탐지 기술을 더 디벨롭 하는 추세.
+3. 2 factor 인증.
+4. 확실한 도메인 정리.
+
+<br />
+<br />
+
+## 마무리
+1. 인증 토큰을 cookie 기반으로 가게 되면, 의존관계 없이 인증에서 단일책임원칙이 완성 될 수 있음.
+2. cookie에 httpOnly, Seacure, Samesite 속성을 사용하여 보안적인 측면을 높일 수 있음.
 
 
 ### reference
