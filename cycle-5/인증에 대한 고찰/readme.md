@@ -490,7 +490,7 @@ response body는 특별한 데이터를 넘겨주지 않는다
 ## 글로벌 테크 기업의 인증 방향성
 1. client단 id/pw 암호화,
 2. refresh_token보다 도용탐지 기술을 더 디벨롭 하는 추세.
-3. 2 factor 인증.
+3. two factor.
 4. 확실한 도메인 정리.
 
 <br />
@@ -500,6 +500,11 @@ response body는 특별한 데이터를 넘겨주지 않는다
 1. 인증 토큰을 cookie 기반으로 가게 되면, 의존관계 없이 인증에서 단일책임원칙이 완성 될 수 있음.
 2. cookie에 httpOnly, Seacure, Samesite 속성을 사용하여 보안적인 측면을 높일 수 있음.
 
+<br />
+
+## iOS, Andorid도 cookie 기반 인증으로 구현될수 있다면?!
+
+<br />
 
 ### reference
 - 네이버 Oauth: https://d2.naver.com/helloworld/24942
