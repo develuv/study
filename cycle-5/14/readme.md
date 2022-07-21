@@ -1,4 +1,4 @@
-# Chapter 13. Front-end Setup
+# Chapter 14. Front-end Setup
 
 ## CRA
 
@@ -16,7 +16,7 @@ yarn create react-app nuber-eats-frontend --template=typescript
 - tailwind, postcss, autoprefixer 를 설치합니다.
 
 ```bash
-npm install -D tailwindcss postcss autoprefixer
+yarn add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 
@@ -51,7 +51,7 @@ module.exports = {
 - apollo client와 graphql을 설치합니다.
 
 ```bash
-npm install @apollo/client graphql
+yarn add @apollo/client graphql
 ```
 
 - apollo.ts 파일을 따로 생성하여 클라이언트를 생성합니다.
@@ -81,3 +81,16 @@ root.render(
 ```
 
 ## React Route DOM
+
+```bash
+yarn add react-router-dom
+```
+
+- 로그인 전/후, 각 롤에 대한 페이지가 달라짐.
+
+```bash
+├── App.tsx
+├── routers
+│   ├── LoggedInRouter.tsx
+│   └── LoggedOutRouter.tsx
+```
