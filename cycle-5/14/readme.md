@@ -8,10 +8,11 @@ yarn create react-app nuber-eats-frontend --template=typescript
 
 ## TailwindCSS
 
-[Install with React](https://tailwindcss.com/docs/guides/create-react-app)
+[Install](https://tailwindcss.com/docs/installation/using-postcss)
 
 > 강의와는 메이저 버전이 차이가 나서 설정 부분이 약간 다릅니다.<br/>
-> v3 부터는 빌드가 별도로 필요 없습니다.
+> v3 부터는 빌드가 별도로 필요 없습니다.<br/>
+> v2.1 버전부터는 mode: jit를 제공하였지만 v3에서는 자동으로 된다.
 
 - tailwind, postcss, autoprefixer 를 설치합니다.
 
@@ -21,7 +22,9 @@ npx tailwindcss init -p
 ```
 
 - tailwind.config.js에서 content를 업데이트 해줍니다.
-- content에 해당하는 파일들에서 사용하는 클래스들만 최종 css 파일에 포함시킵니다.
+- content에 등록한 패턴의 파일들에서 사용하는 클래스들만 최종 css 파일에 포함시킵니다.
+- content에는 광범위한 패턴을 지정하는 것을 지양합니다.
+- css 패턴은 절대 포함시키면 안됩니다.
 
 ```js
 // tailwind.config.js
@@ -44,6 +47,8 @@ module.exports = {
 @tailwind components;
 @tailwind utilities;
 ```
+
+[VS Code & JetBrain plugin](https://tailwindcss.com/docs/editor-setup)
 
 ## Apollo
 [Apollo with React](https://www.apollographql.com/docs/react/)
@@ -80,7 +85,9 @@ root.render(
 );
 ```
 
-## React Route DOM
+## React Router DOM
+
+[React Router DOM v6](https://reactrouter.com/docs/en/v6/getting-started/overview)
 
 ```bash
 yarn add react-router-dom
