@@ -201,14 +201,18 @@ export class PaymentResolver {
 ```
 
 ## Task scheduler
+
 - 정해진 시간에 맞추어 작업이 실행될 수 있도록 제공합니다.
 - `node-cron` 패키지와 함께 통합하여 `@nestjs/schedule` 패키지를 제공합니다.
 
 ### Cron 이란?
+
 > 소프트웨어 유틸리티 cron은 유닉스 계열 컴퓨터 운영 체제의 시간 기반 잡 스케줄러이다.
 
 ### nest에 적용
-- 패키지를 설정하고 모듈만 import 시켜주면 설정 끝이다!
+
+- 패키지를 설치하고 모듈만 import 시켜주면 설정 끝이다!
+
 ```bash
 npm install --save @nestjs/schedule
 npm install --save-dev @types/cron
@@ -228,6 +232,7 @@ export class AppModule {}
 ```
 
 ### Cron Jobs
+
 [자세히보기](https://docs.nestjs.com/techniques/task-scheduling#declarative-cron-jobs)
 
 - @Cron(Expression) 데코레이터를 제공한다.
@@ -258,6 +263,7 @@ class PaymentService {
 ```
 
 ### Interval
+
 [자세히보기](https://docs.nestjs.com/techniques/task-scheduling#declarative-intervals)
 
 - @Interval(Milliseconds) 데코레이터를 제공한다.
@@ -273,6 +279,7 @@ class PaymentService {
 ```
 
 ### Timeout
+
 [자세히보기](https://docs.nestjs.com/techniques/task-scheduling#declarative-timeouts)
 
 - @Timeout(Milliseconds) 데코레이터를 제공한다.
