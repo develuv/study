@@ -50,6 +50,7 @@ yarn add -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/ty
 
 ```yml
 schema: 'http://localhost:4000/graphql'
+documents: './src/**/*.graphql'
 generates:
   src/__generate__/types.ts:
     plugins:
