@@ -219,9 +219,9 @@ query me를 날리는 useMe custom hook을 만들고, 그것을 router에서 부
 아주 큰 장점이지만 경우에 따라서는 매번 새 쿼리를 날리도록 만들어줄 필요가 있을 것 같  
 
 # Document
-https://reactrouter.com/docs/en/v6
-https://reactrouter.com/docs/en/v6/upgrading/v5
-https://react-hook-form.com/get-started
-https://react-hook-form.com/migrate-v6-to-v7
-https://tailwindcss.com/docs/configuration
-https://fortawesome.com/
+- https://reactrouter.com/docs/en/v6
+- https://reactrouter.com/docs/en/v6/upgrading/v5
+- https://react-hook-form.com/get-started
+- https://react-hook-form.com/migrate-v6-to-v7
+- https://tailwindcss.com/docs/configuration
+- https://fortawesome.com/
