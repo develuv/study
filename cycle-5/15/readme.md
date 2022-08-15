@@ -48,7 +48,7 @@ export const client = new ApolloClient({
 </details>
 
 - 궁금증
-  - App에서 local state와 local field variable의 차이점 ?
+  - App에서 local state와 local field variable의 차이점
     - [Apollo client는 Redux와 무엇이 다른가](https://d2.naver.com/helloworld/4245995)
     - [Local State Management with Reactive Variables](https://www.apollographql.com/blog/apollo-client/caching/local-state-management-with-reactive-variables/)
     - 같다. 하지만 사용이 더 편리하다.
