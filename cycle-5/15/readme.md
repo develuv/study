@@ -193,6 +193,9 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/0f1e0ccee211be53c7ec2
 
 <details>
   <summary>TailwindCSS features</summary>
+  
+- 다양한 클래스를 통해 디자인한 요소를 묶어 해당 클래스를 간편하게 재사용할 수 있다.
+- @apply를 통해 스타일들을 컴포넌트화 하여, 해당 클래스를 사용함으로써 스타일의 재사용이 가능하다.
 
 ````css
 @tailwind components;
@@ -216,6 +219,7 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/0f1e0ccee211be53c7ec2
 @tailwind utilities;
 ````
 
+  https://velog.io/@ney9083/TailwindCSS
 </details>
 
 ## 15.6 Login Mutation part One
