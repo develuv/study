@@ -164,6 +164,7 @@ typescript는 알아 듣질 못 함
 npm install @type/react-router-dom
 
 2. @type 버전이 없을 경우엔 type definition을 하고 사용가능하지만 typescript의 보호기능 등은 사용 불가능
+</details>
 
 
 ## 15.4 Form Design
