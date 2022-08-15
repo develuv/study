@@ -246,7 +246,15 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522ba
   - 로그인 여부와 사용자에 따라 main화면을 다르게 구성
 </details>
     
- <details>
+
+
+## 15.7 Apollo Codegen
+https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
+
+## 15.8 Login Mutation
+https://github.com/blue45f/nuber-eats-frontend-step/commit/82dd5a99fbc49973da7196ac330a06356ce24a4d
+   
+<details>
   <summary>로그인 Mutation</summary>
   
    ````ts
@@ -274,16 +282,28 @@ const [login, { data: loginResults, loading }] = useMutation<
   onCompleted,
 });
 ````
-</details>
-
-## 15.7 Apollo Codegen
-https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
-
-## 15.8 Login Mutation
-https://github.com/blue45f/nuber-eats-frontend-step/commit/82dd5a99fbc49973da7196ac330a06356ce24a4d
+</details> 
 
 ## 15.9 Login Mutation part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/3b6e584242a511e666f1859777808262bac39f47
+   
+ <details>
+  <summary>Mutation loading</summary>
+ 
+  - loading api를 활용하여 서버에서 응답 받기전까지의 상태를 표시
+  
+````
+  const [loginMutation, {data: loginMutationResult, loading}] = useMutation<loginMutation,
+    loginMutationVariables>(LOGIN_MUTATION, {
+    onCompleted,
+  });
+   
+
+  <button className="mt-3 btn">
+    {loading ? "Loading..." : "Log In"}
+  </button>
+````
+</details> 
 
 ## 15.10 UI Clonning
 https://github.com/blue45f/nuber-eats-frontend-step/commit/51a2e245df42fec66fff369896152037f8278a83
@@ -291,8 +311,37 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/51a2e245df42fec66fff3
 ## 15.11 UI Clonning part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/ba3d09cbfe0f2fe7a81dd0d45f826f371b3e5258
 
+<details>
+  <summary>react-helmet</summary>
+ 
+  - html meta tag를 동적으로 관리해주는 라이브러리
+  - react-helmet의 작동 순서
+    - url경로를 따라서 page request
+    - page에 맞는 resource fetching
+    - HTML 파일 불러옴
+    - react-helmet이 담겨있는 js 파일 작동
+  
+````ts
+  const [loginMutation, {data: loginMutationResult, loading}] = useMutation<loginMutation,
+    loginMutationVariables>(LOGIN_MUTATION, {
+    onCompleted,
+  });
+   
+
+  <button className="mt-3 btn">
+    {loading ? "Loading..." : "Log In"}
+  </button>
+````
+  
+- https://jeonghwan-kim.github.io/dev/2020/08/15/react-helmet.html
+- https://velog.io/@miyoni/noSSRyesSEO
+- https://velog.io/@raverana96/React-React-helmet%EA%B3%BC-%EA%B7%B8-%ED%95%9C%EA%B3%84.-next%EB%A1%9C-migrate%ED%95%98%EB%A0%A4%EB%8A%94-%EC%9D%B4%EC%9C%A0
+</details>    
+   
 ## 15.12 Create Account Mutation
 https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4bdb44d0563b171333388
+   
+   
 
 ## 15.13 Create Account Mutation part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/c4040edba9c1bdcb0f3eff14989534a0b6759566
@@ -324,3 +373,4 @@ query me를 날리는 useMe custom hook을 만들고, 그것을 router에서 부
 - https://react-hook-form.com/migrate-v6-to-v7
 - https://tailwindcss.com/docs/configuration
 - https://fortawesome.com/
+- tps://github.com/nfl/react-helmet
