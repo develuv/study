@@ -54,7 +54,6 @@ export const client = new ApolloClient({
     - 같다. 하지만 사용이 더 편리하다.
 
 
-
 ## 15.1 React Hook Form
 https://github.com/blue45f/nuber-eats-frontend-step/commit/d58f616998793e3028331af838ceeb77591c89f4
 
@@ -165,8 +164,7 @@ typescript는 알아 듣질 못 함
 npm install @type/react-router-dom
 
 2. @type 버전이 없을 경우엔 type definition을 하고 사용가능하지만 typescript의 보호기능 등은 사용 불가능
-  
-  
+
 
 ## 15.4 Form Design
 https://github.com/blue45f/nuber-eats-frontend-step/commit/cd7bcb96e6434def6708338f43420798a2b238d6
