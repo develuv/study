@@ -245,6 +245,36 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522ba
 - React-router-dom
   - 로그인 여부와 사용자에 따라 main화면을 다르게 구성
 </details>
+    
+ <details>
+  <summary>로그인 Mutation</summary>
+  
+   ````ts
+   const LOGIN_MUTATION = gql`
+  mutation login($input: LoginInput!) {
+    login(input: $input) {
+      ok
+      error
+      token
+    }
+  }
+`;
+   ````
+   
+- graphql의 mutation을 클라이언트에서 이용하려면 먼저 gql을 사용하여, 쿼리문을 먼저 작성
+- login은 mutation이므로 useMutation을 사용
+- typescript를 사용하고 있기 때문에 위와 같이 useMutation에 login, loginVariables 타입을 전달
+- t인자로 넘겨준 것은 위의 쿼리어로 만든 LOGIN_MUTATION과 옵션값 
+   
+````
+const [login, { data: loginResults, loading }] = useMutation<
+  login,
+  loginVariables
+>(LOGIN_MUTATION, {
+  onCompleted,
+});
+````
+</details>
 
 ## 15.7 Apollo Codegen
 https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
