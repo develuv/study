@@ -56,3 +56,11 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/e18f904058e2063407622
 
 ## 15.18 Header part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/9c74bc72cf7d49b34794695249f5d793a6c2e4a3
+
+# Document
+https://reactrouter.com/docs/en/v6
+https://reactrouter.com/docs/en/v6/upgrading/v5
+https://react-hook-form.com/get-started
+https://react-hook-form.com/migrate-v6-to-v7
+https://tailwindcss.com/docs/configuration
+https://fortawesome.com/
