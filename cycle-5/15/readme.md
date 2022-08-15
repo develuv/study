@@ -224,6 +224,27 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/0f1e0ccee211be53c7ec2
 
 ## 15.6 Login Mutation part One
 https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522baaa551fe0fb07b4dffa2
+  
+  <details>
+  <summary>apollo features</summary>
+  
+- Apollo란 GraphQL의 클라이언트 라이브러리 중 하나로 GraphQL을 사용한다면 거의 필수적으로 사용하는 상태 관리 플랫폼입   
+- 장점
+    - Query 및 Mutation 직접 전송
+      - API 서버에서 데이터를 가져오기 위해 번거로운 네트워크단의 HTTP 요청을 신경 쓸 필요가 없어진다.
+    - 전송받은 데이터 캐싱
+      - 클라이언트의 반복 요청을 줄여 서버 부하를 줄일 수 있을 뿐만 아니라, 서비스를 이용하는 사람들에게 더 나은 사용자 경험을 제공할 수 있다.
+    - Local state 관리
+      - 클라이언트 만의 Local state를 만들어 Query, Mutation, Resolver의 사용이 가능하다. 서버에서 받아온 데이터와 클라이언트에서 관리하는 데이터를 병합할 수 있다.
+
+- apollo.ts : apollo 세팅 파일
+- uri : back-end url(localhost:4000/graphql)
+- \<app /\>을 \<ApolloProvider client={client}>\</ApolloProvider>로 감싸 줌
+- chrome extension apollo dev tools docs에서 연결 확인 가능
+- set up -> authentication -> login part -> user part -> test(Jest) -> restaurant owner dashboard -> driver part
+- React-router-dom
+  - 로그인 여부와 사용자에 따라 main화면을 다르게 구성
+</details>
 
 ## 15.7 Apollo Codegen
 https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
