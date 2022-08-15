@@ -31,20 +31,28 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/82dd5a99fbc49973da719
 https://github.com/blue45f/nuber-eats-frontend-step/commit/3b6e584242a511e666f1859777808262bac39f47
 
 ## 15.10 UI Clonning
+https://github.com/blue45f/nuber-eats-frontend-step/commit/51a2e245df42fec66fff369896152037f8278a83
 
 ## 15.11 UI Clonning part Two
+https://github.com/blue45f/nuber-eats-frontend-step/commit/ba3d09cbfe0f2fe7a81dd0d45f826f371b3e5258
 
 ## 15.12 Create Account Mutation
+https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4bdb44d0563b171333388
 
 ## 15.13 Create Account Mutation part Two
+https://github.com/blue45f/nuber-eats-frontend-step/commit/c4040edba9c1bdcb0f3eff14989534a0b6759566
 
 ## 15.14 Saving the Token
+https://github.com/blue45f/nuber-eats-frontend-step/commit/b5480995dcbdc6ca8ca04e36e808ea6ea08e4efe
 
 ## 15.15 Using the Token
+https://github.com/blue45f/nuber-eats-frontend-step/commit/ded58a4378705b5481f7519ac86219c730c2b9bf
 
 ## 15.16 Routers and 404s
+https://github.com/blue45f/nuber-eats-frontend-step/commit/73c10136dd171628e4ff3d507b8ec305a40ae4e0
 
 ## 15.17 Header part One
+https://github.com/blue45f/nuber-eats-frontend-step/commit/e18f904058e206340762299fd739eaaec08e581b
 
 ## 15.18 Header part Two
-
+https://github.com/blue45f/nuber-eats-frontend-step/commit/9c74bc72cf7d49b34794695249f5d793a6c2e4a3
