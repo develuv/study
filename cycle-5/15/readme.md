@@ -309,8 +309,11 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/3b6e584242a511e666f18
 https://github.com/blue45f/nuber-eats-frontend-step/commit/51a2e245df42fec66fff369896152037f8278a83
 
 ## 15.11 UI Clonning part Two
-https://github.com/blue45f/nuber-eats-frontend-step/commit/ba3d09cbfe0f2fe7a81dd0d45f826f371b3e5258
-
+https://github.com/blue45f/nuber-eats-frontend-step/commit/ba3d09cbfe0f2fe7a81dd0d45f826f371b3e5258 
+   
+## 15.12 Create Account Mutation
+https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4bdb44d0563b171333388
+   
 <details>
   <summary>react-helmet</summary>
  
@@ -336,12 +339,7 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/ba3d09cbfe0f2fe7a81dd
 - https://jeonghwan-kim.github.io/dev/2020/08/15/react-helmet.html
 - https://velog.io/@miyoni/noSSRyesSEO
 - https://velog.io/@raverana96/React-React-helmet%EA%B3%BC-%EA%B7%B8-%ED%95%9C%EA%B3%84.-next%EB%A1%9C-migrate%ED%95%98%EB%A0%A4%EB%8A%94-%EC%9D%B4%EC%9C%A0
-</details>    
-   
-## 15.12 Create Account Mutation
-https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4bdb44d0563b171333388
-   
-   
+</details>      
 
 ## 15.13 Create Account Mutation part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/c4040edba9c1bdcb0f3eff14989534a0b6759566
