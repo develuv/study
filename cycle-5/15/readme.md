@@ -170,9 +170,53 @@ npm install @type/react-router-dom
 ## 15.4 Form Design
 https://github.com/blue45f/nuber-eats-frontend-step/commit/cd7bcb96e6434def6708338f43420798a2b238d6
 
+- tailwindCSS를 활용해 간단하게 스타일링 가능
+
+<details>
+  <summary>TailwindCSS features</summary>
+
+- 부트스트랩과 달리 눈에 띄는 특유의 생김새가 없음
+- 조합할 수 있는 여러 클래스들이 있는데 좋바해서 쓰면 됨
+- production을 위해 build할때 사용하지 않은 클래스들을 제거해서 css크기를 줄일 수 있음
+- VScode extension : Tailwind CSS intellisense : Tailwind CSS 클래스 이름 자동 완성
+- [postCSS](https://github.com/postcss/postcss) : post process할 수 있게 해주는 라이브러리 - CSS 전용 Babel 같은 느낌
+  - tailwind를 일반 css파일로 빌드하기 위해 postcss config 파일 필요
+  - autoprefixer : 크로스 브라우징 되도록 지원
+  - 참고 : https://fourwingsy.medium.com/postcss-%EC%86%8C%EA%B0%9C-727310aa6505
+- tailwind.config.js : tailwind를 커스터마이즈 하기 위해
+
+</details>
+
 ## 15.5 Form Login 
 https://github.com/blue45f/nuber-eats-frontend-step/commit/8cff6fac2482de2c0b1cc16e7f10a2657ad2a931
 https://github.com/blue45f/nuber-eats-frontend-step/commit/0f1e0ccee211be53c7ec24df11e3a34dc9b31006
+
+<details>
+  <summary>TailwindCSS features</summary>
+
+````css
+@tailwind components;
+
+.input {
+    @apply focus:outline-none focus:border-gray-500 p-3 border-2  text-lg border-gray-200 transition-colors;
+}
+
+.container {
+    @apply max-w-screen-2xl mx-auto;
+}
+
+.link {
+    @apply text-lime-600 hover:underline;
+}
+
+.btn {
+    @apply text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-lime-600 hover:bg-lime-700;
+}
+
+@tailwind utilities;
+````
+
+</details>
 
 ## 15.6 Login Mutation part One
 https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522baaa551fe0fb07b4dffa2
