@@ -325,15 +325,9 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4b
     - react-helmet이 담겨있는 js 파일 작동
   
 ````ts
-  const [loginMutation, {data: loginMutationResult, loading}] = useMutation<loginMutation,
-    loginMutationVariables>(LOGIN_MUTATION, {
-    onCompleted,
-  });
-   
-
-  <button className="mt-3 btn">
-    {loading ? "Loading..." : "Log In"}
-  </button>
+    <Helmet>
+        <title>Login | Nuber Eats</title>
+     </Helmet>
 ````
   
 - https://jeonghwan-kim.github.io/dev/2020/08/15/react-helmet.html
@@ -343,12 +337,82 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/718c3675adc225a9f9b4b
 
 ## 15.13 Create Account Mutation part Two
 https://github.com/blue45f/nuber-eats-frontend-step/commit/c4040edba9c1bdcb0f3eff14989534a0b6759566
+  
+<details>
+  <summary>useNavigate</summary>
+ 
+  - useNavigate는 양식이 제출되거나 특정 event가 발생할 때,  url을 조작할 수 있는 interface를 제공
+  
+````ts
+import {Link, useNavigate} from "react-router-dom";
+   
+  const history = useNavigate();
+  
+  const onCompleted = (data: createAccountMutation) => {
+    const {
+      createAccount: {ok},
+    } = data;
+    if (ok) {
+      history("/login");
+    }
+  };  
+````
+  
+- https://basemenks.tistory.com/278
+</details>    
 
 ## 15.14 Saving the Token
 https://github.com/blue45f/nuber-eats-frontend-step/commit/b5480995dcbdc6ca8ca04e36e808ea6ea08e4efe
+  
+<details>
+  <summary>react-helmet-async</summary>
+ 
+  - react-helmet을 쓰지 않는 이유
+    - react-helmet은 thread-safe하지 않은 react-side-effect에 의존한다는 단점이 있음
+    - 따라서, 비동기 데이터 처리에 문제가 생길 수 있습니다.
+  - react-helmet-async는 react-helmet과 유사한 라이브러리이면서 thread-safe하고 react-helmet보다 실행면에서 더 깊숙한 곳에서 우선권을 갔는다
+
+  
+````ts
+import {HelmetProvider} from "react-helmet-async";
+  
+    <ApolloProvider client={client}>
+      <HelmetProvider>
+        <App/>
+      </HelmetProvider>
+    </ApolloProvider>
+  
+  
+import {Helmet} from "react-helmet-async";  
+````
+
+- https://jisu-y.github.io/til/TIL-%EA%B3%B5%EB%B6%80-220414/
+</details>      
 
 ## 15.15 Using the Token
 https://github.com/blue45f/nuber-eats-frontend-step/commit/ded58a4378705b5481f7519ac86219c730c2b9bf
+   
+<details>
+  <summary>setContext</summary>
+ 
+  - contextSetter() 함수는 Apollo 클라이언트가 서버로 GraphQL 요청을 수행하기 전에 매번 실행된다
+  - 그래서 여기에 HTTP 헤더에 넣을 데이터를 설정할 수 있다.
+  - 그리고 기존 링크인 httpLink와 setContext()로 반환되는 Apollo 링크를 합쳐준다.
+ 
+  
+````ts
+import {setContext} from "@apollo/client/link/context";
+  
+const httpLink = createHttpLink({
+  uri: "http://localhost:4000/graphql",
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+````
+
+- https://velog.io/@gwak2837/Apollo-Client-React%EB%A1%9C-GraphQL-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B0%9C%EB%B0%9C%ED%95%98%EA%B8%B0-2
+</details>         
 
 ## 15.16 Routers and 404s
 https://github.com/blue45f/nuber-eats-frontend-step/commit/73c10136dd171628e4ff3d507b8ec305a40ae4e0
@@ -371,4 +435,5 @@ query me를 날리는 useMe custom hook을 만들고, 그것을 router에서 부
 - https://react-hook-form.com/migrate-v6-to-v7
 - https://tailwindcss.com/docs/configuration
 - https://fortawesome.com/
-- tps://github.com/nfl/react-helmet
+- https://github.com/nfl/react-helmet
+- https://github.com/staylor/react-helmet-async
