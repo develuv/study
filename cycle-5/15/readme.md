@@ -57,10 +57,12 @@ export const client = new ApolloClient({
 ## 15.1 React Hook Form
 https://github.com/blue45f/nuber-eats-frontend-step/commit/d58f616998793e3028331af838ceeb77591c89f4
 
-- [리액트에서 form을 다루기 위한 라이브러리](https://react-hook-form.com/)
-- useForm();
+
 <details>
   <summary>useForm code</summary>
+  
+- [리액트에서 form을 다루기 위한 라이브러리](https://react-hook-form.com/)
+- useForm();  
 
 ```javascript
 export const LoggedOutRouter = () => {
@@ -70,8 +72,7 @@ export const LoggedOutRouter = () => {
     <div>
       <form>
         <input
-          ref={register} // 사용할 form에 register를 붙이면 됨
-          name="email" // name도 필수
+          {...register("email")} // 사용할 form에 register를 붙이면 됨
           required
           placeholder="email"
         >
@@ -80,15 +81,16 @@ export const LoggedOutRouter = () => {
   )
 }
 ```
-
 </details>
-- useForm()의 메서드들
-  - const { register, watch, handleSubmit, errors } = useForm();
-  - handleSubmit : submit 시 실행될 함수(onSubmit)을 등록하면 실행됨
+
 
 <details>
   <summary>handle submit code</summary>
-
+- useForm()의 메서드들
+  - const { register, watch, handleSubmit, formStatus: {errors }} = useForm();
+  - handleSubmit : submit 시 실행될 함수(onSubmit)을 등록하면 실행됨
+  
+  
 ```javascript
 export const CreateAccount = () => {
   const { register, handleSubmit } = useForm();
@@ -97,19 +99,18 @@ export const CreateAccount = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input ref={register} name="email" /> // register를 ref에 등록 + name 설정
+      <input {...register("email")} /> 
       하면 useForm() 사용 준비 완료
     </form>
   );
 };
 ```
-
 </details>
-
-- errors : useForm()의 메서드 중 에러가 있으면 알려줌
 
 <details>
 <summary>errors code</summary>
+  
+- errors : useForm()의 메서드 중 에러가 있으면 알려줌  
 
 ```javascript
 <input
