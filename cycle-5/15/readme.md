@@ -2,7 +2,12 @@
 
 ## 15.0 Local Only Fields
 
-- Local-only fields : GraphQL 서버의 스키마에 정의 되지 않은 것
+
+
+<details>
+  <summary>local state(reactive variable) code</summary>
+  
+  - Local-only fields : GraphQL 서버의 스키마에 정의 되지 않은 것
 
   - local state : server에는 없지만 application에 필요한 state
     - ex) login or not, dark mode, volume on Youtube,
@@ -11,9 +16,6 @@
 - reactive variable(apollo.ts)
   - apollo client에 저장되고 읽고 업데이트 하는 것이 가능
   - const name = makeVar("default value");
-
-<details>
-  <summary>local state(reactive variable) code</summary>
 
 ```javascript
 // apollo.ts
@@ -45,13 +47,11 @@ export const client = new ApolloClient({
 });
 ```
 
-</details>
-
-- 궁금증
-  - App에서 local state와 local field variable의 차이점
+- App에서 local state와 local field variable의 차이점
     - [Apollo client는 Redux와 무엇이 다른가](https://d2.naver.com/helloworld/4245995)
     - [Local State Management with Reactive Variables](https://www.apollographql.com/blog/apollo-client/caching/local-state-management-with-reactive-variables/)
     - 같다. 하지만 사용이 더 편리하다.
+</details>
 
 
 ## 15.1 React Hook Form
@@ -250,6 +250,7 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522ba
 
 ## 15.7 Apollo Codegen
 https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
+https://github.com/blue45f/nuber-eats-frontend-step/commit/b06f7327860070693513cf071b05222a370dd23b
 
 ## 15.8 Login Mutation
 https://github.com/blue45f/nuber-eats-frontend-step/commit/82dd5a99fbc49973da7196ac330a06356ce24a4d
