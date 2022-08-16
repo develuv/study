@@ -249,7 +249,6 @@ https://github.com/blue45f/nuber-eats-frontend-step/commit/6f664cb07bdb098c522ba
 
 
 ## 15.7 Apollo Codegen
-https://github.com/blue45f/nuber-eats-frontend-step/commit/87ddf987621645767f7080af7c7590b270120d4f
 https://github.com/blue45f/nuber-eats-frontend-step/commit/b06f7327860070693513cf071b05222a370dd23b
 
 ## 15.8 Login Mutation
