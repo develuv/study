@@ -503,6 +503,8 @@ response body는 특별한 데이터를 넘겨주지 않는다
 <br />
 
 ## iOS, Andorid도 cookie 기반 인증으로 구현될수 있다면?!
+https://medium.com/mobile-app-development-publication/a-tale-on-android-cookies-store-management-b04832ca18c6
+
 
 <br />
 
