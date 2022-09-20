@@ -20,11 +20,12 @@
 
 ## 2. tailwind style
 
-1. form 작업
-   1. input search style 작업
-   2. 카테고리 노출 작업
-      1. hover 작업
-         1. `group-hover`
+### form 작업
+
+1.  input search style 작업
+2.  카테고리 노출 작업
+    1. hover 작업
+       1. `group-hover`
 
 ```html
 <div className="flex justify-around max-w-sm mx-auto ">
@@ -42,5 +43,9 @@
 </div>
 ```
 
-      1. 음식점 리스트 만들기
-      2.
+### 음식점 리스트 만들기 (Restaurants Pagination)
+
+      1.  grid 사용 (`grid grid-cols-3 gap-7 gap-x-5 gap-y-7`)
+      2.  bg-cover, bg-center 이런거 사용하기 넘 편함.
+
+### 카테고리 백엔드를 고쳐야함 (Restaurants Pagination)
