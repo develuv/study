@@ -1,14 +1,5 @@
 # 17장 Restaurants 스크린 만들기
 
-구현내용
-
-- 카테고리
-- 음식점 리스트
-- 음식점 상세
-  - 요리 리스트
-
-`<helmet>` 작업을 한다.
-
 ## 1. gql `restaurantsPageQuery` 작성
 
 1.  allCategories
@@ -43,12 +34,12 @@
 </div>
 ```
 
-### 음식점 리스트 만들기 (Restaurants Pagination)
+## 음식점 리스트 만들기 (Restaurants Pagination)
 
       1.  grid 사용 (`grid grid-cols-3 gap-7 gap-x-5 gap-y-7`)
       2.  bg-cover, bg-center 이런거 사용하기 넘 편함.
 
-### 카테고리 백엔드를 고쳐야함 (Restaurants Pagination)
+## 카테고리 백엔드를 고쳐야함 (Restaurants Pagination)
 
 1. restaurant 컴포넌트화
    1. 코드를 작성하기 전에 코드를 어떻게 구성할지 생각하지 않음
@@ -57,7 +48,7 @@
    2. `&rarr`, `&larr`
 2. NestJS 수정 (Pagination 처리)
 
-### 검색 (Search part One)
+## 검색 (Search part One)
 
 1. 반응형 처리 `md:grid-cols-3`, `md:w-3/12`
 2. useForm 적용
@@ -65,7 +56,7 @@
       1. history에 state 넣기 (https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event)
    2.
 
-### 검색 (Search part two)
+## 검색 (Search part two)
 
 - searchTerm (queryString)이 없으면 replace('/');
   - 간단하지만 굉장히 유용해 보임!
@@ -121,6 +112,46 @@ module.exports = {
 }
 ```
 
-#### Lazy Query
+### Lazy Query
 
-조건에 따라 Query를 실행하는 방법
+조건에 따라 Query를 실행하는 방법 (useLazyQuery)
+react-query의 `enabled` 같은 느낌!
+
+```javascript
+const [callQuery, {loading, data, called}] = useLazyQuery<searchRestaurant, searchRestaurantVariables>(SEARCH_RESTAURANT);
+
+
+useEffect(() => {
+    const [_, query] = location.search.split("?term=");
+    if (!query) {
+        return history.replace("/");
+    }
+
+    callQuery({
+        variables: {
+            input: {
+                page: 1,
+                query,
+            }
+        }
+    })
+}, [])
+```
+
+## Category
+
+1. `category.tsx` 컴포넌트 생성
+   1. useParams() 사용하여 slug 가져오기
+   2. category fragment 작성
+
+## Code challenge
+
+- category 화면 만들어 보기
+
+## 상세화면 만들기 (Restaurant part one)
+
+`restaurants.tsx`
+
+## 상세화면 만들기 (Restaurant part two)
+
+상세화면 header 만들기
