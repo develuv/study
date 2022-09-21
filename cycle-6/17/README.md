@@ -11,7 +11,7 @@
 
 ## 2. tailwind style
 
-### form 작업
+### form 작업 ⭐⭐
 
 1.  input search style 작업
 2.  카테고리 노출 작업
@@ -56,7 +56,7 @@
       1. history에 state 넣기 (https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event)
    2.
 
-## 검색 (Search part two)
+## 검색 (Search part two) ⭐⭐⭐⭐⭐
 
 - searchTerm (queryString)이 없으면 replace('/');
   - 간단하지만 굉장히 유용해 보임!
@@ -112,7 +112,7 @@ module.exports = {
 }
 ```
 
-### Lazy Query
+### Lazy Query ⭐⭐⭐⭐⭐
 
 조건에 따라 Query를 실행하는 방법 (useLazyQuery)
 react-query의 `enabled` 같은 느낌!
