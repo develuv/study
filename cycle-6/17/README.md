@@ -49,3 +49,78 @@
       2.  bg-cover, bg-center 이런거 사용하기 넘 편함.
 
 ### 카테고리 백엔드를 고쳐야함 (Restaurants Pagination)
+
+1. restaurant 컴포넌트화
+   1. 코드를 작성하기 전에 코드를 어떻게 구성할지 생각하지 않음
+      1. 못생긴 코드를 작성하고 동작하면, 이후에 정리하는 방법
+      2. 5분 코드를 작성하고, 5분 코드를 정리하는 방법 (창작모드 off)
+   2. `&rarr`, `&larr`
+2. NestJS 수정 (Pagination 처리)
+
+### 검색 (Search part One)
+
+1. 반응형 처리 `md:grid-cols-3`, `md:w-3/12`
+2. useForm 적용
+   1. 검색어를 querystring vs history state
+      1. history에 state 넣기 (https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event)
+   2.
+
+### 검색 (Search part two)
+
+- searchTerm (queryString)이 없으면 replace('/');
+  - 간단하지만 굉장히 유용해 보임!
+
+#### fragment
+
+1. fragment (src/fragments.ts) 1. 같은 Query를 여러 곳에서 사용할 때
+
+   ```javascript
+   export const RESTAURANT_FRAGMENT = gql`
+     fragment RestaurantParts on Restaurant {
+       id
+       name
+       coverImg
+       category {
+         name
+       }
+       address
+       isPromoted
+     }
+   `;
+   ```
+
+   `search.tsx`
+
+```javascript
+import { RESTAURANT_FRAGMENT } from "../../fragments";
+
+export const SEARCH_RESTAURANT = gql`
+  query searchRestaurant($input: SearchRestaurantInput!) {
+    searchRestaurant(input: $input) {
+      ok
+      error
+      totalPages
+      totalResults
+      restaurants {
+        ...RestaurantParts
+      }
+    }
+  }
+  ${RESTAURANT_FRAGMENT}
+`;
+```
+
+apollo.config.js에
+
+```javascript
+module.exports = {
+ client: {
+     includes: ["./src/**/*.{tsx,ts}"]
+     ...
+ }
+}
+```
+
+#### Lazy Query
+
+조건에 따라 Query를 실행하는 방법
