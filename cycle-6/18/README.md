@@ -18,7 +18,7 @@
 ---
 
 #### component 테스트
-> 유저 인터렉션 (O), 코드 implements (Condition And Structure) (X)   
+> 유저 인터렉션 (O), 코드 implements (Condition And Structure) (X)  : 어떤 입력값과 액션을 통해서 어떤 결과가 나오는지...   
 > Black Box Test   
 > Way : E2E(implements -> interaction), How : Unit Test (Page -> Parts)
 
@@ -42,8 +42,8 @@
 ---
 
 > Case 1. xxx.spec.tsx  
-> Case 2. __tests__/xxx.tsx
-> 우리 강의에선 Case1 + Case2 
+> Case 2. __tests__/xxx.tsx   
+> 우리 강의에선 Case1 + Case2  
 
 ```typescript
 import { render, waitFor } from "@testing-library/react";
