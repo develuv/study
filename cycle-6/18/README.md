@@ -7,7 +7,7 @@
 ---
 
 #### Jest   
-> __jest option override__   
+> **jest option override**   
 > way 1. eject 를 통해서 CRA를 구성하는 모든 설정을 추출 (Not Best)  
 > way 2. 기본 제공 설정 활용 (설정 옵션 : https://create-react-app.dev/docs/running-tests#configuration)
 
@@ -41,8 +41,8 @@
 
 ---
 
-> Case 1. xxx.spec.tsx  
-> Case 2. __tests__/xxx.tsx   
+> Case 1. xxx.**spec**.tsx  
+> Case 2. **tests**/xxx.tsx   
 > 우리 강의에선 Case1 + Case2  
 
 ```typescript
@@ -77,13 +77,13 @@ describe("<App />", () => {
   });
 });
 ```
-- __render__ by @testing-library/react
+- **render** by @testing-library/react
 - render function 에 우리가 테스트할 component 를 작성
 - useMutation(or useQuery)등을 쓰려면 context에 client를 찾게 되어 있는데...(for apollo) mock(Logged in, Logged out) 으로 대체
-- __isLoggedIn__ 이 __true/false__ 일 때 어떻게 보이는지 테스트
-- interaction : isloggedInVar (ReactiveVariable : https://www.apollographql.com/docs/react/local-state/reactive-variables/)
+- **isLoggedIn** 이 **true/false** 일 때 어떻게 보이는지 테스트
+- interaction : isLoggedInVar (ReactiveVariable : https://www.apollographql.com/docs/react/local-state/reactive-variables/)
 - isLoggedIn 같은 경우 React State updates 할 경우 act로 랩핑이 필요 (act는 유저가 한 행동이라고 생각...)
-- __waitFor__를 써서 state가 업데이트 될 동안 기다려 줌
+- **waitFor** 를 써서 state가 업데이트 될 동안 기다려 줌
 
 
 > ### What render provide...
@@ -256,13 +256,13 @@ describe("<Header />", () => {
 - useMe query : apollo MockedProvider 를 이용하여 백엔드 목킹...
 - hook 말고 request 를 mock
 - response 를 위해 timeout 를 줘서 Promise 가 resolve 되도록 기다려야 함
-- Promise 와 state 가 변경되어 rerender 되는 걸 처리하기 위해 __waitFor__ 감싸 줌
+- Promise 와 state 가 변경되어 rerender 되는 걸 처리하기 위해 **waitFor** 감싸 줌
 
 
 ![](screen1.png)
 
 
-> __Apollo Testing Tools__
+> **Apollo Testing Tools**
 > - MockedProvider (mocks : query, mutation, result)  
 >  -> for Query
 > - mock-apollo-client (more MockedProvider control by test. was called, loading state, alled with the expected variables)  
@@ -301,6 +301,8 @@ describe("<NotFound />", () => {
 ### apollo-client-test
 
 ---
+- form에 있는 id, password가 정상적으로 입력 되어서 mutation 하는 부분을 apollo graphql이 제공하는 테스트 방법으로는 테스트 불가
+- npm i mock-apollo-client --save-dev
 
 ```typescript
 import { ApolloProvider } from "@apollo/client";
@@ -336,7 +338,11 @@ describe("<Login />", () => {
             expect(document.title).toBe("Login | Nuber Eats");
         });
     });
-    
+```
+- component를 실제 ApolloProvider로 감싸고 client를 mockClient를 제공   
+  (전에는 provider 전체를 mocking 했다면 지금은 client만 mocking)
+
+```typescript
     it("displays email validation errors", async () => {
         const { getByPlaceholderText, getByRole } = renderResult;
         const email = getByPlaceholderText(/email/i);
@@ -363,7 +369,16 @@ describe("<Login />", () => {
         const errorMessage = getByRole("alert");
         expect(errorMessage).toHaveTextContent(/password is required/i);
     });
-    
+
+```
+- useForm에 의해서 state가 변하므로 waitFor 처리
+- login 과정을 trigger 함
+- login error trigger 함
+- userEvent를 통해서 유저의 인터렉션을 작성할 수 있음 (이벤트를 직접 트리거 할수도 있지만 이 방법이 유저 인터렉션에 그리고 이벤트 변경에 유연하게 대응)
+- getByPlaceholderText를 통해서 target Object(input)에 userEvent를 통해서 잘못된 이메일 입력
+- userEvent.click 을 통해서 submit button을 트리거 함.
+
+```typescript
     it("submits form and calls mutation", async () => {
         const { getByPlaceholderText, debug, getByRole } = renderResult;
         const email = getByPlaceholderText(/email/i);
@@ -382,8 +397,11 @@ describe("<Login />", () => {
                 },
             },
         });
+        
         mockedClient.setRequestHandler(LOGIN_MUTATION, mockedMutationResponse);
+        
         jest.spyOn(Storage.prototype, "setItem");
+        
         await waitFor(() => {
             userEvent.type(email, formData.email);
             userEvent.type(password, formData.password);
@@ -402,17 +420,7 @@ describe("<Login />", () => {
     });
 });
 ```
-
-- form에 있는 id, password가 정상적으로 입력 되어서 mutation 하는 부분을 apollo graphql이 제공하는 테스트 방법으로는 테스트 불가
-- npm i mock-apollo-client --save-dev
-- component를 실제 ApolloProvider로 감싸고 client를 mockClient를 제공 (전에는 provider 전체를 mocking 했담ㄴ 지금은 client만 mocking)
-- useForm에 의해서 state가 변하므로 waitFor 처리
-- login 과정을 trigger 함
-- login error trigger 함
-- userEvent를 통해서 유저의 인터렉션을 작성할 수 있음 (이벤트를 직접 트리거 할수도 있지만 이 방법이 유저 인터렉션에 그리고 이벤트 변경에 유연하게 대응)
-- getByPlaceholderText를 통해서 target Object(input)에 userEvent를 통해서 잘못된 이메일 입력
-- userEvent.click 을 통해서 submit button을 트리거 함.
-- mockClient.setRequestHandler provider로 가는 mutation, qury를 가진 request를 가로챔
+- mockClient.setRequestHandler provider 로 가는 mutation, query를 가진 request를 가로챔
 - localStorage 커버하기 위해 jest.spyOn을 통해서 setItem을 spy (implementation test - not coverage)
 
 ## 7. CreateAccount Tests
