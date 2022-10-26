@@ -4,7 +4,16 @@
 
 # 강의내용
 
-배달기사가 주문한 음식을 자기가 배달 하겠다고 이벤트를 구독하고 이벤트를 받아 배달을 시작하고 완료 하여 이벤트를 업데이트 할 수 있다.
+음식 주문과 요리과정을 구독(subscription)하는 방법에 대한 설명
+
+키워드
+
+- PubSub
+  - pubsub.asyncIterator // 구독
+  - pubsub.publish // 전파
+- Subscription
+  - filter // 필요한 이벤트만 받음
+  - resolve // 리턴값을 변경
 
 
 
@@ -12,7 +21,7 @@
 
 점주 : owner@test.com/123
 
- : client@test.com/123
+고객 : client@test.com/123
 
 배달원 : delivery@test.com/123
 
@@ -22,51 +31,57 @@
 
 
 
-점주가 주문이 들어오는지 구독한다
+### 점주가 주문을 기다림
 
 <span style="color:orange">pendingOrders</span>
 
 
 
-손님이 음식을 주문한다
+### 손님이 음식을 주문
 
 createOder
 
-주문한 음식의 상태를 구독한다(점주, 손님, 배달원?)
+### 음식 만들어 지기를 기다림(Any: 점주, 손님, 배달원) 
 
 <span style="color:orange">orderUpdates({id})</span>
 
-점주가 'Cooking' 상태 변경한다
+### 점주가 음식의 조리 상태 변경한다 (조리중)
 
 editOrder
 
 
 
-배달원 결정
+### 배달원이 자기가 배달하겠다고 입력
 
 takeOrder
 
-배달원이 음식 조리 완료되었는지 구독한다
+### 배달원이 음식 조리 완료되었는지 구독한다(Delivery)
 
 <span style="color:orange">cookedOrders</span>
 
 
 
-점주가 'Cooked' 상태 변경
+### 점주가 상태 변경(음식 완성)
 
 editOrder
 
+<span style="color:orange">orderUpdates({id})</span>
 
 
-배달원이 배달 'PickedUp'  상태 변경
+
+### 배달원이 배달 'PickedUp'  상태 변경
 
 editOrder
+
+<span style="color:orange">orderUpdates({id})</span>
 
 
 
 배달원이 배달 'Delivered'  상태 변경
 
 editOrder
+
+<span style="color:orange">orderUpdates({id})</span>
 
 
 
@@ -87,11 +102,11 @@ GraphQLModule.forRoot({
   installSubscriptionHandlers: true, //socket 프로토콜을 사용하는 서버를 활성화하여 이벤트 구독을 가능하게 함
   autoSchemaFile: true,
   context: ({ req, connection }) => {
-    if (req) { //ws 프로토콜에는 req가 없어서 분기 처리
-      return { user: req['user'] };
-    } else {
-      console.log(connection);
-    }
+	 	//ws 프로토콜에는 req가 없어서 분기 처리
+    onst TOKEN_KEY = 'x-jwt';
+    return {
+      token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
+    };
   },
 }),
 ```
@@ -128,6 +143,18 @@ potatoReady() {
 ## Role별로 권한 적용
 
 ```javascript
+export enum UserRole {
+  Client = 'Client',
+  Owner = 'Owner',
+  Delivery = 'Delivery',
+}
+```
+
+
+
+auth.guard.ts
+
+```javascript
 const token = gqlContext.token;
 if (token) {
   const decoded = this.jwtService.verify(token.toString());
@@ -141,6 +168,24 @@ if (token) {
       return roles.includes(user.role);
     }
   }
+}
+```
+
+
+
+```javascript
+@Role(['Any']) // 누구나 orderUpdates가능
+orderUpdates(@Args('input') orderUpdatesInput: OrderUpdatesInput) {
+  return this.pubSub.asyncIterator(NEW_ORDER_UPDATE);
+}
+
+@Mutation(returns => TakeOrderOutput)
+@Role(['Delivery']) //배달원만 takeOrder가능
+takeOrder(
+  @AuthUser() driver: User,
+  @Args('input') takeOrderInput: TakeOrderInput,
+  ): Promise<TakeOrderOutput> {
+    return this.ordersService.takeOrder(driver, takeOrderInput);
 }
 ```
 
