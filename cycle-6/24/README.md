@@ -430,7 +430,7 @@ export const DishOption: React.FC<IDishOptionProps> = ({
 ```
 
 ***22.6 Making Order part Six***
-주문 취소, 주문 완료 후처리 완료 이후 해당 주문 페이지로 이동
+- 주문 취소, 주문 완료 후처리 완료 이후 해당 주문 페이지로 이동
 
 ```tsx
 const triggerCancelOrder = () => {
