@@ -2,7 +2,7 @@
 
 **24.0 Extending the Dish Component** 
 
-isCustomer, options 추가
+- DishComponent 추가
 
 ```tsx
 interface IDishProps {
@@ -43,7 +43,7 @@ export const Dish: React.FC<IDishProps> = ({
 };
 ```
 
-
+- 메뉴 목록을 호출하는 UI를 구성한다.
 ```tsx
 const RESTAURANT_QUERY = gql`
   query restaurant($input: RestaurantInput!) {
@@ -77,7 +77,7 @@ const RESTAURANT_QUERY = gql`
 ```
 
 **24.1 Extending the Dish Component**
-Dish Component를 확장해서 주문에 추가하는 기능을 구현한다.
+- Dish Component를 확장해서 주문에 추가하는 기능을 구현한다.
 
 ```tsx
 const CREATE_ORDER_MUTATION = gql`
@@ -121,7 +121,7 @@ const addItemToOrder = (dishId: number) => {
 </div>
 ```
 
-
+- 주문 시작 가능한 상태일 때만 메뉴를 추가하도록 구성한다.
 ```tsx
 export const Dish: React.FC<IDishProps> = ({
   id = 0,
@@ -144,7 +144,7 @@ export const Dish: React.FC<IDishProps> = ({
 ```
 
 **22.2 Making Order part Two**
-- 별도 onclick 함수로 분리
+- 별도 onclick 함수로 분리하고 메뉴가 선택이 토글되도록 추가
 
 ```tsx
 export const Dish: React.FC<IDishProps> = ({
@@ -178,7 +178,7 @@ export const Dish: React.FC<IDishProps> = ({
     >
 ```
 
-- 메뉴 선택 표시, 메뉴 삭제
+-  주문 추가, 삭제 함수 변경하고 멀티 선택이 가능하도록 변경
 
 ```tsx
   const isSelected = (dishId: number) => {
@@ -222,14 +222,16 @@ export const Dish: React.FC<IDishProps> = ({
 
 **22.3 Making Order part Three**
 
-- 메뉴 옵션 추가
+- 메뉴 옵션을 주문에 추가시킨다.
 
 ```tsx
 const addOptionToItem = (dishId: number, option: any) => {
   if (!isSelected(dishId)) {
     return;
   }
+  
   const oldItem = getItem(dishId);
+  
   if (oldItem) {
     removeFromOrder(dishId);
     setOrderItems((current) => [
@@ -254,6 +256,8 @@ const addOptionToItem = (dishId: number, option: any) => {
 
 **22.4 Making Order part Four**
 
+- 추가하려는 옵션이 없는 경우에만 추가하도록 변경
+
 ```tsx
   const addOptionToItem = (dishId: number, option: any) => {
     if (!isSelected(dishId)) {
@@ -265,6 +269,7 @@ const addOptionToItem = (dishId: number, option: any) => {
       const hasOption = Boolean(
         oldItem.options?.find((aOption) => aOption.name == option.name)
       );
+      
       if (!hasOption) {
         removeFromOrder(dishId);
         setOrderItems((current) => [
@@ -274,12 +279,14 @@ const addOptionToItem = (dishId: number, option: any) => {
       }
     }
   };
+
   const getOptionFromItem = (
     item: CreateOrderItemInput,
     optionName: string
   ) => {
     return item.options?.find((option) => option.name === optionName);
   };
+  
   const isOptionSelected = (dishId: number, optionName: string) => {
     const item = getItem(dishId);
     if (item) {
@@ -369,6 +376,7 @@ export const DishOption: React.FC<IDishOptionProps> = ({
   );
 };
 ```
+- 옵션 추가 및 삭제하는 함수를 분리
 
 ```tsx
   const addOptionToItem = (dishId: number, optionName: string) => {
@@ -389,6 +397,7 @@ export const DishOption: React.FC<IDishOptionProps> = ({
       }
     }
   };
+
   const removeOptionFromItem = (dishId: number, optionName: string) => {
     if (!isSelected(dishId)) {
       return;
@@ -421,6 +430,7 @@ export const DishOption: React.FC<IDishOptionProps> = ({
 ```
 
 ***22.6 Making Order part Six***
+주문 취소, 주문 완료 후처리 완료 이후 해당 주문 페이지로 이동
 
 ```tsx
 const triggerCancelOrder = () => {
