@@ -1,6 +1,6 @@
 # AI와 함께 하는 길
 
-notion: https://www.notion.so/AI-9f68eb71838247ab9d050e611423bb56
+notion: https://military-airship-e5d.notion.site/AI-9f68eb71838247ab9d050e611423bb56
 
 > 이번 시간에는 chatGPT나 Ai기술에 대해 알아보고, 이 기술로 어떤 삶의 이득을 얻을 수 있을지 토론하는 시간을 가져보면 좋겠습니다.
 
