@@ -197,6 +197,7 @@ test("renders todos", async () => {
 * API의 url, 각 url에 대한 응답값들을 명시한다.
 * 각 API의 http Status에 따른 응답값을 미리 작성해 놓고, 필요한 상황을 쉽게 재현할 수 있다.
 
+```typescript
 import { rest } from 'msw';
 //JSON 목 데이터
 import createCoupon_404 from '../response/coupons/createCoupon_404.json';
@@ -214,13 +215,14 @@ const createCoupon = (status: 200 | 404) => {
       if (!status) {
         return res.networkError('Failed to connect');
       }
-   
+     
       return res(ctx.status(status), ctx.json(response));
     }
   );
 };
  
 export default [createCoupon(404),getCoupons(200), getCouponDetail(200)];
+```
 
 # 참고
 
