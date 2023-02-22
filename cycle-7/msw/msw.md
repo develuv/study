@@ -191,14 +191,12 @@ test("renders todos", async () => {
 
 ![image2023127_201622.png](.msw_images/image-2023-1-27_20-16-22.png)
 
-
 ## 요청 핸들러 생성
 
 * 어떤 요청을 모킹할지 결정하고 어떤 응답을 줄지 명시하는 handler들이 존재하는 디렉토리
 * API의 url, 각 url에 대한 응답값들을 명시한다.
 * 각 API의 http Status에 따른 응답값을 미리 작성해 놓고, 필요한 상황을 쉽게 재현할 수 있다.
 
-```typescript
 import { rest } from 'msw';
 //JSON 목 데이터
 import createCoupon_404 from '../response/coupons/createCoupon_404.json';
@@ -223,4 +221,15 @@ const createCoupon = (status: 200 | 404) => {
 };
  
 export default [createCoupon(404),getCoupons(200), getCouponDetail(200)];
-```
+
+# 참고
+
+[https://mswjs.io/docs/](https://mswjs.io/docs/)
+
+[MSW(Mock Service Worker)로 더욱 생산적인 FE 개발하기](https://velog.io/@khy226/msw%EB%A1%9C-%EB%AA%A8%EC%9D%98-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+
+[MSW를 활용하는 Front-End 통합테스트](https://fe-developers.kakaoent.com/2022/220825-msw-integration-testing/)
+
+[MSW 모킹 코드 재사용하기 feat. Storybook, Jest](https://fe-developers.kakaoent.com/2022/220317-integrate-msw-storybook-jest/)
+
+[Mocking 라이브러리를 도입해야하는 이유](https://seungahhong.github.io/blog/2022/07/2022-07-25-msw/)
