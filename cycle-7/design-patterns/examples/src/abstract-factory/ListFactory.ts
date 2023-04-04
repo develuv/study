@@ -5,15 +5,15 @@ import ListPage from './ListPage';
 
 export default class ListFactory extends Factory {
     createLink(caption: string, url: string) {
-        return new ListLink(caption, url);
+        // TODO Please implement it.
     }
 
     createTray(caption: string) {
-        return new ListTray(caption);
+        // TODO Please implement it.
     }
 
     createPage(title: string, author: string) {
-        return new ListPage(title, author)
+        // TODO Please implement it.
     }
 
 }

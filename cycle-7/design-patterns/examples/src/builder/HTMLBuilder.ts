@@ -1,28 +1,26 @@
 import Builder from './Builder';
 
 export default class HTMLBuilder implements Builder {
-    private writer: Array<string> = [];
 
     makeTitle(title: string) {
-        this.writer.push(`<html><head><title>${title}</title></head><body>`);
-        this.writer.push(`<h1>${title}</h1>`);
+        // TODO Please implement it.
     }
 
     makeString(str: string) {
-        this.writer.push(`<p>${str}</p>`);
+        // TODO Please implement it.
     }
 
     makeItems(items: Array<string>) {
-        this.writer.push(`<ul>`);
-        items.forEach(item => this.writer.push(`<li>${item}</li>`))
-        this.writer.push(`</ul>`);
+        // TODO Please implement it.
     }
 
     close() {
-        this.writer.push(`</body></html>`);
+        // TODO Please implement it.
     }
 
     public getResult(): string {
-        return this.writer.join('');
+        // TODO Please implement it.
+        return null;
     }
+
 }

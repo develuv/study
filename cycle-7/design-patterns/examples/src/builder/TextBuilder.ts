@@ -1,30 +1,25 @@
 import Builder from './Builder';
 
 export default class TextBuilder implements Builder {
-    private buffer: Array<string> = [];
-
     makeTitle(title: string) {
-        this.buffer.push('===========================\n');
-        this.buffer.push(`[ ${title} ]\n`);
-        this.buffer.push('\n');
+        // TODO Please implement it.
     }
 
     makeString(str: string) {
-        this.buffer.push(`ㅁ ${str} ㅁ`);
-        this.buffer.push('\n');
+        // TODO Please implement it.
     }
 
     makeItems(items: Array<string>) {
-        items.forEach(item => this.buffer.push(` - ${item} \n`));
-        this.buffer.push('\n');
+        // TODO Please implement it.
     }
 
     close() {
-        this.buffer.push('===========================\n');
+        // TODO Please implement it.
     }
 
     public getResult(): string {
-        return this.buffer.join('')
+        // TODO Please implement it.
+        return null;
     }
 
 }
