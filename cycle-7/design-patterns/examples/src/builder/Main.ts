@@ -5,7 +5,9 @@ import HTMLBuilder from './HTMLBuilder';
 import readline from 'readline';
 
 const reader = readline.createInterface({
+    // @ts-ignore
     input: process.stdin,
+    // @ts-ignore
     output: process.stdout
 });
 reader.question('What kind of ? (plain, html) : ', input => {
