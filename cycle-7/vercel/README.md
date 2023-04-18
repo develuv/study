@@ -1,4 +1,4 @@
-# Vercel 인프라로 프론트엔드 운영해보기
+# Vercel 인프라로 프론트엔드 운영해보기 (Feat. Serverless)
 
 
 ## 실습순서
