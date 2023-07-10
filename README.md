@@ -57,6 +57,90 @@ Study & Discuss Project ✏️
 - Yarn berry
 - Github actions
 
+
+## Cycle.8
+
+<details>
+ <summary>펼치기</summary>
+ <div> 
+   
+> 성광 - 동주 - 상훈 - 희준 - 진영 - 재섭
+- [미래 지향적인 프론트 아키텍쳐 구축 - 성광](https://github.com/develuv/study/tree/main/cycle-8/%EB%AF%B8%EB%9E%98-%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%B6%95)
+ </div>
+</details>
+
+
+## Cycle.4
+
+<details>
+  <summary>펼치기</summary>
+  <div>
+
+> 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
+
+#### Section 4. User CRUD By 진영
+1. NestJS에서 throw로 예외를 방출하지 않고 객체로 만들어서 반환하는데, Exception을 만들어서 처리할 수 있을까?
+  - Exception 상태 코드 정의와 구조를 잘 짜면 Error를 확장하여 throw 하는 방향으로 갈 수 있을 것 같다. 
+  - [Example feature/custom-exception](https://github.com/camp-son/nuber-eats-backend/tree/feature/custom-exception)
+
+2. Entity에 대한 로직을 서비스가 아닌 모델에서 처리하는 부분이 인상 깊었다.
+  - typeorm에서 쿼리를 처리(CUD)할 때 전/후처리를 할 수 있도록 데코레이터를 제공하고 있다. (Insert, Remove, Update)
+  - Repository를 통해 데이터를 조회를 했을 때 해당 Entity를 반환해줘서 Entity에 대한 비지니스 로직 메서드를 작성하고 사용할 수 있다.
+
+3. Resolver와 Service의 반환 타입을 맞출 수 있지 않을까?
+  - `output.dto.ts` 공통 반환 클래스를 생성하였고, 각 Input, Output에 대해 클래스를 생성하게 되는데 Resolver와 Service의 반환 타입을 맞출 수 있지 않을까 하는 생각이 들었다.
+  - Q. 타입을 맞추지 않는다면 어떤 경우가 있을까?
+    
+  </div>
+</details>
+
+
+## Cycle.3
+
+<details>
+ <summary>펼치기</summary>
+ <div>
+   
+> 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
+- [Cycle.3 2021.10.07(목) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
+- [Cycle.3 2021.10.14(목) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
+- [Cycle.3 2021.10.21(목) - yarn workspace - 성광](https://github.com/develuv/study/tree/main/cycle-3/yarn-workspace)
+- [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
+- [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
+- [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
+
+   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/bUU5eXo0NHYzaWIzWG5lcnA0Q2xaSGRYaFlRc0k3QzVhSlZXMEVURE5RRmZwVU1NYTRHNzB2TDhYM2RHeXVoWnwzMDc0NDU3MzU3ODIxMTMwMjky?invite_link_id=611719735886)
+   
+   #### [회고란?](https://medium.com/@nanse84/%ED%9A%8C%EA%B3%A0%EB%9E%80-25833157cad6)
+
+![세번째 스터디 사이클 회고](./images/cycle-3.png)
+   
+ </div>
+</details>
+
+
+## Cycle.2
+
+<details>
+ <summary>펼치기</summary>
+ <div>
+   
+> 성광 - 상훈 - 성광 - 동주 - 
+- Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
+- [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
+- Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
+- [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
+- [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
+- [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
+
+   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/T0V0UkVOMnpVY0VrNDBwamZxcjh3U1gyZVJHT09reGhZVTFvYk1xS2tzbDVGSGNCbTF1TWxqYWF2c01CZ1hwZXwzMDc0NDU3MzU3ODIzMjkyNTY2)
+
+![두번째 스터디 사이클 회고](./images/cycle-2.png)
+
+ </div>
+</details>
+
+
 ## Cycle.1
 
 <details>
@@ -91,81 +175,6 @@ Study & Discuss Project ✏️
    </div>
   </details>
 
-## Cycle.2
 
-<details>
- <summary>펼치기</summary>
- <div>
-   
-> 성광 - 상훈 - 성광 - 동주 - 
-- Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
-- [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
-- Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
-- [Cycle.2 2021.06.08(화) - Vite알아보고 스캐폴딩 구성하기 - 동주](cycle-2/vite)
-- [Cycle.2 2021.06.17(목) - 디자인패턴 Iterator, Adapter - 재섭](cycle-2/design-patterns)
-- [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
 
-   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/T0V0UkVOMnpVY0VrNDBwamZxcjh3U1gyZVJHT09reGhZVTFvYk1xS2tzbDVGSGNCbTF1TWxqYWF2c01CZ1hwZXwzMDc0NDU3MzU3ODIzMjkyNTY2)
 
-![두번째 스터디 사이클 회고](./images/cycle-2.png)
-
- </div>
-</details>
-
-## Cycle.3
-
-<details>
- <summary>펼치기</summary>
- <div>
-   
-> 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
-- [Cycle.3 2021.10.07(목) - 캘린더 만들고 Date Picker 기능 구현 실습 - 동주](https://github.com/dunz/date-picker)
-- [Cycle.3 2021.10.14(목) - Github & AWS Codepipeline을 이용한 CICD 구성 리뷰 - 진영](https://github.com/camp-son/aws-sample-repo)
-- [Cycle.3 2021.10.21(목) - yarn workspace - 성광](https://github.com/develuv/study/tree/main/cycle-3/yarn-workspace)
-- [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
-- [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
-- [Cycle.3 2021.11.18(목) - Software design pattern - 재섭](https://github.com/develuv/study/blob/main/cycle-3/design-patterns/README.md)
-
-   ### 회고 [Mirro보드 바로가기](   https://miro.com/welcomeonboard/bUU5eXo0NHYzaWIzWG5lcnA0Q2xaSGRYaFlRc0k3QzVhSlZXMEVURE5RRmZwVU1NYTRHNzB2TDhYM2RHeXVoWnwzMDc0NDU3MzU3ODIxMTMwMjky?invite_link_id=611719735886)
-   
-   #### [회고란?](https://medium.com/@nanse84/%ED%9A%8C%EA%B3%A0%EB%9E%80-25833157cad6)
-
-![세번째 스터디 사이클 회고](./images/cycle-3.png)
-   
- </div>
-</details>
-
-## Cycle.4
-
-<details>
-  <summary>펼치기</summary>
-  <div>
-
-> 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
-
-#### Section 4. User CRUD By 진영
-1. NestJS에서 throw로 예외를 방출하지 않고 객체로 만들어서 반환하는데, Exception을 만들어서 처리할 수 있을까?
-  - Exception 상태 코드 정의와 구조를 잘 짜면 Error를 확장하여 throw 하는 방향으로 갈 수 있을 것 같다. 
-  - [Example feature/custom-exception](https://github.com/camp-son/nuber-eats-backend/tree/feature/custom-exception)
-
-2. Entity에 대한 로직을 서비스가 아닌 모델에서 처리하는 부분이 인상 깊었다.
-  - typeorm에서 쿼리를 처리(CUD)할 때 전/후처리를 할 수 있도록 데코레이터를 제공하고 있다. (Insert, Remove, Update)
-  - Repository를 통해 데이터를 조회를 했을 때 해당 Entity를 반환해줘서 Entity에 대한 비지니스 로직 메서드를 작성하고 사용할 수 있다.
-
-3. Resolver와 Service의 반환 타입을 맞출 수 있지 않을까?
-  - `output.dto.ts` 공통 반환 클래스를 생성하였고, 각 Input, Output에 대해 클래스를 생성하게 되는데 Resolver와 Service의 반환 타입을 맞출 수 있지 않을까 하는 생각이 들었다.
-  - Q. 타입을 맞추지 않는다면 어떤 경우가 있을까?
-    
-  </div>
-</details>
-
-## Cycle.8
-
-<details>
- <summary>펼치기</summary>
- <div> 
-   
-> 성광 - 동주 - 상훈 - 희준 - 진영 - 재섭
-- [미래 지향적인 프론트 아키텍쳐 구축 - 성광](https://github.com/develuv/study/tree/main/cycle-8/%EB%AF%B8%EB%9E%98-%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%B6%95)
- </div>
-</details>
