@@ -157,3 +157,15 @@ Study & Discuss Project ✏️
     
   </div>
 </details>
+
+## Cycle.8
+
+<details>
+ <div>
+ <summary>펼치기</summary>
+   
+> 성광 - 동주 - 상훈 - 희준 - 진영 - 재섭
+- [미래 지향적인 프론트 아키텍쳐 구축]([https://github.com/dunz/date-picker](https://github.com/develuv/study/tree/main/cycle-8/%EB%AF%B8%EB%9E%98-%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%B6%95))
+
+ </div>
+</details>
