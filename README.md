@@ -35,6 +35,7 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
   - [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
   - [Cycle.3 2021.11.11(목) - react-cra - 희준](https://github.com/develuv/study/tree/main/cycle-3/react-cra)
+  - [Cycle.8 미래 지향적인 프론트 아키텍쳐 구축 - 성광](https://github.com/develuv/study/tree/main/cycle-8/%EB%AF%B8%EB%9E%98-%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%B6%95)
 - React Query
   - [Cycle.2 2021.06.23(화) - React Query - 희준](cycle-2/react-async)
 - WebRTC
