@@ -134,7 +134,7 @@ Study & Discuss Project ✏️
 
 
 <details>
- <summary><h2>Cycle.1</h2></summary>
+ <summary><h2>Cycle.1</h2> <h6>2021.03.17 ~ 2021.04.22</h6></summary>
  <div>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
