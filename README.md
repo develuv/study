@@ -92,7 +92,7 @@ Study & Discuss Project ✏️
 
 
 <details>
- <summary><h2>Cycle.3</h2></summary>
+ <summary><h2>Cycle.3</h2> <h6>2021.10.07 ~ 2021.11.18</h6></summary>
  <div>
    
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
@@ -117,7 +117,7 @@ Study & Discuss Project ✏️
  <summary><h2>Cycle.2</h2> <h6>2021.05.14 ~ 2021.06.23</h6></summary>
  <div>
    
-> 성광 - 상훈 - 성광 - 동주 - 
+> 성광 - 상훈 - 성광 - 동주 - 희준
 - Cycle.2 2021.05.14(금) - 뒤로가기 상태 유지에 대한 고찰 - 성광
 - [Cycle.2 2021.05.25(화) - 성광님도 한번 보면 무릎을 탁칠 WebRTC 문서를 작성해 보자 - 상훈](cycle-2/webrtc/webrtc.md)
 - Cycle.2 2021.06.03(목) - 뒤로가기 상태 유지에 대한 고찰2 - 성광
