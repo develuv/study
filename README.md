@@ -114,7 +114,7 @@ Study & Discuss Project ✏️
 
 
 <details>
- <summary><h2>Cycle.2</h2></summary>
+ <summary><h2>Cycle.2</h2> <h6>2021.05.14 ~ 2021.06.23</h6></summary>
  <div>
    
 > 성광 - 상훈 - 성광 - 동주 - 
