@@ -58,10 +58,8 @@ Study & Discuss Project ✏️
 - Github actions
 
 
-## Cycle.8
-
 <details>
- <summary>펼치기</summary>
+ <summary><h2>Cycle.8</h2> <h6>2023.07.05 ~</h6></summary>
  <div> 
    
 > 성광 - 동주 - 상훈 - 희준 - 진영 - 재섭
@@ -70,10 +68,8 @@ Study & Discuss Project ✏️
 </details>
 
 
-## Cycle.4
-
 <details>
-  <summary>펼치기</summary>
+  <summary><h2>Cycle.4</h2></summary>
   <div>
 
 > 진영 - 성광 - 동주 - 재섭 - 상훈 - 재섭
@@ -95,10 +91,8 @@ Study & Discuss Project ✏️
 </details>
 
 
-## Cycle.3
-
 <details>
- <summary>펼치기</summary>
+ <summary><h2>Cycle.3</h2></summary>
  <div>
    
 > 동주 - 진영 - 성광 - 상훈 - 희준 - 재섭
@@ -119,10 +113,8 @@ Study & Discuss Project ✏️
 </details>
 
 
-## Cycle.2
-
 <details>
- <summary>펼치기</summary>
+ <summary><h2>Cycle.2</h2></summary>
  <div>
    
 > 성광 - 상훈 - 성광 - 동주 - 
@@ -141,10 +133,8 @@ Study & Discuss Project ✏️
 </details>
 
 
-## Cycle.1
-
 <details>
-<summary>펼치기</summary>
+ <summary><h2>Cycle.1</h2></summary>
  <div>
    
 > 동주 - 상훈 - 희준 - 재섭 - 성광
