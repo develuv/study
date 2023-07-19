@@ -32,7 +32,7 @@ Study & Discuss Project ✏️
 - D3
   - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
 - Dart
-  - [Dart 빠르게 알아보기](https://www.notion.so/Dart-ef83b4a99f9c4865a38329891995b573)
+  - [Cycle.8 Dart 빠르게 알아보기](https://www.notion.so/Dart-ef83b4a99f9c4865a38329891995b573)
 - React
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
   - [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
