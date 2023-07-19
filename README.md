@@ -31,6 +31,8 @@ Study & Discuss Project ✏️
   - [Cycle.1 2021.03.17(수) - Typescript 얕은 정리 - 동주](cycle-1/study-1-typescript.md)
 - D3
   - [Cycle.1 2021.03.30(화) - D3 얕은 정리리 - 상훈](cycle-1/study-2-d3.md)
+- Dart
+  - [Dart 빠르게 알아보기](https://www.notion.so/Dart-ef83b4a99f9c4865a38329891995b573)
 - React
   - [Cycle.1 2021.04.22(목) - React Tutorial - 성광](cycle-1/react-tutorial/README.md)
   - [Cycle.3 2021.10.29(목) - react-hook-form - 상훈](https://github.com/develuv/study/tree/main/cycle-3/react-hook-form)
@@ -64,6 +66,7 @@ Study & Discuss Project ✏️
    
 > 성광 - 동주 - 상훈 - 희준 - 진영 - 재섭
 - [미래 지향적인 프론트 아키텍쳐 구축 - 성광](https://github.com/develuv/study/tree/main/cycle-8/%EB%AF%B8%EB%9E%98-%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%B6%95)
+- [Dart 빠르게 알아보기](https://www.notion.so/Dart-ef83b4a99f9c4865a38329891995b573)
  </div>
 </details>
 
