@@ -1,0 +1,12 @@
+{
+  "name": "caculator",
+  "module": "src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "canary"
+  },
+  "scripts": {
+    "clean": "rm -rf dist && echo 'Done.'",
+    "start": "bun src/index.ts"
+  }
+}
