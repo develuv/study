@@ -192,11 +192,37 @@ test("snapshot", async () => {
 ```
 
 <BR />
+
 스냅샷 업데이트
 
 ```sh
 bun test --update-snapshots
 ```
+
+<BR />
+
+### UI & DOM testing
+
+Bun은 React Testing Library와 happy-dom을 포함한 기존 컴포넌트 및 DOM 테스트 라이브러리와 잘 작동합니다.
+
+#### happy-dom
+
+```sh
+bun add -d @happy-dom/global-registrator
+
+```
+
+테스트를 실행하기 전에 Bun의 preload 기능을 사용하여 happy-dom 글로벌을 등록 해야 함. 이 단계를 통해 문서와 같은 브라우저 API를 글로벌 범위에서 사용할 수 있게 됨. 프로젝트의 루트에 `happydom.ts` 파일을 만들고 아래 코드를 추가.
+
+`happydom.ts`
+
+```typescript
+import { GlobalRegistrator } from "@happy-dom/global-registrator";
+
+GlobalRegistrator.register();
+```
+
+<BR />
 
 ### 각 제품별 CLI
 

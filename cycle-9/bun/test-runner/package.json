@@ -3,6 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
+    "@happy-dom/global-registrator": "^12.10.3",
     "bun-types": "latest"
   },
   "peerDependencies": {
