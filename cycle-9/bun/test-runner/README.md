@@ -29,6 +29,7 @@ bun test
 - `*_spec.{js|jsx|ts|tsx}`
 
 <br />
+
 ### 특정 테스트 매칭 실행
 
 - "kim" 이름이 들어간 테스트를 실행하고 싶을때.
@@ -36,6 +37,8 @@ bun test
 ```sh
 bun test --test-name-pattern addition
 ```
+
+<br />
 
 ## CLI 비교
 
@@ -50,6 +53,8 @@ bun test --test-name-pattern addition
 bun test --timeout 20
 ```
 
+<br />
+
 ### rerun tests
 
 각 테스트를 여러 번 실행시 `--rerun-each`를 사용.
@@ -62,6 +67,8 @@ bun test --timeout 20
 ```sh
 bun test --rerun-each 100
 ```
+
+<br />
 
 ### Bail out with `--bail`
 
@@ -76,13 +83,73 @@ bun test --bail 10
 bun test . --bail 10
 ```
 
+<br />
+
 ### Watch mode
 
 ```sh
 bun test --watch
 ```
 
+<br />
+
 ### 라이플 사이클 hooks
+
+| Hook         | Description                        |
+| ------------ | ---------------------------------- |
+| `beforeAll`  | 모든 테스트 전에 한 번 실행됩니다. |
+| `beforeEach` | 각 테스트 전에 실행됩니다.         |
+| `afterEach`  | 각 테스트 후에 실행됩니다.         |
+| `afterAll`   | 모든 테스트 후 한 번 실행됩니다.   |
+
+<br />
+
+#### preload
+
+`setup.ts` 파일을 아래와 같이 만듬.
+
+`setup.ts`
+
+```typescript
+import { beforeEach, afterEach } from "bun:test";
+
+beforeEach(() => {
+  console.log("우왕 굳");
+});
+
+afterEach(() => {
+  console.log("우왕 짱");
+});
+```
+
+<br />
+
+아래와 같이 테스트를 실행하면
+
+```sh
+$ bun test --preload ./setup.ts
+
+// result
+index_test.ts:
+우왕 굳
+✓ kim jae sub [0.04ms]
+우왕 짱
+우왕 굳
+✓ yang sang hoon [0.01ms]
+우왕 짱
+우왕 굳
+✓ kim hee jun [0.01ms]
+우왕 짱
+우왕 굳
+✓ lee dong ju [0.01ms]
+우왕 짱
+우왕 굳
+✓ son jin young [0.01ms]
+우왕 짱
+
+```
+
+<br />
 
 ### 각 제품별 CLI
 
