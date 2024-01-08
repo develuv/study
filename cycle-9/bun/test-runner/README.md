@@ -153,6 +153,30 @@ index_test.ts:
 
 ### MOCKS
 
+> <del> 모듈 모킹(`jest.mock()`)은 아직 지원되지 않습니다. 여기에서 지원을 추적하세요.</del>
+>
+> 지원함!! PR Close됨!
+
+```typescript
+import { test, expect, jest, mock } from "bun:test";
+const random1 = mock(() => Math.random());
+const random2 = jest.fn(() => Math.random());
+
+test("bun mock", async () => {
+  const val = random1();
+  expect(val).toBeGreaterThan(0);
+  expect(random1).toHaveBeenCalled();
+  expect(random1).toHaveBeenCalledTimes(1);
+});
+
+test("jest.mock", async () => {
+  const val = random2();
+  expect(val).toBeGreaterThan(0);
+  expect(random2).toHaveBeenCalled();
+  expect(random2).toHaveBeenCalledTimes(1);
+});
+```
+
 <br />
 
 ### 각 제품별 CLI
