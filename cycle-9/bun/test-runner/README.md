@@ -339,6 +339,68 @@ test("Welcome to New York!", () => {
 });
 ```
 
+<br />
+
+### Code coverage
+
+Bun은 기본 제공으로 코드 커버리지 보고 기능을 지원.
+
+이를 통해 코드베이스의 얼마나 많은 부분이 테스트에 포함되는지 쉽게 확인하고 현재 테스트가 제대로 이루어지지 않은 영역을 찾을 수 있습니다.
+
+```sh
+bun test --coverage
+```
+
+기본적으로 항상 커버리지 보고를 사용하도록 설정하려면 `bunfig.toml` 에 다음 줄을 추가.
+
+```sh
+[test]
+
+# always enable coverage
+coverage = true
+```
+
+기본적으로 커버리지 보고서에는 test file이 포함되고 sourcemap은 제외됩니다.
+일반적으로 이렇게 설정하는 것이 좋지만 `bunfig.toml` 에서 다르게 구성할 수 있습니다.
+(이렇게 쓸일이 있으까?)
+
+```sh
+[test]
+coverageSkipTestFiles = true       # default false
+
+```
+
+<br />
+
+#### Coverage thresholds
+
+`bunfig.toml`에서 커버리지 임계값을 지정할 수 있음.
+test suite가 이 임계값을 충족하지 못하거나 초과하는 경우 `bun test`는 종료 코드와 함께 종료됩니다.
+
+```sh
+[test]
+
+# 90% 수준 및 기능 수준 커버리지가 필요합니다.
+coverageThreshold = 0.9
+
+# 라인과 함수에 대해 서로 다른 임계값을 설정
+# 아래 설정 넣으면 오류남..;;
+coverageThreshold = { line = 0.9, function = 0.9 }
+```
+
+#### Sourcemaps
+
+bun은 기본적으로 모든 파일을 트랜스파일 하여, 원본 소스 코드의 줄을 bun의 내부에 매핑하는 sourcemap을 자동으로 생성함.
+이 기능은 비활성화 하려면 test.coverageIgnoreSourcemaps를 false로 설정.
+(test쪽이 느리다고 생각되면 이거 키면 좋을듯..)
+
+```sh
+[test]
+coverageIgnoreSourcemaps = true   # default false
+```
+
+<br />
+
 ### 각 제품별 CLI
 
 - bun: https://bun.sh/docs/cli/test#timeouts

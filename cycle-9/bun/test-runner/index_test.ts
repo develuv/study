@@ -1,7 +1,7 @@
 import { expect, test } from "bun:test";
 
 test("kim jae sub", () => {
-  expect(2 + 2).toBe(4);
+  expect(2 + 2).toBe(2);
 });
 
 
