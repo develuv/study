@@ -179,6 +179,25 @@ test("jest.mock", async () => {
 
 <br />
 
+### Snapshot testing
+
+스냅샷 테스트는 `.toMatchSnapshot()` matcher를 사용하여 작성합니다:
+
+```typescript
+import { test, expect } from "bun:test";
+
+test("snapshot", async () => {
+  expect({ a: 1 }).toMatchSnapshot();
+});
+```
+
+<BR />
+스냅샷 업데이트
+
+```sh
+bun test --update-snapshots
+```
+
 ### 각 제품별 CLI
 
 - bun: https://bun.sh/docs/cli/test#timeouts
