@@ -40,7 +40,7 @@ bun test --test-name-pattern addition
 
 <br />
 
-## CLI 비교
+## CLI 실습
 
 ### timeout
 
@@ -148,6 +148,10 @@ index_test.ts:
 우왕 짱
 
 ```
+
+<br />
+
+### MOCKS
 
 <br />
 
