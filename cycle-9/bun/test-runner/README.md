@@ -224,6 +224,121 @@ GlobalRegistrator.register();
 
 <BR />
 
+### Dates and times
+
+`bun:test`를 사용하면 테스트에서 시간을 변경할 수 있음.
+
+이 함수는 다음 중 하나에서 작동
+
+- `Date.now`
+- `new Date()`
+- `new Intl.DateTimeFormat().format()`
+
+타이머는 아직 영향을 받지 않지만, 향후 Bun 릴리스에 적용될 수 있습니다. (무슨말이지..?!)
+
+<br />
+
+#### setSystemTime
+
+시스템 시간을 변경하려면 setSystemTime을 사용
+
+```typescript
+import { setSystemTime, beforeAll, test, expect } from "bun:test";
+
+beforeAll(() => {
+  setSystemTime(new Date("2020-01-01T00:00:00.000Z"));
+});
+
+test("it is 2020", () => {
+  expect(new Date().getFullYear()).toBe(2020);
+});
+```
+
+Jest와 "bun:test"이라는 테스트 프레임워크의 차이를 보여주는 예제입니다. 두 테스트 프레임워크에서 시간과 관련된 함수를 어떻게 다뤄지는지를 비교하고 있습니다
+
+```typescript
+// 코드가 직관적인거 빼고 잘 모르겠다..ㅠ
+
+test("just like in jest", () => {
+  jest.useFakeTimers();
+  jest.setSystemTime(new Date("2020-01-01T00:00:00.000Z"));
+  expect(new Date().getFullYear()).toBe(2020);
+  jest.useRealTimers();
+  expect(new Date().getFullYear()).toBeGreaterThan(2020);
+});
+
+test("unlike in jest", () => {
+  const OriginalDate = Date;
+  jest.useFakeTimers();
+  if (typeof Bun === "undefined") {
+    // Jest에서는 가짜 타이머를 사용하면 Date 생성자가 변경되므로, 이를 확인
+    expect(Date).not.toBe(OriginalDate);
+    // 마찬가지로 Date.now도 변경되었음을 확인
+    expect(Date.now).not.toBe(OriginalDate.now);
+  } else {
+    // bun:test는 Date 생성자가 변경되지 않음을 테스트
+    expect(Date).toBe(OriginalDate);
+    expect(Date.now).toBe(OriginalDate.now);
+  }
+});
+```
+
+> Timers - 모킹 타이머에 대한 기본 지원은 아직 구현되지 않았지만, 로드맵에 포함되어 있습니다.
+
+<br />
+
+#### Reset the system time
+
+시스템 시간을 재설정하려면 setSystemTime에 인수를 전달하지 않으면됨.
+
+```typescript
+import { setSystemTime, beforeAll } from "bun:test";
+
+test("it was 2020, for a moment.", () => {
+  // 날짜를 변경했따!!!
+  setSystemTime(new Date("2020-01-01T00:00:00.000Z"));
+  expect(new Date().getFullYear()).toBe(2020);
+
+  // 여기가 리셋!!
+  setSystemTime();
+
+  expect(new Date().getFullYear()).toBeGreaterThan(2020);
+});
+```
+
+<br />
+
+#### Set the time zone
+
+시간대를 변경하려면 번 테스트에 `$TZ` 환경 변수를 전달.
+
+```sh
+TZ=America/Los_Angeles bun test
+```
+
+또는 런타임에 process.env.TZ를 설정.
+
+```typescript
+import { test, expect } from "bun:test";
+
+test("Welcome to California!", () => {
+  process.env.TZ = "America/Los_Angeles";
+  expect(new Date().getTimezoneOffset()).toBe(420);
+  expect(new Intl.DateTimeFormat().resolvedOptions().timeZone).toBe(
+    "America/Los_Angeles"
+  );
+});
+
+test("Welcome to New York!", () => {
+  // Unlike in Jest, you can set the timezone multiple times at runtime and it will work.
+  process.env.TZ = "America/New_York";
+  expect(new Date().getTimezoneOffset()).toBe(240);
+  expect(new Intl.DateTimeFormat().resolvedOptions().timeZone).toBe(
+    "America/New_York"
+  );
+});
+```
+
 ### 각 제품별 CLI
 
 - bun: https://bun.sh/docs/cli/test#timeouts
@@ -234,6 +349,7 @@ bun은 jest와 node.js 짬뽕되어 있는 느낌...ㅎㅎ;;
 
 ### bunfig.toml에서 test
 
+- jest 같이 복잡한 설정이 없어서 좋았음.
 - https://bun.sh/docs/runtime/bunfig#test-root
 
 ## jest에서 bun으로 마이그레이션 하기
