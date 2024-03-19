@@ -1,6 +1,8 @@
 # 리더의 질문법(Humble Inquiry)
 
-![humbleInquiry](./images/huble-inquiry.png)
+<p align="center">
+ <img src="./images/huble-inquiry.png" width="200px" height="300px" />
+</p>
 
 ## 어떤 스터디 인가요?
 
