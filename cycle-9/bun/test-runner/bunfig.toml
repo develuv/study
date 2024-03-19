@@ -1,8 +1,6 @@
 [test]
 preload = "./happydom.ts"
 
-coverageThreshold = 0.9
+# coverageThreshold = 0.9
 
-
-# 이거 왜 오륲남..;;
-# coverageThreshold = { line = 0.9, function = 0.9 }
+coverageThreshold = { line = 0.9, function = 0.9 }

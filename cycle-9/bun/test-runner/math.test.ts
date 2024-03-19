@@ -20,11 +20,11 @@ describe('Math operations', () => {
     // Add more test cases as needed
   });
 
-//   test('divide', () => {
-//     expect(divide(4, 2)).toBe(2);
-//     expect(divide(10, 5)).toBe(2);
-//     // Add more test cases as needed
-//   });
+  test('divide', () => {
+    expect(divide(4, 2)).toBe(2);
+    expect(divide(10, 5)).toBe(2);
+    // Add more test cases as needed
+  });
 
   // Additional test cases can be added for edge cases or specific scenarios
 });

@@ -1,5 +1,6 @@
-import { test, expect } from "bun:test";
+import { test, expect, jest } from "bun:test";
 
 test("snapshot", async () => {
-  expect({ a: 2 }).toMatchSnapshot();
+  console.log(jest)
+  expect({ a: 3 }).toMatchSnapshot();
 });
