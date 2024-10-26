@@ -141,7 +141,10 @@
 
 ## 3.4 실제문서작성
 
-<img src="./images/3.4.1-0.png" width="600" />
+<figure>
+  <img src="./images/3.4.1-0.png" width="600" />
+  <caption>비전/전략 작성 프로세스</caption>
+</figure>
 
 ### 3.4.1 작성 프로세스
 
