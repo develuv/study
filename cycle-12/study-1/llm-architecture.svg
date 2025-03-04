@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- 배경 -->
+  <rect width="800" height="400" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- 제목 -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">LLM 아키텍처와 작동 원리</text>
+  
+  <!-- 입력 섹션 -->
+  <rect x="50" y="80" width="150" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10" ry="10"/>
+  <text x="125" y="105" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">입력 텍스트</text>
+  <text x="125" y="130" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">프롬프트</text>
+  <text x="125" y="150" font-family="Arial" font-size="12" text-anchor="middle">"날씨에 대해 알려줘"</text>
+  
+  <!-- 토큰화 -->
+  <rect x="250" y="80" width="150" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="10" ry="10"/>
+  <text x="325" y="105" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">토큰화</text>
+  <text x="325" y="130" font-family="Arial" font-size="12" text-anchor="middle">["날씨", "에", " 대해", " 알려줘"]</text>
+  <text x="325" y="150" font-family="Arial" font-size="12" text-anchor="middle">토큰 ID로 변환</text>
+  
+  <!-- LLM 모델 -->
+  <rect x="300" y="200" width="200" height="150" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="225" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">LLM 모델</text>
+  <text x="400" y="250" font-family="Arial" font-size="14" text-anchor="middle">수십억 개의 파라미터</text>
+  
+  <!-- 내부 레이어 -->
+  <rect x="325" y="265" width="150" height="25" fill="#ffecb3" stroke="#ffa000" stroke-width="1" rx="5" ry="5"/>
+  <text x="400" y="282" font-family="Arial" font-size="12" text-anchor="middle">어텐션 메커니즘</text>
+  
+  <rect x="325" y="295" width="150" height="25" fill="#ffecb3" stroke="#ffa000" stroke-width="1" rx="5" ry="5"/>
+  <text x="400" y="312" font-family="Arial" font-size="12" text-anchor="middle">피드포워드 네트워크</text>
+  
+  <!-- 출력 섹션 -->
+  <rect x="600" y="80" width="150" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="10" ry="10"/>
+  <text x="675" y="105" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">출력 텍스트</text>
+  <text x="675" y="130" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">응답</text>
+  <text x="675" y="150" font-family="Arial" font-size="12" text-anchor="middle">"오늘 날씨는 맑습니다..."</text>
+  
+  <!-- 화살표 -->
+  <path d="M200 120 L250 120" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M325 160 L325 200" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M475 120 L475 200" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M500 240 L600 120" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 마커 정의 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- 배경 -->
+  <rect width="800" height="450" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- 제목 -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">RAG(Retrieval-Augmented Generation) 아키텍처</text>
+  
+  <!-- 사용자 쿼리 -->
+  <rect x="50" y="80" width="200" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10" ry="10"/>
+  <text x="150" y="110" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">사용자 쿼리</text>
+  <text x="150" y="140" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">"2023년 노벨 물리학상은 누가 받았나요?"</text>
+  
+  <!-- 임베딩 모델 -->
+  <rect x="50" y="200" width="200" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="10" ry="10"/>
+  <text x="150" y="235" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">임베딩 모델</text>
+  
+  <!-- 벡터 데이터베이스 -->
+  <rect x="300" y="180" width="200" height="100" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="210" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">벡터 데이터베이스</text>
+  <text x="400" y="235" font-family="Arial" font-size="14" text-anchor="middle">문서들의 임베딩 저장</text>
+  <text x="400" y="260" font-family="Arial" font-size="14" text-anchor="middle">유사도 기반 검색</text>
+  
+  <!-- 검색된 문서 -->
+  <rect x="300" y="80" width="200" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="110" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">검색된 관련 문서</text>
+  <text x="400" y="135" font-family="Arial" font-size="12" text-anchor="middle">2023년 노벨 물리학상</text>
+  <text x="400" y="155" font-family="Arial" font-size="12" text-anchor="middle">수상자 정보와 업적</text>
+  
+  <!-- 모델 -->
+  <rect x="550" y="130" width="200" height="100" fill="#e1f5fe" stroke="#03a9f4" stroke-width="2" rx="10" ry="10"/>
+  <text x="650" y="160" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">LLM</text>
+  <text x="650" y="185" font-family="Arial" font-size="14" text-anchor="middle">쿼리 + 검색 결과를</text>
+  <text x="650" y="210" font-family="Arial" font-size="14" text-anchor="middle">통합하여 응답 생성</text>
+  
+  <!-- 응답 -->
+  <rect x="550" y="260" width="200" height="100" fill="#f1f8e9" stroke="#8bc34a" stroke-width="2" rx="10" ry="10"/>
+  <text x="650" y="290" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">최종 응답</text>
+  <text x="650" y="315" font-family="Arial" font-size="12" text-anchor="middle">2023년 노벨 물리학상은</text>
+  <text x="650" y="335" font-family="Arial" font-size="12" text-anchor="middle">앤 렐로그, 피에르 아고스티니,</text>
+  <text x="650" y="355" font-family="Arial" font-size="12" text-anchor="middle">페렌크 크라우스가 수상했습니다.</text>
+  
+  <!-- 문서 인덱싱 프로세스 -->
+  <rect x="50" y="320" width="450" height="80" fill="#efebe9" stroke="#795548" stroke-width="2" rx="10" ry="10"/>
+  <text x="275" y="345" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">문서 인덱싱 프로세스 (사전 준비)</text>
+  <text x="275" y="370" font-family="Arial" font-size="14" text-anchor="middle">1. 문서 수집 및 청크 분할</text>
+  <text x="275" y="390" font-family="Arial" font-size="14" text-anchor="middle">2. 임베딩 생성 및 벡터 DB에 저장</text>
+  
+  <!-- 화살표 -->
+  <!-- 쿼리 -> 임베딩 -->
+  <path d="M150 160 L150 200" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 임베딩 -> 벡터 DB -->
+  <path d="M250 230 L300 230" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 벡터 DB -> 검색 결과 -->
+  <path d="M400 180 L400 160" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 쿼리 -> LLM -->
+  <path d="M250 120 L550 160" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 검색 결과 -> LLM -->
+  <path d="M500 120 L550 170" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- LLM -> 응답 -->
+  <path d="M650 230 L650 260" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 마커 정의 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>

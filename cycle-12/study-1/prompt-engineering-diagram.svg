@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- 배경 -->
+  <rect width="800" height="400" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- 제목 -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">프롬프트 엔지니어링 기법 비교</text>
+  
+  <!-- Zero-shot -->
+  <rect x="50" y="80" width="200" height="120" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10" ry="10"/>
+  <text x="150" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Zero-shot</text>
+  <text x="150" y="135" font-family="Arial" font-size="14" text-anchor="middle">질문: 이 리뷰가 긍정적인가요?</text>
+  <text x="150" y="155" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">"이 제품은 훌륭해요!"</text>
+  <text x="150" y="180" font-family="Arial" font-size="14" text-anchor="middle">응답: 네, 긍정적입니다.</text>
+  
+  <!-- One-shot -->
+  <rect x="300" y="80" width="200" height="170" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">One-shot</text>
+  <text x="400" y="135" font-family="Arial" font-size="14" text-anchor="middle">예시: "좋아요!" → 긍정적</text>
+  <line x1="330" y1="145" x2="470" y2="145" stroke="#4caf50" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="170" font-family="Arial" font-size="14" text-anchor="middle">질문: 이 리뷰가 긍정적인가요?</text>
+  <text x="400" y="190" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">"이 제품은 훌륭해요!"</text>
+  <text x="400" y="215" font-family="Arial" font-size="14" text-anchor="middle">응답: 네, 긍정적입니다.</text>
+  
+  <!-- Few-shot -->
+  <rect x="550" y="80" width="200" height="240" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="10" ry="10"/>
+  <text x="650" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Few-shot</text>
+  <text x="650" y="135" font-family="Arial" font-size="14" text-anchor="middle">예시1: "좋아요!" → 긍정적</text>
+  <text x="650" y="155" font-family="Arial" font-size="14" text-anchor="middle">예시2: "실망이에요" → 부정적</text>
+  <text x="650" y="175" font-family="Arial" font-size="14" text-anchor="middle">예시3: "보통이에요" → 중립적</text>
+  <line x1="580" y1="185" x2="720" y2="185" stroke="#ff9800" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="650" y="215" font-family="Arial" font-size="14" text-anchor="middle">질문: 이 리뷰가 긍정적인가요?</text>
+  <text x="650" y="235" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic">"이 제품은 훌륭해요!"</text>
+  <text x="650" y="260" font-family="Arial" font-size="14" text-anchor="middle">응답: 네, 긍정적입니다.</text>
+  
+  <!-- Chain-of-Thought -->
+  <rect x="175" y="260" width="450" height="120" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="285" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Chain-of-Thought</text>
+  <text x="400" y="315" font-family="Arial" font-size="14" text-anchor="middle" width="430" text-overflow="ellipsis">질문: 철수가 사과 5개를 갖고 있었고, 영희가 3개를 더 주었다면?</text>
+  <text x="400" y="345" font-family="Arial" font-size="14" text-anchor="middle">응답: 철수는 원래 5개가 있었고, 3개를 더 받았으니 5+3=8개입니다.</text>
+  
+  <!-- 화살표 -->
+  <path d="M150 230 L150 250 L175 250" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M400 230 L400 240 L400 250" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M650 230 L650 250 L625 250" fill="none" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 마커 정의 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+</svg>
