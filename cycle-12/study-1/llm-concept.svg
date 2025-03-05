@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 배경 -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- 제목 -->
+  <text x="400" y="50" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">LLM(Large Language Model) 개념도</text>
+  
+  <!-- 중앙 LLM 영역 -->
+  <ellipse cx="400" cy="300" rx="220" ry="140" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" />
+  <text x="400" y="300" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#1976d2">LLM</text>
+  
+  <!-- LLM 내부 구성 요소 -->
+  <rect x="320" y="260" width="160" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="280" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">트랜스포머 아키텍처</text>
+  
+  <rect x="320" y="300" width="160" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="320" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">수천억 개 파라미터</text>
+  
+  <rect x="320" y="340" width="160" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="360" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">방대한 말뭉치 학습</text>
+  
+  <!-- 입력 영역 (좌측) -->
+  <rect x="50" y="250" width="150" height="100" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="125" y="275" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#e65100">입력</text>
+  
+  <!-- 입력 세부 -->
+  <rect x="70" y="290" width="110" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="125" y="307" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">프롬프트</text>
+  
+  <rect x="70" y="320" width="110" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="125" y="337" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">컨텍스트 윈도우</text>
+  
+  <!-- 출력 영역 (우측) -->
+  <rect x="600" y="250" width="150" height="100" rx="10" ry="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="675" y="275" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#2e7d32">출력</text>
+  
+  <!-- 출력 세부 -->
+  <rect x="620" y="290" width="110" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1" />
+  <text x="675" y="307" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">텍스트 생성</text>
+  
+  <rect x="620" y="320" width="110" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1" />
+  <text x="675" y="337" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">토큰 확률 분포</text>
+  
+  <!-- 훈련 데이터 (상단) -->
+  <rect x="300" y="80" width="200" height="100" rx="10" ry="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" />
+  <text x="400" y="105" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#6a1b9a">훈련 데이터</text>
+  
+  <!-- 훈련 데이터 세부 -->
+  <rect x="320" y="120" width="160" height="20" rx="5" ry="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1" />
+  <text x="400" y="135" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">웹 텍스트, 책, 코드</text>
+  
+  <rect x="320" y="145" width="160" height="20" rx="5" ry="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1" />
+  <text x="400" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">수조 개 토큰</text>
+  
+  <!-- 하단 기능 영역 -->
+  <rect x="180" y="430" width="440" height="150" rx="10" ry="10" fill="#e0f7fa" stroke="#00acc1" stroke-width="2" />
+  <text x="400" y="455" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#006064">LLM 기능 및 응용</text>
+  
+  <!-- 기능 목록 -->
+  <rect x="200" y="470" width="180" height="100" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="290" y="490" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">기본 능력</text>
+  <text x="290" y="510" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 텍스트 생성</text>
+  <text x="290" y="530" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 질의응답</text>
+  <text x="290" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 요약 및 번역</text>
+  
+  <rect x="420" y="470" width="180" height="100" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="510" y="490" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">고급 응용</text>
+  <text x="510" y="510" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 코드 생성</text>
+  <text x="510" y="530" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 추론 및 문제 해결</text>
+  <text x="510" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• 창의적 글쓰기</text>
+  
+  <!-- 연결선 -->
+  <!-- 훈련 데이터 -> LLM -->
+  <line x1="400" y1="180" x2="400" y2="230" stroke="#9c27b0" stroke-width="2" />
+  <polygon points="400,230 395,220 405,220" fill="#9c27b0" />
+  
+  <!-- 입력 -> LLM -->
+  <line x1="200" y1="300" x2="250" y2="300" stroke="#ff9800" stroke-width="2" />
+  <polygon points="250,300 240,295 240,305" fill="#ff9800" />
+  
+  <!-- LLM -> 출력 -->
+  <line x1="550" y1="300" x2="600" y2="300" stroke="#4caf50" stroke-width="2" />
+  <polygon points="600,300 590,295 590,305" fill="#4caf50" />
+  
+  <!-- LLM -> 기능 -->
+  <line x1="400" y1="370" x2="400" y2="430" stroke="#00acc1" stroke-width="2" />
+  <polygon points="400,430 395,420 405,420" fill="#00acc1" />
+  
+  <!-- 모델 종류 (왼쪽) -->
+  <rect x="50" y="450" width="110" height="130" rx="5" ry="5" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1" />
+  <text x="105" y="470" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#3f51b5">주요 LLM</text>
+  <line x1="65" y1="480" x2="145" y2="480" stroke="#3f51b5" stroke-width="1" />
+  <text x="105" y="500" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">GPT-4</text>
+  <text x="105" y="520" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">Claude</text>
+  <text x="105" y="540" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">LLaMA</text>
+  <text x="105" y="560" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">Gemini</text>
+  
+  <!-- 제한사항 (오른쪽) -->
+  <rect x="640" y="450" width="110" height="130" rx="5" ry="5" fill="#fbe9e7" stroke="#ff5722" stroke-width="1" />
+  <text x="695" y="470" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#d84315">제한사항</text>
+  <line x1="655" y1="480" x2="735" y2="480" stroke="#ff5722" stroke-width="1" />
+  <text x="695" y="500" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">환각</text>
+  <text x="695" y="520" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">컨텍스트 한계</text>
+  <text x="695" y="540" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">시간적 제약</text>
+  <text x="695" y="560" font-family="Arial" font-size="11" text-anchor="middle" fill="#333">편향성</text>
+</svg>

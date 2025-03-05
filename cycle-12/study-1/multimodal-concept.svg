@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 배경 -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- 제목 -->
+  <text x="400" y="50" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">멀티모달(Multimodal) AI 개념도</text>
+  
+  <!-- 중앙 멀티모달 AI 영역 -->
+  <ellipse cx="400" cy="300" rx="150" ry="100" fill="#e8f4f8" stroke="#4a86e8" stroke-width="2" />
+  <text x="400" y="300" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#333">멀티모달 AI</text>
+  <text x="400" y="325" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">다양한 형태의 입력 처리 및 통합</text>
+  
+  <!-- 텍스트 모달리티 -->
+  <circle cx="200" cy="150" r="70" fill="#e6f2ff" stroke="#1a73e8" stroke-width="2" />
+  <text x="200" y="140" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">텍스트</text>
+  <text x="200" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">문서, 질문, 대화</text>
+  <text x="200" y="175" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">BERT, GPT, T5</text>
+  
+  <!-- 이미지 모달리티 -->
+  <circle cx="600" cy="150" r="70" fill="#fce8e6" stroke="#ea4335" stroke-width="2" />
+  <text x="600" y="140" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">이미지</text>
+  <text x="600" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">사진, 그래프, 차트</text>
+  <text x="600" y="175" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">ResNet, ViT, CLIP</text>
+  
+  <!-- 음성 모달리티 -->
+  <circle cx="200" cy="450" r="70" fill="#e6f9e6" stroke="#34a853" stroke-width="2" />
+  <text x="200" y="440" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">음성</text>
+  <text x="200" y="460" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">발화, 음악, 소리</text>
+  <text x="200" y="475" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">Wav2Vec, Whisper</text>
+  
+  <!-- 비디오 모달리티 -->
+  <circle cx="600" cy="450" r="70" fill="#fff8e1" stroke="#fbbc04" stroke-width="2" />
+  <text x="600" y="440" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">비디오</text>
+  <text x="600" y="460" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">동영상, 애니메이션</text>
+  <text x="600" y="475" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">I3D, TimeSformer</text>
+  
+  <!-- 연결선 -->
+  <line x1="255" y1="185" x2="350" y2="240" stroke="#1a73e8" stroke-width="2" />
+  <line x1="545" y1="185" x2="450" y2="240" stroke="#ea4335" stroke-width="2" />
+  <line x1="255" y1="415" x2="350" y2="360" stroke="#34a853" stroke-width="2" />
+  <line x1="545" y1="415" x2="450" y2="360" stroke="#fbbc04" stroke-width="2" />
+  
+  <!-- 융합 영역 -->
+  <rect x="290" y="230" width="220" height="140" rx="20" ry="20" fill="none" stroke="#4a86e8" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="400" y="250" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#555">모달리티 융합 (Fusion)</text>
+  <text x="400" y="370" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#555">멀티모달 이해 및 생성</text>
+  
+  <!-- 하단 영역: 응용 분야 -->
+  <rect x="100" y="530" width="600" height="50" rx="10" ry="10" fill="#f0f0f0" stroke="#9aa0a6" stroke-width="1" />
+  <text x="400" y="550" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">응용 분야: VQA, 이미지 캡션 생성, 다중 감각 AI, 멀티모달 검색, 자율 주행</text>
+  
+  <!-- 멀티모달 모델 예시 -->
+  <rect x="50" y="65" width="170" height="30" rx="5" ry="5" fill="#e0e0e0" stroke="#9aa0a6" stroke-width="1" />
+  <text x="135" y="85" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">대표 모델: CLIP, GPT-4V, Gemini</text>
+</svg>

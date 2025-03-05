@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 배경 -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- 제목 -->
+  <text x="400" y="50" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">파운데이션 모델(Foundation Model) 개념도</text>
+  
+  <!-- 중앙 파운데이션 모델 영역 -->
+  <rect x="200" y="100" width="400" height="180" rx="15" ry="15" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" />
+  <text x="400" y="135" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#1976d2">파운데이션 모델</text>
+  
+  <!-- 파운데이션 모델 특징 -->
+  <rect x="250" y="150" width="300" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="170" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">대규모 자기지도학습 (Self-supervised Learning)</text>
+  
+  <rect x="250" y="190" width="300" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="210" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">초대규모 파라미터 (수십억~수천억)</text>
+  
+  <rect x="250" y="230" width="300" height="30" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">범용적 기본 능력 보유</text>
+  
+  <!-- 학습 데이터 (상단 좌측) -->
+  <rect x="50" y="100" width="120" height="180" rx="10" ry="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" />
+  <text x="110" y="125" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#388e3c">학습 데이터</text>
+  
+  <!-- 학습 데이터 종류 -->
+  <rect x="65" y="140" width="90" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="110" y="157" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">텍스트</text>
+  
+  <rect x="65" y="175" width="90" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="110" y="192" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">이미지</text>
+  
+  <rect x="65" y="210" width="90" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="110" y="227" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">오디오</text>
+  
+  <rect x="65" y="245" width="90" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="110" y="262" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">멀티모달</text>
+  
+  <!-- 모델 종류 (상단 우측) -->
+  <rect x="630" y="100" width="120" height="180" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="690" y="125" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#ff9800">주요 모델</text>
+  
+  <!-- 모델 종류 목록 -->
+  <rect x="645" y="140" width="90" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="690" y="157" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">GPT</text>
+  
+  <rect x="645" y="175" width="90" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="690" y="192" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">BERT</text>
+  
+  <rect x="645" y="210" width="90" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="690" y="227" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">DALL-E</text>
+  
+  <rect x="645" y="245" width="90" height="25" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+  <text x="690" y="262" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">LLaMA</text>
+  
+  <!-- 화살표: 학습 데이터 -> 파운데이션 모델 -->
+  <line x1="170" y1="190" x2="200" y2="190" stroke="#388e3c" stroke-width="2" />
+  <polygon points="200,190 190,185 190,195" fill="#388e3c" />
+  
+  <!-- 화살표: 파운데이션 모델 -> 모델 종류 -->
+  <line x1="600" y1="190" x2="630" y2="190" stroke="#1976d2" stroke-width="2" />
+  <polygon points="630,190 620,185 620,195" fill="#1976d2" />
+  
+  <!-- 적응 방법 영역 -->
+  <rect x="200" y="300" width="400" height="70" rx="10" ry="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" />
+  <text x="400" y="330" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#9c27b0">적응 방법 (Adaptation)</text>
+  
+  <!-- 적응 방법 상세 -->
+  <rect x="215" y="345" width="110" height="25" rx="5" ry="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1" />
+  <text x="270" y="362" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">파인튜닝</text>
+  
+  <rect x="335" y="345" width="130" height="25" rx="5" ry="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1" />
+  <text x="400" y="362" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">프롬프트 엔지니어링</text>
+  
+  <rect x="475" y="345" width="110" height="25" rx="5" ry="5" fill="#e1bee7" stroke="#9c27b0" stroke-width="1" />
+  <text x="530" y="362" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">파라미터 효율화</text>
+  
+  <!-- 화살표: 파운데이션 모델 -> 적응 방법 -->
+  <line x1="400" y1="280" x2="400" y2="300" stroke="#1976d2" stroke-width="2" />
+  <polygon points="400,300 395,290 405,290" fill="#1976d2" />
+  
+  <!-- 응용 분야 영역 -->
+  <rect x="50" y="390" width="700" height="190" rx="15" ry="15" fill="#e0f7fa" stroke="#00acc1" stroke-width="2" />
+  <text x="400" y="420" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#00acc1">응용 분야 (Applications)</text>
+  
+  <!-- 응용 분야 그리드 -->
+  <!-- 첫 번째 행 -->
+  <rect x="70" y="440" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="145" y="460" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">자연어 처리</text>
+  <text x="145" y="480" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">텍스트 생성</text>
+  <text x="145" y="495" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">질의응답, 번역</text>
+  
+  <rect x="240" y="440" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="315" y="460" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">컴퓨터 비전</text>
+  <text x="315" y="480" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">이미지 생성</text>
+  <text x="315" y="495" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">객체 인식, 세그먼트</text>
+  
+  <rect x="410" y="440" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="485" y="460" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">음성 및 오디오</text>
+  <text x="485" y="480" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">음성 인식/합성</text>
+  <text x="485" y="495" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">음악 생성</text>
+  
+  <rect x="580" y="440" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="655" y="460" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">코드 생성</text>
+  <text x="655" y="480" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">프로그래밍 지원</text>
+  <text x="655" y="495" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">코드 완성/변환</text>
+  
+  <!-- 두 번째 행 -->
+  <rect x="70" y="510" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="145" y="530" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">멀티모달</text>
+  <text x="145" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">텍스트-이미지 변환</text>
+  <text x="145" y="565" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">크로스모달 이해</text>
+  
+  <rect x="240" y="510" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="315" y="530" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">과학 연구</text>
+  <text x="315" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">단백질 구조 예측</text>
+  <text x="315" y="565" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">물리/화학 시뮬레이션</text>
+  
+  <rect x="410" y="510" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="485" y="530" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">의료</text>
+  <text x="485" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">의료 이미지 분석</text>
+  <text x="485" y="565" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">진단 지원</text>
+  
+  <rect x="580" y="510" width="150" height="60" rx="8" ry="8" fill="#b2ebf2" stroke="#00acc1" stroke-width="1" />
+  <text x="655" y="530" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">로보틱스</text>
+  <text x="655" y="550" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">로봇 제어</text>
+  <text x="655" y="565" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">환경 인식</text>
+  
+  <!-- 화살표: 적응 방법 -> 응용 분야 -->
+  <line x1="400" y1="370" x2="400" y2="390" stroke="#9c27b0" stroke-width="2" />
+  <polygon points="400,390 395,380 405,380" fill="#9c27b0" />
+</svg>

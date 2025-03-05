@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 배경 -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- 제목 -->
+  <text x="400" y="50" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">파인튜닝(Fine-tuning) 개념도</text>
+  
+  <!-- 사전 훈련 모델 영역 (상단) -->
+  <rect x="100" y="90" width="600" height="120" rx="15" ry="15" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" />
+  <text x="400" y="120" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#1976d2">사전 훈련 모델 (Pre-trained Model)</text>
+  
+  <!-- 사전 훈련 모델 내부 -->
+  <rect x="150" y="140" width="130" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="215" y="170" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">일반 지식 학습</text>
+  
+  <rect x="310" y="140" width="180" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="400" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">대규모 데이터셋</text>
+  <text x="400" y="185" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(텍스트, 이미지, 음성 등)</text>
+  
+  <rect x="520" y="140" width="130" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  <text x="585" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">고비용 훈련</text>
+  <text x="585" y="185" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(시간, 컴퓨팅 자원)</text>
+  
+  <!-- 화살표 연결 -->
+  <line x1="400" y1="210" x2="400" y2="240" stroke="#333" stroke-width="2" />
+  <polygon points="400,240 395,230 405,230" fill="#333" />
+  
+  <!-- 파인튜닝 영역 (중앙) -->
+  <rect x="100" y="240" width="600" height="180" rx="15" ry="15" fill="#fff8e1" stroke="#ffa000" stroke-width="2" />
+  <text x="400" y="270" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffa000">파인튜닝 (Fine-tuning)</text>
+  
+  <!-- 파인튜닝 내부 요소 -->
+  <rect x="150" y="290" width="200" height="60" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000" stroke-width="1" />
+  <text x="250" y="315" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">특정 도메인 데이터셋</text>
+  <text x="250" y="335" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(작은 규모, 특수 목적)</text>
+  
+  <rect x="380" y="290" width="90" height="60" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000" stroke-width="1" />
+  <text x="425" y="315" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">낮은</text>
+  <text x="425" y="335" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">학습률</text>
+  
+  <rect x="500" y="290" width="150" height="60" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000" stroke-width="1" />
+  <text x="575" y="315" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">선택적 레이어</text>
+  <text x="575" y="335" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(모두 또는 일부)</text>
+  
+  <rect x="240" y="360" width="320" height="40" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000" stroke-width="1" />
+  <text x="400" y="385" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">적은 계산 비용으로 특화된 모델 생성</text>
+  
+  <!-- 화살표 연결 -->
+  <line x1="400" y1="420" x2="400" y2="450" stroke="#333" stroke-width="2" />
+  <polygon points="400,450 395,440 405,440" fill="#333" />
+  
+  <!-- 파인튜닝된 모델 영역 (하단) -->
+  <rect x="100" y="450" width="600" height="120" rx="15" ry="15" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" />
+  <text x="400" y="480" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#388e3c">파인튜닝된 모델 (Fine-tuned Model)</text>
+  
+  <!-- 파인튜닝된 모델 내부 -->
+  <rect x="150" y="500" width="170" height="50" rx="8" ry="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="235" y="525" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">특정 작업 최적화</text>
+  <text x="235" y="545" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(분류, 요약, 생성 등)</text>
+  
+  <rect x="350" y="500" width="170" height="50" rx="8" ry="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="435" y="525" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">도메인 특화 지식</text>
+  <text x="435" y="545" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(의료, 법률, 금융 등)</text>
+  
+  <rect x="550" y="500" width="100" height="50" rx="8" ry="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+  <text x="600" y="525" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">높은 성능</text>
+  <text x="600" y="545" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">(특정 작업)</text>
+  
+  <!-- 파인튜닝 기법 영역 (좌측) -->
+  <rect x="20" y="240" width="60" height="180" rx="8" ry="8" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" />
+  <text x="50" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#9c27b0" transform="rotate(270 50 330)">파인튜닝 기법</text>
+  
+  <!-- 파인튜닝 기법 목록 - 수정된 부분 -->
+  <rect x="20" y="180" width="180" height="40" rx="5" ry="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" transform="rotate(90 20 180)" />
+  <text x="40" y="160" font-family="Arial" font-size="12" text-anchor="start" fill="#333" transform="rotate(90 20 180)">전체 파인튜닝</text>
+  
+  <rect x="20" y="240" width="180" height="40" rx="5" ry="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" transform="rotate(90 20 240)" />
+  <text x="40" y="220" font-family="Arial" font-size="12" text-anchor="start" fill="#333" transform="rotate(90 20 240)">LoRA</text>
+  
+  <rect x="20" y="300" width="180" height="40" rx="5" ry="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" transform="rotate(90 20 300)" />
+  <text x="40" y="280" font-family="Arial" font-size="12" text-anchor="start" fill="#333" transform="rotate(90 20 300)">어댑터 튜닝</text>
+  
+  <rect x="20" y="360" width="180" height="40" rx="5" ry="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" transform="rotate(90 20 360)" />
+  <text x="40" y="340" font-family="Arial" font-size="12" text-anchor="start" fill="#333" transform="rotate(90 20 360)">프롬프트 튜닝</text>
+  
+  <rect x="20" y="420" width="180" height="40" rx="5" ry="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" transform="rotate(90 20 420)" />
+  <text x="40" y="400" font-family="Arial" font-size="12" text-anchor="start" fill="#333" transform="rotate(90 20 420)">QLoRA</text>
+  
+  <!-- 응용 분야 영역 (우측) - 수정된 부분 -->
+  <rect x="720" y="240" width="60" height="180" rx="8" ry="8" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" />
+  <text x="750" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#00acc1" transform="rotate(90 750 330)">응용 분야</text>
+  
+  <!-- 응용 분야 목록 - 수정된 부분 -->
+  <rect x="720" y="180" width="180" height="40" rx="5" ry="5" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" transform="rotate(270 720 180)" />
+  <text x="700" y="160" font-family="Arial" font-size="12" text-anchor="end" fill="#333" transform="rotate(270 720 180)">자연어 처리</text>
+  
+  <rect x="720" y="240" width="180" height="40" rx="5" ry="5" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" transform="rotate(270 720 240)" />
+  <text x="700" y="220" font-family="Arial" font-size="12" text-anchor="end" fill="#333" transform="rotate(270 720 240)">컴퓨터 비전</text>
+  
+  <rect x="720" y="300" width="180" height="40" rx="5" ry="5" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" transform="rotate(270 720 300)" />
+  <text x="700" y="280" font-family="Arial" font-size="12" text-anchor="end" fill="#333" transform="rotate(270 720 300)">음성 인식</text>
+  
+  <rect x="720" y="360" width="180" height="40" rx="5" ry="5" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" transform="rotate(270 720 360)" />
+  <text x="700" y="340" font-family="Arial" font-size="12" text-anchor="end" fill="#333" transform="rotate(270 720 360)">멀티모달</text>
+  
+  <rect x="720" y="420" width="180" height="40" rx="5" ry="5" fill="#e0f7fa" stroke="#00acc1" stroke-width="1" transform="rotate(270 720 420)" />
+  <text x="700" y="400" font-family="Arial" font-size="12" text-anchor="end" fill="#333" transform="rotate(270 720 420)">강화학습</text>
+</svg>
