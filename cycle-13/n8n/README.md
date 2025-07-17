@@ -1,223 +1,104 @@
 # n8n 자동화 실습
 
-n8n 이란
+###  n8n 이란
 
 n8n은 다양한 애플리케이션과 서비스 간의 워크플로우를 자동화하는 데 사용되는 오픈 소스 플랫폼
 
-n8n의 특징
+### n8n의 특징
 
-오픈 소스: 무료로 사용이 가능하며, 필요에 따라 소스 코드를 수정하거나 기능을 확장 가능. 자체 호스팅을 통해 데이터 보안을 강화할 수 있다는 장점
-
-노코드/로우코드 플랫폼: 코딩 경험이 없는 사용자도 쉽게 워크플로우를 설계할 수 있도록 시각적인 인터페이스를 제공
-
-다양한 서비스 통합: 400개 이상의 앱 및 서비스와의 연동을 지원, 이메일, 소셜 미디어, CRM, 데이터베이스 등 다양한 도구들을 연결할 수 있음
-
-확장성 및 사용자 정의: JavaScript 코드 삽입 또는 사용자 정의 노드 개발을 통해 복잡한 로직을 구현하고 기능을 확장할 수 있음
+- 오픈 소스: 무료로 사용이 가능하며, 필요에 따라 소스 코드를 수정하거나 기능을 확장 가능. 자체 호스팅을 통해 데이터 보안을 강화할 수 있다는 장점
+- 노코드/로우코드 플랫폼: 코딩 경험이 없는 사용자도 쉽게 워크플로우를 설계할 수 있도록 시각적인 인터페이스를 제공
+- 다양한 서비스 통합: 400개 이상의 앱 및 서비스와의 연동을 지원, 이메일, 소셜 미디어, CRM, 데이터베이스 등 다양한 도구들을 연결할 수 있음
+- 확장성 및 사용자 정의: JavaScript 코드 삽입 또는 사용자 정의 노드 개발을 통해 복잡한 로직을 구현하고 기능을 확장할 수 있음
 
 
 
-n8n의 주요 기능 및 장점
+### n8n의 주요 기능 및 장점
 
-시각적 워크플로우 빌더: 드래그 앤 드롭 인터페이스를 통해 워크플로우를 직관적으로 구성하고 관리 가능
-
-다양한 노드 지원: Gmail, Slack, Notion 등 다양한 애플리케이션과의 통합을 위한 노드를 제공
-
-데이터 변환 및 처리: 데이터 필터링, 가공, 변환 등 다양한 데이터 처리 기능을 제공
-
-트리거 및 웹훅: 특정 이벤트 발생 시 워크플로우를 자동으로 실행할 수 있도록 지원
-
-에러 처리 및 디버깅: 워크플로우 실행 중 발생하는 오류를 감지하고 해결할 수 있는 기능을 제공
-
-AI 기능: AI 플랫폼과의 연동을 통해 텍스트 분석, 자연어 처리, AI 에이전트 구축 등 AI 기반 워크플로우를 구축 가능
+- 시각적 워크플로우 빌더: 드래그 앤 드롭 인터페이스를 통해 워크플로우를 직관적으로 구성하고 관리 가능
+- 다양한 노드 지원: Gmail, Slack, Notion 등 다양한 애플리케이션과의 통합을 위한 노드를 제공
+- 데이터 변환 및 처리: 데이터 필터링, 가공, 변환 등 다양한 데이터 처리 기능을 제공
+- 트리거 및 웹훅: 특정 이벤트 발생 시 워크플로우를 자동으로 실행할 수 있도록 지원
+- 에러 처리 및 디버깅: 워크플로우 실행 중 발생하는 오류를 감지하고 해결할 수 있는 기능을 제공
+- AI 기능: AI 플랫폼과의 연동을 통해 텍스트 분석, 자연어 처리, AI 에이전트 구축 등 AI 기반 워크플로우를 구축 가능
 
 
 
-n8n 설치 및 실행
+### n8n 설치 및 실행
 
 Docker를 이용한 설치: Docker를 사용하여 n8n을 쉽고 빠르게 설치하고 관리 가능
 
+```
 docker run -it --rm -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n 명령어를 사용하여 Docker 컨테이너로 n8n을 실행할 수 있음
 
 Node.js를 이용한 설치: Node.js 환경에서 npm을 사용하여 n8n을 직접 설치할 수 있음
 
 npm install -g n8n 명령어를 사용하여 n8n을 설치하고, n8n 명령어로 실행할 수 있음
-
+```
 클라우드 서비스 사용: n8n Cloud와 같은 유료 클라우드 서비스를 이용하여 간편하게 n8n을 사용할 수도 있음
 
 
 
-n8n 활용 예시
+### n8n 활용 예시
 
-Gmail → Slack 자동 알림: 특정 조건의 이메일 수신 시 Slack으로 자동 알림을 전송하는 워크플로우
-
-Google Sheets → Notion 데이터 자동 입력: Google Sheets에 입력된 데이터를 Notion 데이터베이스에 자동으로 등록하는 워크플로우
-
-AI 고객 응대 자동화: 고객 문의 티켓을 수신하여 AI가 분석하고 자동으로 응답을 생성하는 시스템
-
-소셜 미디어 자동화: 블로그 포스팅 알림, 인스타그램 게시물 예약 등 소셜 미디어 관련 작업을 자동화
-
-웹 크롤링 및 데이터 분석: 웹사이트에서 데이터를 추출하고, GPT를 이용하여 요약 및 텍스트 분석을 수행하여 결과를 자동으로 전송하는 워크플로우
+- Gmail → Slack 자동 알림: 특정 조건의 이메일 수신 시 Slack으로 자동 알림을 전송하는 워크플로우
+- Google Sheets → Notion 데이터 자동 입력: Google Sheets에 입력된 데이터를 Notion 데이터베이스에 자동으로 등록하는 워크플로우
+- AI 고객 응대 자동화: 고객 문의 티켓을 수신하여 AI가 분석하고 자동으로 응답을 생성하는 시스템
+- 소셜 미디어 자동화: 블로그 포스팅 알림, 인스타그램 게시물 예약 등 소셜 미디어 관련 작업을 자동화
+- 웹 크롤링 및 데이터 분석: 웹사이트에서 데이터를 추출하고, GPT를 이용하여 요약 및 텍스트 분석을 수행하여 결과를 자동으로 전송하는 워크플로우
 
 
 
-n8n vs 다른 자동화 도구
+### n8n vs 다른 자동화 도구
 
 n8n은 Zapier, Make(Integromat) 등 다른 자동화 도구들과 비교했을 때 다음과 같은 차이점을 가짐
+<img width="915" height="264" alt="image" src="https://github.com/user-attachments/assets/d84e46b6-0190-4843-a328-58544fff3ef1" />
 
-기능
 
-n8n (오픈 소스)
 
-Zapier (유료)
+### 간단한 설치 과정
 
-Make (유료)
-
-가격
-
-무료 (자체 호스팅)
-
-유료 (제한적 무료 플랜)
-
-유료 (제한적 무료 플랜)
-
-셀프 호스팅
-
-가능
-
-불가능
-
-불가능
-
-코드 실행
-
-가능 (JavaScript)
-
-제한적
-
-가능
-
-API 연동
-
-400+ 개 이상
-
-6,000+ 개 이상
-
-1,000+ 개 이상
-
-복잡한 워크플로우
-
-자유로운 로직, 무제한 확장 가능
-
-고급 로직은 어려움
-
-비교적 자유로움
-
-간단한 설치 과정
-
-n8n 스타터 킷으로 로컬에 설치하여 빠르게 시작
+#### n8n 스타터 킷으로 로컬에 설치하여 빠르게 시작
 
 https://github.com/n8n-io/self-hosted-ai-starter-kit 
 
+```
 git clone <https://github.com/n8n-io/self-hosted-ai-starter-kit.git>
 cd self-hosted-ai-starter-kit
 docker compose up
+```
 
- 자체 호스팅
+### 자체 호스팅
 
 자체 호스팅 후보 목록
 
-https://fly.io/ 
+- https://fly.io/ 
+- https://render.com/ 
+- https://railway.com/ 
+- https://www.coolify.io/  
 
-https://render.com/ 
+<img width="1349" height="343" alt="image" src="https://github.com/user-attachments/assets/0a5aa10b-2dbc-4447-b4a2-199b493e8c70" />
 
-https://railway.com/ 
 
-https://www.coolify.io/  
+### http://fly.io  로 n8n 셀프호스팅 하기
 
-기능
+#### fly cli 설치하기
 
-fly
+```
+brew install flyctl
+```
 
-Render
+#### fly 프로젝트 초기화
 
-Railway
-
-Coolify
-
-주요 특징
-
-글로벌 배포, 낮은 지연 시간
-
-간편한 사용, 다양한 서비스 지원
-
-간편한 배포, 다양한 데이터베이스 지원
-
-자유로운 제어, 높은 비용 효율성
-
-배포 방식
-
-Docker
-
-Git
-
-Docker, Nixpacks
-
-Docker
-
-가격
-
-사용량 기반
-
-무료 티어, 유료 플랜
-
-사용량 기반
-
-무료 (서버 비용 별도)
-
-장점
-
-글로벌 배포, 확장성
-
-간편한 사용, 다양한 기능
-
-간편한 배포, 다양한 DB 지원
-
-자유로운 제어, 비용 효율성
-
-단점
-
-학습 곡선, 관리형 DB 부재
-
-가격, 콜드 스타트
-
-가격, 무료 티어 없음
-
-기술적 지식 필요, 유지보수 책임
-
-적합한 사용자
-
-글로벌 서비스, 낮은 지연 시간
-
-빠른 MVP, 쉬운 PaaS
-
-빠른 프로토타입, 다양한 DB
-
-인프라 제어, 비용 절감
-
-http://fly.io  로 n8n 셀프호스팅 하기
-
-fly cli 설치하기
-
-brew install flyctl 
-
-fly 프로젝트 초기화
-
+```
 mkdir n8n
 cd n8n
 flyctl launch --no-deploy # 배포 없이 초기화
+```
 
-생성된 toml 파일에 n8n 구성 추가
+#### 생성된 toml 파일에 n8n 구성 추가
 
+```
 # fly.toml app configuration file generated for n8n-dunz on 2025-05-05T16:23:50+09:00
 #
 # See <https://fly.io/docs/reference/configuration/> for information about how to use this file.
@@ -255,48 +136,45 @@ primary_region = 'nrt'  # 일본 도쿄 리전
   memory = '512'  # n8n은 최소 512는 되어야 돌아감
   cpu_kind = 'shared'
   cpus = 1
+```
 
+#### fly 볼륨 추가
 
-fly 볼륨 추가
-
+```
 flyctl volumes list --app n8n-dunz
+```
 
-fly 배포
+#### fly 배포
 
+```
 flyctl deploy
+```
 
 
 
-Workflow
+## Workflow
 
-유튜브 숏츠 자동 발행 워크플로우
+### 유튜브 숏츠 자동 발행 워크플로우
 
-툴
+#### 툴
 
-Google Sheets
-
-Youtube
-
-LLM(Large Language Model)
-
-http://fal.ai 
-
-TTS(Text-to-Speech): elevenlabs turbo 2.5
-
-T2I(Text-to-Image): recraft v3
-
-I2V(Image-to-Video): kiling 1.6
-
-Text-to-SFX: elevenlabs soud-effects
-
-https://creatomate.com/ 
+- Google Sheets
+- Youtube
+- LLM(Large Language Model)
+- https://creatomate.com/ 
+- http://fal.ai 
+ - TTS(Text-to-Speech): elevenlabs turbo 2.5
+ - T2I(Text-to-Image): recraft v3
+ - I2V(Image-to-Video): kiling 1.6
+ - Text-to-SFX: elevenlabs soud-effects
 
 
 
-작업 실행
+### 작업 실행
 
-숏츠 기획 프롬프트
+1. 숏츠 기획 프롬프트
 
+```
 너는 자동화 유튜브 쇼츠 콘텐츠 기획 전문가야.
 저작권에 문제가 없는 고전 이야기 • 역사 • 신화 • 민담 • 철학적 딜레마 등을 바탕으로 5가지 주제를 추천해줘.
 
@@ -311,23 +189,20 @@ https://creatomate.com/
 - Status: 항상 준비
 - Caption: 10줄 분량의 심층 부연 설명, 줄바꿈 없이 셀 하나에 들어가도록 작성
 - Publish: 항상 대기중
+```
 
-나온 결과물 구글 시트에 추가하기
+2. 나온 결과물 구글 시트에 추가하기
 
-n8n 에서 구글 시트 get row 로 가져오기
+3. n8n 에서 구글 시트 get row 로 가져오기
+  - google drive, google, sheets api 사용 활성화
+   - https://console.cloud.google.com/apis/library?inv=1&invt=AbyUTA&project=n8nproject-458807 
 
-google drive, google, sheets api 사용 활성화
+4. 가져올 시트를 선택후 필터 추가
+ - Status가 준비인것 필터 추가
+ - return on first matching row 옵션 추가
 
-https://console.cloud.google.com/apis/library?inv=1&invt=AbyUTA&project=n8nproject-458807 
-
-가져올 시트를 선택후 필터 추가
-
-Status가 준비인것 필터 추가
-
-return on first matching row 옵션 추가
-
-나레이션 생성을 위한 elevenlabs api 호출
-
+5. 나레이션 생성을 위한 elevenlabs api 호출
+```
 Method: POST
 URL: <https://queue.fal.run/fal-ai/elevenlabs/tts/turbo-v2.5>
 
@@ -344,34 +219,27 @@ JSON:
   "text": "{{ $json.Narration }}",
   "language_code": "ko"
 }
+```
+- http://fal.ai : https://fal.ai/  - 멀티모달 모델을 웹이나 API를 통해 바로 사용할
+ - https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5 
+ - elevenlabs 의 turbo 2.5 모델 사용 (호출당 0.01달러 차감)
+ - 추후 가격 최적화를 위해 elevenlabs api 를 직접 연동하는것을 고려(초기 1달러 제공)
+  - 학습용/테스트용: http://Fal.ai  경유 사용도 무방
+  - 서비스/제품화 목적: ElevenLabs API 직접 사용하는 것이 훨씬 좋음 (비용, 성능, 유연성 면에서 유리)
 
-http://fal.ai : https://fal.ai/  - 멀티모달 모델을 웹이나 API를 통해 바로 사용할
+- api 키와 헤더 및 바디를 설정
 
-https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5 
-
-elevenlabs 의 turbo 2.5 모델 사용 (호출당 0.01달러 차감)
-
-추후 가격 최적화를 위해 elevenlabs api 를 직접 연동하는것을 고려(초기 1달러 제공)
-
-학습용/테스트용: http://Fal.ai  경유 사용도 무방
-
-서비스/제품화 목적: ElevenLabs API 직접 사용하는 것이 훨씬 좋음 (비용, 성능, 유연성 면에서 유리)
-
-api 키와 헤더 및 바디를 설정
-
-wait 노드로 초 지정하여 음성 생성 기다리기
-
-생성한 나레이션 음성 가져오기
-
+6. wait 노드로 초 지정하여 음성 생성 기다리기
+7. 생성한 나레이션 음성 가져오기
+```
 Method: GET
 URL: <https://queue.fal.run/fal-ai/elevenlabs/requests/{{> $json.request_id }}
+```
+8. 이미지 영상 생성하기
 
-이미지 영상 생성하기
-
-Basic llm chain 노드 사용
-
-모델, output 형식 지정
-
+- Basic llm chain 노드 사용
+ - 모델, output 형식 지정
+```
 // prompt
 
 주어진 스크립트에 따라 매우 몰입감 있고 영화적인 장면 프롬프트를 5장 생성해 주세요.
@@ -384,15 +252,13 @@ Basic llm chain 노드 사용
 5. 각 프롬프트는 200자 이내로 상세하게 작성
 6. 큰따옴표("")는 사용하지 않음
 7. 프롬프트는 영어로 생성함
+```
+9. 이미지 생성을 위한 나레이션으로 장면 생성용 프롬프트 5개 생성하기
+ - gemini 2.5 flash 모델 사용
+ - output 으로 Item List Output Parser 사용
 
-이미지 생성을 위한 나레이션으로 장면 생성용 프롬프트 5개 생성하기
-
-gemini 2.5 flash 모델 사용
-
-output 으로 Item List Output Parser 사용
-
-만든 프롬프트로 이미지 생성 api 호출 (Recraft)
-
+10. 만든 프롬프트로 이미지 생성 api 호출 (Recraft)
+```
 Method: POST
 URL: <https://queue.fal.run/fal-ai/recraft-v3>
 
@@ -410,16 +276,16 @@ JSON:
   "image_size": "portrait_16_9",
   "style": "digital_illustration/neon_calm"
 }
+```
+11. api 응답 대기를 위한 delay 주기
 
-api 응답 대기를 위한 delay 주기
-
-이미지 url 가져오기
-
+12. 이미지 url 가져오기
+```
 Method: GET
 URL: <https://queue.fal.run/fal-ai/recraft-v3/requests/{{> $json.request_id
-
-영상 생성하기
-
+```
+13. 영상 생성하기
+```
 Method: POST
 URL: <https://queue.fal.run/fal-ai/kling-video/v1.6/standard/image-to-video>
 
@@ -439,17 +305,17 @@ JSON:
   "aspect_ratio": "9:16",
   "negative_prompt": "blur, distort, and low quality"
 }
+```
+14. 영상 생성시까지 대기하기
 
-영상 생성시까지 대기하기
-
-영상 주소 가져왹
-
+15. 영상 주소 가져왹
+```
 Method:
 GET
 URL: <https://queue.fal.run/fal-ai/kling-video/requests/{{> $json.request_id }}
-
-효과음 프롬프트 생성
-
+```
+16. 효과음 프롬프트 생성
+```
 // prompt
 이미지 프롬프트에 어울리는 효과음을 생성해주세요.
 
@@ -465,9 +331,9 @@ A howling desert wind sweeping across the dunes
 
 이미지 프롬프트:
 {{ $('Image Prompt').item.json.text }}
-
-효과음 생성
-
+```
+17. 효과음 생성
+```
 Method: POST
 URL: <https://queue.fal.run/fal-ai/elevenlabs/sound-effects>
 
@@ -484,23 +350,20 @@ JSON:
   "text": "{{ $json.text }}",
   "duration_seconds": "5"
 }
+```
+18. 효과음 생성 대기
 
-효과음 생성 대기
+19. 효과음 가져오기
 
-효과음 가져오기
+20. 3개의 input merge 하기
+ - 총 11개의 아이템으로 머지
 
-3개의 input merge 하기
+21. Aggregate 하기
+ - 11개의 input을 1개의 output으로 합침
 
-총 11개의 아이템으로 머지
-
-Aggregate 하기
-
-11개의 input을 1개의 output으로 합침
-
-field edit 하기
-
-creatomate 에 호출할때 필요한 인자 구성
-
+22. field edit 하기
+ - creatomate 에 호출할때 필요한 인자 구성
+```
 {
   "scene1": "{{ $json.data[1].video.url }}",
   "scene2": "{{ $json.data[2].video.url }}",
@@ -514,9 +377,9 @@ creatomate 에 호출할때 필요한 인자 구성
   "sound5": "{{ $json.data[10].audio.url }}",
   "narration": "{{ $json.data[0].audio.url }}"
 } 
-
-creatomate 템플릿 만들기
-
+```
+23. creatomate 템플릿 만들기
+```
 {
   "output_format": "mp4",
   "width": 1080,
@@ -704,13 +567,11 @@ creatomate 템플릿 만들기
     }
   ]
 }
-
-curl 로 api 호출 json 구성
-
-creatomate api key 추가(Bearer 토큰)
-
-json 인자값에 이전에 받은 소스 추가
-
+```
+24. curl 로 api 호출 json 구성
+ - creatomate api key 추가(Bearer 토큰)
+ - json 인자값에 이전에 받은 소스 추가
+```
 curl -X POST <https://api.creatomate.com/v1/renders> \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer 8a9d8c5842ca4298ac2cb234f6d07b9f715f99785183bb94b3f749d43a88d87bc1840711296916c13c3233b2daf19323" \
@@ -730,35 +591,28 @@ curl -X POST <https://api.creatomate.com/v1/renders> \
     "narration.source": ""
   }
 }'
-
-구글 시트에 완성된 url 업데이트
-
-google sheet node 사용
-
-map each column manualy row_number
-
-초반에 가져온 구글시트 row number 지정
-
-status "생성완료" 처리
+```
+25. 구글 시트에 완성된 url 업데이트
+ - google sheet node 사용
+ - map each column manualy row_number
+ - 초반에 가져온 구글시트 row number 지정
+ - status "생성완료" 처리
 
 
 
-이후 발행 프로세스
-<img width="567" alt="image" src="https://github.com/user-attachments/assets/a0cd077f-625a-4eb2-94c4-662931fe5b2f " />
+### 이후 발행 프로세스
+<img width="1132" height="781" alt="image" src="https://github.com/user-attachments/assets/2d6f0c68-1454-4dd8-a291-bc625f381209" />
 
-스케쥴 트리거 추가
+1. 스케쥴 트리거 추가
+2. 구글 시트 url 가져오기
+3. url 호출
+4. 유튜브 업로드
+  - youtube v3 api 활성화 후 범위 설정필요
+<img width="1728" height="963" alt="image" src="https://github.com/user-attachments/assets/ef893853-61a7-4b29-9fde-b62bbfd7177f" />
 
-구글 시트 url 가져오기
 
-url 호출
-
-유튜브 업로드
-
-youtube v3 api 활성화 후 범위 설정필요
-<img width="1714" alt="image" src="https://github.com/user-attachments/assets/3c867272-c8e7-4077-ac5e-e22761bad15c " />
-
-업로드된 영상에 코멘트 달기
-
+5. 업로드된 영상에 코멘트 달기
+```
 Method: POST
 URL: <https://www.googleapis.com/youtube/v3/commentThreads?part=snippet>
 
@@ -778,16 +632,15 @@ JSON:
     }
   }
 }
+```
+
+
+## 참고
+- https://www.youtube.com/@sihyun_adventure/videos 
 
 
 
-참고
-
-https://www.youtube.com/@sihyun_adventure/videos 
-
-
-
-끝
+## 끝
 
 n8n은 노코드/로우코드 방식으로 다양한 앱과 서비스를 연결하여 워크플로우를 자동화하고, 특히 AI 기능과의 연동을 통해 더욱 스마트한 업무 처리를 가능하게 하고 
 
