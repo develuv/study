@@ -2096,7 +2096,6 @@ echo '
 - [슈퍼클로드: 클로드 코드 즉시 강화하기](https://apidog.com/kr/blog/superclaude-kr/)
 - [클라우디아 오픈소스 Claude 코드 GUI 사용 후기](https://apidog.com/kr/blog/claudia-the-gui-for-claude-code-kr/)
 - [Claude Code를 위한 경량 프레임워크 "SuperClaude"](https://discuss.pytorch.kr/t/superclaude-claude-code/7188)
-- [코드 에디터의 종말? '클로드 코드(Claude Code)'의 등장 - 요즘IT](https://yozm.wishket.com/magazine/)
 - [Claude code 를 사용하자 - Velog](https://velog.io/@bang9dev/just-use-claude-code)
 - [Claude Code 사용 가이드 - 하이퍼리즘 기술 블로그](https://tech.hyperithm.com/claude_code_guides)
 - [SuperClaude 사용자 가이드](https://vibenewb.com/boards/board-1/posts/8)
