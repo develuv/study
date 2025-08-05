@@ -2103,13 +2103,3 @@ echo '
 **GitHub 프로젝트**
 - [Claude Code Mastering (한국어 가이드북)](https://github.com/revfactory/claude-code-mastering)
 
-#### YouTube 동영상 자료
-
-**한국어 튜토리얼**
-- [Claude Code를 설치하는 방법 - MCP 체험하기](https://youtube.com/watch?v=...) - 모두의연구소
-- [클로드 코드(Claude Code) 설정 및 사용법 영상](https://youtube.com/watch?v=...) - 테크유튜버 나레이션
-- [Claude Code: MCP 체험하기](https://youtube.com/watch?v=...) - 이수안컴퓨터연구소
-- [클로드 코드(Claude Code)를 이용한 커밋과 푸시 가능한가?](https://youtube.com/watch?v=...) - 위니브_weniv
-- [Claude Code 클로드 코드 터미널 명령어 사용법](https://youtube.com/watch?v=...) - 후니의 IT 길라잡이
-
-> **참고**: YouTube 링크는 직접 YouTube에서 채널명과 제목으로 검색하여 찾으실 수 있습니다.
