@@ -1,12 +1,13 @@
-# Claude Code와 SuperClaude 완벽 가이드
+# Claude Code, SuperClaude, 그리고 Claudia 완벽 가이드
 
 ## 목차
-1. [클로드 코드와 슈퍼 클로드 소개](#1-클로드-코드와-슈퍼-클로드-소개)
+1. [클로드 코드, 슈퍼 클로드, 그리고 클로디아 소개](#1-클로드-코드-슈퍼-클로드-그리고-클로디아-소개)
 2. [Cursor와의 비교](#2-cursor와의-비교)
 3. [설치 가이드](#3-설치-가이드)
    - [클로드 코드 설치 (macOS)](#클로드-코드-설치-macos)
    - [IDE 플러그인 설치](#ide-플러그인-설치)
    - [슈퍼 클로드 설치](#슈퍼-클로드-설치)
+   - [클로디아(Claudia) 설치](#클로디아claudia-설치)
 4. [기본 사용법](#4-기본-사용법)
    - [클로드 코드 시작하기](#클로드-코드-시작하기)
    - [슈퍼 클로드 명령어](#슈퍼-클로드-명령어-sc-명령어들)
@@ -29,7 +30,7 @@
 
 ---
 
-## 1. 클로드 코드와 슈퍼 클로드 소개
+## 1. 클로드 코드, 슈퍼 클로드, 그리고 클로디아 소개
 
 ### 클로드 코드(Claude Code)란?
 
@@ -61,15 +62,28 @@
 - 인텔리전트 체인지로그 생성
 - 자동 문서화 및 코드 리뷰
 
+### 클로디아(Claudia)란?
+
+**클로디아**는 Claude Code를 위한 GUI(그래픽 사용자 인터페이스) 애플리케이션입니다. 터미널 기반의 Claude Code에 시각적 인터페이스를 제공하여 더 직관적인 사용 경험을 제공합니다.
+
+#### 주요 기능
+- **시각적 프로젝트 관리**: GUI를 통한 프로젝트 및 세션 관리
+- **커스텀 에이전트 생성**: 특정 작업에 특화된 AI 에이전트 설정
+- **MCP 서버 관리**: 그래픽 인터페이스로 MCP 서버 추가/제거
+- **사용량 대시보드**: 토큰 사용량과 비용을 실시간 시각화
+- **크로스 플랫폼 지원**: macOS, Linux, Windows에서 동작
+
 ### 주요 차이점
 
-| 항목 | Claude Code | SuperClaude |
-|------|-------------|-------------|
-| 개발사 | Anthropic (공식) | 오픈소스 커뮤니티 |
-| 목적 | 기본 AI 코딩 어시스턴트 | Claude Code 기능 확장 |
-| 설치 | 독립적으로 설치 | Claude Code 필요 |
-| 비용 | Pro $17/월, Max $100/월 | 무료 (오픈소스) |
-| 토큰 효율성 | 기본 | 70% 절약 |
+| 항목 | Claude Code | SuperClaude | Claudia |
+|------|-------------|-------------|---------|
+| 개발사 | Anthropic (공식) | 오픈소스 커뮤니티 | 오픈소스 (getAsterisk) |
+| 목적 | 기본 AI 코딩 어시스턴트 | Claude Code 기능 확장 | Claude Code GUI 인터페이스 |
+| 인터페이스 | 터미널 (CLI) | 터미널 (CLI) | 그래픽 (GUI) |
+| 설치 | 독립적으로 설치 | Claude Code 필요 | Claude Code와 함께 사용 |
+| 비용 | Pro $17/월, Max $100/월 | 무료 (오픈소스) | 무료 (오픈소스) |
+| 토큰 효율성 | 기본 | 70% 절약 | Claude Code 설정 따름 |
+| 주요 특징 | AI 코딩 어시스턴트 | 전문 명령어, 페르소나 | 시각적 관리, 에이전트 |
 
 ### 왜 사용해야 하는가?
 
@@ -88,11 +102,17 @@
 - 체계적인 소프트웨어 엔지니어링 접근
 - 자동화된 문서화로 시간 절약
 
+**사용성 개선** (Claudia 사용 시)
+- GUI를 통한 직관적인 프로젝트 관리
+- 시각적 사용량 모니터링으로 비용 관리
+- 커스텀 에이전트로 반복 작업 자동화
+- 팀원 간 에이전트 공유로 협업 효율성 증대
+
 ---
 
 ## 2. Cursor와의 비교
 
-### Claude Code + SuperClaude vs Cursor 활용성 비교
+### Claude Code + SuperClaude + Claudia vs Cursor 활용성 비교
 
 | 비교 항목 | Claude Code + SuperClaude                                   | Cursor                                 | 활용성 우위 |
 |-----------|-------------------------------------------------------------|----------------------------------------|------------|
@@ -105,18 +125,20 @@
 | **증거 기반 코딩** | 공식 문서 자동 조회 (C7)<br>환각 방지 CRITICAL 규칙                       | AI 추천 의존<br>검증 수동 수행                   | Claude Code ✓✓ |
 | **워크플로우 자동화** | 페르소나 체인 워크플로우<br>병렬 에이전트 실행                                 | 단일 스레드 작업<br>순차적 처리                    | Claude Code ✓ |
 | **IDE 통합** | VS Code, JetBrains 플러그인<br>터미널 우선 설계                        | VS Code 포크<br>완전 통합 환경                 | Cursor ✓ |
-| **초보자 친화성** | 학습 곡선 존재<br>강력하지만 복잡                                        | 직관적 UI<br>즉시 사용 가능                     | Cursor ✓✓ |
-| **설치 및 설정** | 다단계 설치 과정<br>SuperClaude 추가 설정                              | 원클릭 설치<br>즉시 사용                        | Cursor ✓✓ |
-| **가격** | 사용량 기반 과금<br>SuperClaude 무료<br>opus 모델은 $100이상의 max 요금부터 가능 | 월 $20 고정 요금<br>opus 모델은 $200이상의 요금제 필요 | 사용량에 따라 다름 |
+| **GUI 인터페이스** | Claudia로 시각적 관리 가능<br>프로젝트/에이전트 GUI 관리                    | 기본 IDE UI만 제공<br>추가 GUI 도구 없음         | Claude Code ✓ |
+| **초보자 친화성** | Claudia GUI로 접근성 개선<br>터미널과 GUI 선택 가능                      | 직관적 UI<br>즉시 사용 가능                     | 동등 |
+| **설치 및 설정** | 다단계 설치 과정<br>Claudia는 추가 빌드 필요                             | 원클릭 설치<br>즉시 사용                        | Cursor ✓✓ |
+| **가격** | 사용량 기반 과금<br>SuperClaude/Claudia 무료<br>opus 모델은 $100이상의 max 요금부터 가능 | 월 $20 고정 요금<br>opus 모델은 $200이상의 요금제 필요 | 사용량에 따라 다름 |
 
 ### 활용성 종합 평가
 
-**Claude Code + SuperClaude가 유리한 경우:**
+**Claude Code + SuperClaude + Claudia가 유리한 경우:**
 - 대규모 프로젝트나 복잡한 아키텍처 작업
-- 팀 협업이 중요한 환경
-- 비용 최적화가 필요한 경우
-- 터미널 중심 개발 워크플로우
+- 팀 협업이 중요한 환경 (Claudia의 에이전트 공유)
+- 비용 최적화가 필요한 경우 (시각적 모니터링)
+- 터미널과 GUI를 모두 활용하고 싶은 경우
 - 전문적이고 체계적인 개발 프로세스
+- 커스텀 AI 에이전트를 만들어 사용하고 싶은 경우
 
 **Cursor가 유리한 경우:**
 - 빠른 프로토타이핑
@@ -125,7 +147,7 @@
 - 즉시 시작하고 싶은 초보자
 - 단순하고 직관적인 도구 선호
 
-전문 개발팀이나 복잡한 프로젝트에서는 Claude Code + SuperClaude의 강력한 기능이 빛을 발하며, 개인 개발자나 빠른 개발이 필요한 상황에서는 Cursor의 간편함이 장점으로 작용합니다.
+전문 개발팀이나 복잡한 프로젝트에서는 Claude Code + SuperClaude + Claudia의 강력한 기능과 유연성이 빛을 발하며, 개인 개발자나 빠른 개발이 필요한 상황에서는 Cursor의 간편함이 장점으로 작용합니다. Claudia를 추가로 사용하면 터미널이 익숙하지 않은 개발자도 Claude Code의 강력한 기능을 GUI를 통해 쉽게 활용할 수 있습니다.
 
 ---
 
@@ -384,6 +406,254 @@ source ~/.zshrc
 ├── PERSONAS.md       # 9개 인지 페르소나
 ├── MCP.md           # Model Context Protocol
 └── commands/        # 19개 전문 명령어
+```
+
+### 클로디아(Claudia) 설치
+
+#### 클로디아란?
+
+**Claudia**는 Claude Code를 위한 강력한 GUI 애플리케이션 및 툴킷입니다. 터미널 기반의 Claude Code에 시각적 인터페이스를 제공하여 더 직관적이고 편리한 개발 경험을 제공합니다.
+
+**주요 특징**
+- **시각적 프로젝트 관리**: GUI를 통한 프로젝트 및 세션 관리
+- **커스텀 에이전트**: 특정 작업에 특화된 AI 에이전트 생성 및 관리
+- **MCP 서버 통합**: GUI에서 MCP 서버를 쉽게 추가하고 관리
+- **사용량 대시보드**: 토큰 사용량과 비용을 시각적으로 모니터링
+- **크로스 플랫폼**: macOS, Linux, Windows 지원
+
+#### 시스템 요구사항
+
+**공통 요구사항**
+- Git (소스 코드 클론용)
+- Rust 1.70+ (Tauri 백엔드)
+- Bun 1.0+ (JavaScript 런타임)
+- Node.js 18+ (일부 의존성)
+
+**macOS 추가 요구사항**
+- macOS 10.15 이상
+- Xcode Command Line Tools
+- Apple Silicon 네이티브 지원
+
+**Linux 추가 요구사항**
+- GTK3, WebKitGTK 등 GUI 라이브러리
+
+#### 클로디아 설치 과정
+
+**1단계: 필수 도구 설치**
+
+```bash
+# Git 설치 (macOS)
+brew install git
+
+# Git 설치 (Ubuntu/Debian)
+sudo apt install git
+
+# Rust 설치
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+
+# Bun 설치
+curl -fsSL https://bun.sh/install | bash
+```
+
+**2단계: 플랫폼별 의존성 설치**
+
+macOS:
+```bash
+# Xcode Command Line Tools
+xcode-select --install
+
+# 추가 도구 (선택사항)
+brew install pkg-config
+```
+
+Linux (Ubuntu/Debian):
+```bash
+sudo apt update
+sudo apt install -y \
+  libwebkit2gtk-4.1-dev \
+  libgtk-3-dev \
+  libayatana-appindicator3-dev \
+  librsvg2-dev \
+  patchelf \
+  build-essential \
+  curl \
+  wget \
+  file \
+  libssl-dev \
+  libxdo-dev \
+  libsoup-3.0-dev \
+  libjavascriptcoregtk-4.1-dev
+```
+
+**3단계: 클로디아 소스 코드 클론 및 빌드**
+
+```bash
+# 리포지토리 클론
+git clone https://github.com/getAsterisk/claudia.git
+cd claudia
+
+# 의존성 설치
+bun install
+
+# 개발 모드 실행
+bun run tauri dev
+
+# 프로덕션 빌드
+bun run tauri build
+
+# macOS 유니버설 바이너리 빌드
+bun run tauri build --target universal-apple-darwin
+```
+
+#### 클로디아 주요 기능
+
+**1. CC Projects (프로젝트 관리)**
+```
+프로젝트 선택 → 세션 보기 → 재개 또는 새로 시작
+```
+- Claude Code 세션을 GUI로 관리
+- 프로젝트별 대화 히스토리 저장
+- 여러 프로젝트 간 빠른 전환
+
+**2. CC Agents (AI 에이전트 관리)**
+```
+에이전트 생성 → 구성 → 실행
+```
+- 커스텀 시스템 프롬프트 설정
+- 모델 선택 (Opus/Sonnet/Haiku)
+- 권한 관리 (파일 읽기/쓰기, 네트워크 접근)
+- 에이전트 설정 내보내기/가져오기
+
+**3. MCP Manager (MCP 서버 관리)**
+```
+메뉴 → MCP 매니저 → 서버 추가 → 구성
+```
+- GUI에서 MCP 서버 추가/제거
+- 서버 상태 실시간 모니터링
+- 환경 변수 및 설정 관리
+
+**4. Usage Dashboard (사용량 분석)**
+```
+메뉴 → 사용량 대시보드 → 분석 보기
+```
+- 토큰 사용량 시각화
+- 비용 추적 및 예측
+- 모델별 사용 통계
+
+#### 클로디아 프로젝트 구조
+
+```
+claudia/
+├── src/                   # React 프론트엔드
+│   ├── components/        # UI 컴포넌트
+│   ├── lib/               # API 클라이언트 및 유틸리티
+│   └── assets/            # 정적 자산
+├── src-tauri/             # Rust 백엔드
+│   ├── src/
+│   │   ├── commands/      # Tauri 명령 핸들러
+│   │   ├── sandbox/       # 보안 샌드박싱
+│   │   └── checkpoint/    # 타임라인 관리
+│   └── tests/             # Rust 테스트 스위트
+└── public/                # 공개 자산
+```
+
+#### 에이전트 설정 형식
+
+```json
+{
+  "version": 1,
+  "exported_at": "2025-01-23T14:29:58.156063+00:00",
+  "agent": {
+    "name": "프론트엔드 전문가",
+    "icon": "bot",
+    "model": "sonnet",
+    "system_prompt": "당신은 React와 TypeScript 전문가입니다...",
+    "default_task": "React 컴포넌트 개발 및 최적화",
+    "sandbox_enabled": true,
+    "enable_file_read": true,
+    "enable_file_write": true,
+    "enable_network": false
+  }
+}
+```
+
+#### 클로디아 개발 워크플로우
+
+**개발 명령어**
+```bash
+# 개발 서버 시작
+bun run tauri dev
+
+# 프론트엔드만 실행
+bun run dev
+
+# 타입 체크
+bunx tsc --noEmit
+
+# Rust 테스트
+cd src-tauri && cargo test
+
+# 코드 포맷팅
+cd src-tauri && cargo fmt
+
+# 디버그 빌드
+bun run tauri build --debug
+```
+
+**실행 파일 직접 실행**
+```bash
+# Linux/macOS
+./src-tauri/target/release/claudia
+
+# Windows
+./src-tauri/target/release/claudia.exe
+```
+
+#### 클로디아와 Claude Code 통합
+
+**1. 클로디아에서 Claude Code 실행**
+- 프로젝트 선택 후 "터미널에서 열기" 클릭
+- 자동으로 해당 디렉토리에서 `claude` 명령 실행
+- GUI와 터미널 간 원활한 전환
+
+**2. 에이전트 활용**
+```bash
+# 클로디아에서 만든 에이전트를 Claude Code에서 사용
+claude --agent "프론트엔드 전문가"
+
+# 또는 에이전트 설정 파일 직접 로드
+claude --agent-config ./agents/frontend-expert.json
+```
+
+**3. MCP 서버 공유**
+- 클로디아에서 설정한 MCP 서버가 Claude Code에서도 사용 가능
+- 통합된 설정 관리로 일관성 유지
+
+#### 클로디아 활용 시나리오
+
+**1. 멀티 프로젝트 관리**
+```
+1. 클로디아 실행
+2. 여러 프로젝트 등록
+3. 프로젝트 간 빠른 전환
+4. 각 프로젝트별 세션 히스토리 관리
+```
+
+**2. 팀 에이전트 공유**
+```
+1. 팀 표준 에이전트 생성
+2. JSON 파일로 내보내기
+3. Git에 커밋하여 팀 공유
+4. 팀원들이 가져와서 사용
+```
+
+**3. 비용 모니터링**
+```
+1. Usage Dashboard 열기
+2. 일별/주별/월별 사용량 확인
+3. 비용 알림 설정
+4. 최적화 포인트 식별
 ```
 
 ---
