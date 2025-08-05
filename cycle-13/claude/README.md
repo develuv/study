@@ -947,16 +947,6 @@ CLAUDE.md는 Claude Code가 프로젝트의 맥락을 이해하도록 돕는 '�
 - Minimum 80% test coverage
 - Use conventional commits
 
-## Project Structure
-```
-src/
-├── components/     # Reusable UI components
-├── pages/         # Route components
-├── services/      # API calls
-├── store/         # Redux store
-└── utils/         # Helper functions
-```
-
 ## Key Commands
 - `npm run dev`: Start development server
 - `npm test`: Run test suite
