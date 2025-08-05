@@ -2073,8 +2073,44 @@ echo '
 - 페르소나 기반 역할 분담
 
 ### 참고 링크
+
+#### 영문 자료
 - [Anthropic 공식 문서](https://docs.anthropic.com)
 - [Claude Code IDE 통합 가이드](https://docs.anthropic.com/en/docs/claude-code/ide-integrations)
 - [SuperClaude GitHub](https://github.com/NomenAK/SuperClaude)
 - [VS Code Marketplace - Claude Code](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
 - [JetBrains Plugin - Claude Code [Beta]](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-)
+- [Claudia 공식 사이트](https://claudiacode.com/)
+- [Claudia GitHub](https://github.com/getAsterisk/claudia)
+
+#### 한국어 자료
+
+**공식 문서 및 가이드**
+- [Anthropic Claude Code 한국어 문서](https://docs.anthropic.com/ko/docs/claude-code/overview)
+- [Claude Code 사용 가이드 - 터미널 AI 코딩 어시스턴트](https://claude.develop-on.co.kr/ko/)
+- [Claude Code 한국어 튜토리얼](https://docs.anthropic.com/ko/docs/agents-and-tools/claude-code/tutorials)
+
+**블로그 및 커뮤니티**
+- [클로드 코드 (Claude Code) 총정리 - 프롬프트해커 대니](https://www.magicaiprompts.com/docs/claude/claude-code/)
+- [클로드 코드 리뷰: 10배의 코더가 되는 방법](https://apidog.com/kr/blog/claude-code-kr/)
+- [슈퍼클로드: 클로드 코드 즉시 강화하기](https://apidog.com/kr/blog/superclaude-kr/)
+- [클라우디아 오픈소스 Claude 코드 GUI 사용 후기](https://apidog.com/kr/blog/claudia-the-gui-for-claude-code-kr/)
+- [Claude Code를 위한 경량 프레임워크 "SuperClaude"](https://discuss.pytorch.kr/t/superclaude-claude-code/7188)
+- [코드 에디터의 종말? '클로드 코드(Claude Code)'의 등장 - 요즘IT](https://yozm.wishket.com/magazine/)
+- [Claude code 를 사용하자 - Velog](https://velog.io/@bang9dev/just-use-claude-code)
+- [Claude Code 사용 가이드 - 하이퍼리즘 기술 블로그](https://tech.hyperithm.com/claude_code_guides)
+- [SuperClaude 사용자 가이드](https://vibenewb.com/boards/board-1/posts/8)
+
+**GitHub 프로젝트**
+- [Claude Code Mastering (한국어 가이드북)](https://github.com/revfactory/claude-code-mastering)
+
+#### YouTube 동영상 자료
+
+**한국어 튜토리얼**
+- [Claude Code를 설치하는 방법 - MCP 체험하기](https://youtube.com/watch?v=...) - 모두의연구소
+- [클로드 코드(Claude Code) 설정 및 사용법 영상](https://youtube.com/watch?v=...) - 테크유튜버 나레이션
+- [Claude Code: MCP 체험하기](https://youtube.com/watch?v=...) - 이수안컴퓨터연구소
+- [클로드 코드(Claude Code)를 이용한 커밋과 푸시 가능한가?](https://youtube.com/watch?v=...) - 위니브_weniv
+- [Claude Code 클로드 코드 터미널 명령어 사용법](https://youtube.com/watch?v=...) - 후니의 IT 길라잡이
+
+> **참고**: YouTube 링크는 직접 YouTube에서 채널명과 제목으로 검색하여 찾으실 수 있습니다.
