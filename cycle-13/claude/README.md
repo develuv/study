@@ -94,20 +94,20 @@
 
 ### Claude Code + SuperClaude vs Cursor 활용성 비교
 
-| 비교 항목 | Claude Code + SuperClaude | Cursor | 활용성 우위 |
-|-----------|--------------------------|--------|------------|
-| **AI 모델 선택** | Claude Opus 4 / Sonnet 4 자유 전환<br>작업별 최적 모델 자동 선택 | GPT-4, Claude 등 다중 모델<br>수동 전환 필요 | Claude Code ✓ |
-| **전문가 페르소나** | 9개 전문 페르소나 (architect, security, frontend 등)<br>상황별 자동 활성화 | 단일 AI 어시스턴트<br>전문성 구분 없음 | Claude Code ✓✓ |
-| **프로젝트 컨텍스트** | CLAUDE.md 계층적 메모리<br>Git 체크포인트 시스템 | 프로젝트 인덱싱<br>세션 간 연속성 제한 | Claude Code ✓ |
-| **토큰 효율성** | 70% 토큰 절약 (초압축 모드)<br>비용 최적화 자동화 | 일반적인 토큰 사용<br>수동 최적화 필요 | Claude Code ✓✓ |
-| **터미널 통합** | 네이티브 터미널 환경<br>직접 명령 실행 | IDE 내장 터미널<br>간접 실행 | Claude Code ✓ |
-| **커스텀 명령어** | 프로젝트별 슬래시 명령어<br>팀 공유 가능 | 기본 명령어 세트<br>제한적 확장 | Claude Code ✓ |
-| **증거 기반 코딩** | 공식 문서 자동 조회 (C7)<br>환각 방지 CRITICAL 규칙 | AI 추천 의존<br>검증 수동 수행 | Claude Code ✓✓ |
-| **워크플로우 자동화** | 페르소나 체인 워크플로우<br>병렬 에이전트 실행 | 단일 스레드 작업<br>순차적 처리 | Claude Code ✓ |
-| **IDE 통합** | VS Code, JetBrains 플러그인<br>터미널 우선 설계 | VS Code 포크<br>완전 통합 환경 | Cursor ✓ |
-| **초보자 친화성** | 학습 곡선 존재<br>강력하지만 복잡 | 직관적 UI<br>즉시 사용 가능 | Cursor ✓✓ |
-| **설치 및 설정** | 다단계 설치 과정<br>SuperClaude 추가 설정 | 원클릭 설치<br>즉시 사용 | Cursor ✓✓ |
-| **가격** | 사용량 기반 과금<br>SuperClaude 무료 | 월 $20 고정 요금 | 사용량에 따라 다름 |
+| 비교 항목 | Claude Code + SuperClaude                                   | Cursor                                 | 활용성 우위 |
+|-----------|-------------------------------------------------------------|----------------------------------------|------------|
+| **AI 모델 선택** | Claude Opus 4 / Sonnet 4 자유 전환<br>작업별 최적 모델 자동 선택           | GPT-4, Claude 등 다중 모델<br>수동 전환 필요      | Claude Code ✓ |
+| **전문가 페르소나** | 9개 전문 페르소나 (architect, security, frontend 등)<br>상황별 자동 활성화  | 단일 AI 어시스턴트<br>전문성 구분 없음               | Claude Code ✓✓ |
+| **프로젝트 컨텍스트** | CLAUDE.md 계층적 메모리<br>Git 체크포인트 시스템                          | 프로젝트 인덱싱<br>세션 간 연속성 제한                | Claude Code ✓ |
+| **토큰 효율성** | 70% 토큰 절약 (초압축 모드)<br>비용 최적화 자동화                            | 일반적인 토큰 사용<br>수동 최적화 필요                | Claude Code ✓✓ |
+| **터미널 통합** | 네이티브 터미널 환경<br>직접 명령 실행                                     | IDE 내장 터미널<br>간접 실행                    | Claude Code ✓ |
+| **커스텀 명령어** | 프로젝트별 슬래시 명령어<br>팀 공유 가능                                    | 기본 명령어 세트<br>제한적 확장                    | Claude Code ✓ |
+| **증거 기반 코딩** | 공식 문서 자동 조회 (C7)<br>환각 방지 CRITICAL 규칙                       | AI 추천 의존<br>검증 수동 수행                   | Claude Code ✓✓ |
+| **워크플로우 자동화** | 페르소나 체인 워크플로우<br>병렬 에이전트 실행                                 | 단일 스레드 작업<br>순차적 처리                    | Claude Code ✓ |
+| **IDE 통합** | VS Code, JetBrains 플러그인<br>터미널 우선 설계                        | VS Code 포크<br>완전 통합 환경                 | Cursor ✓ |
+| **초보자 친화성** | 학습 곡선 존재<br>강력하지만 복잡                                        | 직관적 UI<br>즉시 사용 가능                     | Cursor ✓✓ |
+| **설치 및 설정** | 다단계 설치 과정<br>SuperClaude 추가 설정                              | 원클릭 설치<br>즉시 사용                        | Cursor ✓✓ |
+| **가격** | 사용량 기반 과금<br>SuperClaude 무료<br>opus 모델은 $100이상의 max 요금부터 가능 | 월 $20 고정 요금<br>opus 모델은 $200이상의 요금제 필요 | 사용량에 따라 다름 |
 
 ### 활용성 종합 평가
 
