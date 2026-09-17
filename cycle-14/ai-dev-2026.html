@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026년, AI와 함께 만든 것들</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F2F4F6;
+    --surface-2: #E5E8EB;
+    --text: #191F28;
+    --text-2: #4E5968;
+    --text-3: #8B95A1;
+    --blue: #3366FF;
+    --blue-dark: #2952CC;
+    --blue-tint: #EBF0FF;
+    --green: #00C471;
+    --green-tint: #E5F9F0;
+    --orange: #FF8A00;
+    --orange-tint: #FFF3E0;
+    --red: #F04452;
+    --red-tint: #FFEBEC;
+    --code-bg: #F9FAFB;
+    --shadow: 0 8px 24px rgba(0, 27, 55, 0.06);
+    --r-lg: 24px;
+    --r-md: 16px;
+    --r-sm: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17171C;
+      --surface: #202027;
+      --surface-2: #2C2C35;
+      --text: #F2F4F6;
+      --text-2: #B0B8C1;
+      --text-3: #6B7684;
+      --blue-tint: #1C2545;
+      --green-tint: #123326;
+      --orange-tint: #3A2A12;
+      --red-tint: #3A1A1E;
+      --code-bg: #202027;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17171C;
+    --surface: #202027;
+    --surface-2: #2C2C35;
+    --text: #F2F4F6;
+    --text-2: #B0B8C1;
+    --text-3: #6B7684;
+    --blue-tint: #1C2545;
+    --green-tint: #123326;
+    --orange-tint: #3A2A12;
+    --red-tint: #3A1A1E;
+    --code-bg: #202027;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+  }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+  code, pre { font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+
+  /* top progress */
+  .progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--surface-2); z-index: 20;
+  }
+  .progress > i {
+    display: block; height: 100%; width: 0; background: var(--blue);
+    transition: width .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .counter {
+    position: fixed; top: 16px; right: 20px; z-index: 20;
+    font-size: 14px; color: var(--text-3); font-weight: 500;
+  }
+
+  /* deck */
+  .deck { height: 100%; position: relative; }
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    overflow-y: auto;
+    padding: 72px 24px 140px;
+  }
+  .slide.active { display: block; }
+  .slide.enter { animation: push .32s cubic-bezier(.2,.7,.2,1); }
+  .slide.enter-back { animation: pop .32s cubic-bezier(.2,.7,.2,1); }
+  @keyframes push { from { opacity: 0; transform: translateX(24px);} to { opacity: 1; transform: none;} }
+  @keyframes pop  { from { opacity: 0; transform: translateX(-24px);} to { opacity: 1; transform: none;} }
+  @media (prefers-reduced-motion: reduce) {
+    .slide.enter, .slide.enter-back { animation: none; }
+    .progress > i { transition: none; }
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .wrap.center { text-align: center; }
+
+  .month {
+    display: inline-block;
+    font-size: 15px; font-weight: 600; color: var(--blue);
+    background: var(--blue-tint); padding: 6px 12px; border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 48px); font-weight: 800; line-height: 1.25;
+    letter-spacing: -0.03em; word-break: keep-all;
+  }
+  h2 {
+    font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.3;
+    letter-spacing: -0.025em; word-break: keep-all; margin-bottom: 14px;
+  }
+  .lead {
+    font-size: clamp(17px, 2vw, 19px); color: var(--text-2); line-height: 1.6;
+    word-break: keep-all; margin-bottom: 36px;
+  }
+  .sub { font-size: 16px; color: var(--text-3); line-height: 1.6; word-break: keep-all; }
+
+  /* list rows (Toss 거래내역 스타일) */
+  .rows { display: flex; flex-direction: column; }
+  .row {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px 0; border-bottom: 1px solid var(--surface);
+  }
+  .row:last-child { border-bottom: 0; }
+  .ico {
+    flex: none; width: 48px; height: 48px; border-radius: 16px;
+    display: grid; place-items: center; font-size: 22px;
+    background: var(--blue-tint);
+  }
+  .ico.green { background: var(--green-tint); }
+  .ico.orange { background: var(--orange-tint); }
+  .ico.red { background: var(--red-tint); }
+  .ico.gray { background: var(--surface); }
+  .row .t { font-size: 18px; font-weight: 600; line-height: 1.4; word-break: keep-all; }
+  .row .d { font-size: 15px; color: var(--text-2); margin-top: 4px; line-height: 1.55; word-break: keep-all; }
+  .row .when { margin-left: auto; flex: none; font-size: 15px; color: var(--text-3); font-weight: 500; padding-top: 2px; }
+
+  /* panel */
+  .panel {
+    background: var(--surface); border-radius: var(--r-lg); padding: 24px;
+    margin-top: 8px;
+  }
+  .panel + .panel { margin-top: 12px; }
+  .panel h3 { font-size: 15px; color: var(--text-3); font-weight: 600; margin-bottom: 10px; }
+  .big { font-size: clamp(26px, 4vw, 34px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.3; }
+  .big small { display: block; font-size: 15px; color: var(--text-2); font-weight: 500; margin-top: 6px; }
+
+  pre.code {
+    background: var(--code-bg); border: 1px solid var(--surface-2);
+    border-radius: var(--r-md); padding: 20px 22px; font-size: 14.5px; line-height: 1.7;
+    overflow-x: auto; color: var(--text-2);
+  }
+  pre.code b { color: var(--text); font-weight: 600; }
+  pre.code .k { color: var(--blue); }
+
+  /* flow */
+  .flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  .step {
+    flex: 1 1 140px; background: var(--surface); border-radius: var(--r-md);
+    padding: 18px 16px; min-width: 130px;
+  }
+  .step .e { font-size: 26px; margin-bottom: 10px; }
+  .step .t { font-size: 16px; font-weight: 600; line-height: 1.4; word-break: keep-all; }
+  .step .d { font-size: 13.5px; color: var(--text-3); margin-top: 4px; line-height: 1.5; word-break: keep-all; }
+  .arrow { align-self: center; color: var(--text-3); font-size: 20px; flex: none; }
+  @media (max-width: 560px) { .arrow { display: none; } .step { flex-basis: 100%; } }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-size: 15px; font-weight: 500; padding: 10px 14px; border-radius: 12px;
+    background: var(--surface); color: var(--text-2);
+  }
+  .chip.red { background: var(--red-tint); color: var(--red); }
+
+  a.link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 15px; color: var(--blue); font-weight: 600; text-decoration: none;
+    padding: 10px 14px; background: var(--blue-tint); border-radius: 12px; margin-top: 14px;
+    margin-right: 8px; word-break: break-all;
+  }
+  a.link:hover { background: #DCE4FF; }
+  a.link:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+  /* video placeholder */
+  .video {
+    margin-top: 20px; aspect-ratio: 16 / 9; border-radius: var(--r-lg);
+    border: 2px dashed var(--surface-2); background: var(--surface);
+    display: grid; place-items: center; text-align: center; color: var(--text-3);
+    padding: 20px;
+  }
+  .video .play {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--blue);
+    display: grid; place-items: center; margin: 0 auto 14px; color: #fff; font-size: 24px;
+    box-shadow: 0 8px 20px rgba(51,102,255,.35);
+  }
+  .video .t { font-size: 17px; font-weight: 600; color: var(--text-2); }
+  .video .d { font-size: 14px; margin-top: 4px; }
+
+  /* slack bubble */
+  .slack {
+    background: var(--surface); border-radius: var(--r-lg); padding: 20px; margin-top: 20px;
+  }
+  .msg { display: flex; gap: 12px; }
+  .avatar {
+    flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--blue);
+    display: grid; place-items: center; font-size: 20px;
+  }
+  .msg .name { font-size: 14px; font-weight: 700; }
+  .msg .name span { font-weight: 400; color: var(--text-3); margin-left: 6px; font-size: 13px; }
+  .msg .body { font-size: 15px; line-height: 1.6; color: var(--text-2); margin-top: 4px; word-break: keep-all; }
+  .msg .body b { color: var(--text); font-weight: 600; }
+  .msg .btn {
+    display: inline-block; margin-top: 10px; background: var(--blue); color: #fff;
+    font-size: 14px; font-weight: 600; padding: 9px 14px; border-radius: 10px;
+  }
+
+  /* compare */
+  .compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; margin-top: 8px; }
+  @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } .compare .sync { transform: rotate(90deg); } }
+  .box { background: var(--surface); border-radius: var(--r-md); padding: 20px; }
+  .box .h { font-size: 14px; color: var(--text-3); font-weight: 600; margin-bottom: 8px; }
+  .box .v { font-size: 17px; font-weight: 600; line-height: 1.4; word-break: keep-all; }
+  .sync { text-align: center; color: var(--blue); font-size: 26px; }
+
+  /* cover */
+  .cover { padding-top: 22vh; }
+  .cover .kicker { font-size: 16px; color: var(--text-3); font-weight: 500; margin-bottom: 18px; }
+  .cover h1 { margin-bottom: 20px; }
+  .cover .lead { margin-bottom: 0; }
+  .cover .who {
+    display: inline-flex; align-items: center; gap: 12px; margin-top: 40px;
+    background: var(--surface); padding: 10px 16px 10px 10px; border-radius: 999px;
+  }
+  .cover .who .av { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-tint); display: grid; place-items: center; }
+  .cover .who span { font-size: 15px; font-weight: 600; }
+  .cover .who em { font-style: normal; color: var(--text-3); font-weight: 400; }
+
+  /* bottom CTA (Toss 하단 고정 버튼) */
+  .cta-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    padding: 20px 24px 28px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 40%);
+  }
+  .cta-inner { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; }
+  .cta {
+    flex: 1; height: 56px; border-radius: 16px; background: var(--blue); color: #fff;
+    font-size: 17px; font-weight: 700; letter-spacing: -0.01em;
+    transition: background .15s, transform .1s;
+  }
+  .cta:hover { background: var(--blue-dark); }
+  .cta:active { transform: scale(.985); }
+  .cta:focus-visible, .back:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .back {
+    flex: none; height: 56px; padding: 0 20px; border-radius: 16px;
+    background: var(--surface); color: var(--text-2); font-size: 16px; font-weight: 600;
+  }
+  .back[disabled] { opacity: .35; cursor: default; }
+
+  .theme {
+    position: fixed; top: 10px; right: 76px; z-index: 20;
+    height: 32px; padding: 0 12px; border-radius: 999px;
+    background: var(--surface); color: var(--text-2);
+    font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+    transition: background .15s;
+  }
+  .theme:hover { background: var(--surface-2); }
+  .theme:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  /* architecture lanes */
+  .arch { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 10px; align-items: start; margin-top: 8px; }
+  .lane { background: var(--surface); border-radius: var(--r-lg); padding: 14px; min-height: 100%; }
+  .lane-h { font-size: 13px; font-weight: 700; color: var(--text-3); letter-spacing: 0; margin: 2px 0 10px 4px; }
+  .node { background: var(--bg); border-radius: var(--r-sm); padding: 12px 14px; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .node:last-child { margin-bottom: 0; }
+  .node .t { font-size: 15px; font-weight: 600; line-height: 1.4; word-break: keep-all; }
+  .node .d { font-size: 13px; color: var(--text-3); margin-top: 3px; line-height: 1.5; word-break: keep-all; }
+  .node.hi { border: 1.5px solid var(--blue); }
+  .node.ok { background: var(--green-tint); }
+  .node.warn { background: var(--red-tint); }
+  .arch .arrow { padding-top: 60px; }
+  @media (max-width: 640px) { .arch { grid-template-columns: 1fr; } .arch .arrow { display: none; } }
+  pre.code .c { color: var(--text-3); }
+  /* compare bars */
+  .bars { display: grid; gap: 14px; margin-top: 8px; }
+  .barrow .lbl { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .barrow .lbl b { color: var(--text); font-weight: 700; }
+  .barrow .track { height: 14px; border-radius: 7px; background: var(--surface-2); overflow: hidden; }
+  .barrow .fill { height: 100%; border-radius: 7px; background: var(--blue); }
+  .barrow .fill.gray { background: var(--text-3); }
+  /* chapter cover */
+  .slide.chapter { background: var(--blue); color: #fff; }
+  .chapter .wrap { padding-top: 14vh; }
+  .chapter .num { font-size: 15px; font-weight: 700; letter-spacing: .12em; opacity: .75; margin-bottom: 18px; }
+  .chapter .emo { font-size: 72px; line-height: 1; margin-bottom: 28px; }
+  .chapter h1 { color: #fff; margin-bottom: 16px; }
+  .chapter .tag { display: inline-block; font-size: 15px; font-weight: 600; background: rgba(255,255,255,.18); padding: 6px 12px; border-radius: 999px; margin-bottom: 22px; }
+  .chapter .lead { color: rgba(255,255,255,.85); margin-bottom: 0; }
+  .chapter .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; }
+  .chapter .meta span { font-size: 14px; font-weight: 500; background: rgba(255,255,255,.14); padding: 8px 12px; border-radius: 10px; color: rgba(255,255,255,.9); }
+  body.on-chapter .progress { background: rgba(255,255,255,.25); }
+  body.on-chapter .progress > i { background: #fff; }
+  body.on-chapter .counter { color: rgba(255,255,255,.75); }
+  body.on-chapter .theme { background: rgba(255,255,255,.16); color: #fff; }
+  body.on-chapter .cta-bar { background: linear-gradient(to bottom, rgba(51,102,255,0), var(--blue) 40%); }
+  body.on-chapter .cta { background: #fff; color: var(--blue); }
+  body.on-chapter .cta:hover { background: #EBF0FF; }
+  body.on-chapter .back { background: rgba(255,255,255,.16); color: #fff; }
+  body.on-chapter .hint { color: rgba(255,255,255,.6); }
+  .hint { position: fixed; bottom: 8px; left: 0; right: 0; text-align: center; font-size: 12px; color: var(--text-3); z-index: 21; }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 12px 0; border-bottom: 1px solid var(--surface); font-size: 17px; line-height: 1.5; display: flex; gap: 10px; align-items: baseline; word-break: keep-all; }
+  ul.plain li:last-child { border-bottom: 0; }
+  ul.plain li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); position: relative; top: -1px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+  .grid2 .panel { margin-top: 0; }
+  .grid2 .panel .e { font-size: 28px; margin-bottom: 10px; }
+  .grid2 .panel .t { font-size: 18px; font-weight: 700; line-height: 1.35; word-break: keep-all; }
+  .grid2 .panel .d { font-size: 15px; color: var(--text-2); margin-top: 6px; line-height: 1.55; word-break: keep-all; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+<div class="counter" id="counter" aria-live="polite"></div>
+<button class="theme" id="theme" aria-label="화면 모드 바꾸기"></button>
+
+<main class="deck" id="deck">
+
+  <!-- 1. 표지 -->
+  <section class="slide cover" data-cta="이야기 시작하기">
+    <div class="wrap">
+      <p class="kicker">PRE팀 스터디, 2026년 9월 16일</p>
+      <h1>2026년,<br>AI와 함께 만든 것들</h1>
+      <p class="lead">1월부터 지금까지 Claude와 같이 만들고,<br>그 과정에서 배운 이야기를 나눠요.</p>
+      <div class="who"><div class="av">👋</div><span>김성광 <em>PRE팀 프론트엔드</em></span></div>
+    </div>
+  </section>
+
+  <!-- 2. 한눈에 보기 -->
+  <section class="slide" data-cta="1월 이야기부터 보기">
+    <div class="wrap">
+      <h2>올해 네 가지를 만들었어요</h2>
+      <p class="lead">하나씩 만들다 보니, 앞에서 만든 게 다음 것의 재료가 되더라고요.</p>
+      <div class="rows">
+        <div class="row"><div class="ico">🎙️</div><div><div class="t">vetify.ai</div><div class="d">Claude로 처음 만든 서비스</div></div><div class="when">1월</div></div>
+        <div class="row"><div class="ico green">📚</div><div><div class="t">LLM Wiki</div><div class="d">소스코드를 원본 데이터로 보고 위키를 만들어요</div></div><div class="when">4월</div></div>
+        <div class="row"><div class="ico orange">💳</div><div><div class="t">돈티드</div><div class="d">법인카드 정산, 클릭 한 번으로</div></div><div class="when">8월</div></div>
+        <div class="row"><div class="ico red">🐞</div><div><div class="t">Bugted</div><div class="d">운영이슈를 담고, 담당자까지 찾아줘요</div></div><div class="when">8월</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 표지 01 -->
+  <section class="slide chapter" data-cta="vetify.ai 이야기 시작하기">
+    <div class="wrap">
+      <div class="num">CHAPTER 01</div>
+      <div class="emo">🎙️</div>
+      <span class="tag">2026년 1월</span>
+      <h1>vetify.ai</h1>
+      <p class="lead">Claude로 처음 만든 서비스. 개발을 AI에게 맡기는 감각을 여기서 익혔어요.</p>
+      <div class="meta"><span>ElevenLabs 연동 위임</span><span>Next.js MSW</span><span>Mock 데이터 · CLAUDE.md</span></div>
+    </div>
+  </section>
+
+  <!-- 3. vetify.ai -->
+  <section class="slide" data-cta="무엇이 인상적이었는지 보기">
+    <div class="wrap">
+      <span class="month">2026년 1월</span>
+      <h2>Claude로 처음 만든 서비스,<br>vetify.ai</h2>
+      <p class="lead">처음으로 개발을 AI에게 맡겨봤어요. 코드를 한 줄씩 쓰는 대신, 원하는 것을 말하고 결과를 확인하는 방식으로 일했어요.</p>
+    </div>
+  </section>
+
+  <!-- 4. 인상 깊었던 세 가지 -->
+  <section class="slide" data-cta="Mock 데이터 비법 보기">
+    <div class="wrap">
+      <span class="month">2026년 1월</span>
+      <h2>세 가지가 기억에 남아요</h2>
+      <div class="rows">
+        <div class="row"><div class="ico">🎙️</div><div><div class="t">ElevenLabs 연동을 통째로 맡겼어요</div><div class="d">낯선 SDK 문서를 직접 파지 않았어요. 원하는 동작만 설명하니 연동 코드가 나왔어요.</div></div></div>
+        <div class="row"><div class="ico green">🧩</div><div><div class="t">복잡한 Next.js MSW 설정을 금방 끝냈어요</div><div class="d">손으로 하면 늘 헤매던 설정인데, 한 번에 잡혔어요.</div></div></div>
+        <div class="row"><div class="ico orange">🗂️</div><div><div class="t">Mock 데이터를 AI로 뚝딱 만들었어요</div><div class="d">API 응답을 기다리지 않고, 데이터를 바꿔가며 화면을 바로 확인했어요.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CLAUDE.md 지침 -->
+  <section class="slide" data-cta="4월 이야기 보기">
+    <div class="wrap">
+      <span class="month">2026년 1월</span>
+      <h2>지침 한 줄로 Mock과 실제 API가<br>같이 움직여요</h2>
+      <p class="lead">CLAUDE.md에 "API를 연동할 때는 Mock 데이터도 함께 맞춰라"는 지침을 넣어뒀어요. 그 뒤로는 따로 신경 쓰지 않아도 둘이 어긋나지 않았어요.</p>
+      <pre class="code"><b># CLAUDE.md</b>
+<span class="k">## API 연동 규칙</span>
+- API 응답을 다루는 코드를 만들거나 바꿀 때는
+  MSW Mock 데이터도 같은 형태로 함께 갱신해요.
+- 화면 개발은 Mock 데이터를 기준으로 진행해요.</pre>
+      <div class="compare">
+        <div class="box"><div class="h">실제 API</div><div class="v">응답 타입이 바뀌면</div></div>
+        <div class="sync">⇄</div>
+        <div class="box"><div class="h">MSW Mock</div><div class="v">Mock 데이터도 따라 바뀌어요</div></div>
+      </div>
+      <p class="sub" style="margin-top:20px">덕분에 API가 준비되기 전에도 화면을 먼저 만들 수 있었어요.</p>
+    </div>
+  </section>
+
+  <!-- 표지 02 -->
+  <section class="slide chapter" data-cta="LLM Wiki 이야기 시작하기">
+    <div class="wrap">
+      <div class="num">CHAPTER 02</div>
+      <div class="emo">📚</div>
+      <span class="tag">2026년 4월 → 지금</span>
+      <h1>LLM Wiki</h1>
+      <p class="lead">소스코드를 원본 데이터로 보고, LLM이 읽기 좋은 위키를 만들고 낡지 않게 지켜요.</p>
+      <div class="meta"><span>docs/ 구조 · frontmatter TTL</span><span>docs-lint · Self-hosted 러너</span><span>벤치마크 · 지식 팩토리</span><span>48개 repo 적용</span></div>
+    </div>
+  </section>
+
+  <!-- 6. LLM Wiki -->
+  <section class="slide" data-cta="docs 폴더 안에 뭐가 있는지 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>소스코드를 원본 데이터로<br>보기로 했어요</h2>
+      <p class="lead">LLM Wiki 이야기를 듣고, 코드 자체를 RAW 데이터로 두고 그걸 기반으로 LLM이 읽기 좋은 위키를 만드는 스킬을 만들었어요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">🧱</div><div class="t">소스코드</div><div class="d">원본 데이터 (RAW)</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🤖</div><div class="t">LLM Wiki 스킬</div><div class="d">코드를 읽고 자연어로 풀어요</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">📚</div><div class="t">위키 문서</div><div class="d">LLM이 읽기 좋은 형태</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6-2. docs 디렉토리 -->
+  <section class="slide" data-cta="문서가 낡지 않게 한 방법 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>repo 안 docs/ 폴더에<br>이렇게 쌓여요</h2>
+      <p class="lead">위키는 별도 사이트가 아니라 repo 안에 마크다운으로 살아요. AGENTS.md와 CLAUDE.md에는 이 폴더의 목차만 들어가서, LLM이 필요한 문서를 찾아 들어가요.</p>
+      <pre class="code"><b>AGENTS.md</b>  <span class="c"># 100줄 이내 목차. docs/가 진짜 원본이에요</span>
+<b>CLAUDE.md</b>
+<b>docs/</b>
+├── <span class="k">architecture/</span>        <span class="c"># 시스템 구조, 데이터 흐름</span>
+├── <span class="k">domain/</span>              <span class="c"># 도메인별 상세 비즈니스 로직</span>
+├── <span class="k">coding-standards/</span>    <span class="c"># 코딩 컨벤션</span>
+├── <span class="k">workflows/</span>           <span class="c"># 개발·배포 작업 절차</span>
+├── <span class="k">runbooks/</span>            <span class="c"># 장애 대응 방법</span>
+├── <span class="k">decision-records/</span>    <span class="c"># ADR, 왜 이렇게 결정했는지</span>
+├── <span class="k">troubleshooting/</span>     <span class="c"># 알려진 이슈와 해결법</span>
+└── <span class="k">_meta/</span>               <span class="c"># 문서 운영 정책</span>
+    ├── product-owners.md    <span class="c"># git 활동 기반 자동 생성 담당자 표</span>
+    └── review-policy.md     <span class="c"># 리뷰 주기, TTL 규칙</span></pre>
+      <p class="sub" style="margin-top:20px">각 문서 상단에는 frontmatter로 점검일과 유효기간이 붙어요. 그 이야기를 이어서 해볼게요.</p>
+    </div>
+  </section>
+
+  <!-- 7. 신선도 -->
+  <section class="slide" data-cta="날짜를 자동으로 검사하는 법 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>문서가 스스로<br>유효기간을 들고 있어요</h2>
+      <p class="lead">코드는 계속 바뀌니까 문서도 금방 낡아요. 그래서 문서 상단에 "마지막 점검일 + 며칠까지 유효한지"를 적어두게 했어요.</p>
+      <pre class="code"><span class="k">---</span>
+<b>reviewed:</b> 2026-06-19
+<b>ttl_days:</b> 180
+<span class="k">---</span></pre>
+      <div class="panel">
+        <h3>이 문서는</h3>
+        <div class="big">2026년 12월 16일까지 믿을 수 있어요<small>6월 19일에 점검했고, 180일 동안 유효해요. 지나면 다시 점검할 차례예요.</small></div>
+      </div>
+      <p class="sub" style="margin-top:20px">이때 frontmatter라는 포맷을 알게 됐어요.</p>
+    </div>
+  </section>
+
+  <!-- 7-2. docs-lint -->
+  <section class="slide" data-cta="frontmatter로 덤으로 만든 것 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>PR을 올리면<br>날짜를 대신 확인해줘요</h2>
+      <p class="lead">유효기간을 적어두기만 하면 아무도 안 봐요. 그래서 GitHub Actions에 검사를 붙였어요. 문서를 건드린 PR에서 기한이 지난 문서를 찾아내요.</p>
+      <pre class="code"><b>name:</b> docs-lint
+
+<b>on:</b>
+  <span class="k">pull_request:</span>
+    paths:
+      - "AGENTS.md"
+      - "docs/**"
+      - "scripts/docs-lint.mjs"
+      - ".github/workflows/docs-lint.yml"
+  <span class="k">push:</span>
+    branches: [main, release]
+    paths:
+      - "AGENTS.md"
+      - "docs/**"
+      - "scripts/docs-lint.mjs"
+      - ".github/workflows/docs-lint.yml"
+
+<b>jobs:</b>
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Run docs lint
+        run: node scripts/docs-lint.mjs --strict</pre>
+      <p class="sub" style="margin-top:20px">문서가 낡으면 사람이 아니라 CI가 먼저 알려줘요.</p>
+    </div>
+  </section>
+
+  <!-- 8. Gatsby CMS -->
+  <section class="slide" data-cta="다시 본론으로 돌아가기">
+    <div class="wrap">
+      <span class="month">잠깐 곁길</span>
+      <h2>frontmatter를 알고 나니,<br>CMS도 뚝딱 만들어졌어요</h2>
+      <p class="lead">글 내용에 제목, 날짜, 작성자 같은 정보를 함께 담아두면 Gatsby가 마크다운을 알아서 페이지로 만들어줘요. 간단한 CMS가 이걸로 끝났어요.</p>
+      <pre class="code"><span class="k">---</span>
+<b>title:</b> "AX 도입 사례"
+<b>date:</b> "2026-09-16"
+<b>slug:</b> "ax-case-study"
+<b>category:</b> "Case Study"
+<b>description:</b> "제조업 AX 전환 사례"
+<b>featuredImage:</b> "hero.png"
+<b>author:</b> "김성광"
+<b>authorRole:</b> "AX Lab"
+<b>authorAvatar:</b> "sungkwang.png"
+<b>authorAvatarBg:</b> "#FFE9B0"
+<span class="k">---</span>
+본문 마크다운…
+
+![대체텍스트](./images/shot-1.png)</pre>
+    </div>
+  </section>
+
+  <!-- 9. Open Wiki -->
+  <section class="slide" data-cta="정말 RAG보다 나은지 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>LangChain도 같은 길을<br>가고 있었어요</h2>
+      <p class="lead">LangChain에서 Open Wiki라는 이름으로 똑같은 프로젝트를 시작했어요. LLM에게 더 나은 맥락을 주면 토큰 소모가 줄어든다는 결과도 보여줬어요.</p>
+      <div class="rows">
+        <div class="row"><div class="ico gray">💬</div><div><div class="t">Slack에서 공유된 이야기</div><a class="link" href="https://wantedx.slack.com/archives/C0104JVHKB3/p1784507671812889" target="_blank" rel="noopener">🔗 wantedx.slack.com 스레드 열기</a></div></div>
+        <div class="row"><div class="ico red">▶️</div><div><div class="t">Open Wiki 소개 영상</div><a class="link" href="https://youtu.be/S_PeI8JUqMg?si=WokxmnDSa6Y6yWFN" target="_blank" rel="noopener">🔗 YouTube에서 보기</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9-2. 벤치마크: Tencent LLM-Wiki -->
+  <section class="slide" data-cta="무엇이 차이를 만들었는지 보기">
+    <div class="wrap">
+      <span class="month">벤치마크 · 2026년 5월</span>
+      <h2>여러 문서를 건너뛰며 답할수록<br>위키가 더 크게 앞섰어요</h2>
+      <p class="lead">Tencent WeChat 팀이 문서를 링크 달린 위키 페이지로 컴파일하고, 에이전트가 검색·읽기·링크 따라가기를 반복하는 LLM-Wiki를 만들어 RAG 7종과 비교했어요. 답변 모델은 전부 같게 뒀어요.</p>
+      <div class="bars">
+        <div class="barrow"><div class="lbl"><span>MuSiQue (2~4홉 질문) F1</span><b>위키 0.739 · Dense RAG 0.611</b></div><div class="track"><div class="fill" style="width:73.9%"></div></div><div class="track" style="margin-top:4px"><div class="fill gray" style="width:61.1%"></div></div></div>
+        <div class="barrow"><div class="lbl"><span>2WikiMultiHopQA F1</span><b>위키 0.911 · Dense RAG 0.815</b></div><div class="track"><div class="fill" style="width:91.1%"></div></div><div class="track" style="margin-top:4px"><div class="fill gray" style="width:81.5%"></div></div></div>
+        <div class="barrow"><div class="lbl"><span>HotpotQA (2홉) F1</span><b>위키 0.839 · Dense RAG 0.764</b></div><div class="track"><div class="fill" style="width:83.9%"></div></div><div class="track" style="margin-top:4px"><div class="fill gray" style="width:76.4%"></div></div></div>
+      </div>
+      <div class="chips">
+        <span class="chip">가장 강한 기존 방식(LightRAG)보다도 +2.0~8.1 F1</span><span class="chip">4홉 질문에선 F1 0.983</span><span class="chip">질문당 지연 시간은 RAG와 비슷 (평균 2.5~3.9쪽만 읽어요)</span>
+      </div>
+      <p class="sub" style="margin-top:20px">단순히 더 많은 텍스트를 가져온 게 아니에요. 중간에 발견한 단서로 다음 검색을 이어갈 수 있는 구조가 차이를 만들었어요.</p>
+      <a class="link" href="https://arxiv.org/abs/2605.25480" target="_blank" rel="noopener">🔗 arXiv 2605.25480 · Retrieval as Reasoning</a>
+      <a class="link" href="https://news.hada.io/topic?id=32164" target="_blank" rel="noopener">🔗 GeekNews 소개 글</a>
+    </div>
+  </section>
+
+  <!-- 9-3. 벤치마크: ablation -->
+  <section class="slide" data-cta="이걸 운영에 옮긴 사례 보기">
+    <div class="wrap">
+      <span class="month">벤치마크 · 2026년 5월</span>
+      <h2>위키 구조보다 중요한 건<br>"쓰기 전에 얼마나 읽느냐"였어요</h2>
+      <p class="lead">구성 요소를 하나씩 빼봤어요. 위키 구조를 없애도 F1이 6~7점 떨어지지만, 에이전트가 한 번만 검색하고 링크를 안 따라가게 하면 12~14점이 떨어졌어요. 구조는 순회할 때만 힘을 발휘해요.</p>
+      <div class="bars">
+        <div class="barrow"><div class="lbl"><span>단계적 순회를 뺐을 때 (MuSiQue F1)</span><b>0.739 → 0.601, −13.8</b></div><div class="track"><div class="fill" style="width:60.1%;background:var(--red)"></div></div></div>
+        <div class="barrow"><div class="lbl"><span>위키 구조를 뺐을 때</span><b>0.739 → 0.669, −7.0</b></div><div class="track"><div class="fill" style="width:66.9%;background:var(--orange)"></div></div></div>
+        <div class="barrow"><div class="lbl"><span>Error Book(자기 수정)을 뺐을 때</span><b>0.739 → 0.699, −4.0</b></div><div class="track"><div class="fill" style="width:69.9%"></div></div></div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>우리 위키에 그대로 적용되는 교훈</h3>
+        <div class="big">AGENTS.md는 목차만, 진짜 내용은 docs/에서 읽게<small>인덱스 → 페이지 → 링크를 따라 들어가는 순회가 성능의 핵심이에요. 그리고 문서 오류의 절반 이상이 "깨진 링크"라서, 우리도 docs-lint처럼 자동 검사가 필요해요.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9-3b. 지식 팩토리 -->
+  <section class="slide" data-cta="쓰기 전에 얼마나 읽을지 정한 방법 보기">
+    <div class="wrap">
+      <span class="month">사례 · LLM Wiki Newsroom</span>
+      <h2>사람은 글을 쓰지 않고,<br>편집국을 설계해요</h2>
+      <p class="lead">Karpathy의 LLM Wiki를 Claude Code로 구현하다가 "AI가 만든 지식을 어디까지 믿을까"를 풀어낸 사례예요. 신문사 편집국처럼 역할을 나누고, 신뢰를 쌓는 루프 4개를 돌려요. 판단하는 AI는 '데스크' 한 자리뿐이에요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">편집국 5역할</div>
+          <div class="node"><div class="t">📰 기자</div><div class="d">원문을 취재해 소스 페이지를 써요</div></div>
+          <div class="node"><div class="t">✍️ 칼럼니스트</div><div class="d">여러 소스를 엮어 분석 페이지를 써요</div></div>
+          <div class="node ok"><div class="t">🔎 교열 = 파이썬 코드</div><div class="d">링크·인용·구조를 규칙으로 검사. AI 아님</div></div>
+          <div class="node hi"><div class="t">🧑‍⚖️ 데스크 = 유일한 판단 AI</div><div class="d">글쓴이 의도는 안 보고 원고만 평가해요</div></div>
+          <div class="node"><div class="t">🎯 편집장</div><div class="d">일을 나눠주는 오케스트레이터</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">신뢰를 쌓는 루프 4개</div>
+          <div class="node"><div class="t">① 이너 루프</div><div class="d">쓰는 중에 스스로 lint 점검</div></div>
+          <div class="node"><div class="t">② 아우터 루프</div><div class="d">발행 직전 이중 관문: 교열(규칙) → 데스크(AI)</div></div>
+          <div class="node"><div class="t">③ 메타 루프</div><div class="d">반복된 지적을 규칙·코드로 승격. 같은 실수는 두 번 안 해요</div></div>
+          <div class="node warn"><div class="t">④ 리그라운드 루프</div><div class="d">낡은 문서를 다시 입력으로 되먹여 고쳐 써요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">우리 위키와 겹치는 곳</div>
+          <div class="node"><div class="t">reviewed · ttl_days</div><div class="d">= 리그라운드 루프의 트리거</div></div>
+          <div class="node"><div class="t">docs-lint (GitHub Actions)</div><div class="d">= 교열 관문</div></div>
+          <div class="node"><div class="t">Self-hosted 러너의 주기 갱신</div><div class="d">= 리그라운드를 자동으로 돌리는 것</div></div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:20px">지식은 코드와 달리 발행 뒤에 낡아요. 그래서 소프트웨어 팩토리의 루프 3개에 4번째 루프가 하나 더 필요했어요.</p>
+      <a class="link" href="https://alfadur7.github.io/llm-wiki-newsroom/ko/knowledge-factory/" target="_blank" rel="noopener">🔗 지식 팩토리: 에이전트가 위키를 쓰고 사람은 편집국을 설계한다</a>
+    </div>
+  </section>
+
+  <!-- 9-3c. 그라운드 사다리 -->
+  <section class="slide" data-cta="반대 결과는 없는지 보기">
+    <div class="wrap">
+      <span class="month">사례 · LLM Wiki Newsroom</span>
+      <h2>근거가 모자랄 때만<br>한 칸씩 더 읽어요</h2>
+      <p class="lead">앞 논문의 "순회가 제일 중요하다"는 결과를 보고 붙인 장치예요. 이름은 그라운드 사다리. 위키 페이지를 쓰기 전에 기존 지식을 얼마나 읽을지 다섯 칸으로 나눴어요. 순서대로 오르는 게 아니라, 신호가 가리키는 칸으로 바로 가요.</p>
+      <div class="flow">
+        <div class="step" style="background:var(--blue-tint)"><div class="e">①</div><div class="t">페이지가 적어둔 의존 문서</div><div class="d">여기서 시작</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">②</div><div class="t">색인</div><div class="d">_index, AGENTS.md</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">③</div><div class="t">미리 계산된 링크</div><div class="d">빌드가 만든 백링크</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">④</div><div class="t">본문 검색</div><div class="d">링크 없는 숨은 관계</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">⑤</div><div class="t">위키 전체</div><div class="d">한 번에 읽힐 크기일 때만</div></div>
+      </div>
+      <div class="grid2" style="margin-top:24px">
+        <div class="panel"><div class="e">🚦</div><div class="t">올라가는 조건은 "근거 부족 신호"</div><div class="d">출처 없는 주장, 깨진 링크, 계속 빈손인 검색. 깨진 링크가 나오면 중간을 건너뛰고 ③으로 바로 가요.</div></div>
+        <div class="panel"><div class="e">📝</div><div class="t">어디서 멈췄는지 기록해요</div><div class="d">그래야 "덜 읽어서 난 결함"과 "못 써서 난 결함"을 구분하고, 메타 루프가 "더 넓게 읽어라"는 처방을 낼 수 있어요.</div></div>
+      </div>
+      <div class="chips">
+        <span class="chip">사람 승인이 필수인 7가지: 같은 이유로 3회 반려 · 새 카테고리 · 새 인물/개념 페이지 · 최상위 종합 페이지 · 지침 구조 변경 · Git push · 50% 이상 재작성</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9-4. 반대 결과 -->
+  <section class="slide" data-cta="우리는 어떻게 쓰는지 보기">
+    <div class="wrap">
+      <span class="month">벤치마크 · 2026년 5월</span>
+      <h2>다른 연구에선 비용이<br>21배 든다는 결과도 있어요</h2>
+      <p class="lead">같은 달 나온 사전등록 비교 연구예요. 논문 24편에 질문 13개로 벡터 RAG와 위키를 붙였는데, 종합력은 위키가 크게 앞섰지만 질문당 토큰은 21배, 응답 시간은 6.6배였어요. 한 줄짜리 사실 찾기는 RAG가 동등 이상이었어요.</p>
+      <div class="grid2">
+        <div class="panel"><div class="e">🧩</div><div class="t">문서 사이 연결 종합력</div><div class="d">10점 만점에 위키 9.5 vs RAG 5.4. 인용이 주장을 실제로 뒷받침한 비율도 40% vs 19%로 위키가 높았어요.</div></div>
+        <div class="panel"><div class="e">🪙</div><div class="t">질문당 토큰 21배</div><div class="d">에이전트가 페이지를 여러 번 읽어서요. "미리 만들어두면 질문은 싸진다"는 가설은 이 실험에선 뒤집혔어요.</div></div>
+        <div class="panel"><div class="e">🔍</div><div class="t">단순 사실 찾기는 RAG</div><div class="d">Tencent 연구에서도 단일 문서 질문은 HippoRAG 2가 2.3점 더 높았어요. 두 연구가 같은 방향이에요.</div></div>
+        <div class="panel"><div class="e">✂️</div><div class="t">질문을 쪼갠 RAG가 따라와요</div><div class="d">하위 질문으로 분해한 RAG는 종합력 격차의 88%를 좁혔어요. 다만 인용 정확도 격차는 남았어요.</div></div>
+      </div>
+      <div class="panel" style="margin-top:12px">
+        <h3>그래서 우리 결론</h3>
+        <div class="big">엮어서 이해해야 하면 위키, 한 줄 찾으면 검색<small>아키텍처·정책·결정을 한 번에 이해해야 하는 개발 맥락은 위키가 맞아요. 정책 한 줄을 찾는 사내 지식 검색은 검색 품질이 관건이라 QMD 같은 도구를 따로 보고 있어요.</small></div>
+      </div>
+      <a class="link" href="https://arxiv.org/abs/2605.18490" target="_blank" rel="noopener">🔗 arXiv 2605.18490 · Vector RAG vs LLM-Compiled Wiki</a>
+    </div>
+  </section>
+
+  <!-- 10. 두 축 -->
+  <section class="slide" data-cta="첫 번째 축 자세히 보기">
+    <div class="wrap">
+      <span class="month">2026년 4월</span>
+      <h2>두 가지 방향으로 쓰고 있어요</h2>
+      <p class="lead">같은 위키인데, 누가 읽느냐에 따라 쓰임이 달라요.</p>
+      <div class="grid2">
+        <div class="panel"><div class="e">🛠️</div><div class="t">개발을 더 잘하기 위한 정보</div><div class="d">코딩할 때 LLM에게 프로젝트 맥락을 풍부하게 줘요.</div></div>
+        <div class="panel"><div class="e">🔎</div><div class="t">사내 지식 카탈로그</div><div class="d">정책이 궁금한 사람이 검색하고 물어볼 수 있게 해요.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. 축 1 -->
+  <section class="slide" data-cta="두 번째 축 보기">
+    <div class="wrap">
+      <span class="month">첫 번째 축</span>
+      <h2>개발할 때 LLM에게<br>풍부한 맥락을 줘요</h2>
+      <p class="lead">위키에는 이런 문서가 들어 있어요. "개발 서버 배포 어떻게 해?" 같은 질문에 자연어로 바로 답할 수 있어요.</p>
+      <div class="chips">
+        <span class="chip">프로젝트 아키텍처</span><span class="chip">코딩 가이드</span><span class="chip">ADR (아키텍처 결정 기록)</span>
+        <span class="chip">개발 워크플로우</span><span class="chip">온보딩</span><span class="chip">개발 서버 배포 방법</span>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>자체 테스트도 해봤어요</h3>
+        <div class="big">LLM Wiki 있을 때 vs 없을 때<small>5개 과제로 A/B 테스트한 결과를 정리했어요 (2026-05-28)</small></div>
+        <a class="link" href="https://wantedlab.atlassian.net/wiki/spaces/~71520108/pages/4821549063/LLM+LLM+Wiki+5+A+B+2026-05-28" target="_blank" rel="noopener">🔗 Confluence에서 결과 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. 축 2 -->
+  <section class="slide" data-cta="검색 품질 이야기 보기">
+    <div class="wrap">
+      <span class="month">두 번째 축</span>
+      <h2>정책이 궁금하면<br>바로 물어볼 수 있게 했어요</h2>
+      <p class="lead">위키를 만들 때 비즈니스 로직까지 자연어로 풀어 쓰게 했어요. 그 내용을 검색엔진에 넣고, MCP와 Slack 봇으로 열어뒀어요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">✍️</div><div class="t">비즈니스 로직을 자연어로</div><div class="d">위키 생성 시 함께 작성</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🗄️</div><div class="t">검색엔진에 넣기</div><div class="d">사내 지식 카탈로그</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">💬</div><div class="t">MCP · Slack 봇</div><div class="d">누구나 질문할 수 있어요</div></div>
+      </div>
+      <div class="slack">
+        <div class="msg"><div class="avatar">🙋</div><div><div class="name">팀원 <span>오후 2:14</span></div><div class="body">지원서 상태가 <b>'검토중'</b>으로 바뀌는 조건이 뭐예요?</div></div></div>
+        <div class="msg" style="margin-top:14px"><div class="avatar" style="background:var(--green)">📚</div><div><div class="name">지식 봇 <span>오후 2:14</span></div><div class="body">위키 문서를 찾아봤어요. 기업이 지원서를 처음 열람하면 <b>'검토중'</b>으로 바뀌어요. 관련 문서 링크를 함께 드릴게요.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. QMD -->
+  <section class="slide" data-cta="48개 repo를 어떻게 돌렸는지 보기">
+    <div class="wrap">
+      <span class="month">두 번째 축</span>
+      <h2>검색 품질이 아쉬워서,<br>QMD를 써보고 있어요</h2>
+      <p class="lead">기존 검색은 생각보다 원하는 문서를 잘 못 찾았어요. QMD로 바꿔 테스트해보니 훨씬 잘 찾아주더라고요.</p>
+      <div class="panel">
+        <h3>추천해요</h3>
+        <div class="big">QMD는 개인적으로 써보기에도 좋아요<small>로컬에서 문서를 검색해보고 싶다면 꼭 한번 써보세요.</small></div>
+        <a class="link" href="https://news.hada.io/topic?id=26213" target="_blank" rel="noopener">🔗 QMD 소개 글 보기 (GeekNews)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13-2. 토큰과 러너 -->
+  <section class="slide" data-cta="결과가 어떻게 됐는지 보기">
+    <div class="wrap">
+      <span class="month">만들면서 부딪힌 문제</span>
+      <h2>개인 계정으로 돌리면<br>정작 일을 못 해요</h2>
+      <p class="lead">위키를 만들 때 토큰을 아주 많이 써요. 내 계정으로 돌리는 동안에는 개발을 못 하게 되더라고요. 그래서 문서 생성을 다른 곳으로 옮겼어요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">🖥️</div><div class="t">놀고 있던 M1 맥미니</div><div class="d">회사에서 발견했어요</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🏃</div><div class="t">Self-hosted 러너</div><div class="d">GitHub Actions를 여기서 돌려요</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🎫</div><div class="t">전용 계정 하나</div><div class="d">Claude Code Team 구독으로 생성해요</div></div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>이렇게 바뀌었어요</h3>
+        <div class="big">내 계정은 개발에만 써요<small>문서 생성은 맥미니가 알아서 돌려요.</small></div>
+      </div>
+      <a class="link" href="https://docs.github.com/ko/actions/concepts/runners/self-hosted-runners" target="_blank" rel="noopener">🔗 Self-hosted runner 공식 문서</a>
+    </div>
+  </section>
+
+  <!-- 13-3. 결과 -->
+  <section class="slide" data-cta="다음에 해보고 싶은 것 보기">
+    <div class="wrap">
+      <span class="month">지금까지</span>
+      <h2>활발하게 개발 중인<br>repo에 모두 적용했어요</h2>
+      <div class="panel">
+        <h3>LLM Wiki 문서 생성</h3>
+        <div class="big">48개 repo, 생성 완료<small>지금도 활발하게 개발되고 있는 저장소들이에요.</small></div>
+      </div>
+      <div class="panel">
+        <h3>다음에 하고 있는 일</h3>
+        <div class="big">문서가 스스로 갱신되게 만들고 있어요<small>맥미니의 Self-hosted 러너가 주기적으로 문서를 다시 만들어요.</small></div>
+      </div>
+      <p class="sub" style="margin-top:20px">사람이 챙기지 않아도 위키가 코드를 따라오게 하는 게 목표예요.</p>
+    </div>
+  </section>
+
+  <!-- 13-4. 서비스 단위 그룹핑 -->
+  <section class="slide" data-cta="8월 이야기 보기">
+    <div class="wrap">
+      <span class="month">해보고 싶은 것</span>
+      <h2>repo가 아니라 서비스 단위로<br>위키를 묶어보려고 해요</h2>
+      <p class="lead">지금은 repo 하나에 위키 하나예요. 그런데 "원티드 서비스"는 repo 여섯 개가 함께 만들어요. 프론트가 부르는 API는 백엔드 repo에 있고, 어드민에서 바꾼 정책은 B2C 화면에 나타나요. 한 그룹으로 묶으면 서로의 빈 곳을 채워줄 거라고 보고 있어요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">지금 · repo마다 위키 하나</div>
+          <div class="node"><div class="t">🖥️ B2C 프론트엔드</div></div>
+          <div class="node"><div class="t">⚙️ B2C 백엔드</div></div>
+          <div class="node"><div class="t">🏢 B2B 프론트엔드</div></div>
+          <div class="node"><div class="t">⚙️ B2B 백엔드</div></div>
+          <div class="node"><div class="t">🛠️ 내부 어드민 프론트엔드</div></div>
+          <div class="node"><div class="t">⚙️ 내부 어드민 백엔드</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">다음 · "원티드 서비스" 그룹 위키</div>
+          <div class="node hi"><div class="t">🗺️ 그룹 인덱스</div><div class="d">서비스 전체 지도. repo 인덱스로 내려가요</div></div>
+          <div class="node"><div class="t">🔗 API 계약 페이지</div><div class="d">프론트의 호출과 백엔드의 구현을 한 페이지에 양방향 링크로</div></div>
+          <div class="node"><div class="t">📖 도메인 용어 사전</div><div class="d">여섯 repo가 같은 말을 같은 뜻으로</div></div>
+          <div class="node"><div class="t">🧵 기능별 end-to-end 흐름</div><div class="d">어드민 설정 → 백엔드 정책 → B2C 화면까지 한 줄로</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">기대하는 것</div>
+          <div class="node ok"><div class="t">에이전트가 repo 경계를 넘어 순회해요</div><div class="d">"이 필드 어디서 채워져?"를 프론트 위키에서 백엔드 위키로 링크 따라 답해요</div></div>
+          <div class="node"><div class="t">Bugted 라우팅 단위와 같아져요</div><div class="d">담당자 표도 이미 서비스 그룹 단위예요</div></div>
+          <div class="node warn"><div class="t">인덱스가 커지는 건 조심해요</div><div class="d">그룹 → repo → 페이지의 계층 인덱스로 풀 계획이에요</div></div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:20px">앞의 벤치마크에서 위키가 이긴 지점이 정확히 "여러 문서를 건너뛰며 답하는 질문"이었어요. repo 경계가 그 문서 경계예요.</p>
+    </div>
+  </section>
+
+  <!-- 표지 03 -->
+  <section class="slide chapter" data-cta="돈티드 이야기 시작하기">
+    <div class="wrap">
+      <div class="num">CHAPTER 03</div>
+      <div class="emo">💳</div>
+      <span class="tag">2026년 8월</span>
+      <h1>돈티드</h1>
+      <p class="lead">법인카드 정산을 클릭 한 번으로. API 없는 카드사 사이트를 크롤링해 Slack으로 가져왔어요.</p>
+      <div class="meta"><span>크롤러 → Slack → 지출결의서</span><span>기계 데이터와 사람 입력의 분리</span></div>
+    </div>
+  </section>
+
+  <!-- 14. 돈티드 문제 -->
+  <section class="slide" data-cta="돈티드가 어떻게 바꿨는지 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>법인카드 정산,<br>이렇게 번거로웠어요</h2>
+      <p class="lead">우리 회사는 리더 몇 분만 법인카드가 있고, 팀원들은 그 카드를 돌려써요. 쓸 때마다 전자결제 서비스에 내역을 하나하나 손으로 적어야 했어요.</p>
+      <div class="panel">
+        <h3>매번 직접 입력해야 했던 것</h3>
+        <div class="chips" style="margin-top:4px">
+          <span class="chip">날짜</span><span class="chip">거래처명</span><span class="chip">용도</span>
+          <span class="chip">함께 사용한 사람</span><span class="chip">카드 뒷자리</span><span class="chip">총계</span>
+        </div>
+      </div>
+      <div class="rows" style="margin-top:12px">
+        <div class="row"><div class="ico red">😵</div><div><div class="t">오타가 나고, 다시 써야 했어요</div></div></div>
+        <div class="row"><div class="ico red">🚫</div><div><div class="t">카드사는 API를 제공하지 않아요</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. 돈티드 해결 -->
+  <section class="slide" data-cta="데이터가 어떻게 흐르는지 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>클릭 한 번으로<br>지출결의서가 올라가요</h2>
+      <p class="lead">카드사 사이트에 로그인 정보를 등록하면, 사용 내역을 읽어와 Slack으로 알려줘요. 내역을 클릭하면 지출결의서가 자동으로 올라가요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">🕷️</div><div class="t">카드사 사이트 크롤링</div><div class="d">API 대신 직접 읽어와요</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🔔</div><div class="t">Slack 알림</div><div class="d">결제 즉시 도착</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">👆</div><div class="t">클릭 한 번</div><div class="d">지출결의서 자동 등록</div></div>
+      </div>
+      <div class="slack">
+        <div class="msg"><div class="avatar" style="background:var(--orange)">💳</div><div><div class="name">돈티드 <span>방금</span></div><div class="body"><b>32,000원</b>이 결제됐어요. 지출결의서로 올릴까요?<br><span style="color:var(--text-3)">스타벅스 역삼점 · 9월 16일 12:40 · 카드 끝자리 1234</span><span class="btn">지출결의서 올리기</span></div></div></div>
+      </div>
+      <div class="video"><div><div class="play">▶</div><div class="t">시연영상을 여기서 보여드려요</div><div class="d">Slack 알림부터 결의서 등록까지</div></div></div>
+    </div>
+  </section>
+
+  <!-- 15-2. 돈티드 데이터 흐름 -->
+  <section class="slide" data-cta="Bugted 이야기 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>데이터는 이렇게 흘러요</h2>
+      <p class="lead">카드사가 만든 데이터와 사용자가 적는 데이터를 따로 두는 게 핵심이에요. 크롤러가 다시 돌아도 사용자가 쓴 내용은 절대 덮어쓰지 않아요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">① 가져오기 (크롤러)</div>
+          <div class="node"><div class="t">🔐 BC카드 계정 등록</div><div class="d">로그인 확인이 되면 크롤링을 시작해요</div></div>
+          <div class="node"><div class="t">🕷️ 주기적 크롤링</div><div class="d">계정별로 순서대로, 요청 간격을 띄워서</div></div>
+          <div class="node hi"><div class="t">🗄️ 거래내역 저장</div><div class="d">카드번호+승인일시+승인번호로 중복을 걸러요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">② 알리기 (Slack)</div>
+          <div class="node"><div class="t">🆕 새 거래 감지</div><div class="d">이전 크롤링에 없던 건만 골라요</div></div>
+          <div class="node"><div class="t">🔔 Slack 메시지</div><div class="d">금액, 가맹점, 카드 뒷자리를 담아 보내요</div></div>
+          <div class="node"><div class="t">🗂️ 미작성 / 작성완료</div><div class="d">아직 안 쓴 건만 모아 볼 수 있어요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">③ 올리기 (사용자)</div>
+          <div class="node"><div class="t">👆 내역 클릭</div><div class="d">그때 처음 지출 항목이 만들어져요</div></div>
+          <div class="node"><div class="t">✍️ 용도, 함께 쓴 사람만 채우기</div><div class="d">날짜·거래처·금액·뒷자리는 이미 들어가 있어요</div></div>
+          <div class="node ok"><div class="t">📄 지출결의서 자동 등록</div><div class="d">전자결재 서비스에 올라가요</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 표지 04 -->
+  <section class="slide chapter" data-cta="Bugted 이야기 시작하기">
+    <div class="wrap">
+      <div class="num">CHAPTER 04</div>
+      <div class="emo">🐞</div>
+      <span class="tag">2026년 8월 → 지금</span>
+      <h1>Bugted</h1>
+      <p class="lead">사용자 화면의 개발자도구를 내 자리에서 열어요. 버그 제보 순간을 담고, 담당자까지 찾아줘요.</p>
+      <div class="meta"><span>SDK · Relay · 뷰어 3층 구조</span><span>기록 트리거 모델</span><span>담당자 추천 · AI 다이제스트</span><span>운영 환경 계획</span></div>
+    </div>
+  </section>
+
+  <!-- 16. Bugted 배경 -->
+  <section class="slide" data-cta="Bugted가 무엇인지 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>"운영이슈를 전부 AI로<br>자동 처리해보세요"</h2>
+      <p class="lead">7월에 CTO분이 이런 미션을 주셨어요. 꽤 골치가 아팠는데, 희준이형이 아이디어와 관련 기술을 제공해줘서 Bugted를 만들 수 있었어요.</p>
+      <div class="rows">
+        <div class="row"><div class="ico gray">🎯</div><div><div class="t">미션</div><div class="d">모든 운영이슈를 AI로 자동화해서 처리하기</div></div></div>
+        <div class="row"><div class="ico">💡</div><div><div class="t">아이디어와 기술</div><div class="d">희준이형이 함께해줬어요</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17. Bugted 무엇인가 -->
+  <section class="slide" data-cta="전체 구조 한눈에 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>사용자 화면의 개발자도구를<br>내 자리에서 열어요</h2>
+      <p class="lead">웹뷰나 웹페이지에 SDK를 심으면 콘솔·네트워크가 Chrome DevTools 메시지(CDP)로 흘러나와요. 그걸 진짜 Chrome 개발자도구 화면에서 그대로 봐요. 저장해두면 나중에 다시 재생할 수도 있어요.</p>
+      <div class="rows">
+        <div class="row"><div class="ico">🧩</div><div><div class="t">계측은 직접 만들지 않았어요</div><div class="d">chobitsu라는 인페이지 CDP 구현체를 썼어요. 우리가 만든 건 웹소켓 브리지, 룸·재연결·버퍼, 플로팅 버튼이에요.</div></div></div>
+        <div class="row"><div class="ico green">🛠️</div><div><div class="t">뷰어도 Chrome 개발자도구 그대로예요</div><div class="d">devtools-frontend를 정적 파일로 띄워요. Network·Console 패널을 공짜로 얻었어요.</div></div></div>
+        <div class="row"><div class="ico orange">🎞️</div><div><div class="t">화면은 rrweb으로 녹화해요</div><div class="d">DOM을 기록해서 용량이 작고, 배속·스크럽·커서 재현이 따라와요.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-1. 아키텍처 -->
+  <section class="slide" data-cta="두 가지 사용 모드 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>세 층으로 나눠져 있어요</h2>
+      <p class="lead">가운데 Relay는 메시지 내용을 읽지 않아요. 룸 번호만 보고 바이트를 그대로 흘려보내는 게 원칙이에요. 그래서 빠르고 단순해요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">인앱 SDK · TypeScript</div>
+          <div class="node hi"><div class="t">🧩 chobitsu 브리지</div><div class="d">페이지의 fetch·console·DOM → CDP 이벤트</div></div>
+          <div class="node"><div class="t">🎞️ rrweb 화면 트랙</div><div class="d">기록 중에만 켜져요</div></div>
+          <div class="node"><div class="t">🔁 Transport</div><div class="d">ws 재연결 + 송신 큐(로컬 링버퍼 2,000건/5MB)</div></div>
+          <div class="node"><div class="t">🐞 플로팅 버튼</div><div class="d">closed Shadow DOM으로 앱과 격리</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">Relay · Go</div>
+          <div class="node hi"><div class="t">🚦 룸 매칭 · fan-out</div><div class="d">CDP를 파싱하지 않는 불투명 릴레이</div></div>
+          <div class="node"><div class="t">🧠 서버 링버퍼</div><div class="d">룸당 최근 2,000건. 늦게 붙은 뷰어에 replay</div></div>
+          <div class="node"><div class="t">💾 기록 writer</div><div class="d">메타 → PostgreSQL, CDP 청크 → S3(gzip)</div></div>
+          <div class="node"><div class="t">🎟️ Jira · Slack · 담당자 추천 · AI 다이제스트</div><div class="d">시크릿은 Relay만 들고 있어요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">보는 곳</div>
+          <div class="node ok"><div class="t">🛠️ Chrome devtools-frontend</div><div class="d">라이브도, 재생도 같은 뷰어</div></div>
+          <div class="node"><div class="t">🖥️ Next.js web</div><div class="d">룸·기록 목록, 화면 재생(rrweb-player), 통계</div></div>
+          <div class="node"><div class="t">🤖 AI 에이전트</div><div class="d">다이제스트 URL · MCP로 접근</div></div>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip">TypeScript · esbuild</span><span class="chip">Go 1.25 · gorilla/websocket</span><span class="chip">Next.js 16 · React 19 · WDS</span><span class="chip">PostgreSQL + S3</span><span class="chip">bun workspaces</span><span class="chip">Backyard(사내 K8s)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-1b. 두 모드 -->
+  <section class="slide" data-cta="기록이 시작되는 순간 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>쓰는 방법은 두 가지예요</h2>
+      <p class="lead">지금 같이 보거나, 남겨두고 나중에 보거나. 뷰어는 둘 다 같은 화면이에요.</p>
+      <div class="grid2">
+        <div class="panel"><div class="e">📡</div><div class="t">라이브 디버깅</div><div class="d">SDK ↔ Relay ↔ 뷰어를 실시간으로 중계해요. 저장하지 않고, 서버 메모리 링버퍼만 써요. 공유 링크를 보내면 상대 화면의 개발자도구가 내 브라우저에 떠요.</div></div>
+        <div class="panel"><div class="e">⏺️</div><div class="t">기록 &amp; 재생</div><div class="d">사용자가 "기록"을 누른 순간부터 CDP 스트림을 PostgreSQL(메타) + S3(청크)에 영구 저장해요. 나중에 DevTools 재생(Network·Console)이나 화면 재생(rrweb)으로 다시 봐요.</div></div>
+      </div>
+      <p class="sub" style="margin-top:20px">기록엔 뷰어가 없어서 응답 body, 쿠키·스토리지 스냅샷을 SDK가 따로 실어 보내요.</p>
+    </div>
+  </section>
+
+  <!-- 17-1c. 기록 트리거 모델 -->
+  <section class="slide" data-cta="제보가 이슈가 되는 과정 보기">
+    <div class="wrap">
+      <span class="month">설계 결정</span>
+      <h2>누르기 전엔 보내지 않고,<br>누르면 그 전까지 다 보내요</h2>
+      <p class="lead">"기록"을 누르기 전 상황이 보통 원인이에요. 그래서 SDK는 항상 로컬 버퍼를 채우고 있다가, 트리거 순간 버퍼를 통째로 보내고 그 뒤로는 스트리밍해요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">🤫</div><div class="t">트리거 전</div><div class="d">SDK 로컬 링버퍼만. 네트워크 전송 0</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--blue-tint)"><div class="e">👆</div><div class="t">트리거</div><div class="d">버퍼 + 메타를 HTTP POST로 한 번에 덤프</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">📡</div><div class="t">이후</div><div class="d">WS 스트리밍. 5MB 또는 30초마다 S3 청크</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--green-tint)"><div class="e">⏹️</div><div class="t">종료</div><div class="d">마지막 flush, DB status=closed</div></div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>세 가지 안 중에 골랐어요</h3>
+        <div class="rows">
+          <div class="row" style="padding:12px 0"><div class="ico red" style="width:40px;height:40px;font-size:18px">A</div><div><div class="t" style="font-size:16px">트리거 시 스냅샷만</div><div class="d">그 뒤를 라이브로 볼 수 없어요</div></div></div>
+          <div class="row" style="padding:12px 0"><div class="ico red" style="width:40px;height:40px;font-size:18px">B</div><div><div class="t" style="font-size:16px">항상 스트리밍</div><div class="d">99%는 버려질 데이터를 계속 보내고, 프라이버시 부담도 커요</div></div></div>
+          <div class="row" style="padding:12px 0"><div class="ico green" style="width:40px;height:40px;font-size:18px">C</div><div><div class="t" style="font-size:16px">로컬 버퍼 덤프 + 이후 스트리밍 (채택)</div><div class="d">전 상황도 남고, 이후도 라이브로 봐요. 나중에 운영 환경 계획의 바탕이 됐어요.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-1d. 제보 흐름 -->
+  <section class="slide" data-cta="AI가 이어받는 부분 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>기록을 끝내면<br>담당자까지 골라져 있어요</h2>
+      <p class="lead">플로팅 패널도 한 화면에 한 가지만 물어요. 기록을 끝낸 페이지 URL로 담당자를 추천하고, 제목만 적으면 Jira 이슈가 만들어져요. 버그인지 확신이 없으면 Slack으로 먼저 물어볼 수도 있어요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">플로팅 패널</div>
+          <div class="node"><div class="t">⏹️ 기록 종료</div><div class="d">자동으로 제보 화면으로 넘어가요</div></div>
+          <div class="node"><div class="t">✉️ 보고자 이메일</div><div class="d">최초 1회만 물어요</div></div>
+          <div class="node"><div class="t">✍️ 제목 + 받는 사람</div><div class="d">추천 담당자가 기본 선택돼 있어요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">Relay · 담당자 추천</div>
+          <div class="node hi"><div class="t">🧭 URL → 라우팅 표</div><div class="d">host 글로브 + path 프리픽스로 결정적 매칭. 환경(dev1~8·www)은 *로 흡수</div></div>
+          <div class="node"><div class="t">📚 근거는 LLM Wiki</div><div class="d">userweb docs/_meta/product-owners.md(git 활동 기반) → 유저웹 44 라우트</div></div>
+          <div class="node"><div class="t">🙋 자동 배정이 아니라 추천</div><div class="d">제보자가 확인하고 바꿀 수 있어요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">도착하는 곳</div>
+          <div class="node ok"><div class="t">🎟️ Jira 이슈</div><div class="d">보고자 = 버튼 누른 사람. 기록·화면 녹화·AI 컨텍스트 링크 포함</div></div>
+          <div class="node"><div class="t">💬 Slack #bugted-ops</div><div class="d">"버그인지 확인해 주세요" 문의</div></div>
+        </div>
+      </div>
+      <div class="slack">
+        <div class="msg"><div class="avatar" style="background:var(--red)">🐞</div><div><div class="name">Bugted <span>방금</span></div><div class="body"><b>🔍 이력서 미리보기에서 저장이 안 돼요</b><br>🟧 /cv/review 페이지에서 PUT 요청이 500으로 실패했어요.<br><span style="color:var(--text-3)">🏷 userweb · production · 담당자 우연서</span><span class="btn">기록 보기</span> <span class="btn" style="background:var(--surface);color:var(--text-2)">스크린 녹화</span> <span class="btn" style="background:var(--surface);color:var(--text-2)">페이지 열기</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-1e. AI 연동 -->
+  <section class="slide" data-cta="SDK라서 아쉬웠던 점 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>기록 한 건을<br>AI가 읽을 문서 한 장으로 만들어요</h2>
+      <p class="lead">처음엔 MCP 서버로 시작했는데, 방향을 바꿨어요. 이슈 링크에서 출발하는 에이전트에겐 툴 왕복보다 마크다운 문서 하나가 나았어요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">📼</div><div class="t">기록 1건</div><div class="d">CDP 청크 + rrweb 트랙</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--blue-tint)"><div class="e">📄</div><div class="t">다이제스트</div><div class="d">타임라인 · 예외 · 실패 요청+응답 body · 사용자 클릭/입력</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🔗</div><div class="t">Jira · Slack에 링크</div><div class="d">설정 0으로 에이전트에 도달</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--green-tint)"><div class="e">🤖</div><div class="t">코딩 에이전트</div><div class="d">회사 표준 Atlassian·Slack MCP를 타고 읽어요</div></div>
+      </div>
+      <div class="rows" style="margin-top:12px">
+        <div class="row"><div class="ico">✨</div><div><div class="t">이슈 제목과 요약을 AI가 써요</div><div class="d">다이제스트를 사내 LaaS(Ennoia)에 넘겨 제목·요약을 받아요. 실패해도 이슈 생성은 막지 않아요.</div></div></div>
+        <div class="row"><div class="ico gray">🔌</div><div><div class="t">MCP 서버는 보조 채널로 남겨뒀어요</div><div class="d">콘솔 에러·실패 요청·예외를 걸러진 뷰로 주는 툴 4개. 사용량을 보고 존폐를 정해요.</div></div></div>
+        <div class="row"><div class="ico green">📈</div><div><div class="t">만든 이슈가 처리되는지도 재요</div><div class="d">1시간마다 Jira 상태를 동기화해서 처리율·소요시간 대시보드를 봐요.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-2. Bugted SDK 한계 -->
+  <section class="slide" data-cta="운영 환경 계획 보기">
+    <div class="wrap">
+      <span class="month">2026년 8월</span>
+      <h2>SDK라서 놓치는<br>순간이 있었어요</h2>
+      <p class="lead">SDK는 페이지가 다 열린 뒤에 초기화돼요. 그래서 그 이후에 보낸 요청만 수집할 수 있어요. 새로고침하면 초기화 전에 나간 네트워크 요청은 잡지 못했어요.</p>
+      <div class="flow">
+        <div class="step"><div class="e">🔄</div><div class="t">새로고침</div><div class="d">페이지가 다시 열려요</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--red-tint)"><div class="e">📡</div><div class="t">로딩 중 API 호출</div><div class="d" style="color:var(--red)">SDK가 아직 없어서 못 잡아요</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="e">🐞</div><div class="t">SDK 초기화</div><div class="d">이제부터 준비 완료</div></div>
+        <div class="arrow">→</div>
+        <div class="step" style="background:var(--green-tint)"><div class="e">✅</div><div class="t">이후 요청</div><div class="d" style="color:var(--green)">정상 수집</div></div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>그래서 이런 생각이 들었어요</h3>
+        <div class="big">Chrome 확장 프로그램으로도 제공해야 할까?<small>확장 프로그램은 페이지보다 먼저 떠 있으니, 첫 요청부터 빠짐없이 담을 수 있어요.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17-3. 운영 환경 계획 -->
+  <section class="slide" data-cta="배운 점 정리 보기">
+    <div class="wrap">
+      <span class="month">다음 계획</span>
+      <h2>운영 환경에서도 리플레이를 켜요.<br>보내는 건 문제가 생겼을 때만</h2>
+      <p class="lead">OTEL을 기반으로 운영 환경에서도 Sentry Session Replay를 켤 계획이에요. 원칙은 기록 트리거 모델과 같아요. 녹화는 항상 브라우저 안에서만 하고, 에러 같은 문제가 생긴 순간에만 그 구간을 서버로 보내요.</p>
+      <div class="arch">
+        <div class="lane">
+          <div class="lane-h">평소 · 사용자 브라우저</div>
+          <div class="node hi"><div class="t">🎞️ 항상 녹화, 전송 0</div><div class="d">rrweb 세그먼트 버퍼를 메모리 예산 안에서 돌려 써요</div></div>
+          <div class="node"><div class="t">📡 OTEL 계측</div><div class="d">트레이스·에러 신호가 트리거 기준</div></div>
+          <div class="node"><div class="t">🙈 마스킹 기본</div><div class="d">입력값·헤더·스토리지는 가려요</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">문제가 생긴 순간</div>
+          <div class="node warn"><div class="t">⚠️ 트리거</div><div class="d">JS 에러 · API 실패 · rage click</div></div>
+          <div class="node"><div class="t">🛂 서버 승인</div><div class="d">핑거프린트로 같은 에러는 쿼터 안에서만</div></div>
+          <div class="node"><div class="t">📤 그 구간만 전송</div><div class="d">버퍼 덤프 → 잠시 스트리밍 → 자동 종료</div></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="lane">
+          <div class="lane-h">보는 곳</div>
+          <div class="node ok"><div class="t">▶️ Sentry Session Replay</div><div class="d">에러와 화면 기록이 한 화면에</div></div>
+          <div class="node"><div class="t">🐞 Bugted 기록 · 다이제스트</div><div class="d">승인된 건은 기존 기록 흐름을 그대로 타요</div></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>지금 상태</h3>
+        <div class="big">구현 가능성 검토를 끝냈어요<small>2026년 9월 16일. 착수 여부를 정하는 단계예요. 먼저 정할 두 가지가 있어요: 운영 사용자가 보낼 수신 경로만 밖으로 여는 것, 그리고 같은 에러를 묶는 핑거프린트 규칙이에요.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18. 배운 것 -->
+  <section class="slide" data-cta="질문 받기">
+    <div class="wrap">
+      <h2>AI와 일하며 배운 네 가지</h2>
+      <p class="lead">네 프로젝트와 논문, 다른 팀 사례까지 돌아보니 결국 같은 네 문장으로 모여요.</p>
+      <div class="grid2">
+        <div class="panel"><div class="e">🤝</div><div class="t">모르는 것부터 맡기고, 아는 것은 검토해요</div><div class="d">ElevenLabs 연동, Next.js MSW 설정, Go 웹소켓 릴레이처럼 내가 헤맬 영역에서 위임 효율이 가장 컸어요. 반대로 내가 잘 아는 영역은 AI가 쓴 걸 검토하는 쪽이 빨랐어요. "무엇을 맡길까"의 기준은 난이도가 아니라 나와의 거리였어요.<br><span style="color:var(--text-3)">→ vetify.ai · Bugted</span></div></div>
+        <div class="panel"><div class="e">📝</div><div class="t">규칙은 말로 하지 않고 파일과 코드에 심어요</div><div class="d">CLAUDE.md의 Mock 동기화 지침, frontmatter의 reviewed·ttl_days, PR마다 도는 docs-lint, 담당자 라우팅 표 routing/*.json. 프롬프트로 부탁한 규칙은 잊히지만, 파일과 CI에 심은 규칙은 매번 지켜져요. 지식 팩토리의 메타 루프도 같은 말이에요. 반복된 지적은 규칙으로 승격하세요.<br><span style="color:var(--text-3)">→ vetify.ai · LLM Wiki · Bugted · 지식 팩토리</span></div></div>
+        <div class="panel"><div class="e">🎯</div><div class="t">AI가 판단하는 자리를 하나로 좁혀요</div><div class="d">Relay는 메시지를 읽지 않고 흘려보내요. 교열은 파이썬 규칙이고, 판단하는 AI는 데스크 한 자리예요. 담당자는 자동 배정이 아니라 추천이고, 제보자가 확인해요. 자율성은 최대로 올리되, 사람 검토 없이 통과시키는 범위는 신뢰가 쌓인 만큼만 넓혀요. 어디서 AI가 판단하고 어디서 판단하지 않을지 정하는 게 설계예요.<br><span style="color:var(--text-3)">→ Bugted · 지식 팩토리</span></div></div>
+        <div class="panel"><div class="e">🔗</div><div class="t">맥락은 자산이지만 유통기한이 있어요</div><div class="d">소스코드가 원본이고 위키가 맥락이에요. 위키의 product-owners.md는 Bugted의 담당자 추천이 됐고, 버그 기록 한 건은 다이제스트 한 장이 되어 에이전트에게 닿아요. 산출물은 다음 프로젝트의 재료가 돼요. 다만 맥락은 코드보다 빨리 낡아요. 그래서 만드는 비용은 맥미니 러너 같은 인프라로, 낡는 문제는 유효기간과 주기 갱신으로 풀어야 해요.<br><span style="color:var(--text-3)">→ LLM Wiki · Bugted</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19. 마무리 -->
+  <section class="slide cover" data-cta="처음으로 돌아가기">
+    <div class="wrap">
+      <h1>들어주셔서<br>고마워요</h1>
+      <p class="lead" style="margin-top:20px">궁금한 점을 편하게 물어봐 주세요.</p>
+      <div style="margin-top:32px">
+
+
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="cta-bar">
+  <div class="cta-inner">
+    <button class="back" id="back" aria-label="이전 이야기로">이전</button>
+    <button class="cta" id="next"></button>
+  </div>
+</div>
+<div class="hint" aria-hidden="true">← → 키로도 넘길 수 있어요</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar = document.getElementById('bar');
+  var counter = document.getElementById('counter');
+  var next = document.getElementById('next');
+  var back = document.getElementById('back');
+  var idx = 0;
+
+  try {
+    var saved = parseInt(localStorage.getItem('ai-dev-2026-slide'), 10);
+    if (!isNaN(saved) && saved >= 0 && saved < slides.length) idx = saved;
+  } catch (e) {}
+
+  function show(i, dir) {
+    if (i < 0 || i >= slides.length) return;
+    slides.forEach(function (s) { s.classList.remove('active', 'enter', 'enter-back'); });
+    var s = slides[i];
+    document.body.classList.toggle('on-chapter', s.classList.contains('chapter'));
+    s.classList.add('active', dir < 0 ? 'enter-back' : 'enter');
+    s.scrollTop = 0;
+    idx = i;
+    bar.style.width = ((i + 1) / slides.length * 100) + '%';
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    next.textContent = s.getAttribute('data-cta') || '다음 이야기 보기';
+    back.disabled = i === 0;
+    try { localStorage.setItem('ai-dev-2026-slide', String(i)); } catch (e) {}
+  }
+
+  next.addEventListener('click', function () {
+    if (idx === slides.length - 1) show(0, 1); else show(idx + 1, 1);
+  });
+  back.addEventListener('click', function () { show(idx - 1, -1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next.click(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); if (idx > 0) show(idx - 1, -1); }
+    else if (e.key === 'Home') { show(0, -1); }
+    else if (e.key === 'End') { show(slides.length - 1, 1); }
+  });
+
+  // 모바일 스와이프
+  var x0 = null;
+  document.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) < 60) return;
+    if (dx < 0 && idx < slides.length - 1) show(idx + 1, 1);
+    if (dx > 0 && idx > 0) show(idx - 1, -1);
+  }, { passive: true });
+
+  // 라이트 / 다크 모드
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('theme');
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function effective() {
+    var t = root.getAttribute('data-theme');
+    if (t === 'dark' || t === 'light') return t;
+    return mq.matches ? 'dark' : 'light';
+  }
+  function paintTheme() {
+    var dark = effective() === 'dark';
+    themeBtn.textContent = dark ? '☀️ 라이트 모드로 보기' : '🌙 다크 모드로 보기';
+  }
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem('ai-dev-2026-theme', t); } catch (e) {}
+    paintTheme();
+  }
+  try {
+    var savedTheme = localStorage.getItem('ai-dev-2026-theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
+  } catch (e) {}
+  themeBtn.addEventListener('click', function () { setTheme(effective() === 'dark' ? 'light' : 'dark'); });
+  if (mq.addEventListener) mq.addEventListener('change', paintTheme);
+  paintTheme();
+
+  show(idx, 1);
+})();
+</script>
+</body>
+</html>

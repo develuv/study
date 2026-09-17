@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>커버드콜, 진짜 뭐야? — 스터디 발표 자료</title>
+<style>
+  :root{
+    --navy:#1B2A41; --gold:#D4A017; --teal:#1D9E75; --coral:#D9534F;
+    --ink:#222; --muted:#6B7280; --line:#E3E6EB; --paper:#fff; --tint:#F5F6F8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Pretendard",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px}
+  a{color:inherit;text-decoration-color:var(--gold);text-underline-offset:3px}
+  .box a{color:var(--navy);font-weight:600}
+  .box.dark a{color:var(--gold)}
+  .wrap{max-width:780px;margin:0 auto;padding:0 24px}
+
+  header.hero{background:var(--navy);color:#fff;padding:88px 0 72px}
+  header .kicker{color:var(--gold);font-weight:700;letter-spacing:.12em;font-size:13px;margin:0 0 18px}
+  header h1{font-size:clamp(34px,6vw,52px);line-height:1.1;margin:0 0 18px;font-weight:800}
+  header p.lead{font-size:19px;color:#DCE6F2;margin:0 0 36px;max-width:640px}
+  nav.toc ol{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  nav.toc li{display:flex;gap:14px;align-items:baseline;padding:12px 16px;background:rgba(255,255,255,.06);border-radius:10px}
+  nav.toc li span.n{color:var(--gold);font-weight:800;min-width:1.4em}
+  nav.toc li a{text-decoration:none;color:#fff;font-weight:600}
+  nav.toc li small{color:#B9C6D8;margin-left:auto;text-align:right}
+  nav.toc li.hot{background:var(--gold);color:var(--navy)}
+  nav.toc li.hot span.n,nav.toc li.hot a,nav.toc li.hot small{color:var(--navy)}
+
+  section.part{padding:56px 0 24px}
+  section.part>.wrap>h2{font-size:15px;color:var(--gold);letter-spacing:.1em;font-weight:800;margin:0 0 6px}
+  section.part>.wrap>h2+h3{font-size:34px;margin:0 0 8px;line-height:1.15;color:var(--navy)}
+  section.part>.wrap>p.sub{color:var(--muted);margin:0 0 40px;font-size:17px}
+
+  article{margin:0 0 56px}
+  article h4{font-size:23px;margin:0 0 6px;color:var(--navy);line-height:1.3}
+  article p.dek{color:var(--muted);margin:0 0 20px}
+  article p{margin:0 0 14px}
+  article ul{margin:0 0 14px;padding-left:22px}
+  article li{margin:0 0 6px}
+  figure{margin:22px 0;padding:18px;background:var(--tint);border-radius:12px}
+  figure svg{width:100%;height:auto;display:block}
+  figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+
+  .callout{background:var(--navy);color:#fff;padding:18px 22px;border-radius:12px;margin:20px 0;font-weight:600;line-height:1.55}
+  .callout small{display:block;font-weight:400;color:#DCE6F2;margin-top:6px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+  .box{background:var(--tint);border-radius:12px;padding:16px 18px}
+  .box.dark{background:var(--navy);color:#fff}
+  .box.dark h5{color:var(--gold)}
+  .box h5{margin:0 0 8px;font-size:15px;color:var(--navy)}
+  .box p,.box li{font-size:14.5px;margin:0 0 6px}
+  .box ul{padding-left:18px;margin:0}
+  .big{font-size:30px;font-weight:800;line-height:1.1;margin:2px 0 6px}
+  .pos{color:var(--teal)} .neg{color:var(--coral)} .gold{color:var(--gold)}
+  .box .lab{font-size:13px;color:var(--muted)}
+  .box.dark .lab{color:#B9C6D8}
+
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:700}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{font-weight:700;color:var(--navy);white-space:nowrap}
+  tr.hot td{background:#FFF7DF}
+
+  details.script{margin:18px 0 0;border-left:3px solid var(--gold);background:#FFFCF3;border-radius:0 10px 10px 0}
+  details.script summary{cursor:pointer;padding:10px 16px;font-weight:700;color:var(--navy);list-style:none;font-size:14px}
+  details.script summary::before{content:"▸ ";color:var(--gold)}
+  details.script[open] summary::before{content:"▾ "}
+  details.script p{padding:0 16px 14px;margin:0;font-size:15px;color:#3b3b3b;line-height:1.7}
+
+  .break{background:var(--navy);color:#fff;padding:96px 0;margin:40px 0 0;text-align:left}
+  .break .wrap p.k{color:#B9C6D8;margin:0 0 10px;font-size:14px}
+  .break .wrap h2{font-size:clamp(44px,9vw,76px);color:var(--gold);margin:0 0 18px;line-height:1}
+  .break .wrap p{font-size:20px;color:#fff;max-width:640px;margin:0}
+
+  footer.end{background:var(--navy);color:#fff;padding:72px 0 64px;margin-top:40px}
+  footer .wrap h2{color:var(--gold);font-size:15px;letter-spacing:.1em;margin:0 0 24px}
+  footer ol{padding:0;margin:0 0 36px;list-style:none;display:grid;gap:22px}
+  footer li{display:grid;grid-template-columns:38px 1fr;gap:14px}
+  footer li .n{width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center}
+  footer li strong{display:block;font-size:19px;margin-bottom:4px}
+  footer li span{color:#DCE6F2;font-size:15px}
+  footer p.src{font-size:12.5px;color:#9CA3AF;line-height:1.6;margin:0}
+
+  @media (max-width:640px){
+    .grid3,.grid2{grid-template-columns:1fr}
+    section.part>.wrap>h2+h3{font-size:28px}
+    nav.toc li small{display:none}
+    td:first-child{white-space:normal}
+  }
+  @media print{
+    header.hero,.break,footer.end{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    details.script{display:block}
+    details.script summary{display:none}
+    details.script p{display:block}
+    article{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">커버드콜 스터디 · 2026. 09</p>
+    <h1>커버드콜, 진짜 뭐야?</h1>
+    <p class="lead">1세대부터 3세대까지 훑어보고 — 우리한테만 있는 반전 하나. 앞 3개는 빌드업이고, 4번이 본론입니다. 각 항목 아래 "발표 대본"을 펼치면 말로 풀어놓은 버전이 있어요.</p>
+    <nav class="toc"><ol>
+      <li><span class="n">1</span><a href="#p1">커버드콜 이해</a><small>콜옵션 · 프리미엄 · 분배금 · 세대 구분</small></li>
+      <li><span class="n">2</span><a href="#p2">효과와 용법</a><small>누가 왜 쓰나 · 비중 · 장기 vs 단기</small></li>
+      <li><span class="n">3</span><a href="#p3">어떻게 투자하나</a><small>미국 직투 vs 국내 상장 · 계좌</small></li>
+      <li class="hot"><span class="n">4</span><a href="#p4">커버드콜 3.0 — 반전</a><small>미국 3.0은 의미 없다. 우리 3.0은 따로 있다</small></li>
+    </ol></nav>
+  </div>
+</header>
+
+<!-- ============ PART 1 ============ -->
+<section class="part" id="p1"><div class="wrap">
+  <h2>PART 1</h2><h3>커버드콜 이해</h3>
+  <p class="sub">옵션 얘기 나오면 어렵게 느껴지는데, 아파트 비유 하나면 끝난다.</p>
+
+  <article>
+    <h4>아파트 비유 하나로 끝내자</h4>
+    <p class="dek">10억 아파트를 갖고 있는데, 옆집이 이런 제안을 한다.</p>
+    <div class="box" style="margin:0 0 18px;border-left:3px solid var(--gold)">
+      <h5>한 줄 정의</h5>
+      <p style="margin:0;font-size:15.5px">옵션 매도 세일즈를 통해 주가 상승에 따른 추가 이익을 일부 포기하는 대신, 시장이 정체되거나 하락할 때도 매월 안정적인 현금 흐름(월배당)을 만들어내는 구조입니다.</p>
+    </div>
+    <div class="callout">"3개월 뒤에 그 집 11억에 살 수 있는 권리 파세요. 지금 1,000만원 드릴게요."</div>
+    <div class="grid3">
+      <div class="box"><h5 class="neg">9억으로 하락</h5><p><b>−1억 + 1,000만 = 9,000만 손해</b></p><p class="lab">1,000만원 덜 잃은 것뿐. 하락은 그대로 맞는다.</p></div>
+      <div class="box"><h5 class="pos">10.5억 (11억 미만)</h5><p><b>집도 내 것 + 1,000만원</b></p><p class="lab">옆집은 권리 포기. 가장 좋은 시나리오.</p></div>
+      <div class="box"><h5 class="gold">15억으로 급등</h5><p><b>11억에 팔아야 함. 4억 상승분 포기</b></p><p class="lab">1억 1,000만원만 먹고 끝.</p></div>
+    </div>
+    <table>
+      <tr><th>비유</th><th>실제</th></tr>
+      <tr><td>아파트</td><td>기초자산 (S&amp;P500, 나스닥100, 코스피200…)</td></tr>
+      <tr><td>11억에 살 권리</td><td>콜옵션. 11억이 행사가</td></tr>
+      <tr><td>1,000만원</td><td>옵션 프리미엄 → 매달 나오는 분배금의 재원</td></tr>
+    </table>
+    <div class="box dark" style="margin:18px 0">
+      <h5>스톡옵션 받아본 사람은 이미 아는 개념이다</h5>
+      <p>행사가 10,000원짜리 스톡옵션을 받았다고 치자. 행사 가능한 날 주가가 <b>8,000원</b>이면? 행사 안 한다. 시장에서 8,000원에 사는 게 더 싸니까 그냥 포기. 주가가 <b>15,000원</b>이면? 행사해서 10,000원에 받고 5,000원 차익.</p>
+      <p>이게 <b>콜옵션 매수자</b>의 입장이다. 현재 주가가 행사가보다 아래면 포기하고, 위면 행사한다. 옆집 사람이 딱 이 위치.</p>
+      <p style="margin:0">커버드콜은 그 반대편, <b>스톡옵션을 발행해주는 회사 쪽</b>에 서는 것이다. 다만 회사는 옵션을 공짜로 주지만, 우리는 프리미엄을 받고 판다. 상대가 포기하면 프리미엄은 그대로 내 것, 상대가 행사하면 행사가에 넘겨줘야 한다.</p>
+    </div>
+    <p><b>핵심: 미래의 상승 가능성을 팔아서 지금 현금을 받는 거래.</b> 없던 돈이 생기는 게 아니라 미래 수익을 현재로 당겨오는 것.</p>
+    <details class="script"><summary>발표 대본</summary><p>스톡옵션 받아본 사람은 바로 이해될 거야. 행사가 만 원인데 주가가 팔천 원이면 행사 안 하잖아. 시장에서 사는 게 더 싸니까. 주가가 만오천 원이면 행사해서 오천 원 먹고. 콜옵션 사는 사람이 정확히 그 입장이야. 커버드콜은 그 반대편, 옵션을 발행해주는 회사 쪽에 서는 거야. 차이는 회사는 공짜로 주지만 우리는 프리미엄 받고 판다는 것. 커버드콜은 이게 전부야. 내가 갖고 있는 자산에 대해 '오르면 이 가격에 넘길게'라는 권리를 팔고 돈을 받는 거. 그 돈이 프리미엄이고, ETF에서는 이걸 매달 분배금으로 뿌려주는 거지. 중요한 건, 없던 돈이 생기는 게 아니라 미래 수익을 지금으로 당겨온다는 것.</p></details>
+  </article>
+
+  <article>
+    <h4>손익 그래프로 보면</h4>
+    <p class="dek">아래는 열려 있고, 위만 잘려 있다.</p>
+    <figure>
+      <svg viewBox="0 0 680 350" role="img" aria-label="주식 보유와 커버드콜의 손익 비교">
+        <line x1="100" y1="220" x2="630" y2="220" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="220" y1="70" x2="220" y2="250" stroke="#C4C9D1" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="400" y1="70" x2="400" y2="250" stroke="#C4C9D1" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="100" y1="280" x2="500" y2="80" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+        <path d="M100 250 L400 100 L630 100" fill="none" stroke="#7F77DD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="130" y1="236" x2="130" y2="264" stroke="#1B2A41" stroke-width="1.2"/>
+        <path d="M126 240 L130 235 L134 240 M126 260 L130 265 L134 260" fill="none" stroke="#1B2A41" stroke-width="1.2"/>
+        <g font-family="inherit" font-size="13" fill="#1B2A41">
+          <text x="100" y="196">프리미엄</text>
+          <text x="510" y="70" fill="#6B7280">주식만 보유</text>
+          <text x="510" y="126" fill="#7F77DD" font-weight="700">커버드콜</text>
+          <text x="630" y="212" text-anchor="end" fill="#6B7280">손익 0</text>
+          <text x="220" y="270" text-anchor="middle" fill="#6B7280">현재가</text>
+          <text x="400" y="270" text-anchor="middle" fill="#6B7280">행사가</text>
+          <text x="215" y="322" text-anchor="middle" fill="#D9534F">주가가 내려도 손실은 거의 그대로</text>
+          <text x="455" y="322" text-anchor="middle" fill="#D4A017">주가가 올라도 수익은 여기까지</text>
+        </g>
+      </svg>
+      <figcaption>회색: 주식만 보유. 보라색: 커버드콜. 프리미엄만큼 위로 밀려 올라간 대신, 행사가 위의 상승은 포기한 구조.</figcaption>
+    </figure>
+    <div class="grid3">
+      <div class="box"><h5 class="neg">하락 구간</h5><p>프리미엄만큼만 덜 잃는다. 완충재가 얇게 깔린 주식.</p></div>
+      <div class="box"><h5 class="pos">횡보 구간</h5><p>프리미엄이 그대로 이익. 커버드콜이 이기는 유일한 구간.</p></div>
+      <div class="box"><h5 class="gold">급등 구간</h5><p>행사가에서 수익 고정. 그 위 상승은 남의 것.</p></div>
+    </div>
+    <details class="script"><summary>발표 대본</summary><p>그림으로 보면 이래. 회색이 주식만 들고 있을 때, 보라색이 커버드콜. 보라색이 회색보다 조금 위에 있잖아, 그게 프리미엄. 근데 오른쪽 가면 수평으로 꺾여. 그 위로는 못 먹는 거야. 왼쪽은? 거의 같이 떨어져. 그러니까 커버드콜이 '방어형'이라는 말은 좀 과장이고, 실제로는 완충재 얇게 깔린 주식이라고 보면 돼.</p></details>
+  </article>
+
+  <article>
+    <h4>분배금은 배당이 아니다</h4>
+    <p class="dek">여기서부터 헷갈리기 시작한다.</p>
+    <div class="grid2">
+      <div class="box"><h5 class="pos">주식의 배당</h5><ul><li>기업이 벌어들인 이익을 주주와 나누는 것</li><li>내 지분은 그대로 유지된다</li><li>배당을 받아도 주식 수는 안 줄어든다</li></ul></div>
+      <div class="box dark"><h5>커버드콜의 분배금</h5><ul><li>주식 100 중 20을 콜로 팔았으면, 그 20은 이미 내 것이 아닌 셈</li><li>줄어든 비중만큼을 현금으로 받는 것 → <b>원금을 꺼내주는 개념</b>에 가깝다</li><li>분배금을 주면 그날 ETF 가격은 그만큼 빠진다</li><li>그래서 봐야 할 건 분배율이 아니라 <b>총수익 = 분배금 + 가격 변화</b></li></ul></div>
+    </div>
+    <p>분배 직전에 사서 이틀 뒤 분배금 받는 건 '내 돈 냈다가 수수료 떼고 일부 돌려받는 것'과 실질적으로 같다. 투자는 그렇게 달콤하지 않다.</p>
+    <details class="script"><summary>발표 대본</summary><p>이게 진짜 중요한 개념인데, 커버드콜 분배금은 회사가 돈 벌어서 주는 배당이 아니야. 내 상승 가능성 판 대가를 현금으로 받는 거고, 결과적으로 원금 일부를 꺼내서 받는 것에 가까워. 그래서 분배 전날 사서 분배금 받으면 돈 번 것 같지? 그날 ETF 가격이 그만큼 빠져. 내 돈 냈다가 수수료 떼고 돌려받은 거야. 그러니까 커버드콜은 분배율 말고 '분배금 + 가격 변화' 합친 총수익으로만 판단해야 돼.</p></details>
+  </article>
+
+  <article>
+    <h4>"총수익으로 봐야 한다"는 게 정확히 무슨 뜻이냐</h4>
+    <p class="dek">분배금은 ETF 안에 있던 돈이 내 통장으로 자리만 옮긴 것이다.</p>
+    <p>ETF 가격은 그 안에 든 자산의 가치(순자산가치, NAV)로 정해진다. 주머니 하나라고 생각하면 된다.</p>
+    <table>
+      <tr><th></th><th>분배 전날</th><th>분배일</th></tr>
+      <tr><td>ETF 안에 든 자산</td><td>주식 9,800원 + 현금 200원 = <b>10,000원</b></td><td>주식 9,800원 + 현금 0원 = <b>9,800원</b></td></tr>
+      <tr><td>ETF 가격</td><td>10,000원</td><td><b class="neg">9,800원</b></td></tr>
+      <tr><td>내 통장</td><td>0원</td><td><b class="pos">+200원</b></td></tr>
+      <tr class="hot"><td>합계</td><td><b>10,000원</b></td><td><b>10,000원</b></td></tr>
+    </table>
+    <p>200원을 분배하면 주머니에서 200원이 빠져나가니 주머니 가격도 200원 떨어진다. 내 재산은 1원도 안 늘었다. 그래서 "분배 전날 사서 분배금 받으면 이득"은 착시다. 10,000원 내고 9,800원짜리 ETF와 200원 현금을 받은 것뿐이고, 200원에는 세금 15.4%까지 붙는다.</p>
+    <p>주식 배당도 배당락으로 똑같이 빠진다. 차이는 <b>주식은 기업이 새로 벌어들인 이익으로 채워지는데, 커버드콜은 상승분을 포기한 대가(프리미엄)로 채워야 해서 구조적으로 덜 채워진다</b>는 것.</p>
+    <p style="margin-top:22px"><b>그래서 1년 뒤 계좌를 열어봐야 진짜 성적이 나온다.</b> 1억을 넣고 1년 지났다고 치자.</p>
+    <table>
+      <tr><th></th><th>A: 분배율 15%</th><th>B: 분배율 7%</th><th>C: 분배율 0% (지수 ETF)</th></tr>
+      <tr><td>받은 분배금</td><td>1,500만원</td><td>700만원</td><td>0원</td></tr>
+      <tr><td>1년 뒤 ETF 평가액</td><td>9,000만원 <span class="neg">(−10%)</span></td><td>1억 200만원 <span class="pos">(+2%)</span></td><td>1억 1,200만원 <span class="pos">(+12%)</span></td></tr>
+      <tr class="hot"><td>총수익 = 분배금 + 가격 변화</td><td><b>+500만원 (5%)</b></td><td><b>+900만원 (9%)</b></td><td><b>+1,200만원 (12%)</b></td></tr>
+    </table>
+    <p>A는 매달 125만원씩 통장에 꽂혀서 기분은 제일 좋다. 그런데 1년 뒤 계좌를 열어보면 셋 중 가장 못 벌었다. 1,500만원 중 1,000만원은 수익이 아니라 <b>내 원금이 잘려서 통장으로 옮겨진 것</b>이다.</p>
+    <div class="callout">분배금은 수익이 아니라 인출이다.
+      <small>수익인지 아닌지는 "받은 분배금 + 남은 평가액"을 원금과 비교해야만 알 수 있고, 분배율 숫자 자체는 그걸 전혀 말해주지 않는다. 옵션 프리미엄을 세게 뽑을수록(분배율이 높을수록) 상승을 더 많이 포기하기 때문에, 높은 분배율과 가격 하락은 같은 동전의 양면이다. 4번에 나오는 "분배율 25.4%인데 ETF는 −24.4%" 사례가 정확히 이 얘기.</small></div>
+    <details class="script"><summary>발표 대본</summary><p>이거 표로 보면 바로 이해돼. ETF를 주머니라고 생각해봐. 주머니 안에 주식 9,800원이랑 현금 200원이 있어서 가격이 만 원이야. 200원을 분배금으로 주면? 주머니엔 9,800원만 남으니까 가격도 9,800원이 돼. 내 통장에 200원 들어왔고. 합치면 만 원. 하나도 안 늘었어. 분배 전날 사서 분배금 받는 게 왜 의미 없는지 이제 알겠지? 그리고 두 번째 표. 분배율 15%짜리가 매달 125만원 꽂아주니까 제일 좋아 보이는데, 1년 뒤 보면 가격이 10% 빠져서 실제로 번 건 500만원이야. 지수 ETF는 분배 하나도 안 줬는데 1,200만원 벌었고. 그러니까 분배율은 '얼마 버냐'가 아니라 '얼마를 꺼내주냐'야. 버는 건 1년 뒤 계좌 열어봐야 알아.</p></details>
+  </article>
+
+  <article>
+    <h4>그럼 분배금은 원래 왜 있는 거냐 — 세금 정산 장치다</h4>
+    <p class="dek">ETF 분배금은 투자자에게 주는 선물이 아니라, 국세청이 1년에 한 번 세금을 걷기 위해 만든 절차다.</p>
+    <p>소득세법상 펀드와 ETF는 <b>1년에 한 번은 반드시 이익을 분배</b>해야 한다. 이유는 하나다. 펀드 안에서 발생한 이익을 정산해서 <b>세금을 내라</b>는 것. 이익이 펀드 안에 계속 쌓이면 국세청은 세금을 걷을 시점이 없어진다.</p>
+    <table>
+      <tr><th></th><th>과거 관행</th><th>최근</th></tr>
+      <tr><td>기준가 1,000원 → 1,200원<br><span style="font-weight:400;color:var(--muted)">(주가 +100, 배당 +100)</span></td><td><b>200원 전부 분배</b> → 200원에 세금</td><td><b>배당·이자 100원만 분배</b> → 100원에만 세금. 매매·평가차익은 이연</td></tr>
+      <tr><td>펀드의 경우</td><td colspan="2">판매사가 분배금에서 세금을 원천징수하고 바로 재투자. 투자자는 돈을 만져보지도 못하고 세금만 낸다</td></tr>
+      <tr class="hot"><td>문제</td><td colspan="2">세금을 다 냈는데 그 뒤 주가가 빠져서 환매 때 1,000원 밑이면? <b>이미 낸 세금은 못 돌려받는다</b></td></tr>
+    </table>
+    <div class="grid2">
+      <div class="box"><h5>퀴즈: 같은 S&amp;P500 추종, 같은 성과 10%</h5><p>A ETF는 법이 최소로 요구하는 <b>1%만</b> 분배한다.<br>B ETF는 안 줘도 되는 <b>5%를</b> 분배한다.<br>어느 쪽이 투자자에게 유리한가?</p></div>
+      <div class="box dark"><h5>답: A</h5><p>A는 1%에만 세금, 나머지 9%는 과세이연되어 복리로 굴러간다. B는 국세청이 요구하지도 않은 4%를 더 꺼내서 세금을 내고 원금을 줄인다. <b>분배금은 많이 주는 게 아니라 적게 주는 게 좋은 ETF다.</b></p></div>
+    </div>
+    <p>이걸 알면 커버드콜의 위치가 보인다. 일반 ETF는 세금 때문에 어쩔 수 없이 최소한만 분배하는데, 커버드콜은 그 반대로 <b>일부러 최대한 많이 꺼내주는 상품</b>이다. 주식의 배당(기업 이익 공유)과 펀드의 분배금(세금 정산용 인출)을 같은 것으로 착각하면서 이 차이가 안 보이게 된다.</p>
+    <div class="callout">그래서 해외주식형 TR ETF가 없어진 것이다.
+      <small>TR(Total Return) ETF는 배당을 분배하지 않고 안에서 재투자해 과세를 계속 이연시키는 구조였다. "1년에 한 번은 정산해서 세금 내라"는 취지에 정면으로 어긋난다. 2026년부터 해외주식형 TR ETF는 배당 재원을 의무 분배하도록 바뀌었고(국내주식형 TR은 유지), 사실상 사라졌다. 절세 구조가 잘 작동하면 결국 막힌다는 점은 국내 주식형 커버드콜의 비과세를 볼 때도 기억해둘 부분.</small></div>
+    <details class="script"><summary>발표 대본</summary><p>분배금이 왜 있는지 아는 사람 별로 없어. 이거 국세청이 만든 거야. 펀드 안에 이익이 계속 쌓이면 세금 걷을 타이밍이 없잖아. 그래서 1년에 한 번은 무조건 정산해서 분배하고 세금 내라고 법에 박아놓은 거지. 예전엔 매매차익까지 다 분배해서 세금 냈어. 그러고 나서 주가 빠지면? 낸 세금 못 돌려받아. 그래서 요즘은 배당이랑 이자만 분배하고 나머진 이연시켜. 퀴즈 하나. 같은 S&amp;P500인데 1%만 주는 ETF랑 5% 주는 ETF, 뭐가 좋아? 1%야. 안 내도 되는 세금을 미리 내면서 원금 깎는 게 5%짜리거든. 이걸 알면 커버드콜이 뭔지 딱 보여. 남들은 세금 때문에 최소한만 꺼내주는데, 커버드콜은 일부러 최대한 꺼내주는 상품이야. 그리고 TR ETF 없어진 거 알지? 배당 안 주고 안에서 재투자해서 세금을 계속 미루니까 국세청이 막은 거야. 절세 구조가 잘 먹히면 결국 막힌다는 거, 뒤에 국내 커버드콜 비과세 얘기할 때도 기억해둬.</p></details>
+  </article>
+
+  <article>
+    <h4>세대별 비교 — 1.0 / 2.0 / 3.0</h4>
+    <p class="dek">공식 분류가 아니라 운용사 마케팅 용어라는 것부터 기억하자.</p>
+    <table>
+      <tr><th></th><th>1.0 (2013~)</th><th>2.0 (2020~)</th><th>3.0 (2024~)</th></tr>
+      <tr><td>대표</td><td>QYLD, XYLD, RYLD</td><td>JEPI, JEPQ</td><td>SPYI, GPIQ / 국내 데일리·타겟형</td></tr>
+      <tr><td>콜 매도 비중</td><td>100% (ATM, 월간)</td><td>10~40%만 매도</td><td>최소 비중 고정, 데일리·위클리 옵션</td></tr>
+      <tr><td>상승 참여</td><td>거의 없음</td><td>60~90% 따라감</td><td>대부분 확보</td></tr>
+      <tr><td>하락 방어</td><td>프리미엄만큼만</td><td>2022년 S&amp;P −18% 때 −3.5%</td><td>상장 얼마 안 돼 검증 부족</td></tr>
+      <tr class="hot"><td>차별점</td><td>분배금 극대화</td><td>원금 유지 + 분배 유지 균형</td><td><b>미국: 세금 효율 / 국내: 절세 구조 → 4번에서</b></td></tr>
+    </table>
+    <figure>
+      <svg viewBox="0 0 680 250" role="img" aria-label="상승장 1세대 vs 2세대 총수익률">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">상승장, 1세대 vs 2세대 — 배당 재투자 포함 총수익률</text>
+        <g font-size="12" fill="#222">
+          <rect x="300" y="38" width="12" height="12" rx="2" fill="#9CA3AF"/><text x="318" y="49">1세대 QYLD</text>
+          <rect x="410" y="38" width="12" height="12" rx="2" fill="#1B2A41"/><text x="428" y="49">2세대 JEPQ</text>
+          <rect x="520" y="38" width="12" height="12" rx="2" fill="#D4A017"/><text x="538" y="49">나스닥</text>
+        </g>
+        <g font-size="12.5" font-weight="700">
+          <text x="20" y="98" font-size="16" fill="#1B2A41">2023</text>
+          <rect x="90" y="70" width="195.5" height="14" rx="3" fill="#9CA3AF"/><text x="293" y="82" fill="#6B7280">23%</text>
+          <rect x="90" y="87" width="306" height="14" rx="3" fill="#1B2A41"/><text x="404" y="99" fill="#1B2A41">36%</text>
+          <rect x="90" y="104" width="467.5" height="14" rx="3" fill="#D4A017"/><text x="565" y="116" fill="#D4A017">55%</text>
+          <text x="20" y="158" font-size="16" fill="#1B2A41">2024</text>
+          <rect x="90" y="130" width="161.5" height="14" rx="3" fill="#9CA3AF"/><text x="259" y="142" fill="#6B7280">19%</text>
+          <rect x="90" y="147" width="212.5" height="14" rx="3" fill="#1B2A41"/><text x="310" y="159" fill="#1B2A41">25%</text>
+          <rect x="90" y="164" width="221" height="14" rx="3" fill="#D4A017"/><text x="319" y="176" fill="#D4A017">26%</text>
+          <text x="20" y="218" font-size="16" fill="#1B2A41">2025</text>
+          <rect x="90" y="190" width="68" height="14" rx="3" fill="#9CA3AF"/><text x="166" y="202" fill="#6B7280">8%</text>
+          <rect x="90" y="207" width="127.5" height="14" rx="3" fill="#1B2A41"/><text x="225" y="219" fill="#1B2A41">15%</text>
+          <rect x="90" y="224" width="161.5" height="14" rx="3" fill="#D4A017"/><text x="259" y="236" fill="#D4A017">19%</text>
+        </g>
+      </svg>
+      <figcaption>3년 연속 나스닥이 두 자릿수로 오르는 동안 1세대는 매년 절반도 못 따라갔고, 2세대는 대부분을 따라갔다. 배당까지 합친 총수익 기준.</figcaption>
+    </figure>
+    <p>1.0 → 상승장에서 불만 폭발 → 2.0 등장(제로금리 시기, 현금흐름 가치 급등) → 3.0으로 진화. 방향은 "분배 조금 줄여도 원금 성장 여지를 남기자".</p>
+    <details class="script"><summary>발표 대본</summary><p>세대 구분은 공식 용어가 아니고 운용사가 마케팅하면서 붙인 말이야. 그래도 흐름은 있어. 1.0은 QYLD처럼 100% 콜 팔아서 분배는 미친 듯이 주는데 상승장 못 먹어. 2.0은 JP모건이 만든 JEPI. 10~40%만 팔아서 상승 60~90% 따라가면서 분배도 유지하는 절묘한 지점을 찾은 거. 3.0은 옵션 비율 조절, 데일리 옵션 이런 건데… 3.0의 진짜 차별점은 4번에서 얘기할게. 여기서는 표만 보고 넘어가자.</p></details>
+  </article>
+</div></section>
+
+<!-- ============ PART 2 ============ -->
+<section class="part" id="p2"><div class="wrap">
+  <h2>PART 2</h2><h3>효과와 용법</h3>
+  <p class="sub">이걸 누가 왜 쓰는 거냐. 이게 커버드콜 이해의 절반이다.</p>
+
+  <article>
+    <h4>커버드콜은 '투자'가 아니라 '인출 솔루션'</h4>
+    <p class="dek">카테고리가 아예 다르다.</p>
+    <div class="grid2">
+      <div class="box"><h5 class="pos">적립을 위한 상품</h5><ul><li>S&amp;P500·나스닥100 지수 ETF, 배당성장 ETF</li><li>20~40대가 노후 자산을 쌓는 도구</li><li>장기 총수익 극대화가 목적</li></ul></div>
+      <div class="box dark"><h5>인출을 위한 상품 ← 커버드콜</h5><ul><li>쌓아둔 연금을 어떻게 효율적으로 빼 쓸까</li><li>50~60대, 은퇴자가 생활비를 만드는 도구</li><li>총수익은 지수를 못 이긴다 — 원지수 이기는 커버드콜은 없다</li></ul></div>
+    </div>
+    <div class="callout">그럼 그냥 팔아서 쓰면 되지 않나? → 맞다. '자가배당'이 가장 효율적이다.
+      <small>근데 10,000주 모아놓고 매달 100주씩 파는 걸 사람은 못 견딘다. 내 주식이 줄어드는 게 보이니까(마지막 잎새 증후군). 경제적으로는 의미 없는 상품인데, 행동재무학적으로는 의미가 있는 상품. 그게 커버드콜.</small></div>
+    <details class="script"><summary>발표 대본</summary><p>운용사 사람이 한 말 중에 제일 와닿았던 게 이거야. 커버드콜은 투자 상품이 아니고 인출 솔루션이라고. 20~40대가 돈 모으는 상품은 이미 많으니까, 50~60대가 모아둔 걸 어떻게 빼 쓸까 고민해서 만든 게 커버드콜이라는 거지. 그럼 그냥 팔아 쓰면 되잖아? 맞아, 그게 제일 효율적이야. 근데 사람이 그걸 못 해. 내 주식 줄어드는 거 보면서 매달 파는 거, 심리적으로 진짜 힘들어. 그래서 '경제적으로는 의미 없지만 심리적으로는 의미 있는 상품'이라는 표현이 정확해.</p></details>
+  </article>
+
+  <article>
+    <h4>장기 vs 단기 — 숫자로 보면</h4>
+    <p class="dek">커버드콜이 이기는 구간과 지는 구간이 명확하다.</p>
+    <div class="grid2">
+      <div class="box"><div class="big neg">39.3% vs 17.9%</div><p class="lab">최근 1년 총수익률 · S&amp;P500 vs JEPI. 상승장에선 20%p 차이</p></div>
+      <div class="box"><div class="big pos">−18% → −3.5%</div><p class="lab">2022년 하락장 · S&amp;P500 vs 2세대(JEPI). 1세대는 −12%</p></div>
+      <div class="box"><div class="big pos">35%</div><p class="lab">JEPI 4년 총수익 · 주가는 제자리였지만 48번 분배금 합산</p></div>
+      <div class="box"><div class="big">월 810만원</div><p class="lab">SCHD 1억 30년 · 배당성장 복리. 원금 대비 배당률 114%</p></div>
+    </div>
+    <p><b>결론: 시간이 있으면 지수, 시간이 없으면 커버드콜.</b> 매달 분배금 받아서 지수에 재투자해도 지수 수익률은 못 따라간다.</p>
+    <details class="script"><summary>발표 대본</summary><p>숫자로 보자. 작년 1년 S&amp;P500이 39% 올랐는데 JEPI는 18%. 상승장에선 이만큼 뒤처져. 대신 2022년 하락장에서 S&amp;P가 18% 빠질 때 JEPI는 3.5%밖에 안 빠졌어. 그리고 JEPI 4년 들고 있었으면 주가는 제자리인데 분배금 합쳐서 35% 벌었어. 마지막, SCHD에 1억 넣고 30년 두면 월 배당 810만원이 나와. 이게 20~30대한테 커버드콜 하지 말라고 하는 이유야. 시간이 있으면 시간을 써야지.</p></details>
+  </article>
+
+  <article>
+    <h4>포트에서 비중은 얼마나?</h4>
+    <p class="dek">정답은 없지만 원칙은 있다 — 부족한 현금흐름만큼만.</p>
+    <figure>
+      <svg viewBox="0 0 680 260" role="img" aria-label="은퇴자 포트 예시 40/40/20">
+        <g transform="translate(130 130)">
+          <circle r="80" fill="none" stroke="#E3E6EB" stroke-width="36"/>
+          <circle r="80" fill="none" stroke="#1B2A41" stroke-width="36" stroke-dasharray="201.06 502.65" transform="rotate(-90)"/>
+          <circle r="80" fill="none" stroke="#D4A017" stroke-width="36" stroke-dasharray="201.06 502.65" transform="rotate(54)"/>
+          <circle r="80" fill="none" stroke="#9CA3AF" stroke-width="36" stroke-dasharray="100.53 502.65" transform="rotate(198)"/>
+          <text y="6" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A41">은퇴자 예시</text>
+        </g>
+        <g font-size="14" fill="#222">
+          <rect x="270" y="48" width="16" height="16" rx="3" fill="#1B2A41"/><text x="296" y="61"><tspan font-weight="700">40% 국내 주식형 커버드콜</tspan></text>
+          <text x="296" y="81" fill="#6B7280" font-size="13">일반계좌. 월 분배금으로 평소 생활비</text>
+          <rect x="270" y="110" width="16" height="16" rx="3" fill="#D4A017"/><text x="296" y="123"><tspan font-weight="700">40% 해외형 커버드콜</tspan></text>
+          <text x="296" y="143" fill="#6B7280" font-size="13">연금저축·IRP. 과세이연 + 장기 성장</text>
+          <rect x="270" y="172" width="16" height="16" rx="3" fill="#9CA3AF"/><text x="296" y="185"><tspan font-weight="700">20% 현금성·채권·파킹</tspan></text>
+          <text x="296" y="205" fill="#6B7280" font-size="13">비상금, 하락장 추가매수 여력</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="callout">원칙: 연금·저축으로 생활비가 되면 커버드콜 안 해도 된다.
+      <small>부족분만 채우고(예: 2억 상한), 나머지는 성장에 둔다. 분배금이 생활비보다 많이 나오면 다 쓰지 말고 재투자하거나 현금성으로.</small></div>
+    <details class="script"><summary>발표 대본</summary><p>비중은 사람마다 다르지만 참고한 자료에 나온 예시가 40/40/20이야. 국내 주식형 커버드콜 40은 일반계좌에서 생활비, 해외형 40은 연금계좌에서 오래 굴리고, 20은 현금. 근데 이 숫자보다 중요한 원칙이 있어. 국민연금이랑 저축으로 생활비가 되면 커버드콜 안 해도 돼. 부족한 만큼만 채우고 나머지는 성장에 두라는 거. 어떤 자료에선 2억까지만 커버드콜, 나머지는 지수라고 딱 잘라 말하더라.</p></details>
+  </article>
+
+  <article>
+    <h4>누가 어떤 목적으로? — 연령대별</h4>
+    <p class="dek">핵심은 '시간이 얼마나 남았나'.</p>
+    <table>
+      <tr><th>연령</th><th>커버드콜?</th><th>대신 이렇게</th></tr>
+      <tr><td>20~30대</td><td><b class="neg">하지 마라</b></td><td>나스닥 + 미국배당 반반. 월 50만원 연금저축 30년 → 41억(시뮬레이션 가정). 자산 크면 매년 2~3% 인출이 배당보다 낫다</td></tr>
+      <tr><td>40대</td><td>아직은 원금 만들기</td><td>3계좌: 해외직투(성장) + ISA(S&amp;P500, 월 100만×15년 → 약 5억, 4% 인출 월 187만) + 연금저축. 50대에 일부를 커버드콜로 전환</td></tr>
+      <tr><td>50대</td><td>필요 금액부터 계산</td><td>1억 → 월 75~94만: 은퇴 불가. 3.5억 → 월 300만: 이때부터 생활 가능. 계좌 우선순위 연금 → ISA → 일반</td></tr>
+      <tr><td>60대+</td><td><b class="pos">부족분만</b></td><td>3개월 지출 평균 − (국민연금+기초연금 약 100만) = 부족액. 그만큼만 커버드콜, 나머지는 성장 유지. 100세까지 40년 더 굴린다</td></tr>
+    </table>
+    <figure>
+      <svg viewBox="0 0 680 255" role="img" aria-label="40대 3계좌 시뮬레이션 타임라인">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">40대 투자자 — 계좌 3개를 시간차로 쌓는다 (시뮬레이션)</text>
+        <line x1="60" y1="140" x2="620" y2="140" stroke="#C4C9D1" stroke-width="4" stroke-linecap="round"/>
+        <g font-size="13" text-anchor="middle">
+          <rect x="45" y="52" width="130" height="54" rx="8" fill="#fff" stroke="#1B2A41" stroke-width="1.5"/>
+          <text x="110" y="74" font-weight="700" fill="#1B2A41">해외직투</text><text x="110" y="95" fill="#222">1억원</text>
+          <line x1="110" y1="106" x2="110" y2="128" stroke="#1B2A41" stroke-width="1.5"/>
+          <circle cx="110" cy="140" r="9" fill="#1B2A41"/>
+          <text x="110" y="172" font-size="16" font-weight="700" fill="#1B2A41">10년</text>
+          <text x="110" y="192" font-size="12" fill="#6B7280">월 30만원 나스닥</text><text x="110" y="209" font-size="12" fill="#6B7280">→ 50대에 커버드콜 전환</text>
+
+          <rect x="205" y="52" width="130" height="54" rx="8" fill="#fff" stroke="#1B2A41" stroke-width="1.5"/>
+          <text x="270" y="74" font-weight="700" fill="#1B2A41">ISA</text><text x="270" y="95" fill="#222">월 187만원</text>
+          <line x1="270" y1="106" x2="270" y2="128" stroke="#1B2A41" stroke-width="1.5"/>
+          <circle cx="270" cy="140" r="9" fill="#1B2A41"/>
+          <text x="270" y="172" font-size="16" font-weight="700" fill="#1B2A41">15년</text>
+          <text x="270" y="192" font-size="12" fill="#6B7280">월 100만원 S&amp;P500</text><text x="270" y="209" font-size="12" fill="#6B7280">약 5억 → 4% 인출</text>
+
+          <rect x="365" y="52" width="130" height="54" rx="8" fill="#fff" stroke="#1B2A41" stroke-width="1.5"/>
+          <text x="430" y="74" font-weight="700" fill="#1B2A41">개인연금</text><text x="430" y="95" fill="#222">월 442만원</text>
+          <line x1="430" y1="106" x2="430" y2="128" stroke="#1B2A41" stroke-width="1.5"/>
+          <circle cx="430" cy="140" r="9" fill="#1B2A41"/>
+          <text x="430" y="172" font-size="16" font-weight="700" fill="#1B2A41">20년</text>
+          <text x="430" y="192" font-size="12" fill="#6B7280">목돈 1억원</text><text x="430" y="209" font-size="12" fill="#6B7280">미국배당다우존스</text>
+
+          <rect x="525" y="52" width="130" height="54" rx="8" fill="#FFF7DF" stroke="#D4A017" stroke-width="1.5"/>
+          <text x="590" y="74" font-weight="700" fill="#1B2A41">국민연금</text><text x="590" y="95" fill="#222">월 70만원</text>
+          <line x1="590" y1="106" x2="590" y2="128" stroke="#D4A017" stroke-width="1.5"/>
+          <circle cx="590" cy="140" r="9" fill="#D4A017"/>
+          <text x="590" y="172" font-size="16" font-weight="700" fill="#1B2A41">25년</text>
+          <text x="590" y="192" font-size="12" fill="#6B7280">65세부터</text>
+        </g>
+        <text x="340" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#1D9E75">합치면 60세 이후 월 700만원 이상의 현금흐름</text>
+      </svg>
+      <figcaption>시뮬레이션 예시. 해외직투 1억은 50대에 커버드콜로 전환하는 재원이고, ISA·연금·국민연금이 각각 월 187 + 442 + 70만원을 만든다는 그림. 수익률 가정은 아래 참고 참조.</figcaption>
+    </figure>
+    <p>국민연금은 미룰 수 있으면 미루자 — 1년마다 7.2%, 최대 5년 36% 증액. 은퇴 후 국민연금까지의 소득 공백(크레바스)을 커버드콜로 메우는 게 전형적 용법.</p>
+    <p class="lab" style="color:var(--muted);font-size:14px">참고: 40대 시뮬레이션의 수익률 가정은 공격적이다(월 30만원 10년 → 1억이면 연 20%). 본인 계산은 연 7~8%로 다시 돌려볼 것.</p>
+    <details class="script"><summary>발표 대본</summary><p>연령대별로 정리하면 이래. 20~30대는 그냥 안 하는 게 맞아. 40대는 커버드콜 살 원금을 만드는 시기. 50대는 얼마 필요한지 계산부터. 1억으로는 월 80만원 정도라 은퇴 못 하고, 3.5억 정도 돼야 월 300만원 나와. 60대는 부족한 만큼만. 참고로 40대 시뮬레이션은 수익률 가정이 좀 공격적이야. 본인 계산할 땐 7~8%로 다시 돌려봐.</p></details>
+  </article>
+</div></section>
+
+<!-- ============ PART 3 ============ -->
+<section class="part" id="p3"><div class="wrap">
+  <h2>PART 3</h2><h3>어떻게 투자하나</h3>
+  <p class="sub">어디서 뭘 사야 하냐. 미국 직투냐 국내 상장이냐, 계좌는 어디냐.</p>
+
+  <article>
+    <h4>1.0과 2.0, 운영 방식이 뭐가 다른데?</h4>
+    <p class="dek">같은 '커버드콜'인데 결과가 갈리는 이유.</p>
+    <table>
+      <tr><th></th><th>1.0</th><th>2.0</th></tr>
+      <tr><td>콜 매도 비중</td><td>100%</td><td>10~40%</td></tr>
+      <tr><td>행사가</td><td>ATM (현재가 근처)</td><td>OTM (상승 여력 남김)</td></tr>
+      <tr><td>옵션 만기</td><td>월간</td><td>주간·일간 (짧을수록 시간가치 빨리 소멸)</td></tr>
+      <tr><td>시장 횡보</td><td>프리미엄만큼 이익</td><td>프리미엄 이익 (1.0보다 적음)</td></tr>
+      <tr><td>시장 상승</td><td>전혀 못 따라감</td><td>60~90% 따라감</td></tr>
+      <tr><td>시장 하락</td><td>프리미엄만큼만 완충</td><td>1.0보다 방어 우수 (2022년 −3.5%)</td></tr>
+      <tr class="hot"><td>결과</td><td>분배는 많은데 원금이 녹는다</td><td>원금 유지 + 분배 유지의 균형점</td></tr>
+    </table>
+    <p>좋은 커버드콜 = 최소한의 옵션 매도 비중 + 적절한 분배율 + 원금이 일정 부분 유지 + 분배금이 꾸준히 유지. <b>개별 종목 커버드콜은 진짜 무섭다</b> — 옵션을 사주는 상대방은 기관이고, 횡보할 것 같으면 안 사준다.</p>
+    <details class="script"><summary>발표 대본</summary><p>1.0과 2.0 차이는 결국 옵션을 얼마나, 어떤 행사가로, 얼마나 짧게 파느냐야. 1.0은 100% 다 팔고 행사가도 현재가 근처라서 조금만 올라도 다 뺏겨. 2.0은 10~40%만 팔고 행사가도 위에 두고 만기도 짧게. 그래서 상승 60~90% 따라가면서 분배도 유지해. 하나 더, 개별 종목 커버드콜은 조심해. 옵션 사주는 상대방은 기관이고 슈퍼컴 돌리는 애들이야. 횡보할 것 같으면 안 사줘.</p></details>
+  </article>
+
+  <article>
+    <h4>미국 직투 vs 국내 상장 — 세금이 갈림길</h4>
+    <p class="dek">분배금 100만원 받으면 실제로 내 손에 얼마 남나.</p>
+    <figure>
+      <svg viewBox="0 0 680 300" role="img" aria-label="미국 상장과 국내 주식형 커버드콜의 분배금 100만원 실수령 비교">
+        <g font-size="13">
+          <text x="20" y="28" font-weight="700" fill="#1B2A41" font-size="15">미국 상장 (JEPQ 등)</text>
+          <rect x="20" y="42" width="180" height="70" rx="10" fill="#F5F6F8"/>
+          <text x="110" y="74" text-anchor="middle" font-size="24" font-weight="800" fill="#1B2A41">100만원</text>
+          <text x="110" y="98" text-anchor="middle" fill="#6B7280">분배금</text>
+          <path d="M208 77 L242 77" stroke="#9CA3AF" stroke-width="2"/><path d="M236 71 L244 77 L236 83" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+          <rect x="250" y="42" width="180" height="70" rx="10" fill="#F5F6F8"/>
+          <text x="340" y="74" text-anchor="middle" font-size="24" font-weight="800" fill="#D9534F">85만원</text>
+          <text x="340" y="98" text-anchor="middle" fill="#6B7280">원천징수 15%</text>
+          <path d="M438 77 L472 77" stroke="#9CA3AF" stroke-width="2"/><path d="M466 71 L474 77 L466 83" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+          <rect x="480" y="42" width="180" height="70" rx="10" fill="#F5F6F8"/>
+          <text x="570" y="74" text-anchor="middle" font-size="24" font-weight="800" fill="#D9534F">약 77만원</text>
+          <text x="570" y="98" text-anchor="middle" fill="#6B7280">건보료 약 8%</text>
+
+          <text x="20" y="168" font-weight="700" fill="#1B2A41" font-size="15">국내 상장 · 국내 주식형 (KODEX 200 타겟위클리 등)</text>
+          <rect x="20" y="182" width="180" height="70" rx="10" fill="#1B2A41"/>
+          <text x="110" y="214" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">100만원</text>
+          <text x="110" y="238" text-anchor="middle" fill="#B9C6D8">분배금</text>
+          <path d="M208 217 L242 217" stroke="#9CA3AF" stroke-width="2"/><path d="M236 211 L244 217 L236 223" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+          <rect x="250" y="182" width="180" height="70" rx="10" fill="#1B2A41"/>
+          <text x="340" y="214" text-anchor="middle" font-size="24" font-weight="800" fill="#3FCF9E">약 98만원</text>
+          <text x="340" y="238" text-anchor="middle" fill="#B9C6D8">과세 대상 약 2%만</text>
+          <path d="M438 217 L472 217" stroke="#9CA3AF" stroke-width="2"/><path d="M466 211 L474 217 L466 223" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+          <rect x="480" y="182" width="180" height="70" rx="10" fill="#1B2A41"/>
+          <text x="570" y="214" text-anchor="middle" font-size="24" font-weight="800" fill="#3FCF9E">약 98만원</text>
+          <text x="570" y="238" text-anchor="middle" fill="#B9C6D8">건보료 산정 제외</text>
+        </g>
+      </svg>
+      <figcaption>해외 직투의 장점(양도세 22%·250만 공제·분리과세)은 매매차익에만 붙는다. 커버드콜은 매매차익이 거의 없어서 그 장점을 못 쓴다. 해외 배당도 금융소득종합과세에 그대로 합산. 왜 국내가 98만원인지는 4번에서.</figcaption>
+    </figure>
+    <p>그리고 "건보료 8%"가 어디서 나오는지, 왜 금융소득 2,000만원이 벼랑인지 한 장으로 보자.</p>
+    <figure>
+      <svg viewBox="0 0 680 320" role="img" aria-label="종합소득 누진과 금융소득 2,000만원 기준선">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">세금 + 세금 + 세금 — 금융소득은 다른 소득 '위에' 쌓인다</text>
+        <g font-size="12" font-weight="700" fill="#fff">
+          <rect x="60" y="42" width="286" height="38" rx="6" fill="#9CA3AF"/><text x="203" y="66" text-anchor="middle">근로소득 4,500만</text>
+          <rect x="346" y="42" width="146" height="38" fill="#1D9E75"/><text x="419" y="66" text-anchor="middle" font-size="11.5">사업소득 2,300만</text>
+          <rect x="492" y="42" width="128" height="38" rx="6" fill="#1B2A41"/><text x="556" y="66" text-anchor="middle" font-size="11.5">금융소득 2,000만</text>
+        </g>
+        <g font-size="13" font-weight="700" text-anchor="middle">
+          <text x="203" y="102" fill="#6B7280">세율 15%</text>
+          <text x="419" y="102" fill="#1D9E75">24%</text>
+          <text x="556" y="102" fill="#D9534F">35%</text>
+        </g>
+        <text x="60" y="126" font-size="12" fill="#6B7280">종합과세되면 금융소득은 가장 위 구간에 얹혀서 가장 높은 세율을 맞는다.</text>
+
+        <line x1="20" y1="146" x2="660" y2="146" stroke="#E3E6EB"/>
+        <text x="20" y="172" font-size="15" font-weight="700" fill="#1B2A41">금융소득 2,000만 vs 2,001만 — '1만원'의 벼랑</text>
+        <g font-size="13">
+          <rect x="60" y="190" width="130" height="44" rx="8" fill="#F5F6F8" stroke="#C4C9D1"/>
+          <text x="125" y="217" text-anchor="middle" font-weight="700" fill="#1B2A41">2,000만원</text>
+          <text x="215" y="217" fill="#222">15.4% 분리과세로 끝</text>
+          <text x="400" y="217" fill="#6B7280">종합소득세 24% + 건보료 0%</text>
+
+          <rect x="60" y="250" width="130" height="44" rx="8" fill="#1B2A41"/>
+          <text x="125" y="277" text-anchor="middle" font-weight="700" fill="#fff">2,001만원</text>
+          <text x="215" y="277" fill="#D9534F" font-weight="700">종합과세 진입</text>
+          <text x="400" y="277" fill="#222">종합소득세 <tspan fill="#D9534F" font-weight="700">35%</tspan> + 건보료 <tspan fill="#D9534F" font-weight="700">8%</tspan></text>
+          <text x="600" y="277" fill="#D9534F" font-weight="800" font-size="16">+19%p</text>
+        </g>
+      </svg>
+      <figcaption>예시(근로 4,500 + 사업 2,300 + 금융 2,000). 금융소득이 2,000만원을 1만원만 넘어도 초과분이 종합소득에 합산되어 세율 구간이 뛰고, 지역가입자면 건보료까지 붙는다. 커버드콜 분배금이 이 기준선에 그대로 잡힌다.<br>※ 건보료 8%의 근거: 지역가입자 소득보험료율 = 건강보험 7.19% + 장기요양 0.94% ≈ 8.1% (2026년). 지역가입자는 금융소득이 연 1,000만원을 넘으면 그 전액이 소득에 합산되고, 직장가입자는 월급 외 소득 2,000만원 초과분에만 부과된다. 피부양자는 소득 2,000만원 초과 시 자격을 잃고 지역가입자로 전환된다.</figcaption>
+    </figure>
+    <details class="script"><summary>발표 대본</summary><p>여기가 3번의 핵심. 미국 커버드콜에서 100만원 받으면 미국이 15% 먼저 떼서 85만원 들어와. 그리고 금융소득 많으면 건보료 8%쯤 더 나가서 실제로 77만원. 근데 이 건보료는 시간차 두고 나와서 체감이 안 돼. 국내 주식형 커버드콜은 100만원 중 98만원이 들어와. 왜 그런지는 4번에서 얘기할게. 그리고 흔히 '해외 직투가 세금 유리하다'고 하는데 그건 매매차익 얘기야. 커버드콜은 매매차익이 거의 없어서 그 장점이 안 먹혀.</p></details>
+  </article>
+
+  <article>
+    <h4>계좌는 어디에? — '언제 쓸 돈인가'로 갈린다</h4>
+    <p class="dek">세율 순위는 연금 &gt; ISA &gt; 일반. 하지만 커버드콜의 목적과 충돌한다.</p>
+    <div class="grid3">
+      <div class="box"><h5>일반 계좌</h5><p class="lab">지금 바로 써야 함</p><ul><li>분배금 15.4% 과세</li><li>종합과세 2,000만 합산</li><li>해외 상장 ETF 가능</li><li><b>국내 주식형 커버드콜은 여기</b> (4번)</li></ul></div>
+      <div class="box"><h5>ISA</h5><p class="lab">3~5년 뒤 필요</p><ul><li>계좌 내 과세 없음, 손익통산</li><li>순이익 비과세 후 9.9% 분리과세</li><li>2026 개정: 연 4,000만·비과세 500만 추진 (시행 확인)</li><li>지금 개설만 해두면 3년 시계 돌아감</li></ul></div>
+      <div class="box dark"><h5>연금저축·IRP</h5><p class="lab">55세 이후</p><ul><li>과세이연 → 연금소득세 3.3~5.5%</li><li>연 1,500만 초과 시 16.5% 분리 or 종합</li><li>1,500만까지 건보료 산정 제외</li><li><b>해외형 커버드콜은 여기</b></li></ul></div>
+    </div>
+    <p>연금·ISA에서는 미국 상장 ETF를 못 산다. 그리고 55세까지 못 빼는 계좌에 '매달 현금 받으려고' 커버드콜을 넣으면 목적과 정면 충돌.</p>
+    <details class="script"><summary>발표 대본</summary><p>계좌는 세율로 보면 연금 &gt; ISA &gt; 일반인데, 커버드콜은 좀 달라. 커버드콜 사는 이유가 매달 현금 받으려는 건데 연금계좌에 넣으면 55세까지 못 빼잖아. 목적과 충돌해. 그래서 '언제 쓸 돈이냐'로 나눠야 돼. 지금 쓸 돈이면 일반, 몇 년 뒤면 ISA, 노후면 연금. 그리고 연금·ISA에선 미국 상장 ETF 못 사. JEPQ 사고 싶으면 일반계좌밖에 없어.</p></details>
+  </article>
+
+  <article>
+    <h4>미국 상품 고른다면 — 배당률 말고 이걸 봐</h4>
+    <p class="dek">1억 투자 시 월 75~99만원(세후). 문제는 얼마냐가 아니라 얼마나 안정적이냐.</p>
+    <table>
+      <tr><th>종목</th><th>평가</th><th>이유</th></tr>
+      <tr><td>XYLG</td><td class="neg"><b>제외</b></td><td>배당 변동폭 95.5%. 연말에 몰아주는 구조라 월 생활비로 못 쓴다</td></tr>
+      <tr><td>SPYI</td><td class="pos"><b>안정성 1위</b></td><td>배당 변동폭 가장 작음. 생활비 목적이면 여기</td></tr>
+      <tr><td>JEPQ</td><td><b>수익률 1위</b></td><td>상승 탄력 최고, 자산 365억 달러, 총보수 최저. 원금 회수 약 11년</td></tr>
+      <tr><td>QQQI</td><td class="gold"><b>회수 최단</b></td><td>고분배율로 원금 회수 약 8년 6개월. 단, 회수 기간은 NAV 유지가 전제</td></tr>
+    </table>
+    <figure>
+      <svg viewBox="0 0 680 255" role="img" aria-label="1억원 투자 시 미국 커버드콜 4종목 월배당과 배당금 최대 낙폭"><text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">1억원 투자 → 월배당 &amp; 배당금 최대 낙폭 (최근 1년)</text><g font-size="12" fill="#6B7280"><text x="20" y="118">월배당</text><text x="20" y="195">배당 최대 낙폭</text></g><line x1="90" y1="150" x2="640" y2="150" stroke="#C4C9D1" stroke-width="1.5"/><g text-anchor="middle" font-weight="700"><text x="140" y="48" font-size="14" fill="#1B2A41">XYLG</text><rect x="105" y="90.6" width="70" height="59.4" rx="4" fill="#1B2A41"/><text x="140" y="84.6" font-size="13" fill="#1B2A41">99만원</text><rect x="105" y="155" width="70" height="71.6" rx="4" fill="#D9534F"/><text x="140" y="242.6" font-size="13" fill="#D9534F">−95.5%</text><text x="280" y="48" font-size="14" fill="#1B2A41">QQQI</text><rect x="245" y="91.2" width="70" height="58.8" rx="4" fill="#1B2A41"/><text x="280" y="85.2" font-size="13" fill="#1B2A41">98만원</text><rect x="245" y="155" width="70" height="12.9" rx="4" fill="#D9534F"/><text x="280" y="183.9" font-size="13" fill="#D9534F">−17.2%</text><text x="420" y="48" font-size="14" fill="#1B2A41">SPYI</text><rect x="385" y="100.2" width="70" height="49.8" rx="4" fill="#1B2A41"/><text x="420" y="94.2" font-size="13" fill="#1B2A41">83만원</text><rect x="385" y="155" width="70" height="9.9" rx="4" fill="#1D9E75"/><text x="420" y="180.9" font-size="13" fill="#1D9E75">−13.2%</text><text x="560" y="48" font-size="14" fill="#1B2A41">JEPQ</text><rect x="525" y="105.0" width="70" height="45.0" rx="4" fill="#1B2A41"/><text x="560" y="99.0" font-size="13" fill="#1B2A41">75만원</text><rect x="525" y="155" width="70" height="17.5" rx="4" fill="#D9534F"/><text x="560" y="188.5" font-size="13" fill="#D9534F">−23.3%</text></g></svg>
+      <figcaption>월배당은 XYLG가 가장 크지만 배당금이 한 달 새 95% 줄어든 적이 있다. 연말에 몰아주는 구조라 생활비로는 못 쓴다. SPYI는 배당이 가장 덜 흔들린다.</figcaption>
+    </figure>
+    <p>체크리스트: 총수익률(분배 재투자 기준) → 상장 후 NAV 추이 → 옵션 매도 비중·만기 → 순자산 규모. 분배율 20% 이상은 일단 의심.</p>
+    <details class="script"><summary>발표 대본</summary><p>미국 상품 고를 때 배당률 순으로 보면 망해. XYLG는 배당률 높아 보이는데 연말에 몰아줘서 월 변동폭이 95%야. 생활비로 못 써. SPYI는 제일 안정적, JEPQ는 수익률이랑 규모가 제일 좋고, QQQI는 분배 많아서 회수가 빨라. 근데 '원금 회수 8년' 이런 건 그 사이 가격이 안 빠진다는 가정이니까 너무 믿지 마.</p></details>
+  </article>
+</div></section>
+
+<!-- ============ BREAK ============ -->
+<div class="break"><div class="wrap">
+  <p class="k">여기까지가 빌드업</p>
+  <h2>그런데…</h2>
+  <p>3세대 커버드콜의 차별점은 운용이 아니라 '세금'이다.<br>그리고 그 세금은 미국 세법 기준이다.</p>
+</div></div>
+
+<!-- ============ PART 4 ============ -->
+<section class="part" id="p4"><div class="wrap">
+  <h2>PART 4</h2><h3>커버드콜 3.0</h3>
+  <p class="sub">오늘 진짜 하고 싶은 얘기.</p>
+
+  <article>
+    <h4>미국 3.0은 우리한테 의미 없다</h4>
+    <p class="dek">분배금 100만원 받았을 때 세후 실수령 (미국 투자자 기준).</p>
+    <div class="grid2">
+      <div class="box"><div class="big" style="color:var(--muted)">63 ~ 78만원</div><p class="lab">2세대 (JEPI) · 미국 소득세율 구간에 따라</p></div>
+      <div class="box"><div class="big pos">72 ~ 83만원</div><p class="lab">3세대 (SPYI, GPIQ 등) · 스프레드 구조 + ROC 처리로 절세</p></div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 680 240" role="img" aria-label="배당금 100만원 기준 2세대와 3세대의 세후 실수령 비교, 미국 세법">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">세후 실수령 (배당 100만원, 미국 세법)</text>
+        <g font-size="12" fill="#222">
+          <rect x="400" y="12" width="12" height="12" rx="2" fill="#1B2A41"/><text x="418" y="23">중산층 세율 22%</text>
+          <rect x="540" y="12" width="12" height="12" rx="2" fill="#9CA3AF"/><text x="558" y="23">최고세율 37%</text>
+        </g>
+        <line x1="60" y1="195" x2="620" y2="195" stroke="#C4C9D1" stroke-width="1.5"/>
+        <g text-anchor="middle" font-weight="700">
+          <rect x="120" y="39" width="60" height="156" rx="4" fill="#1B2A41"/><text x="150" y="60" font-size="14" fill="#fff">78만</text>
+          <rect x="200" y="69" width="60" height="126" rx="4" fill="#9CA3AF"/><text x="230" y="90" font-size="14" fill="#fff">63만</text>
+          <text x="190" y="222" font-size="14" fill="#1B2A41">2세대 JEPI · JEPQ</text>
+
+          <rect x="400" y="29" width="60" height="166" rx="4" fill="#1B2A41"/><text x="430" y="50" font-size="14" fill="#fff">83만</text>
+          <rect x="480" y="51" width="60" height="144" rx="4" fill="#9CA3AF"/><text x="510" y="72" font-size="14" fill="#fff">72만</text>
+          <text x="470" y="222" font-size="14" fill="#1B2A41">3세대 SPYI · GPIQ</text>
+
+          <text x="330" y="115" font-size="15" fill="#D4A017">+5~9만원</text>
+          <text x="330" y="135" font-size="11" fill="#6B7280" font-weight="400">미국 투자자만</text>
+        </g>
+      </svg>
+      <figcaption>섹션 1256 실효세율 적용 기준. 미국 투자자에게는 세율 구간에 따라 5~9만원 차이. 한국 투자자는 이 표와 무관하게 15% 원천징수 후 한국 세법을 다시 적용받는다.</figcaption>
+    </figure>
+    <div class="callout">차이 약 10만원. 그런데 이 절세는 미국 세법 얘기다.
+      <small>한국 투자자는 미국 원천징수 15%를 떼고 받고, 그 다음 한국 배당소득세·금융소득종합과세·건보료로 다시 계산된다. ROC(자본 환급)도 '세금 삭제'가 아니라 '과세 시점과 성격이 바뀌는 것' — 나중에 팔 때 양도차익이 커진다.</small></div>
+    <p><b>결론: 우리한테 미국 2.0과 3.0은 굳이 나눌 필요가 없다. 운용 성과로만 고르면 된다.</b></p>
+    <details class="script"><summary>발표 대본</summary><p>미국 3세대가 2세대보다 뭐가 좋냐. 세금이야. 100만원 받으면 2세대는 63~78만원 남고 3세대는 72~83만원 남아. 10만원 차이. 근데 이거 미국 세율 기준이야. 우린 미국 시민이 아니잖아. 우린 15% 원천징수 떼고 받은 다음에 한국 세법으로 다시 계산돼. 그러니까 한국 사람한테는 미국 2.0이든 3.0이든 세금은 똑같아. 운용 성과만 보고 고르면 되는 거야. 그럼 우리한텐 3.0이 없냐? 있어. 다음.</p></details>
+  </article>
+
+  <article>
+    <h4>우리의 3.0 = 국내 주식형 커버드콜의 절세 구조</h4>
+    <p class="dek">분배금 재원이 3가지인데, 그중 2가지가 비과세다.</p>
+    <div class="grid3">
+      <div class="box"><h5>① 주식 매매차익</h5><div class="big pos" style="font-size:24px">비과세</div><p class="lab">국내 주식 매매차익은 원래 비과세</p></div>
+      <div class="box"><h5>② 주식 배당금</h5><div class="big neg" style="font-size:24px">15.4% 과세</div><p class="lab">여기만 과세. 건보료 산정에도 포함</p></div>
+      <div class="box"><h5>③ 옵션 프리미엄</h5><div class="big pos" style="font-size:24px">비과세</div><p class="lab">국내 장내 파생상품 매매차익 비과세 (소득세법 시행령 제26조의2 제4항)</p></div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 680 170" role="img" aria-label="연 분배율 15%의 과세 비과세 구성">
+        <text x="20" y="26" font-size="15" font-weight="700" fill="#1B2A41">삼성자산운용 공지 예시 — 연 분배율 15%라면</text>
+        <rect x="20" y="46" width="213" height="44" rx="6" fill="#D9534F"/>
+        <rect x="233" y="46" width="427" height="44" rx="6" fill="#1D9E75"/>
+        <text x="126" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">배당수익 5% · 과세</text>
+        <text x="446" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">옵션 프리미엄 10% · 비과세</text>
+        <text x="20" y="120" font-size="13" fill="#222">분배금의 2/3가 세금 없이 들어온다.</text>
+        <text x="20" y="140" font-size="13" fill="#222">비과세분은 금융소득종합과세 2,000만 계산에도, 건보료 산정에도 안 잡힌다.</text>
+        <text x="20" y="160" font-size="13" fill="#6B7280">이게 '세금 없는 커버드콜'의 실체.</text>
+      </svg>
+    </figure>
+    <details class="script"><summary>발표 대본</summary><p>국내 커버드콜 ETF 분배금은 재원이 세 개야. 주식 팔아서 난 차익, 주식 배당금, 옵션 프리미엄. 이 중에 배당금만 과세야. 국내 주식 매매차익은 원래 비과세고, 옵션 프리미엄은 국내 장내 파생상품 매매차익이라서 시행령으로 비과세. 삼성자산운용 공지에 예시가 있는데 분배율 15%면 배당 5%만 과세, 옵션 프리미엄 10%는 비과세. 3분의 2가 세금 없이 들어오고, 이건 종합과세 2천만원 계산에도 건보료에도 안 잡혀. 이게 '세금 없는 3세대'라는 말의 진짜 근거야.</p></details>
+  </article>
+
+  <article>
+    <h4>숫자로 보면 — 1억 넣으면 어떻게 되나</h4>
+    <p class="dek">KODEX 200 타겟위클리커버드콜 · 과거 실적 기준. 확정 월급이 아니라 특정 기간 연환산.</p>
+    <div class="grid3">
+      <div class="box"><div class="big">1,945만원</div><p class="lab">연간 총 분배금</p></div>
+      <div class="box"><div class="big neg">220만원</div><p class="lab">그중 금융소득(과세)으로 잡히는 부분 — 약 11%</p></div>
+      <div class="box"><div class="big pos">월 159만원</div><p class="lab">세후 실수령 월평균 (연 1,911만원)</p></div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 680 260" role="img" aria-label="1억원 투자 시 국내 주식형 커버드콜 3종의 연 총 분배금과 과세 대상 금액">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">1억원 → 연 총 분배금 중 금융소득(과세) 대상은 얼마나?</text>
+        <g font-size="12">
+          <text x="20" y="70" font-weight="700" fill="#1B2A41">TIGER 배당커버드콜액티브</text>
+          <text x="215" y="46" font-size="11" fill="#D9534F">과세 251만 → 세금 38.7만</text>
+          <rect x="215" y="52" width="388" height="30" rx="6" fill="#1D9E75"/><rect x="215" y="52" width="56" height="30" rx="6" fill="#D9534F"/>
+          <text x="609" y="72" font-weight="700" fill="#1B2A41">1,736만</text>
+
+          <text x="20" y="128" font-weight="700" fill="#1B2A41">RISE 200 위클리커버드콜</text>
+          <text x="215" y="104" font-size="11" fill="#D9534F">과세 216만 → 세금 33.3만</text>
+          <rect x="215" y="110" width="429" height="30" rx="6" fill="#1D9E75"/><rect x="215" y="110" width="48" height="30" rx="6" fill="#D9534F"/>
+          <text x="638" y="130" font-weight="700" fill="#fff" text-anchor="end">1,916만</text>
+
+          <text x="20" y="186" font-weight="700" fill="#1B2A41">KODEX 200 타겟위클리커버드콜</text>
+          <text x="215" y="162" font-size="11" fill="#D9534F">과세 220만 → 세금 33.9만</text>
+          <rect x="215" y="168" width="435" height="30" rx="6" fill="#1D9E75"/><rect x="215" y="168" width="49" height="30" rx="6" fill="#D9534F"/>
+          <text x="644" y="188" font-weight="700" fill="#fff" text-anchor="end">1,945만</text>
+        </g>
+        <g font-size="11.5" fill="#222">
+          <rect x="20" y="222" width="12" height="12" rx="2" fill="#1D9E75"/><text x="38" y="233">비과세 (옵션 프리미엄·매매차익)</text>
+          <rect x="250" y="222" width="12" height="12" rx="2" fill="#D9534F"/><text x="268" y="233">과세 (주식 배당분, 15.4%)</text>
+        </g>
+        <text x="20" y="254" font-size="12" fill="#6B7280">같은 KODEX에 5억이면: 총 9,725만원 중 과세 1,100만원(11%), 세금 169만원. 금융소득 2,000만원 안쪽.</text>
+      </svg>
+      <figcaption>세 상품 모두 총 분배금의 89~94%가 비과세. 5억을 넣어도 과세 대상 금융소득이 1,100만원이라 종합과세 기준선(2,000만원)에 안 걸린다.</figcaption>
+    </figure>
+    <table>
+      <tr><th>같은 1억을</th><th>세후 월 실수령</th><th>세금·건보료</th></tr>
+      <tr><td>미국 커버드콜 (JEPQ 등)</td><td class="neg"><b>월 75~99만원</b></td><td>금융소득 연 1,000만+ → 건보료·종합과세 리스크</td></tr>
+      <tr class="hot"><td>국내 주식형 (KODEX 200 타겟위클리)</td><td class="pos"><b>월 159만원</b></td><td>금융소득은 220만원만. 건보료 걱정 없음</td></tr>
+    </table>
+    <p>차이는 상품이 좋아서가 아니다. 국내 주식형은 옵션 프리미엄이 비과세라서 분배 자체도 세게 뽑을 수 있고, 뽑아도 세금·건보료로 안 새는 것. (그 기간 코스피200이 크게 올랐다는 점도 기억하자.)</p>
+    <details class="script"><summary>발표 대본</summary><p>실제 숫자로 보자. 1억을 KODEX 200 타겟위클리에 넣었으면 연간 분배금이 1,945만원인데 이 중 과세로 잡히는 게 220만원밖에 안 돼. 세후로 월 159만원. 같은 1억을 미국 커버드콜에 넣으면 월 75~99만원이고, 금융소득 2천만원 가까이 잡혀서 종합과세·건보료 폭탄 맞을 수 있어. 근데 이건 특정 기간 과거 실적이니까 앞으로도 159만원이라고 믿으면 안 돼.</p></details>
+  </article>
+
+  <article>
+    <h4>그런데 조건이 있다 — 여기 걸리면 절세 안 된다</h4>
+    <p class="dek">'국내 상장'이 아니라 '국내 주식형'이다.</p>
+    <table>
+      <tr><th>함정</th><th>내용</th></tr>
+      <tr class="hot"><td>국내 주식형만 해당</td><td>국내 상장 55개 중 미국 지수 추종 40개는 전액 과세. 코스피200·국내 배당주 기초 14개만 혜택</td></tr>
+      <tr><td>3월엔 과세가 확 뛴다</td><td>배당 재원이 옵션 프리미엄보다 먼저 분배되는 구조. 국내 배당 몰리는 3월 분배금은 대부분 과세. 2025년 "세금 안 낸다더니" 보도</td></tr>
+      <tr><td>절세계좌에 넣으면 역효과</td><td>이미 비과세인 소득을 연금계좌에 넣으면 인출 때 연금소득세를 새로 낸다. 국내 주식형은 일반계좌가 정답</td></tr>
+      <tr><td>주당 과세표준액을 봐라</td><td>분배 내역에 나오는 이 숫자가 실제 과세·건보료 대상. PLUS 고배당주 20%대 분배율은 화려하지만 과세 비율 20% 후반</td></tr>
+      <tr><td>분배율 ≠ 수익</td><td>어떤 고배당 위클리 커버드콜: 분배율 25.4%, 본주 +20.9%, ETF는 −24.4%. 분배금이 원금 훼손을 가린 사례</td></tr>
+    </table>
+    <figure>
+      <svg viewBox="0 0 680 230" role="img" aria-label="계좌별 배당소득과 옵션 프리미엄 과세율 비교">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">절세계좌의 함정 — 0%였던 옵션 프리미엄이 과세로 바뀐다</text>
+        <g font-size="12" font-weight="700">
+          <text x="20" y="74" font-size="15" fill="#1B2A41">일반</text>
+          <rect x="110" y="50" width="260" height="36" rx="6" fill="#9CA3AF"/><text x="240" y="73" text-anchor="middle" fill="#fff">배당소득 15.4%</text>
+          <rect x="376" y="50" width="90" height="36" rx="6" fill="none" stroke="#1B2A41" stroke-width="1.5" stroke-dasharray="5 4"/><text x="421" y="73" text-anchor="middle" fill="#1B2A41">옵션 0%</text>
+
+          <text x="20" y="134" font-size="15" fill="#1B2A41">ISA</text>
+          <rect x="110" y="110" width="167" height="36" rx="6" fill="#9CA3AF"/><text x="193" y="133" text-anchor="middle" fill="#fff">배당 9.9%</text>
+          <rect x="277" y="110" width="167" height="36" rx="6" fill="#1B2A41"/><text x="360" y="133" text-anchor="middle" fill="#fff">옵션 9.9%</text>
+
+          <text x="20" y="194" font-size="15" fill="#1B2A41">연금</text>
+          <rect x="110" y="170" width="93" height="36" rx="6" fill="#9CA3AF"/><text x="156" y="193" text-anchor="middle" fill="#fff" font-size="11.5">배당 5.5%</text>
+          <rect x="203" y="170" width="93" height="36" rx="6" fill="#1B2A41"/><text x="249" y="193" text-anchor="middle" fill="#fff" font-size="11.5">옵션 5.5%</text>
+        </g>
+        <text x="480" y="128" font-size="12" fill="#D9534F" font-weight="700">← 국내 주식형은 여기서 손해</text>
+        <text x="480" y="146" font-size="11" fill="#6B7280">분배금의 90%가 옵션 프리미엄인데</text>
+        <text x="480" y="162" font-size="11" fill="#6B7280">일반계좌 0% → ISA 9.9% / 연금 5.5%</text>
+      </svg>
+      <figcaption>절세계좌는 계좌 안의 모든 수익을 하나로 묶어 인출 시 과세한다. 일반계좌에서는 비과세였던 옵션 프리미엄까지 함께 과세되니, 국내 주식형 커버드콜은 일반계좌가 유리하다. 해외형(전액 과세)은 반대로 절세계좌가 유리.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 680 290" role="img" aria-label="국내 커버드콜 TOP5의 총 분배금 중 과세 대상 비율">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">국내 커버드콜 TOP5 — 총 분배금 중 과세 대상 비율</text>
+        <g font-size="11.5" font-weight="700" fill="#1B2A41" text-anchor="end">
+          <text x="225" y="63">PLUS 고배당주위클리커버드콜</text>
+          <text x="225" y="109">TIGER 배당커버드콜액티브</text>
+          <text x="225" y="155">RISE 200위클리커버드콜</text>
+          <text x="225" y="201">KODEX 금융고배당TOP10위클리</text>
+          <text x="225" y="247">KODEX 200타겟위클리커버드콜</text>
+        </g>
+        <g font-size="11">
+          <text x="235" y="42" fill="#D9534F">과세 480</text>
+          <rect x="235" y="46" width="253" height="26" rx="5" fill="#1B2A41"/><rect x="235" y="46" width="69" height="26" rx="5" fill="#D9534F"/>
+          <text x="482" y="64" text-anchor="end" fill="#fff" font-weight="700">1,755</text><text x="496" y="64" fill="#D9534F" font-weight="800" font-size="13">27%</text>
+
+          <text x="235" y="88" fill="#D9534F">과세 178</text>
+          <rect x="235" y="92" width="400" height="26" rx="5" fill="#1B2A41"/><rect x="235" y="92" width="26" height="26" rx="5" fill="#D9534F"/>
+          <text x="629" y="110" text-anchor="end" fill="#fff" font-weight="700">2,779</text><text x="643" y="110" fill="#1D9E75" font-weight="800" font-size="13">6%</text>
+
+          <text x="235" y="134" fill="#D9534F">과세 134</text>
+          <rect x="235" y="138" width="271" height="26" rx="5" fill="#1B2A41"/><rect x="235" y="138" width="19" height="26" rx="5" fill="#D9534F"/>
+          <text x="500" y="156" text-anchor="end" fill="#fff" font-weight="700">1,883</text><text x="514" y="156" fill="#1D9E75" font-weight="800" font-size="13">7%</text>
+
+          <text x="235" y="180" fill="#D9534F">과세 518</text>
+          <rect x="235" y="184" width="266" height="26" rx="5" fill="#1B2A41"/><rect x="235" y="184" width="75" height="26" rx="5" fill="#D9534F"/>
+          <text x="495" y="202" text-anchor="end" fill="#fff" font-weight="700">1,849</text><text x="509" y="202" fill="#D9534F" font-weight="800" font-size="13">28%</text>
+
+          <text x="235" y="226" fill="#D9534F">과세 147</text>
+          <rect x="235" y="230" width="332" height="26" rx="5" fill="#1B2A41"/><rect x="235" y="230" width="21" height="26" rx="5" fill="#D9534F"/>
+          <text x="561" y="248" text-anchor="end" fill="#fff" font-weight="700">2,309</text><text x="575" y="248" fill="#1D9E75" font-weight="800" font-size="13">6%</text>
+        </g>
+        <text x="20" y="282" font-size="11.5" fill="#6B7280">단위: 만원 (1억 기준, 최근 1년). 남색 = 총 분배금, 빨강 = 주당 과세표준액 합계(실제 과세·건보료 대상).</text>
+      </svg>
+      <figcaption>PLUS 고배당주와 KODEX 금융고배당은 분배율이 높은 대신 배당주 비중이 커서 과세 비율이 27~28%. 코스피200 기초 상품은 6~7%. 금융소득이 이미 많은 사람은 오른쪽 숫자가 작은 상품을 골라야 한다.</figcaption>
+    </figure>
+    <div class="box" style="margin:18px 0">
+      <h5>주당 과세표준액, 어디서 보나</h5>
+      <p>각 운용사 홈페이지의 상품 상세 페이지 → <b>분배금 내역</b> 탭에 매 분배마다 "주당 분배금"과 "주당 과세표준액"이 나란히 공시된다. 과세표준액 ÷ 분배금이 그 달의 과세 비율이다.</p>
+      <p>예시 — PLUS 고배당주위클리커버드콜 분배금 내역:<br><a href="https://www.plusetf.co.kr/product/detail?n=006382" target="_blank" rel="noopener">plusetf.co.kr/product/detail?n=006382</a></p>
+      <p class="lab" style="margin:0">KODEX(삼성자산운용), TIGER(미래에셋), RISE(KB자산운용)도 같은 구조다. 상품명으로 검색해 들어가면 분배금 탭에서 확인할 수 있다. 3월 분배는 과세표준액이 크게 뛰니 그 달만 따로 보면 바로 체감된다.</p>
+    </div>
+    <details class="script"><summary>발표 대본</summary><p>여기가 사람들이 제일 많이 착각하는 부분. '국내 상장'이 아니라 '국내 주식형'이야. 국내 상장된 나스닥100 커버드콜 사면 절세 안 돼. 55개 중 40개가 그거야. 그리고 3월엔 국내 배당이 몰려서 그 달 분배금은 거의 다 과세야. 세 번째, 이미 비과세인 걸 연금계좌에 넣으면 나중에 연금소득세 새로 내니까 국내 주식형은 일반계좌가 맞아. 네 번째, 분배 내역에 '주당 과세표준액' 있는데 이게 실제 세금이랑 건보료 대상이야. 마지막, 분배율 25%인데 ETF는 −24% 간 상품도 있어. 분배율만 보면 안 돼.</p></details>
+  </article>
+
+  <article>
+    <h4>그래서 실전 배치는 이렇게</h4>
+    <p class="dek">국내 주식형은 일반계좌, 해외형은 절세계좌 — 서로 자리를 바꾸면 손해.</p>
+    <div class="grid3">
+      <div class="box"><h5>일반계좌</h5><p class="lab">국내 주식형 커버드콜</p><ul><li>KODEX 200 타겟위클리 / RISE 200 위클리 / TIGER 배당커버드콜액티브</li><li>TIGER·KODEX는 옵션 프리미엄 비율 동일, RISE는 총보수 0.05% 낮음</li><li>평소 생활비는 여기 분배금으로</li><li>매달 과세표준액 확인 (운용사 상품 페이지 → 분배금 내역, <a href="https://www.plusetf.co.kr/product/detail?n=006382" target="_blank" rel="noopener">예시</a>)</li></ul></div>
+      <div class="box dark"><h5>연금저축·IRP</h5><p class="lab">해외형 커버드콜</p><ul><li>미국 지수 기초 국내 상장 상품</li><li>과세이연 + 재투자 복리</li><li>55세 이후 연 1,500만 이내 인출 → 3.3~5.5%, 건보료 산정 제외</li><li>가능한 오래 유지</li></ul></div>
+      <div class="box"><h5>현금성 20%</h5><p class="lab">파킹·채권 ETF</p><ul><li>비상금, 급한 지출은 여기서 먼저</li><li>하락장 추가매수 여력</li><li>분배금이 생활비보다 많으면 다 쓰지 말고 여기로</li></ul></div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 680 250" role="img" aria-label="국내 주식형 커버드콜 TOP3의 비과세 비율, 순자산, 총비용 비교">
+        <text x="20" y="24" font-size="15" font-weight="700" fill="#1B2A41">국내 주식형 커버드콜 TOP3 — 비과세 비율 · 순자산 · 총비용</text>
+        <g font-size="13" font-weight="700" fill="#1B2A41">
+          <text x="30" y="56">TIGER 배당커버드콜</text><text x="30" y="74">액티브</text>
+          <text x="250" y="56">RISE 200 위클리</text><text x="250" y="74">커버드콜</text>
+          <text x="470" y="56">KODEX 200 타겟위클리</text><text x="470" y="74">커버드콜</text>
+        </g>
+        <g font-size="10.5" fill="#6B7280">
+          <text x="30" y="102">비과세 비율</text><text x="250" y="102">비과세 비율</text><text x="470" y="102">비과세 비율</text>
+          <text x="30" y="150">순자산 (조원)</text><text x="250" y="150">순자산 (조원)</text><text x="470" y="150">순자산 (조원)</text>
+          <text x="30" y="198">총비용 (연)</text><text x="250" y="198">총비용 (연)</text><text x="470" y="198">총비용 (연)</text>
+        </g>
+        <g font-size="12" font-weight="700">
+          <rect x="30" y="108" width="150" height="14" rx="3" fill="#1D9E75"/><text x="186" y="120" fill="#1D9E75">93.6%</text>
+          <rect x="250" y="108" width="149" height="14" rx="3" fill="#1D9E75"/><text x="405" y="120" fill="#1D9E75">92.9%</text>
+          <rect x="470" y="108" width="150" height="14" rx="3" fill="#1D9E75"/><text x="626" y="120" fill="#1D9E75">93.6%</text>
+
+          <rect x="30" y="156" width="36" height="14" rx="3" fill="#1B2A41"/><text x="72" y="168" fill="#1B2A41">1.1조</text>
+          <rect x="250" y="156" width="26" height="14" rx="3" fill="#1B2A41"/><text x="282" y="168" fill="#1B2A41">0.8조</text>
+          <rect x="470" y="156" width="148" height="14" rx="3" fill="#1B2A41"/><text x="624" y="168" fill="#1B2A41">4.5조</text>
+
+          <rect x="30" y="204" width="124" height="14" rx="3" fill="#9CA3AF"/><text x="160" y="216" fill="#6B7280">0.62%</text>
+          <rect x="250" y="204" width="96" height="14" rx="3" fill="#9CA3AF"/><text x="352" y="216" fill="#6B7280">0.48%</text>
+          <rect x="470" y="204" width="106" height="14" rx="3" fill="#9CA3AF"/><text x="582" y="216" fill="#6B7280">0.53%</text>
+        </g>
+        <text x="30" y="242" font-size="11.5" fill="#6B7280">비과세 비율 = 총 분배금 중 옵션 프리미엄·매매차익 재원 비중. 세 상품이 거의 같고, 규모는 KODEX, 비용은 RISE가 유리.</text>
+      </svg>
+      <figcaption>같은 코스피200을 추종하니 비과세 비율은 거의 같다. 선택은 규모(유동성)와 비용 중 무엇을 더 중시하느냐의 문제.</figcaption>
+    </figure>
+    <p>국민연금은 미룰 수 있으면 미루고(최대 +36%), 그 공백기를 국내 주식형 커버드콜로 메우는 게 가장 깔끔한 그림.</p>
+    <details class="script"><summary>발표 대본</summary><p>정리하면 이렇게 배치하면 돼. 국내 주식형 커버드콜은 일반계좌에서 생활비, 해외형은 연금계좌에서 오래 굴리기, 현금 20%. 이걸 반대로 하면 손해야. 국내 주식형을 연금계좌에 넣으면 비과세인 걸 과세로 바꾸는 거고, 해외형을 일반계좌에 넣으면 15.4%에 건보료까지 맞아.</p></details>
+  </article>
+</div></section>
+
+<footer class="end"><div class="wrap">
+  <h2>오늘의 결론</h2>
+  <ol>
+    <li><div class="n">1</div><div><strong>커버드콜은 투자가 아니라 인출 솔루션이다.</strong><span>시간이 있으면 지수, 시간이 없으면 커버드콜. 20~30대는 손대지 말자.</span></div></li>
+    <li><div class="n">2</div><div><strong>세대 구분은 마케팅이다. 미국 3.0의 차별점은 세금, 그것도 미국 세법이다.</strong><span>우리한테 미국 2.0과 3.0은 같다. 운용 성과로만 고르자.</span></div></li>
+    <li><div class="n">3</div><div><strong>우리의 3.0은 국내 주식형 커버드콜이다.</strong><span>옵션 프리미엄 비과세 → 분배금 2/3가 세금·건보료에 안 잡힌다. 단, '국내 주식형'만. 일반계좌에. 과세표준액 확인.</span></div></li>
+  </ol>
+  <p class="src">출처: 수페TV·김범곤의 연금수업 등 커버드콜 관련 콘텐츠 정리, 삼성자산운용 국내주식 커버드콜 ETF 분배금 과세 안내(2025.4), 한국경제·헤럴드경제 보도. 숫자는 자료 작성 시점 기준이며 세법·분배율은 바뀐다. 실제 투자 전 운용사 공시와 홈택스에서 확인. 발표자는 투자자문업자가 아니며 이 자료는 학습 목적임.</p>
+</div></footer>
+
+</body>
+</html>
